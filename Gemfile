@@ -55,6 +55,7 @@ end
 
 group :test do
   gem "webdrivers", "~> 4.2"
+  gem 'shoulda-matchers', "~> 4.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
