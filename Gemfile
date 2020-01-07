@@ -41,6 +41,8 @@ group :development, :test do
   gem "capybara", "~> 3.30"
 
   gem "dotenv-rails"
+
+  gem "bullet", "~> 6.1"
 end
 
 group :development do

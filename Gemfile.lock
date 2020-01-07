@@ -64,6 +64,9 @@ GEM
       msgpack (~> 1.0)
     brakeman (4.7.2)
     builder (3.2.4)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     capybara (3.30.0)
       addressable
@@ -224,6 +227,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
+    uniform_notifier (1.13.0)
     web-console (4.0.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -250,6 +254,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   brakeman (= 4.7.2)
+  bullet (~> 6.1)
   byebug
   capybara (~> 3.30)
   dotenv-rails
