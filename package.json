@@ -1,4 +1,6 @@
 {
+  "name": "curriculum_materials",
+  "private": true,
   "engines": {
     "node": "12.13.1"
   },

@@ -1,5 +1,5 @@
 {
-  "name": "govuk-rails-boilerplate",
+  "name": "curriculum_materials",
   "scripts": {
     "postdeploy": "bundle exec rake db:migrate db:seed"
   },
