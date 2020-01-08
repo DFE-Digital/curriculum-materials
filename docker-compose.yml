@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  curriculum_materials:
+    image: curriculum_materials:latest
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      - RAILS_ENV=staging
+      - SECRET_KEY_BASE=stubbed
+      - HTTP_AUTH_USER=test
+      - HTTP_AUTH_PASSWORD=test
+      - RAILS_SERVE_STATIC_FILES=true
+      - DB_HOST=database
+      - DB_DATABASE=curriculum_materials
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    depends_on:
+      - db_tasks
+
+  db_tasks:
+    image: curriculum_materials:latest
+    command: bundle exec rake db:create db:schema:load db:seed
+    restart: on-failure
+    environment:
+      - RAILS_ENV=staging
+      - SECRET_KEY_BASE=stubbed
+      - DB_HOST=database
+      - DB_DATABASE=curriculum_materials
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=curriculum_materials
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
