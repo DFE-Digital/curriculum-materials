@@ -1,0 +1,18 @@
+doctype html
+
+html lang="en" class="govuk-template "
+  head
+    title
+      | Curriculum Materials
+
+    = render 'layouts/shared/head'
+
+  body.govuk-template__body
+
+    = render 'layouts/shared/header'
+
+    .govuk-width-container
+      main#main-content.govuk-main-wrapper[role="main"]
+        = yield
+
+    = render 'layouts/shared/footer'
