@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/DFE-Digital/curriculum-materials.svg?branch=master)](https://travis-ci.com/DFE-Digital/curriculum-materials)
 
-# GOV.UK Rails Boilerplate
+# DFE Curriculum Materials
 
 ## Prerequisites
 
