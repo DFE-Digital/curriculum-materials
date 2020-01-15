@@ -1,0 +1,73 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+
+    markdown:
+      # Access your school's curriculum online
+    
+      Teachers can use this service to access their school's complete
+      curriculum online.
+
+      You can access the full course of study and its resources, lesson by
+      lesson.
+
+      Use this service to:
+
+      * view your curriculum's contents by year and by subject
+      * organise all lessons, using plans and resources tailored to the
+        curriculum
+      * find helpful guidance on teaching the curriculum
+
+      #### Resources
+
+      Resources are currently available for:
+
+      * key stages 1 and 2 maths and science
+      * key stages 2 and 3 history and geography
+
+      You'll need a valid school email address to sign up.
+
+      This service is only available in England.
+
+    = link_to '#', class: %i(govuk-button govuk-button--start)
+      | Start now
+
+      svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" role="presentation" focusable="false"
+        path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"
+
+    markdown:
+      ### Before you start
+
+      Your school can use this service if it is:
+
+      * maintained or local authority funded
+      * an academy or academy trust
+      * a free school
+
+  .govuk-grid-column-one-third
+
+    aside
+      h3 Further reading
+      
+      ul.govuk-list
+        li.govuk-body-s
+          = link_to("The National Curriculum", "https://www.gov.uk/government/collections/national-curriculum")
+
+        li.govuk-body-s
+          = link_to("Curriculum programme pilots to reduce time spent planning lessons", "https://www.gov.uk/government/news/curriculum-programme-pilots-to-reduce-time-spent-planning-lessons")
+
+
+      h3 Get help using this service
+
+      p.govuk-body-s
+        | Call 0800 100 900 or
+        =< link_to "use webchat", "#"
+
+        br
+
+        span.govuk-hint class="govuk-!-font-size-16"
+          | 8am to 10pm, 7 days a week
+
+      p.govuk-body-s
+        | More ways to
+        
+        =< link_to "contact us", "#"
