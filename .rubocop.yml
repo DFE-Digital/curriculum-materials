@@ -9,6 +9,7 @@ Bundler/OrderedGems:
 Metrics/BlockLength:
   Exclude:
     - config/environments/**/*.rb
+    - spec/**/*
 
 Style/StringLiterals:
   Enabled: false
