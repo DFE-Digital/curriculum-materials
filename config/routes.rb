@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resource :home, only: %i(show)
   root to: 'home#show'
 
+  resource :sessions, only: %i(create destroy)
+  get '/sessions/:token', to: 'sessions#create'
+
+  # temporary routes used for testing while setting up
+  resource :protected, controller: :protected, only: %i(show)
   resource :sentry_test, controller: :sentry_test, only: %i(show)
 
   get "/404", to: "errors#not_found", via: :all

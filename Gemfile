@@ -40,6 +40,7 @@ group :development, :test do
 
   # Debugging
   gem "pry-byebug"
+  gem "pry-rails"
 
   # Testing framework
   gem "rspec-rails", "~> 4.0.0.beta3"
@@ -49,6 +50,8 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "bullet", "~> 6.1"
+
+  gem "factory_bot_rails"
 end
 
 group :development do
