@@ -11,6 +11,9 @@ Metrics/BlockLength:
     - config/environments/**/*.rb
     - spec/**/*
 
+Naming/MethodParameterName:
+  Enabled: false
+
 Style/StringLiterals:
   Enabled: false
 Style/TrailingCommaInArguments:
@@ -18,6 +21,4 @@ Style/TrailingCommaInArguments:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 Style/TrailingCommaInArrayLiteral:
-  Enabled: false
-Naming/MethodParameterName:
   Enabled: false
