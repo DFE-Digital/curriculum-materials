@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get "/pages/:page", to: "pages#show"
 
   resource :home, only: %i(show)
-  root to: 'home#show'
+  root to: 'homes#show'
+
+  resource :splash, only: %i(show)
 
   resource :sessions, only: %i(create destroy)
   get '/sessions/:token', to: 'sessions#create'

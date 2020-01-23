@@ -13,6 +13,7 @@ html lang="en" class="govuk-template "
 
     .govuk-width-container
       = render 'layouts/shared/phase_banner'
+      = content_for :back_button
 
       main#main-content.govuk-main-wrapper[role="main"]
         = yield
