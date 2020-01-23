@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   resource :sessions, only: %i(create destroy)
   get '/sessions/:token', to: 'sessions#create'
 
+  resources :complete_curriculum_programs, only: %i(show index) do
+    resources :units, only: %i(show), shallow: true do
+      resources :lessons, only: %i(show), shallow: true
+    end
+  end
+
   # temporary routes used for testing while setting up
   resource :protected, controller: :protected, only: %i(show)
   resource :sentry_test, controller: :sentry_test, only: %i(show)

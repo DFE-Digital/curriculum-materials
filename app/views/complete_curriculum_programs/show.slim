@@ -1,0 +1,6 @@
+h1 = @complete_curriculum_program.name
+
+h2 Units
+ul
+- @complete_curriculum_program.units.each do |unit|
+  li = link_to unit.name, unit

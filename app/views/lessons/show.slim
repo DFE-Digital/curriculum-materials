@@ -1,0 +1,23 @@
+h1 = @lesson.name
+
+table
+  tbody
+    tr
+      td summary
+      td = @lesson.summary
+    tr
+      td core_knowledge
+      td = @lesson.core_knowledge
+    tr
+      td previous_knowledge
+      td = @lesson.previous_knowledge
+
+h2 vocabulary
+ul
+  - @lesson.vocabulary.each do |v|
+    li = v
+
+h2 misconceptions
+ul
+  - @lesson.misconceptions.each do |m|
+    li = m
