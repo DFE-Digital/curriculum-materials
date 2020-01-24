@@ -11,7 +11,7 @@ RSpec.feature "Home page", type: :feature do
     end
 
     specify "there should be a 'Start now' button" do
-      expect(page).to have_link('Start now', href: '#')
+      expect(page).to have_link('Start now', href: '/splash')
     end
   end
 end
