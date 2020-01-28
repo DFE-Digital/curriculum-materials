@@ -31,6 +31,11 @@ gem "redcarpet"
 gem "sentry-raven"
 gem 'simple_ams'
 
+# FIXME we're using factorybot and faker for seed data, move them back to
+# development/test once we're up and running with real data
+gem "factory_bot_rails"
+gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -51,9 +56,6 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "bullet", "~> 6.1"
-
-  gem "factory_bot_rails"
-  gem 'faker'
   gem 'open_api-rswag'
 end
 
