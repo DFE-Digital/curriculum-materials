@@ -14,6 +14,9 @@ Metrics/BlockLength:
 Naming/MethodParameterName:
   Enabled: false
 
+Rails/FilePath:
+  Enabled: false
+
 Style/StringLiterals:
   Enabled: false
 Style/TrailingCommaInArguments:

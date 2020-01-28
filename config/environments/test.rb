@@ -43,6 +43,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Custom app config
+  config.x.swagger_root = ENV.fetch('SWAGGER_ROOT') { Rails.root.join('docs', 'swagger') }
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
   config.after_initialize do

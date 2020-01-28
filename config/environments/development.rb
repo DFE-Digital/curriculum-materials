@@ -52,9 +52,20 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Custom app config
+  config.x.swagger_root = ENV.fetch('SWAGGER_ROOT') { Rails.root.join('docs', 'swagger') }
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.raise = true
     Bullet.rails_logger = true
   end
+end
+
+OpenApi::Rswag::Api.configure do |c|
+  c.swagger_root = Rails.configuration.x.swagger_root
+end
+
+OpenApi::Rswag::Ui.configure do |c|
+  c.swagger_endpoint '/api-docs/v1/swagger.json', 'API V1 Docs'
 end

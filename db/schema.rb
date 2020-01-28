@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_140052) do
+ActiveRecord::Schema.define(version: 2020_01_23_103341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "complete_curriculum_programmes", force: :cascade do |t|
+    t.string "name", limit: 256, null: false
+    t.string "overview", limit: 1024, null: false
+    t.text "benefits", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer "unit_id", null: false
+    t.string "name", limit: 256
+    t.text "summary"
+    t.integer "position"
+    t.text "core_knowledge"
+    t.text "previous_knowledge"
+    t.string "vocabulary", array: true
+    t.string "misconceptions", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_lessons_on_name"
+    t.index ["unit_id"], name: "index_lessons_on_unit_id"
+  end
 
   create_table "teachers", force: :cascade do |t|
     t.uuid "token", null: false
@@ -22,4 +46,17 @@ ActiveRecord::Schema.define(version: 2020_01_16_140052) do
     t.index ["token"], name: "index_teachers_on_token", unique: true
   end
 
+  create_table "units", force: :cascade do |t|
+    t.integer "complete_curriculum_programme_id"
+    t.string "name", limit: 256, null: false
+    t.string "overview", limit: 1024, null: false
+    t.text "benefits", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["complete_curriculum_programme_id"], name: "index_units_on_complete_curriculum_programme_id"
+    t.index ["name"], name: "index_units_on_name"
+  end
+
+  add_foreign_key "lessons", "units"
+  add_foreign_key "units", "complete_curriculum_programmes"
 end

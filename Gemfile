@@ -29,6 +29,7 @@ gem "strong_migrations", "~> 0.5"
 gem "slim-rails"
 gem "redcarpet"
 gem "sentry-raven"
+gem 'simple_ams'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,6 +53,8 @@ group :development, :test do
   gem "bullet", "~> 6.1"
 
   gem "factory_bot_rails"
+  gem 'faker'
+  gem 'open_api-rswag'
 end
 
 group :development do

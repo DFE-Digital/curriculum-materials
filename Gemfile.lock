@@ -92,16 +92,21 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
+    faker (2.10.1)
+      i18n (>= 1.6, < 2)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.11.3)
     foreman (0.86.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (4.0.0)
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
     json (2.3.0)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -122,6 +127,20 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
+    open_api-rswag (0.1.0)
+      open_api-rswag-api (= 0.1.0)
+      open_api-rswag-specs (= 0.1.0)
+      open_api-rswag-ui (= 0.1.0)
+    open_api-rswag-api (0.1.0)
+      railties (>= 3.1, < 7.0)
+    open_api-rswag-specs (0.1.0)
+      activesupport (>= 3.1, < 7.0)
+      hashie
+      json-schema (~> 2.2)
+      railties (>= 3.1, < 7.0)
+    open_api-rswag-ui (0.1.0)
+      actionpack (>= 3.1, < 7.0)
+      railties (>= 3.1, < 7.0)
     parallel (1.19.1)
     parser (2.6.5.0)
       ast (~> 2.4.0)
@@ -230,6 +249,7 @@ GEM
       faraday (>= 0.7.6, < 1.0)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
+    simple_ams (0.2.3)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -294,8 +314,10 @@ DEPENDENCIES
   capybara (~> 3.30)
   dotenv-rails
   factory_bot_rails
+  faker
   foreman
   listen (>= 3.0.5, < 3.3)
+  open_api-rswag
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails
@@ -308,6 +330,7 @@ DEPENDENCIES
   scss_lint-govuk
   sentry-raven
   shoulda-matchers (~> 4.1)
+  simple_ams
   simplecov
   slim-rails
   spring
