@@ -18,8 +18,11 @@ Rails.application.routes.draw do
 
 
   # API
-  mount OpenApi::Rswag::Ui::Engine => '/api-docs'
-  mount OpenApi::Rswag::Api::Engine => '/api-docs'
+  if Rails.env.development?
+    mount OpenApi::Rswag::Ui::Engine => '/api-docs'
+    mount OpenApi::Rswag::Api::Engine => '/api-docs'
+  end
+
   namespace :api do
     namespace :v1 do
       resources :ccps, controller: 'complete_curriculum_programmes', only: %i(index show) do
