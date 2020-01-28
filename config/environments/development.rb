@@ -61,3 +61,11 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 end
+
+OpenApi::Rswag::Api.configure do |c|
+  c.swagger_root = Rails.configuration.x.swagger_root
+end
+
+OpenApi::Rswag::Ui.configure do |c|
+  c.swagger_endpoint '/api-docs/v1/swagger.json', 'API V1 Docs'
+end
