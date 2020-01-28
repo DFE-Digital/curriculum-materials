@@ -52,6 +52,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Custom app config
+  config.x.swagger_root = ENV.fetch('SWAGGER_ROOT') { Rails.root.join('docs', 'swagger') }
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.raise = true
