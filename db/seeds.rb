@@ -1,4 +1,4 @@
-if Rails.env.development?
+unless Rails.env.test?
   3.times do
     FactoryBot.create(:ccp, :randomised) do |ccp|
       3.times do
