@@ -8,4 +8,9 @@ class CompleteCurriculumProgramme < ApplicationRecord
   validates :benefits, presence: true
 
   has_many :units, dependent: :destroy
+
+  # Stub implementation until we associate ccps with years
+  def year
+    'TODO!!'
+  end
 end

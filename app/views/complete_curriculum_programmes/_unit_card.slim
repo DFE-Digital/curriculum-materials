@@ -1,0 +1,13 @@
+article.card
+  .card-header
+    .card-header-title
+      = link_to unit_path(unit)
+        h3 = unit.name
+      span.govuk-caption-m = pluralize(unit.lessons.size, 'lesson')
+
+  .card-body
+    p.govuk-body = unit.overview
+    ul.govuk-list.govuk-list--bullet
+      - unit.lessons.each do |lesson|
+        li = lesson.name
+    = link_to 'View and plan lessons', unit_path(unit)

@@ -10,6 +10,7 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/**/*.rb
     - spec/**/*
+    - config/routes.rb
 
 Naming/MethodParameterName:
   Enabled: false
