@@ -1,4 +1,4 @@
-if Rails.env.development?
+unless Rails.env.test?
   FactoryBot.create(
     :ccp,
     name: 'Year 7 Geography',
