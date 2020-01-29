@@ -8,7 +8,7 @@ table.units.govuk-table
 
   tbody.govuk-table__body
     - lessons.each.with_index(1) do |lesson, i|
-      tr.govuk-table__row
+      tr.unit.govuk-table__row
         th.govuk-table__cell.big-number scope='row' = i
         td.govuk-table__cell= lesson.name
         td.govuk-table__cell= "1 hour"
