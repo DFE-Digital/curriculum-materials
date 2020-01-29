@@ -11,6 +11,7 @@ Metrics/BlockLength:
     - config/environments/**/*.rb
     - config/routes.rb
     - spec/**/*
+    - db/**/*
 
 Naming/MethodParameterName:
   Enabled: false

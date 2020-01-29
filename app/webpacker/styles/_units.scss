@@ -29,34 +29,41 @@
 }
 
 // sibling unit nav
-.siblings {
-  ol {
-    list-style: none;
-    @extend %govuk-body-s;
+nav {
+  &.siblings {
+    ol {
+      list-style: none;
+      @extend %govuk-body-s;
 
-    li {
-      margin: 0;
+      li {
+        margin: 0;
 
-      a,
-      &.current {
-        display: block;
-        padding: 1rem 0 1rem 1rem;
-      }
-
-      a {
-        display: block;
-        border-left: 5px solid transparent;
-
-        &:hover {
-          border-left: 5px solid govuk-tint(govuk-colour('blue'), 15);
+        a,
+        &.current {
+          display: block;
+          padding: 1rem 0 1rem 1rem;
         }
-      }
 
-      &.current {
-        color: $govuk-link-colour;
-        font-weight: bold;
-        border-left: 5px solid govuk-colour('blue');
-        background-color: govuk-colour('light-grey');
+        a {
+          display: block;
+          border-left: 5px solid transparent;
+          text-decoration: none;
+
+          &:hover {
+            border-left: 5px solid govuk-tint(govuk-colour('blue'), 15);
+          }
+
+          &:visited {
+            color: $govuk-link-colour;
+          }
+        }
+
+        &.current {
+          color: $govuk-link-colour;
+          font-weight: bold;
+          border-left: 5px solid govuk-colour('blue');
+          background-color: govuk-colour('light-grey');
+        }
       }
     }
   }
