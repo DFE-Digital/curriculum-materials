@@ -1,0 +1,19 @@
+.govuk-grid-row
+  .govuk-grid-column-full
+    h1.govuk-heading-l
+      = @unit.name
+
+  .govuk-grid-column-two-thirds
+
+    p = @unit.overview
+
+    = render 'table', lessons: @unit.lessons
+
+    section.benefits
+      h2.govuk-heading-m
+        | How this lesson sequence benefits pupils’ learning
+
+      p = @unit.benefits
+
+  .govuk-grid-column-one-third
+    = render 'siblings', units: @unit.complete_curriculum_programme.units

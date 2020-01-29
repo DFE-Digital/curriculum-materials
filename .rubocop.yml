@@ -9,8 +9,9 @@ Bundler/OrderedGems:
 Metrics/BlockLength:
   Exclude:
     - config/environments/**/*.rb
-    - spec/**/*
     - config/routes.rb
+    - spec/**/*
+    - db/**/*
 
 Naming/MethodParameterName:
   Enabled: false

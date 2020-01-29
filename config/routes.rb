@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "/500", to: "errors#internal_server_error", via: :all
 
   resources :complete_curriculum_programmes, only: :show
-  resources :units, only: :show
+  resources :units, only: %i(show)
 
   # API
   if Rails.env.development?

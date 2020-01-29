@@ -11,5 +11,15 @@ FactoryBot.define do
       overview { Faker::Lorem.paragraph }
       benefits { Faker::Lorem.paragraphs.join("\n\n") }
     end
+
+    trait(:with_lessons) do
+      transient do
+        number_of_lessons { 3 }
+      end
+
+      after(:create) do |unit, evaluator|
+        create_list(:lesson, evaluator.number_of_lessons, unit: unit)
+      end
+    end
   end
 end
