@@ -10,4 +10,16 @@ module ApplicationHelper
       tag.path fill: colour, d: "M0 0h13l20 20-20 20H0l20-20z"
     end
   end
+
+  def markdown(content)
+    return '' if content.blank?
+
+    markdown = Redcarpet::Markdown.new \
+      Redcarpet::Render::XHTML, autolink: true, space_after_headers: true
+
+    # rubocop:disable Rails/OutputSafety
+    # Rubocop doesn't notice we're first calling sanitize before calling html_safe
+    sanitize(markdown.render(content)).html_safe
+    # rubocop:enable Rails/OutputSafety
+  end
 end
