@@ -40,6 +40,9 @@
     },
     {
       "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
     }
   ]
 }
