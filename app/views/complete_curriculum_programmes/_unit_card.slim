@@ -7,7 +7,7 @@ article.card
 
   .card-body
     p.govuk-body = unit.overview
-    ul.govuk-list.govuk-list--bullet
+    ol
       - unit.lessons.each do |lesson|
-        li = lesson.name
+        li = link_to(lesson.name, lesson_path(lesson))
     = link_to 'View and plan lessons', unit_path(unit)

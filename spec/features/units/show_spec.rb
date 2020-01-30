@@ -36,6 +36,14 @@ RSpec.feature "Units page", type: :feature do
       end
     end
 
+    specify 'the table should contain a link to each lesson' do
+      within('table.units > tbody') do
+        unit.lessons.each do |lesson|
+          expect(page).to have_link('View lesson', href: lesson_path(lesson))
+        end
+      end
+    end
+
     describe 'navigation side pane' do
       specify 'there should be a side pane containing a navigation list' do
         expect(page).to have_css('nav.siblings')

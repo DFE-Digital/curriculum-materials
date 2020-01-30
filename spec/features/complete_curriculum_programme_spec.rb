@@ -31,7 +31,7 @@ feature 'Complete Curriculum Programme page', type: :feature do
           expect(page).to have_css 'h3', text: unit.name
           expect(page).to have_link 'View and plan lessons', href: unit_path(unit)
           unit.lessons.each do |lesson|
-            expect(page).to have_css 'li', text: lesson.name
+            expect(page).to have_link(lesson.name, href: lesson_path(lesson))
           end
         end
       end
