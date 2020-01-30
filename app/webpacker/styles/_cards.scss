@@ -12,10 +12,6 @@
     border-top: 10px solid govuk-colour("light-green");
     background-color: govuk-colour("light-grey");
 
-    display: grid;
-    grid-template-rows: auto 1fr auto auto;
-    grid-gap: 1rem;
-
     a {
       text-decoration: none;
     }
