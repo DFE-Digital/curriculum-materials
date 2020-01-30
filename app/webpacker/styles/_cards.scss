@@ -1,13 +1,10 @@
 .cards-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   counter-reset: card-number;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
 
   .card {
-    flex: 0 0 30%;
-    flex-basis: 16rem;
     margin: 0.5rem 0;
     padding: 20px;
     padding-top: 10px;
@@ -15,15 +12,16 @@
     border-top: 10px solid govuk-colour("light-green");
     background-color: govuk-colour("light-grey");
 
+    a {
+      text-decoration: none;
+    }
+
     .card-header {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
 
       &::before {
-        flex-basis: 20%;
-        flex-grow: 0;
         counter-increment: card-number;
         content: counter(card-number);
         @extend %govuk-heading-xl;
@@ -31,12 +29,10 @@
         font-size: 4.5rem;
         padding: 0;
         margin: 0;
+        width: 3rem;
       }
 
       .card-header-title {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
         padding-left: 0.5rem;
 
         a > h3 {
