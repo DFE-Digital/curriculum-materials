@@ -12,4 +12,4 @@ table.units.govuk-table
         th.govuk-table__cell.big-number scope='row' = i
         td.govuk-table__cell= lesson.name
         td.govuk-table__cell= "1 hour"
-        td.govuk-table__cell= link_to('View lesson', '#')
+        td.govuk-table__cell= link_to('View lesson', lesson_path(lesson))

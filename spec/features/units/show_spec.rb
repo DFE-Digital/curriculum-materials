@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Units page", type: :feature do
+RSpec.feature "Unit page", type: :feature do
   describe '#show' do
     let(:number_of_units) { 2 }
     let(:number_of_lessons) { 2 }
@@ -32,6 +32,14 @@ RSpec.feature "Units page", type: :feature do
       within('table.units > thead') do
         ['Lesson number', 'Learning objective', 'Duration'].each do |heading|
           expect(page).to have_css('th', text: heading)
+        end
+      end
+    end
+
+    specify 'the table should contain a link to each lesson' do
+      within('table.units > tbody') do
+        unit.lessons.each do |lesson|
+          expect(page).to have_link('View lesson', href: lesson_path(lesson))
         end
       end
     end

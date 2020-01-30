@@ -65,6 +65,10 @@
       a {
         font-weight: bold;
       }
+
+      li > a {
+        font-weight: normal;
+      }
     }
   }
 }

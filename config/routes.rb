@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :complete_curriculum_programmes, only: :show
   resources :units, only: %i(show)
+  resources :lessons, only: %i(show)
 
   # API
   if Rails.env.development?
