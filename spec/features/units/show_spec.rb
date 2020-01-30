@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Units page", type: :feature do
+RSpec.feature "Unit page", type: :feature do
   describe '#show' do
     let(:number_of_units) { 2 }
     let(:number_of_lessons) { 2 }
