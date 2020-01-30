@@ -10,4 +10,6 @@ article.card
     ol
       - unit.lessons.each do |lesson|
         li = link_to(lesson.name, lesson_path(lesson))
+
+  .card-footer
     = link_to 'View and plan lessons', unit_path(unit)
