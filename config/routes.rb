@@ -7,9 +7,6 @@ Rails.application.routes.draw do
 
   resource :splash, only: %i(show)
 
-  resource :sessions, only: %i(create destroy)
-  get '/sessions/:token', to: 'sessions#create'
-
   # temporary routes used for testing while setting up
   resource :protected, controller: :protected, only: %i(show)
   resource :sentry_test, controller: :sentry_test, only: %i(show)
@@ -18,9 +15,13 @@ Rails.application.routes.draw do
   get "/422", to: "errors#unprocessable_entity", via: :all
   get "/500", to: "errors#internal_server_error", via: :all
 
-  resources :complete_curriculum_programmes, only: :show
-  resources :units, only: %i(show)
-  resources :lessons, only: %i(show)
+  namespace :teachers do
+    resource :sessions, only: %i(create destroy)
+    get '/sessions/:token', to: 'sessions#create'
+    resources :complete_curriculum_programmes, only: :show
+    resources :units, only: %i(show)
+    resources :lessons, only: %i(show)
+  end
 
   # API
   if Rails.env.development?

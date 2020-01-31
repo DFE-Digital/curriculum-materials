@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UnitsController, type: :controller do
+describe Teachers::UnitsController, type: :controller do
   context '#show' do
     let(:unit) { FactoryBot.create(:unit) }
     subject { get :show, params: { id: unit.id } }

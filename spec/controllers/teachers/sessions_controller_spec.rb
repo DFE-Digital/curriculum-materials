@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SessionsController, type: :controller do
+RSpec.describe Teachers::SessionsController, type: :controller do
   let(:teacher) { create(:teacher) }
   describe '#create' do
     context 'when the token is valid' do
