@@ -8,6 +8,7 @@ require "rspec/rails"
 require "support/factory_bot"
 require "support/api_examples"
 require "faker"
+require "action_view/component/test_helpers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -62,6 +63,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include ActionView::Component::TestHelpers, type: :component
 end
 
 Shoulda::Matchers.configure do |config|
