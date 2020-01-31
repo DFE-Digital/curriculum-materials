@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include HTTPAuth
+
   before_action :set_raven_context
 
 private
