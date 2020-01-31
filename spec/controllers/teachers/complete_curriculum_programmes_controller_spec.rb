@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe CompleteCurriculumProgrammesController, type: :request do
+describe Teachers::CompleteCurriculumProgrammesController, type: :request do
   context '#show' do
     let :complete_curriculum_programme do
       create :complete_curriculum_programme
     end
 
     subject do
-      get complete_curriculum_programme_path complete_curriculum_programme
+      get teachers_complete_curriculum_programme_path complete_curriculum_programme
     end
 
     it do

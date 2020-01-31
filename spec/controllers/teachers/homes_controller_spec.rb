@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe HomesController, type: :controller do
+RSpec.describe Teachers::HomesController, type: :controller do
   describe '#show' do
     subject { get(:show) }
 
