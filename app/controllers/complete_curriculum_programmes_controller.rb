@@ -1,4 +1,6 @@
 class CompleteCurriculumProgrammesController < ApplicationController
+  def index; end
+
   def show
     @complete_curriculum_programme = \
       CompleteCurriculumProgramme

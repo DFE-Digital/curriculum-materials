@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "/422", to: "errors#unprocessable_entity", via: :all
   get "/500", to: "errors#internal_server_error", via: :all
 
-  resources :complete_curriculum_programmes, only: :show
+  resources :complete_curriculum_programmes, only: %i(index show)
   resources :units, only: %i(show)
   resources :lessons, only: %i(show)
 
