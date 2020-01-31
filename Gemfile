@@ -29,7 +29,8 @@ gem "strong_migrations", "~> 0.5"
 gem "slim-rails"
 gem "redcarpet"
 gem "sentry-raven"
-gem 'simple_ams'
+gem "simple_ams"
+gem "actionview-component"
 
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data

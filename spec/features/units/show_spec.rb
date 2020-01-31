@@ -22,6 +22,13 @@ RSpec.feature "Unit page", type: :feature do
       expect(page).to have_css('h1', text: unit.name)
     end
 
+    specify "there should be breadcrumbs for the CCP and current unit" do
+      within('.govuk-breadcrumbs') do
+        expect(page).to have_link(ccp.name, href: complete_curriculum_programme_path(ccp))
+        expect(page).to have_content(unit.name)
+      end
+    end
+
     specify %(there should be a table containing this unit's lessons) do
       within('table.units > tbody') do
         expect(page).to have_css('tr.unit', count: number_of_lessons)

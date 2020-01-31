@@ -25,6 +25,12 @@ feature 'Complete Curriculum Programme page', type: :feature do
       expect(page).to have_css 'h1', text: complete_curriculum_programme.name
     end
 
+    it "contains breadcrumbs with only the current CCP included" do
+      within('.govuk-breadcrumbs') do
+        expect(page).to have_content(complete_curriculum_programme.name)
+      end
+    end
+
     context 'Unit cards' do
       it "shows a card for each unit" do
         units.each do |unit|

@@ -1,0 +1,8 @@
+div.govuk-breadcrumbs
+  ol.govuk-breadcrumbs__list
+    - crumbs.each do |name, href|
+      li.govuk-breadcrumbs__list-item
+        = link_to(name, href, class: 'govuk-breadcrumbs__link')
+
+    li.govuk-breadcrumbs__list-item aria-current='page'
+      = current_page
