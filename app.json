@@ -24,6 +24,12 @@
     },
     "SENTRY_DSN": {
       "required": true
+    },
+    "HTTP_AUTH_PASSWORD": {
+      "required": true
+    },
+    "HTTP_AUTH_USER": {
+      "required": true
     }
   },
   "formation": {
