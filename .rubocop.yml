@@ -19,6 +19,13 @@ Naming/MethodParameterName:
 Rails/FilePath:
   Enabled: false
 
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+
 Style/StringLiterals:
   Enabled: false
 Style/TrailingCommaInArguments:
