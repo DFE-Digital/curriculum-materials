@@ -4,6 +4,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1rem;
 
+  @include govuk-media-query($until: desktop) {
+    grid-template-columns: 1fr;
+  }
+
   .card {
     margin: 0.5rem 0;
     padding: 20px;
