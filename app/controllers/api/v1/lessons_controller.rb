@@ -14,7 +14,10 @@ class Api::V1::LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson
+      .eager_load(:unit)
+      .where(unit_id: params[:unit_id])
+      .find(params[:id])
 
     render(
       json: SimpleAMS::Renderer.new(

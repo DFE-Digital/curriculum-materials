@@ -21,3 +21,7 @@ end
 def example_lessons(quantity)
   1.upto(quantity).map { |i| example_lesson(i) }
 end
+
+def example_errors
+  ["Name can't be blank"]
+end
