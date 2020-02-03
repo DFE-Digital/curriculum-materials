@@ -6,7 +6,7 @@ RSpec.feature "Lesson page", type: :feature do
     let(:unit) { lesson.unit }
     let(:ccp) { unit.complete_curriculum_programme }
 
-    before { visit(lesson_path(lesson)) }
+    before { visit(teachers_lesson_path(lesson)) }
 
     specify 'the page heading should be the lesson title' do
       expect(page).to have_css('h1', text: lesson.name)
@@ -14,8 +14,8 @@ RSpec.feature "Lesson page", type: :feature do
 
     specify "there should be breadcrumbs for the CCP and current unit" do
       within('.govuk-breadcrumbs') do
-        expect(page).to have_link(ccp.name, href: complete_curriculum_programme_path(ccp))
-        expect(page).to have_link(unit.name, href: unit_path(unit))
+        expect(page).to have_link(ccp.name, href: teachers_complete_curriculum_programme_path(ccp))
+        expect(page).to have_link(unit.name, href: teachers_unit_path(unit))
         expect(page).to have_content(lesson.name)
       end
     end
