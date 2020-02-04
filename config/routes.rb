@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get "/pages/:page", to: "pages#show"
 
   # temporary routes used for testing while setting up
-  resource :protected, controller: :protected, only: %i(show)
   resource :sentry_test, controller: :sentry_test, only: %i(show)
 
   get "/404", to: "errors#not_found", via: :all
