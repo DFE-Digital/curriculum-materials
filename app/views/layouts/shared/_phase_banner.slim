@@ -6,3 +6,7 @@
       | This is a new service – your
       =<> link_to 'feedback', '#'
       | will help us to improve it.
+
+  - if @current_teacher.present?
+    div.logout
+      = link_to 'Log out', teachers_session_path

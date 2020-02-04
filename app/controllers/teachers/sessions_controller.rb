@@ -14,6 +14,8 @@ module Teachers
       end
     end
 
+    def show; end
+
     def destroy
       session.clear
 

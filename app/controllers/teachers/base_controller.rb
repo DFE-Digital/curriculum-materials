@@ -5,7 +5,11 @@ module Teachers
   private
 
     def ensure_token_exists
-      unless Teacher.exists?(token: session[:token])
+      teacher = Teacher.find_by(token: session[:token])
+
+      if teacher.present?
+        @current_teacher = teacher
+      else
         redirect_to '/pages/how-to-get-access'
       end
     end
