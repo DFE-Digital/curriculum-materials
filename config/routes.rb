@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
     resources :units, only: %i(show)
     resources :lessons, only: %i(show)
+
+    resource :logged_out, only: %i(show), controller: 'logged_out'
   end
 
   root to: 'teachers/homes#show'

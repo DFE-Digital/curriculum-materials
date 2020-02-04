@@ -15,7 +15,7 @@ module Teachers
     def destroy
       session.clear
 
-      redirect_to root_path
+      redirect_to teachers_logged_out_path
     end
   end
 end
