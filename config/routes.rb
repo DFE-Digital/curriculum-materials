@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     resource :home, only: %i(show)
     resource :splash, only: %i(show)
 
-    get '/sessions/:token', to: 'sessions#create', as: 'create_session'
-    delete '/sessions', to: 'sessions#destroy', as: 'destroy_session'
+    resource :session, only: %i(show destroy) do
+      get '/:token', to: 'sessions#create', as: 'create'
+    end
 
     resources :complete_curriculum_programmes, only: %i(index show)
 
