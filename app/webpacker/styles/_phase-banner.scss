@@ -1,0 +1,16 @@
+.govuk-phase-banner {
+  display: flex;
+  align-items: center;
+
+  .govuk-phase-banner__content {
+    display: inline-flex;
+    flex-grow: 1;
+  }
+
+  .logout {
+    button {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

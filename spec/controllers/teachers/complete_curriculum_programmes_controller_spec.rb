@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Teachers::CompleteCurriculumProgrammesController, type: :request do
+  include_context 'logged in teacher'
+
   context '#show' do
     let :complete_curriculum_programme do
       create :complete_curriculum_programme

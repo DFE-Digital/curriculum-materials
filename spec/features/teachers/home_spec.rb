@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Home page", type: :feature do
+  include_context 'logged in teacher'
+
   describe '#show' do
     before do
       visit('/')

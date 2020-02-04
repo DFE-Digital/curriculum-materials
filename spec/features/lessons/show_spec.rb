@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Lesson page", type: :feature do
+  include_context 'logged in teacher'
+
   describe '#show' do
     let(:lesson) { FactoryBot.create(:lesson) }
     let(:unit) { lesson.unit }

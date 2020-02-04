@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get "/pages/:page", to: "pages#show"
 
   # temporary routes used for testing while setting up
-  resource :protected, controller: :protected, only: %i(show)
   resource :sentry_test, controller: :sentry_test, only: %i(show)
 
   get "/404", to: "errors#not_found", via: :all
@@ -13,11 +12,17 @@ Rails.application.routes.draw do
   namespace :teachers do
     resource :home, only: %i(show)
     resource :splash, only: %i(show)
-    resource :sessions, only: %i(create destroy)
-    get '/sessions/:token', to: 'sessions#create'
+
+    resource :session, only: %i(show destroy) do
+      get '/:token', to: 'sessions#create', as: 'create'
+    end
+
     resources :complete_curriculum_programmes, only: %i(index show)
+
     resources :units, only: %i(show)
     resources :lessons, only: %i(show)
+
+    resource :logged_out, only: %i(show), controller: 'logged_out'
   end
 
   root to: 'teachers/homes#show'

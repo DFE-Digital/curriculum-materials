@@ -10,6 +10,7 @@ $govuk-font-url-function: frontend-font-url;
 $govuk-image-url-function: frontend-image-url;
 
 @import "~govuk-frontend/govuk/all";
+@import "phase-banner";
 @import "defaults";
 @import "side-panes";
 @import "splash";
