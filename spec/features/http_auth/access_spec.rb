@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'HTTP Auth for the staging environment', type: :feature do
+  include_context 'logged in teacher'
+
   describe 'accessing the site' do
     context 'when the environment is staging' do
       before do

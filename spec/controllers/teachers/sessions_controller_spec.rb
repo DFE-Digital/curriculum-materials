@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Teachers::SessionsController, type: :request do
   let(:teacher) { create(:teacher) }
+
   describe '#create' do
     context 'when the token is valid' do
       subject { get(teachers_create_session_path(teacher.token)) }
@@ -25,11 +26,11 @@ RSpec.describe Teachers::SessionsController, type: :request do
     specify 'after destroying the session protected pages should not be accessible' do
       # log in
       get(teachers_create_session_path(teacher.token))
-      expect(get(protected_path)).to eql(200)
+      expect(get(teachers_home_path)).to be(200)
 
       # log out
       delete(teachers_destroy_session_path)
-      expect(get(protected_path)).to eql(401)
+      expect(get(teachers_home_path)).to be(401)
     end
   end
 end

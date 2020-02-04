@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.feature "Unit page", type: :feature do
+  include_context 'logged in teacher'
+
   describe '#show' do
     let(:number_of_units) { 2 }
     let(:number_of_lessons) { 2 }

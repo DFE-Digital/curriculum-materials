@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 feature 'Complete Curriculum Programme page', type: :feature do
+  include_context 'logged in teacher'
+
   context 'Viewing the page' do
     let! :complete_curriculum_programme do
       create :complete_curriculum_programme

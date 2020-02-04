@@ -1,5 +1,7 @@
 module Teachers
   class SessionsController < BaseController
+    skip_before_action :ensure_token_exists
+
     def create
       if Teacher.exists?(token: params[:token])
         session[:token] = params[:token]
