@@ -30,7 +30,7 @@ RSpec.describe Teachers::SessionsController, type: :request do
 
       # log out
       delete(teachers_destroy_session_path)
-      expect(get(teachers_home_path)).to be(401)
+      expect(get(teachers_home_path)).to redirect_to('/pages/how-to-get-access')
     end
   end
 end

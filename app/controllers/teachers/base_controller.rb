@@ -6,7 +6,7 @@ module Teachers
 
     def ensure_token_exists
       unless Teacher.exists?(token: session[:token])
-        render(json: { authorized: false }, status: :unauthorized)
+        redirect_to '/pages/how-to-get-access'
       end
     end
   end
