@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   namespace :teachers do
     resource :home, only: %i(show)
     resource :splash, only: %i(show)
-    resource :sessions, only: %i(create destroy)
-    get '/sessions/:token', to: 'sessions#create'
+
+    get '/sessions/:token', to: 'sessions#create', as: 'create_session'
+    delete '/sessions', to: 'sessions#destroy', as: 'destroy_session'
+
     resources :complete_curriculum_programmes, only: %i(index show)
+
     resources :units, only: %i(show)
     resources :lessons, only: %i(show)
   end
