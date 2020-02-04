@@ -2,16 +2,14 @@ module Teachers
   class BaseController < ApplicationController
     before_action :ensure_token_exists
 
+    def current_teacher
+      @current_teacher ||= Teacher.find_by(token: session[:token])
+    end
+
   private
 
     def ensure_token_exists
-      teacher = Teacher.find_by(token: session[:token])
-
-      if teacher.present?
-        @current_teacher = teacher
-      else
-        redirect_to '/pages/how-to-get-access'
-      end
+      redirect_to('/pages/how-to-get-access') if current_teacher.blank?
     end
   end
 end
