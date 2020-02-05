@@ -6,16 +6,15 @@ RSpec.feature "Logging out", type: :feature do
 
     before { visit(teachers_home_path) }
 
-    specify 'there should be a logout link in the phase bar' do
+    specify 'there should be a logout button in the phase bar' do
       within('.govuk-phase-banner') do
-        expect(page).to have_link('Log out', href: teachers_session_path)
+        within('form[action="/teachers/session"]') do
+          expect(page).to have_button('Log out')
+        end
       end
     end
 
     specify 'actually logging out' do
-      click_link 'Log out'
-      expect(page.current_path).to eql(teachers_session_path)
-
       click_button 'Log out'
       expect(page.current_path).to eql(teachers_logged_out_path)
 

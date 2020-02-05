@@ -1,0 +1,28 @@
+.logout {
+  input[type="submit"] {
+    border: none;
+    background: none;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: $govuk-link-colour;
+
+    &:hover {
+      color: $govuk-link-hover-colour;
+    }
+
+    &:visited {
+      color: $govuk-link-visited-colour;
+    }
+
+    &:active {
+      color: $govuk-link-active-colour;
+    }
+
+    &:focus {
+      @extend %govuk-link:focus;
+    }
+  }
+}

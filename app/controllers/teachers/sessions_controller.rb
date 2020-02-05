@@ -14,12 +14,12 @@ module Teachers
       end
     end
 
-    def show; end
-
     def destroy
+      token = session[:token]
+
       session.clear
 
-      redirect_to teachers_logged_out_path
+      redirect_to teachers_logged_out_path(token: token)
     end
   end
 end

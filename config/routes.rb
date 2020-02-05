@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource :home, only: %i(show)
     resource :splash, only: %i(show)
 
-    resource :session, only: %i(show destroy) do
+    resource :session, only: %i(destroy) do
       get '/:token', to: 'sessions#create', as: 'create'
     end
 
