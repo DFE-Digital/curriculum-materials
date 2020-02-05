@@ -68,8 +68,7 @@
                 "ccp": {
                   "name": "CCP 2",
                   "overview": "Overview",
-                  "benefits": "Benefits",
-                  "id": 1
+                  "benefits": "Benefits"
                 }
               }
             }
@@ -188,8 +187,7 @@
                 "ccp": {
                   "name": "CCP 4",
                   "overview": "Overview",
-                  "benefits": "Benefits",
-                  "id": 1
+                  "benefits": "Benefits"
                 }
               }
             }
@@ -202,9 +200,9 @@
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons": {
       "get": {
-        "summary": "Retrieves all lessons belonging to the specified CCP and unit",
+        "summary": "retrieves all lessons belonging to the specified CCP and unit",
         "tags": [
-          "CCP"
+          "Lesson"
         ],
         "parameters": [
           {
@@ -304,13 +302,63 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "creates a lesson belonging to the specified unit",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "lesson created",
+            "examples": {
+              "application/json": {
+                "lesson": {
+                  "name": "Lesson 3",
+                  "summary": "Lesson 3",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": "Previous knowledge",
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
+          }
+        }
       }
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{id}": {
       "get": {
-        "summary": "Retrieves a single lesson belonging to the specified CCP and unit",
+        "summary": "retrieves a single lesson belonging to the specified CCP and unit",
         "tags": [
-          "CCP"
+          "Lesson"
         ],
         "parameters": [
           {
@@ -343,8 +391,8 @@
             "description": "lesson found",
             "examples": {
               "application/json": {
-                "name": "Lesson 3",
-                "summary": "Lesson 3",
+                "name": "Lesson 4",
+                "summary": "Lesson 4",
                 "core_knowledge": "Core knowledge",
                 "previous_knowledge": "Previous knowledge",
                 "vocabulary": [
@@ -396,13 +444,71 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "update the referenced lesson",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lesson updated",
+            "examples": {
+              "application/json": {
+                "lesson": {
+                  "name": "Lesson 5",
+                  "summary": "Lesson 5",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": "Previous knowledge",
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson"
+          }
+        }
       }
     },
     "/ccps/{ccp_id}/units": {
       "get": {
-        "summary": "Retrieves all units belonging to the provided CCP",
+        "summary": "retrieves all units belonging to the provided CCP",
         "tags": [
-          "CCP"
+          "Unit"
         ],
         "parameters": [
           {
@@ -461,13 +567,47 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "creates a new unit belonging to the specified CCP",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "unit created",
+            "examples": {
+              "application/json": {
+                "unit": {
+                  "name": "Unit 5",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "id": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
+          }
+        }
       }
     },
     "/ccps/{ccp_id}/units/{id}": {
       "get": {
-        "summary": "Retrieves a single unit belonging to the specified CCP",
+        "summary": "retrieves a single unit belonging to the specified CCP",
         "tags": [
-          "CCP"
+          "Unit"
         ],
         "parameters": [
           {
@@ -492,7 +632,7 @@
             "description": "unit found",
             "examples": {
               "application/json": {
-                "name": "Unit 5",
+                "name": "Unit 6",
                 "overview": "Overview",
                 "benefits": "Benefits",
                 "id": 1,
@@ -504,8 +644,8 @@
                 },
                 "lessons": [
                   {
-                    "name": "Lesson 4",
-                    "summary": "Lesson 4",
+                    "name": "Lesson 6",
+                    "summary": "Lesson 6",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": "Previous knowledge",
                     "vocabulary": [
@@ -519,8 +659,8 @@
                     "id": 1
                   },
                   {
-                    "name": "Lesson 5",
-                    "summary": "Lesson 5",
+                    "name": "Lesson 7",
+                    "summary": "Lesson 7",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": "Previous knowledge",
                     "vocabulary": [
@@ -534,8 +674,8 @@
                     "id": 2
                   },
                   {
-                    "name": "Lesson 6",
-                    "summary": "Lesson 6",
+                    "name": "Lesson 8",
+                    "summary": "Lesson 8",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": "Previous knowledge",
                     "vocabulary": [
@@ -624,6 +764,47 @@
                 }
               }
             }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced unit",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "unit updated",
+            "examples": {
+              "application/json": {
+                "unit": {
+                  "name": "Unit 7",
+                  "overview": "Overview",
+                  "benefits": "Benefits"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
           }
         }
       }

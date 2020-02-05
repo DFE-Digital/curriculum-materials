@@ -36,8 +36,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :ccps, controller: 'complete_curriculum_programmes', only: %i(index show create update) do
-        resources :units, only: %i(index show) do
-          resources :lessons, only: %i(index show) do
+        resources :units, only: %i(index show create update) do
+          resources :lessons, only: %i(index show create update) do
             resources :lesson_parts, only: %i(index show)
           end
         end

@@ -57,7 +57,7 @@ describe 'Complete curriculum programmes' do
       response(201, 'ccp created') do
         let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
 
-        examples('application/json': { ccp: example_ccp })
+        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp) })
 
         run_test! do |response|
           # all of the values in the payload should be present in the returned
@@ -152,7 +152,7 @@ describe 'Complete curriculum programmes' do
       )
 
       response(200, 'ccp updated') do
-        examples('application/json': { ccp: example_ccp })
+        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp) })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
