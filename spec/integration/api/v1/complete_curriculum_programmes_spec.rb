@@ -36,7 +36,7 @@ describe 'Complete curriculum programmes' do
       consumes 'application/json'
 
       parameter(
-        name: :ccp,
+        name: :ccp_params,
         in: :body,
         schema: {
           properties: {
@@ -55,7 +55,7 @@ describe 'Complete curriculum programmes' do
       )
 
       response(201, 'ccp created') do
-        let!(:ccp) { { ccp: FactoryBot.attributes_for(:ccp) } }
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
 
         examples('application/json': { ccp: example_ccp })
 
@@ -64,7 +64,7 @@ describe 'Complete curriculum programmes' do
           # JSON, along with some others added by saving (id, timestamps)
 
           JSON.parse(response.body).with_indifferent_access.tap do |json|
-            ccp.dig(:ccp).each do |attribute, value|
+            ccp_params.dig(:ccp).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
           end
@@ -72,7 +72,7 @@ describe 'Complete curriculum programmes' do
       end
 
       response(400, 'invalid ccp') do
-        let!(:ccp) { { ccp: FactoryBot.attributes_for(:ccp, name: '') } }
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp, name: '') } }
 
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
@@ -82,7 +82,7 @@ describe 'Complete curriculum programmes' do
   end
 
   path('/ccps/{id}') do
-    get('retrieves one complete curriculum programme (CCP)') do
+    get('retrieves one complete curriculum programme') do
       tags('CCP')
       produces('application/json')
 
@@ -119,6 +119,56 @@ describe 'Complete curriculum programmes' do
         )
 
         run_test!
+      end
+    end
+
+    patch('update the referenced complete curriculum programme') do
+      tags('CCP')
+
+      consumes 'application/json'
+      let(:ccp) { FactoryBot.create(:ccp) }
+      let(:id) { ccp.id }
+      let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
+
+      parameter(name: :id, in: :path, type: :string, required: true)
+
+      parameter(
+        name: :ccp_params,
+        in: :body,
+        schema: {
+          properties: {
+            ccp: {
+              type: :object,
+              proprties: {
+                name: { type: :string },
+                benefits: { type: :string },
+                overview: { type: :string }
+              },
+              required: %i(name benefits overview)
+            },
+            required: %i(ccp)
+          }
+        }
+      )
+
+      response(200, 'ccp updated') do
+        examples('application/json': { ccp: example_ccp })
+
+        run_test! do |response|
+          JSON.parse(response.body).with_indifferent_access.tap do |json|
+            ccp_params.dig(:ccp).each do |attribute, value|
+              expect(json[attribute]).to eql(value)
+            end
+          end
+        end
+      end
+
+      response(400, 'invalid ccp') do
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp, name: '') } }
+
+        run_test! do |response|
+          expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
+        end
       end
     end
   end

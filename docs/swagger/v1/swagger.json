@@ -18,9 +18,9 @@
             "examples": {
               "application/json": [
                 {
-                  "name": "Western Jenkins Academy",
-                  "overview": "Nostrum quia enim. Ipsum officiis qui. Id et harum.",
-                  "benefits": "In est aut. Dolor sed magnam. Dicta illum expedita.\n\nEveniet blanditiis nihil. Delectus aut aut. Sint est quae.\n\nEt consequatur similique. Repudiandae sequi sed. Rerum qui voluptas.",
+                  "name": "West Kunde Academy",
+                  "overview": "Aut tempore rerum. Rem repudiandae accusamus. Consectetur laborum omnis.",
+                  "benefits": "Cupiditate in praesentium. Nihil est reprehenderit. Eos et eveniet.\n\nEveniet aut dolores. Quaerat atque debitis. Est autem eligendi.\n\nUnde nihil sit. Occaecati voluptatem assumenda. Consectetur aut eos.",
                   "id": 1
                 }
               ]
@@ -66,9 +66,9 @@
             "examples": {
               "application/json": {
                 "ccp": {
-                  "name": "Rogahn College",
-                  "overview": "Nisi recusandae voluptas. In quo aut. Nihil molestiae maxime.",
-                  "benefits": "Repellat natus iure. Sequi ut et. Dolorem sed vel.\n\nEa illo sed. Omnis aut sunt. Necessitatibus quos est.\n\nNam sit harum. Similique voluptas numquam. Reprehenderit nam occaecati.",
+                  "name": "West Minnesota Academy",
+                  "overview": "Consequatur id in. Blanditiis aspernatur est. Est et dolores.",
+                  "benefits": "Ut sequi sint. Nobis accusamus a. Quis sunt facere.\n\nEt veniam quaerat. Delectus laudantium quaerat. Molestiae atque voluptatem.\n\nDolore ipsam cumque. Aliquam quam corporis. Ab saepe cumque.",
                   "id": 1
                 }
               }
@@ -82,7 +82,7 @@
     },
     "/ccps/{id}": {
       "get": {
-        "summary": "retrieves one complete curriculum programme (CCP)",
+        "summary": "retrieves one complete curriculum programme",
         "tags": [
           "CCP"
         ],
@@ -101,21 +101,21 @@
             "description": "ccp found",
             "examples": {
               "application/json": {
-                "name": "East Gerlach Institute",
-                "overview": "Velit ex qui. Sunt dolorem inventore. Beatae sint fugiat.",
-                "benefits": "Error vel sed. Et consequatur aliquid. Vel minima ipsam.\n\nBeatae consequatur sint. Qui qui non. Molestias similique sit.\n\nEt placeat amet. Dolore deserunt et. Illum facere laborum.",
+                "name": "Southern North Dakota Academy",
+                "overview": "Illum voluptatem aut. Non veniam eveniet. Molestiae et ipsum.",
+                "benefits": "Necessitatibus fuga similique. Non minima sunt. Nam labore occaecati.\n\nVero sit ullam. Ab qui a. Quia sit inventore.\n\nExercitationem magni placeat. Consectetur repellendus dolores. Saepe explicabo dolorum.",
                 "id": 1,
                 "units": [
                   {
-                    "name": "Esse",
-                    "overview": "Modi est velit. Ea consectetur laudantium. Laborum consequatur perferendis.",
-                    "benefits": "Est quisquam autem. Voluptatum totam sit. Quisquam vel dolorem.\n\nVoluptatem et ut. Id aliquid similique. Natus eligendi ducimus.\n\nIure neque temporibus. Vel quos mollitia. Sint earum sit.",
+                    "name": "Dolore",
+                    "overview": "Magni ratione voluptatem. Mollitia exercitationem at. Consequuntur voluptatum quisquam.",
+                    "benefits": "Incidunt et sit. Quis dolorem iste. Accusamus rerum numquam.\n\nEt quo itaque. Dolor ut nam. Et assumenda unde.\n\nNihil voluptatem accusamus. Fuga inventore illo. Omnis quisquam similique.",
                     "id": 1
                   },
                   {
-                    "name": "Dolorum",
-                    "overview": "Delectus praesentium cumque. Aut beatae dolore. Eum quas excepturi.",
-                    "benefits": "Accusantium et ad. Quam aspernatur est. Rerum ducimus unde.\n\nQuas impedit consequatur. Unde eos dolores. Voluptates ratione qui.\n\nEt assumenda voluptatem. Inventore velit consequatur. Excepturi ut accusamus.",
+                    "name": "Qui",
+                    "overview": "Quaerat itaque blanditiis. Aut fugit quasi. Veniam alias quia.",
+                    "benefits": "Debitis in facilis. Quo aut et. Animi molestiae pariatur.\n\nConsequatur est consequuntur. Vel voluptas sit. Ipsa quisquam voluptas.\n\nEt nihil doloribus. Facilis omnis quo. Omnis reiciendis impedit.",
                     "id": 2
                   }
                 ]
@@ -164,6 +164,40 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "update the referenced complete curriculum programme",
+        "tags": [
+          "CCP"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ccp updated",
+            "examples": {
+              "application/json": {
+                "ccp": {
+                  "name": "North Ankunding",
+                  "overview": "Magnam enim perspiciatis. Labore rerum quis. Culpa deleniti qui.",
+                  "benefits": "Et sit et. Asperiores sapiente molestias. Reiciendis enim minima.\n\nArchitecto corporis animi. Doloribus quasi deserunt. Recusandae aut dicta.\n\nDolor quo aliquam. Sit aut iusto. Aspernatur quis culpa.",
+                  "id": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid ccp"
+          }
+        }
       }
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons": {
@@ -197,36 +231,36 @@
               "application/json": [
                 [
                   {
-                    "name": "Alexander Fleming",
+                    "name": "Comte de Buffon",
                     "summary": "Lesson 1",
-                    "core_knowledge": "Nemo commodi fugiat. Unde aut voluptatem. Sit quia illo.\n\nSaepe rem magni. Dolorem harum nesciunt. Sed impedit rem.\n\nVero vel molestias. Est suscipit est. Ut officiis quia.",
-                    "previous_knowledge": "Eius et eveniet. Ea ipsam nobis. Voluptas inventore sit.\n\nRepellat sed ipsam. Odit quidem ea. Beatae distinctio sed.\n\nAtque iusto repudiandae. Assumenda sint repudiandae. Minima consequatur commodi.",
+                    "core_knowledge": "Adipisci a repellendus. Iusto recusandae ut. Ab soluta a.\n\nEt molestiae enim. Minus sequi quia. Cum asperiores blanditiis.\n\nQuos recusandae tempora. Quam provident a. Molestiae voluptates consectetur.",
+                    "previous_knowledge": "Tenetur id reiciendis. Beatae laborum dicta. Veritatis dolor ducimus.\n\nVitae quae aut. Quae illo qui. Tenetur sint dolor.\n\nMollitia provident qui. Recusandae explicabo voluptatem. Quidem omnis totam.",
                     "vocabulary": [
-                      "Explicabo expedita voluptatem. Est facilis dolores. Corporis iusto nam.",
-                      "Architecto inventore aut. Quaerat inventore mollitia. Id omnis quia.",
-                      "Cum quis sapiente. Aut soluta numquam. Voluptatem nam nisi."
+                      "Sit repudiandae ut. Iste unde tempora. Ut praesentium maiores.",
+                      "Voluptatem dignissimos et. Est accusamus iusto. Voluptatum perspiciatis incidunt.",
+                      "Doloremque voluptatibus voluptates. Accusantium iusto earum. Omnis laboriosam qui."
                     ],
                     "misconceptions": [
-                      "Voluptas maiores inventore. Tempore est veritatis. Ab nemo et.",
-                      "Voluptatem aliquam voluptatem. Sit perferendis ipsam. Adipisci aut autem.",
-                      "Quo voluptate eum. In consequatur praesentium. Eius est tempora."
+                      "Quia tempore non. Vero labore quia. Dolore quo quisquam.",
+                      "Deleniti et nulla. Quo amet reiciendis. Iste quod rerum.",
+                      "Eligendi sint quibusdam. Molestiae assumenda alias. Provident dicta debitis."
                     ],
                     "id": 1
                   },
                   {
-                    "name": "Franz Boas",
+                    "name": "Linus Pauling",
                     "summary": "Lesson 2",
-                    "core_knowledge": "Quia cum aut. Repellat dolor laborum. Provident et tempora.\n\nSit odio tempore. Minima nesciunt est. Nemo dolorem voluptate.\n\nArchitecto necessitatibus facilis. Similique libero architecto. Alias nemo ullam.",
-                    "previous_knowledge": "Assumenda qui eveniet. Voluptatem nihil delectus. Ut autem sed.\n\nAutem velit atque. Praesentium et voluptatem. Praesentium qui explicabo.\n\nQuos ut praesentium. Eius qui sed. Repellat molestias dolor.",
+                    "core_knowledge": "Ipsam consectetur ex. Qui architecto ut. Aut aut voluptatum.\n\nOptio inventore ex. Est placeat provident. Corporis sit quo.\n\nEt eos possimus. Quia quidem ipsum. Voluptatem molestias dolorem.",
+                    "previous_knowledge": "At voluptatum est. Qui sunt voluptatum. Qui nobis alias.\n\nProvident nulla et. Repellendus fugiat est. Unde repellat doloribus.\n\nQuis vel et. Animi est aliquam. Quod fugiat ut.",
                     "vocabulary": [
-                      "Debitis recusandae inventore. Repudiandae asperiores pariatur. Qui et omnis.",
-                      "Non enim quia. Odit eligendi necessitatibus. Aut cum ducimus.",
-                      "Sed dolorem dolores. Necessitatibus ea eligendi. Odit distinctio minus."
+                      "Aut ducimus praesentium. Cumque eligendi ut. Qui adipisci quo.",
+                      "Debitis ex voluptas. Veritatis similique voluptas. Ducimus non magnam.",
+                      "Et ea qui. Sequi laboriosam illo. Ut id aut."
                     ],
                     "misconceptions": [
-                      "Eos sunt tempore. Sed debitis molestiae. Voluptate eligendi sunt.",
-                      "Qui aut officia. Ratione voluptatem sit. Ex quia et.",
-                      "Tenetur velit tempora. Sed sit a. Qui expedita quia."
+                      "Reprehenderit pariatur aut. Iure sapiente consequuntur. Maxime facere molestias.",
+                      "Ea est repellat. Id consectetur possimus. Corporis ullam porro.",
+                      "Soluta eos occaecati. Rerum voluptatem quidem. Numquam dolor rem."
                     ],
                     "id": 2
                   }
@@ -313,19 +347,19 @@
             "description": "lesson found",
             "examples": {
               "application/json": {
-                "name": "Dmitri Mendeleev",
+                "name": "Enrico Fermi",
                 "summary": "Lesson 3",
-                "core_knowledge": "Voluptates quia iure. Aliquam alias aut. Nihil ea et.\n\nMolestiae vitae ullam. Molestias debitis ducimus. Temporibus asperiores quia.\n\nSapiente quia atque. Rerum corporis accusamus. Soluta quos distinctio.",
-                "previous_knowledge": "Sed non velit. Est earum autem. Rerum omnis et.\n\nQuam ea autem. Dignissimos enim eum. Autem accusantium eligendi.\n\nSaepe ipsa ullam. Dolorem debitis ad. Dolorem deleniti aliquid.",
+                "core_knowledge": "Dolores veniam quibusdam. Aperiam qui quia. Eum hic eum.\n\nQuaerat ea perferendis. Numquam velit molestiae. Ut dignissimos quidem.\n\nNon autem fuga. Vitae magni saepe. Quaerat debitis voluptatem.",
+                "previous_knowledge": "Quae beatae placeat. Quo minima ratione. Molestiae vel officiis.\n\nError qui ut. Est magni voluptatem. Eveniet molestiae voluptates.\n\nSapiente saepe et. Porro dolorum et. Et est dolore.",
                 "vocabulary": [
-                  "Ut tempora blanditiis. Culpa fugiat est. Qui nihil omnis.",
-                  "Aut cupiditate qui. Debitis itaque autem. Explicabo repudiandae ut.",
-                  "Natus aliquid quam. Animi minus explicabo. Aut repudiandae iste."
+                  "Non deserunt voluptas. Delectus minus sapiente. Et quaerat error.",
+                  "Facere delectus aut. At eveniet in. Sit quis et.",
+                  "Et iste consequuntur. Consequuntur rerum aut. Neque quaerat autem."
                 ],
                 "misconceptions": [
-                  "Rerum at voluptatem. Explicabo error voluptatem. Quasi nemo veniam.",
-                  "Debitis consequatur ducimus. Rem non voluptatem. Numquam unde culpa.",
-                  "Accusantium et in. Nisi quasi eveniet. Et ea nesciunt."
+                  "Cumque dolores at. Voluptas ex dignissimos. Sint fuga repudiandae.",
+                  "Laudantium optio natus. Nostrum et debitis. Quibusdam rerum quo.",
+                  "Saepe voluptatem omnis. Accusantium sit modi. At iste modi."
                 ],
                 "id": 1
               }
@@ -393,15 +427,15 @@
               "application/json": [
                 [
                   {
-                    "name": "Aut",
-                    "overview": "Est blanditiis autem. Natus sint totam. Repudiandae placeat quia.",
-                    "benefits": "Nobis aliquid velit. Non rerum at. Reiciendis a itaque.\n\nExercitationem est soluta. Ex quam cumque. Consequatur numquam et.\n\nExcepturi corrupti repellat. Ut aut reprehenderit. Nostrum magni asperiores.",
+                    "name": "Fugit",
+                    "overview": "Provident officia minima. Qui dolor excepturi. Aperiam omnis est.",
+                    "benefits": "Sunt est aut. Magnam ullam autem. Unde sed iure.\n\nIllum perspiciatis quo. Voluptatem necessitatibus qui. Sit qui placeat.\n\nDolorem aperiam perferendis. Sint temporibus ut. Magni adipisci ducimus.",
                     "id": 1
                   },
                   {
-                    "name": "Aut",
-                    "overview": "Corporis blanditiis ut. Velit hic ipsum. Fugit sit omnis.",
-                    "benefits": "Totam molestias deleniti. Et eaque rerum. Molestiae excepturi a.\n\nEst incidunt corporis. Iure et dolor. Incidunt voluptatem quis.\n\nPraesentium accusamus ipsa. Officiis similique est. Molestiae minima delectus.",
+                    "name": "Pariatur",
+                    "overview": "Ut ipsum ex. Maiores veniam dolores. Facere aut suscipit.",
+                    "benefits": "Molestias ipsum iure. Perspiciatis a excepturi. Quidem harum assumenda.\n\nQuae alias cum. Rerum perspiciatis dolorem. Voluptate nesciunt libero.\n\nSed voluptatem provident. A qui qui. Eius veniam enim.",
                     "id": 2
                   }
                 ]
@@ -464,65 +498,65 @@
             "description": "unit found",
             "examples": {
               "application/json": {
-                "name": "Nihil",
-                "overview": "Suscipit numquam ea. Eius voluptas et. Dolores dolorem vel.",
-                "benefits": "Assumenda libero numquam. Saepe minus unde. Provident non et.\n\nLaudantium ut est. Laborum hic qui. Facilis nulla et.\n\nDeserunt aliquam consequuntur. Officia non accusantium. Qui animi sed.",
+                "name": "Dolorem",
+                "overview": "Tempora culpa modi. Occaecati excepturi vel. Voluptate eius qui.",
+                "benefits": "Dignissimos similique ea. Voluptatem alias modi. Voluptatum tempora rerum.\n\nVelit molestiae et. Laudantium veniam est. Assumenda magnam perspiciatis.\n\nBeatae aperiam ratione. Tempora inventore modi. Quam exercitationem ea.",
                 "id": 1,
                 "complete_curriculum_programme": {
-                  "name": "Northern Wisconsin University",
-                  "overview": "Quis illo fugiat. Ut explicabo totam. Eligendi ipsa incidunt.",
-                  "benefits": "Et ipsa distinctio. Error optio excepturi. Quia quidem hic.\n\nEt sed minima. Accusamus expedita eos. Aperiam omnis corporis.\n\nMaiores eius error. Nemo quam culpa. Et velit qui.",
+                  "name": "East Georgia College",
+                  "overview": "Exercitationem libero et. Ut enim itaque. Itaque totam excepturi.",
+                  "benefits": "Consequatur soluta natus. Nulla omnis ea. Perferendis velit ut.\n\nOmnis quisquam inventore. Et a sequi. Sapiente perspiciatis excepturi.\n\nDeleniti accusantium voluptatem. Ea dolore minima. Et et officiis.",
                   "id": 1
                 },
                 "lessons": [
                   {
-                    "name": "Ernst Haeckel",
+                    "name": "Archimedes",
                     "summary": "Lesson 4",
-                    "core_knowledge": "Et nemo soluta. Ratione iure omnis. Qui soluta vero.\n\nVero odit dolore. Quos minus quis. Eum et mollitia.\n\nSapiente temporibus distinctio. Laudantium quis itaque. In ipsa voluptatum.",
-                    "previous_knowledge": "Saepe excepturi quidem. Possimus earum consequuntur. Qui officia quis.\n\nEaque officiis eveniet. Omnis omnis dolorem. Sed et eius.\n\nUnde quos aut. Molestiae vel voluptatem. Dolor dicta perspiciatis.",
+                    "core_knowledge": "Id rerum non. Voluptatibus non quo. Quis neque ut.\n\nQuia molestiae id. Qui sunt ea. Sequi dolores placeat.\n\nExpedita nesciunt sed. Dicta incidunt deleniti. Voluptatem ducimus cupiditate.",
+                    "previous_knowledge": "Pariatur voluptas maxime. Maxime non nemo. Fugiat alias rerum.\n\nNihil eos recusandae. Consequuntur inventore corporis. Minus temporibus et.\n\nAb vitae aspernatur. Repellat rerum ut. Ab possimus voluptatem.",
                     "vocabulary": [
-                      "Soluta animi adipisci. Animi dolor tempora. Eveniet accusamus quis.",
-                      "Consequatur in facilis. Maxime laborum est. Voluptatum facere recusandae.",
-                      "Quas perspiciatis amet. In similique nam. Est sint eligendi."
+                      "Quaerat enim repellat. Itaque voluptatum qui. Corrupti quisquam non.",
+                      "Aut eos molestias. Quam qui ut. Ut quia dignissimos.",
+                      "Velit vitae voluptatem. Est ducimus quasi. Repellat et officiis."
                     ],
                     "misconceptions": [
-                      "Sunt saepe et. Aut et eaque. Illum architecto blanditiis.",
-                      "Ut est eos. Aut laboriosam assumenda. Quaerat non id.",
-                      "Sed molestias voluptatem. Fugiat sint dolores. Quis optio totam."
+                      "Odit eaque fuga. Omnis distinctio provident. Illo rerum nam.",
+                      "Neque quia officiis. Magni dolorem tempora. Ut dolores et.",
+                      "Tempore unde et. Et aut saepe. Quod debitis in."
                     ],
                     "id": 1
                   },
                   {
-                    "name": "Trofim Lysenko",
+                    "name": "John von Neumann",
                     "summary": "Lesson 5",
-                    "core_knowledge": "Soluta necessitatibus debitis. Nesciunt qui atque. Tempora pariatur cupiditate.\n\nDolor ex autem. Distinctio quis fugit. Quibusdam sunt accusamus.\n\nEa provident ex. Facere ipsum vel. Iure asperiores autem.",
-                    "previous_knowledge": "Nesciunt tenetur sunt. Excepturi non qui. Quo non sit.\n\nQuia non nisi. Libero tenetur dolores. Possimus ea aut.\n\nEt non aut. Et rerum expedita. Modi nisi in.",
+                    "core_knowledge": "Mollitia vel voluptate. Fuga unde eos. Est inventore nostrum.\n\nProvident aut est. Nam doloremque perspiciatis. Est ex quisquam.\n\nQuaerat ea maxime. Ab magnam sit. Voluptatem modi est.",
+                    "previous_knowledge": "Molestiae eligendi ab. Voluptatibus nisi tenetur. Cupiditate aut nisi.\n\nInventore quia et. Enim rerum ratione. Dolores sed suscipit.\n\nCum autem praesentium. Corrupti quis magni. Non repudiandae non.",
                     "vocabulary": [
-                      "Eaque impedit qui. Fugiat sapiente aut. Et qui accusantium.",
-                      "Vel non qui. Rerum voluptatum officia. Qui nemo ut.",
-                      "Exercitationem praesentium dolores. Voluptatibus totam ex. Aut animi sit."
+                      "Aut eum nobis. Ab velit quia. Unde adipisci corrupti.",
+                      "Est in impedit. Dolorem dicta maiores. Reprehenderit nihil ut.",
+                      "Iusto dolorum sit. Ipsum sit aut. Facere voluptas ullam."
                     ],
                     "misconceptions": [
-                      "Officiis illum et. Itaque atque sed. Qui recusandae laborum.",
-                      "Tempora ex enim. Incidunt quia eius. Rerum pariatur quibusdam.",
-                      "Ipsa laudantium iusto. Delectus cumque cupiditate. Ipsum rem officia."
+                      "Hic rerum praesentium. Rerum temporibus aut. Est est quo.",
+                      "Labore minus eum. Modi asperiores possimus. Temporibus qui eos.",
+                      "Officiis aspernatur aperiam. Ea dolor autem. Omnis in quis."
                     ],
                     "id": 2
                   },
                   {
-                    "name": "B. F. Skinner",
+                    "name": "Arthur Eddington",
                     "summary": "Lesson 6",
-                    "core_knowledge": "Vel dolorum et. Rerum voluptas porro. Eos corporis saepe.\n\nQuia sed velit. Distinctio corporis qui. Deleniti ea nemo.\n\nDicta sunt culpa. Voluptatibus voluptate consectetur. Architecto voluptatem repellat.",
-                    "previous_knowledge": "A sapiente esse. Inventore accusamus expedita. Quo at repellendus.\n\nMolestias ipsam et. Fuga quia ipsam. Voluptate iusto quo.\n\nAt qui voluptatem. Enim iusto totam. Ipsam mollitia hic.",
+                    "core_knowledge": "Accusantium voluptatem rerum. Voluptatem quas est. Assumenda ad aperiam.\n\nLaborum amet sunt. Corporis in impedit. Harum eum vel.\n\nQuasi nisi exercitationem. Facilis quos esse. Ullam aut saepe.",
+                    "previous_knowledge": "Aliquid eum nihil. Et ut sint. Laboriosam mollitia beatae.\n\nQuos ullam deserunt. Maiores laborum laboriosam. Libero sunt eum.\n\nLibero molestiae sit. Adipisci libero similique. Cum aut a.",
                     "vocabulary": [
-                      "Dolorem repudiandae placeat. Temporibus et accusantium. Autem commodi quas.",
-                      "Sit amet et. Quas nesciunt est. Eveniet exercitationem dolor.",
-                      "Eveniet fugit veritatis. Laboriosam pariatur tenetur. Omnis voluptatem et."
+                      "Laborum voluptas est. Inventore laudantium voluptas. Aut et rem.",
+                      "Eveniet qui est. Laudantium odit maxime. Sit nulla cumque.",
+                      "Aliquid commodi porro. Dolorem dolores error. Dolorem maiores autem."
                     ],
                     "misconceptions": [
-                      "Voluptatem nobis maxime. Ut illo repellendus. Aut repudiandae fugiat.",
-                      "Pariatur deleniti vero. Ea architecto et. Aperiam quasi qui.",
-                      "Hic laborum est. Non dolores omnis. Nobis non ipsa."
+                      "Aperiam doloribus exercitationem. Ipsam quos est. Qui qui nihil.",
+                      "Nisi enim et. Beatae minus quos. Minima qui aut.",
+                      "Provident exercitationem iste. Ea vero ut. Totam suscipit repudiandae."
                     ],
                     "id": 3
                   }

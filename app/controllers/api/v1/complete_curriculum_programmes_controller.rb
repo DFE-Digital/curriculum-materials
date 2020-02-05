@@ -29,6 +29,16 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
     end
   end
 
+  def update
+    ccp = CompleteCurriculumProgramme.find(params[:id])
+
+    if ccp.update(ccp_params)
+      render(json: serialize(ccp).to_json, status: :ok)
+    else
+      render(json: { errors: ccp.errors.full_messages }, status: :bad_request)
+    end
+  end
+
 private
 
   def ccp_params
