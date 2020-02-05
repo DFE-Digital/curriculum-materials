@@ -42,7 +42,24 @@ describe 'Complete curriculum programmes' do
           properties: {
             ccp: {
               type: :object,
-              proprties: {
+              properties: {
+                name: { type: :string },
+                benefits: { type: :string },
+                overview: { type: :string }
+              },
+              required: %i(name benefits overview)
+            },
+            required: %i(ccp)
+          }
+        }
+      )
+
+      request_body_json(
+        schema: {
+          properties: {
+            ccp: {
+              type: :object,
+              properties: {
                 name: { type: :string },
                 benefits: { type: :string },
                 overview: { type: :string }
@@ -139,7 +156,24 @@ describe 'Complete curriculum programmes' do
           properties: {
             ccp: {
               type: :object,
-              proprties: {
+              properties: {
+                name: { type: :string },
+                benefits: { type: :string },
+                overview: { type: :string }
+              },
+              required: %i(name benefits overview)
+            },
+            required: %i(ccp)
+          }
+        }
+      )
+
+      request_body_json(
+        schema: {
+          properties: {
+            ccp: {
+              type: :object,
+              properties: {
                 name: { type: :string },
                 benefits: { type: :string },
                 overview: { type: :string }

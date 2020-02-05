@@ -32,7 +32,7 @@ describe 'Lessons' do
               },
               misconceptions: {
                 type: :array, items: { type: :string }
-              },
+              }
             }
           }
         )
@@ -73,7 +73,31 @@ describe 'Lessons' do
                   type: :array, items: { type: :string }
                 },
               },
-              required: %i(unit)
+              required: %i(lesson)
+            }
+          }
+        }
+      )
+
+      request_body_json(
+        schema: {
+          properties: {
+            lesson: {
+              type: :object,
+              properties: {
+                id: { type: :integer },
+                name: { type: :string },
+                summary: { type: :string },
+                core_knowledge: { type: :string },
+                previous_knowledge: { type: :string },
+                vocabulary: {
+                  type: :array, items: { type: :string }
+                },
+                misconceptions: {
+                  type: :array, items: { type: :string }
+                },
+              },
+              required: %i(lesson)
             }
           }
         }
@@ -117,6 +141,30 @@ describe 'Lessons' do
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
+
+      request_body_json(
+        schema: {
+          properties: {
+            lesson: {
+              type: :object,
+              properties: {
+                id: { type: :integer },
+                name: { type: :string },
+                summary: { type: :string },
+                core_knowledge: { type: :string },
+                previous_knowledge: { type: :string },
+                vocabulary: {
+                  type: :array, items: { type: :string }
+                },
+                misconceptions: {
+                  type: :array, items: { type: :string }
+                },
+              },
+              required: %i(unit)
+            }
+          }
+        }
+      )
 
       response('200', 'lesson found') do
         examples('application/json': example_lesson)
@@ -162,6 +210,30 @@ describe 'Lessons' do
       parameter(
         name: :lesson_params,
         in: :body,
+        schema: {
+          properties: {
+            lesson: {
+              type: :object,
+              properties: {
+                id: { type: :integer },
+                name: { type: :string },
+                summary: { type: :string },
+                core_knowledge: { type: :string },
+                previous_knowledge: { type: :string },
+                vocabulary: {
+                  type: :array, items: { type: :string }
+                },
+                misconceptions: {
+                  type: :array, items: { type: :string }
+                },
+              },
+              required: %i(lesson)
+            }
+          }
+        }
+      )
+
+      request_body_json(
         schema: {
           properties: {
             lesson: {

@@ -49,7 +49,24 @@ describe 'Units' do
           properties: {
             unit: {
               type: :object,
-              proprties: {
+              properties: {
+                name: { type: :string },
+                benefits: { type: :string },
+                overview: { type: :string }
+              },
+              required: %i(name benefits overview)
+            },
+            required: %i(unit)
+          }
+        }
+      )
+
+      request_body_json(
+        schema: {
+          properties: {
+            unit: {
+              type: :object,
+              properties: {
                 name: { type: :string },
                 benefits: { type: :string },
                 overview: { type: :string }
@@ -172,7 +189,24 @@ describe 'Units' do
           properties: {
             unit: {
               type: :object,
-              proprties: {
+              properties: {
+                name: { type: :string },
+                benefits: { type: :string },
+                overview: { type: :string }
+              },
+              required: %i(name benefits overview)
+            },
+            required: %i(unit)
+          }
+        }
+      )
+
+      request_body_json(
+        schema: {
+          properties: {
+            unit: {
+              type: :object,
+              properties: {
                 name: { type: :string },
                 benefits: { type: :string },
                 overview: { type: :string }

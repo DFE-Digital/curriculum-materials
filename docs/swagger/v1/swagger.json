@@ -60,6 +60,39 @@
         "parameters": [
 
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "ccp": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "benefits": {
+                        "type": "string"
+                      },
+                      "overview": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "benefits",
+                      "overview"
+                    ]
+                  },
+                  "required": [
+                    "ccp"
+                  ]
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "ccp created",
@@ -179,6 +212,39 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "ccp": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "benefits": {
+                        "type": "string"
+                      },
+                      "overview": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "benefits",
+                      "overview"
+                    ]
+                  },
+                  "required": [
+                    "ccp"
+                  ]
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "ccp updated",
@@ -326,6 +392,52 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "summary": {
+                        "type": "string"
+                      },
+                      "core_knowledge": {
+                        "type": "string"
+                      },
+                      "previous_knowledge": {
+                        "type": "string"
+                      },
+                      "vocabulary": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "misconceptions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "lesson"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "lesson created",
@@ -386,6 +498,52 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "summary": {
+                        "type": "string"
+                      },
+                      "core_knowledge": {
+                        "type": "string"
+                      },
+                      "previous_knowledge": {
+                        "type": "string"
+                      },
+                      "vocabulary": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "misconceptions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "unit"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "lesson found",
@@ -476,6 +634,52 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "summary": {
+                        "type": "string"
+                      },
+                      "core_knowledge": {
+                        "type": "string"
+                      },
+                      "previous_knowledge": {
+                        "type": "string"
+                      },
+                      "vocabulary": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "misconceptions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "lesson"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "lesson updated",
@@ -583,6 +787,39 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "unit": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "benefits": {
+                        "type": "string"
+                      },
+                      "overview": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "benefits",
+                      "overview"
+                    ]
+                  },
+                  "required": [
+                    "unit"
+                  ]
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "unit created",
@@ -790,6 +1027,39 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "unit": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "benefits": {
+                        "type": "string"
+                      },
+                      "overview": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "benefits",
+                      "overview"
+                    ]
+                  },
+                  "required": [
+                    "unit"
+                  ]
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "unit updated",
