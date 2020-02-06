@@ -30,12 +30,15 @@ describe 'Units' do
       consumes 'application/json'
 
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
-
       parameter(
         name: :unit_params,
         in: :body,
         schema: {
-          properties: { '$ref' => '#/components/schemas/unit', required: %i(unit) }
+          properties: { 
+            unit: {
+              '$ref' => '#/components/schemas/unit', required: %i(unit)
+            }
+          }
         }
       )
 
@@ -112,7 +115,17 @@ describe 'Units' do
 
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
-      parameter(name: :unit_params, in: :body, schema: { '$ref' => '#/components/schemas/unit' })
+      parameter(
+        name: :unit_params,
+        in: :body,
+        schema: {
+          properties: { 
+            unit: {
+              '$ref' => '#/components/schemas/unit', required: %i(unit)
+            }
+          }
+        }
+      )
 
       request_body_json(schema: { '$ref' => '#/components/schemas/unit' })
 

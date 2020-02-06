@@ -24,7 +24,15 @@ describe 'Complete curriculum programmes' do
 
       consumes 'application/json'
 
-      parameter(name: :ccp_params, in: :body, schema: { '$ref' => '#/components/schemas/ccp' })
+      parameter(
+        name: :ccp_params,
+        in: :body,
+        schema: {
+          properties: {
+            ccp: { '$ref' => '#/components/schemas/ccp' }
+          }
+        }
+      )
 
       request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 
@@ -83,7 +91,15 @@ describe 'Complete curriculum programmes' do
       let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
 
       parameter(name: :id, in: :path, type: :string, required: true)
-      parameter(name: :ccp_params, in: :body, schema: { '$ref' => '#/components/schemas/ccp' })
+      parameter(
+        name: :ccp_params,
+        in: :body,
+        schema: {
+          properties: {
+            ccp: { '$ref' => '#/components/schemas/ccp' }
+          }
+        }
+      )
 
       request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 

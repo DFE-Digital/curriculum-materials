@@ -134,7 +134,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ccp"
+                "properties": {
+                  "ccp": {
+                    "$ref": "#/components/schemas/ccp"
+                  }
+                }
               }
             }
           }
@@ -229,7 +233,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ccp"
+                "properties": {
+                  "ccp": {
+                    "$ref": "#/components/schemas/ccp"
+                  }
+                }
               }
             }
           }
@@ -356,10 +364,12 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "$ref": "#/components/schemas/lesson",
-                  "required": [
-                    "lesson"
-                  ]
+                  "lesson": {
+                    "$ref": "#/components/schemas/lesson",
+                    "required": [
+                      "lesson"
+                    ]
+                  }
                 }
               }
             }
@@ -507,10 +517,12 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "$ref": "#/components/schemas/lesson",
-                  "required": [
-                    "lesson"
-                  ]
+                  "lesson": {
+                    "$ref": "#/components/schemas/lesson",
+                    "required": [
+                      "lesson"
+                    ]
+                  }
                 }
               }
             }
@@ -613,10 +625,12 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "$ref": "#/components/schemas/unit",
-                  "required": [
-                    "unit"
-                  ]
+                  "unit": {
+                    "$ref": "#/components/schemas/unit",
+                    "required": [
+                      "unit"
+                    ]
+                  }
                 }
               }
             }
@@ -768,7 +782,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/unit"
+                "properties": {
+                  "unit": {
+                    "$ref": "#/components/schemas/unit",
+                    "required": [
+                      "unit"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -798,7 +819,7 @@
       "url": "http://{defaultHost}",
       "variables": {
         "defaultHost": {
-          "default": "localhost:3001/api/v1"
+          "default": "localhost:3000/api/v1"
         }
       }
     }
