@@ -15,27 +15,9 @@ describe 'Lessons' do
       parameter(name: :unit_id, in: :path, type: :string, required: true)
 
       response '200', 'lessons found' do
-        examples('application/json': [example_lessons(2)])
+        examples('application/json': example_lessons(2))
 
-        schema(
-          type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              name: { type: :string },
-              summary: { type: :string },
-              core_knowledge: { type: :string },
-              previous_knowledge: { type: :string },
-              vocabulary: {
-                type: :array, items: { type: :string }
-              },
-              misconceptions: {
-                type: :array, items: { type: :string }
-              }
-            }
-          }
-        )
+        schema(type: :array, items: { '$ref' => '#/components/schemas/lesson' })
 
         run_test!
       end
@@ -52,28 +34,13 @@ describe 'Lessons' do
 
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
-
       parameter(
         name: :lesson_params,
         in: :body,
         schema: {
-          properties: {
+          properties: { 
             lesson: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                summary: { type: :string },
-                core_knowledge: { type: :string },
-                previous_knowledge: { type: :string },
-                vocabulary: {
-                  type: :array, items: { type: :string }
-                },
-                misconceptions: {
-                  type: :array, items: { type: :string }
-                },
-              },
-              required: %i(lesson)
+              '$ref' => '#/components/schemas/lesson', required: %i(lesson)
             }
           }
         }
@@ -81,25 +48,7 @@ describe 'Lessons' do
 
       request_body_json(
         schema: {
-          properties: {
-            lesson: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                summary: { type: :string },
-                core_knowledge: { type: :string },
-                previous_knowledge: { type: :string },
-                vocabulary: {
-                  type: :array, items: { type: :string }
-                },
-                misconceptions: {
-                  type: :array, items: { type: :string }
-                },
-              },
-              required: %i(lesson)
-            }
-          }
+          properties: { '$ref' => '#/components/schemas/lesson', required: %i(lesson) }
         }
       )
 
@@ -144,47 +93,14 @@ describe 'Lessons' do
 
       request_body_json(
         schema: {
-          properties: {
-            lesson: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                summary: { type: :string },
-                core_knowledge: { type: :string },
-                previous_knowledge: { type: :string },
-                vocabulary: {
-                  type: :array, items: { type: :string }
-                },
-                misconceptions: {
-                  type: :array, items: { type: :string }
-                },
-              },
-              required: %i(unit)
-            }
-          }
+          properties: { '$ref' => '#/components/schemas/lesson', required: %i(lesson) }
         }
       )
 
       response('200', 'lesson found') do
         examples('application/json': example_lesson)
 
-        schema(
-          type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            summary: { type: :string },
-            core_knowledge: { type: :string },
-            previous_knowledge: { type: :string },
-            vocabulary: {
-              type: :array, items: { type: :string }
-            },
-            misconceptions: {
-              type: :array, items: { type: :string }
-            }
-          }
-        )
+        schema('$ref' => '#/components/schemas/lesson')
 
         run_test!
       end
@@ -206,56 +122,19 @@ describe 'Lessons' do
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
-
       parameter(
         name: :lesson_params,
         in: :body,
         schema: {
-          properties: {
+          properties: { 
             lesson: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                summary: { type: :string },
-                core_knowledge: { type: :string },
-                previous_knowledge: { type: :string },
-                vocabulary: {
-                  type: :array, items: { type: :string }
-                },
-                misconceptions: {
-                  type: :array, items: { type: :string }
-                },
-              },
-              required: %i(lesson)
+              '$ref' => '#/components/schemas/lesson', required: %i(lesson)
             }
           }
         }
       )
 
-      request_body_json(
-        schema: {
-          properties: {
-            lesson: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                summary: { type: :string },
-                core_knowledge: { type: :string },
-                previous_knowledge: { type: :string },
-                vocabulary: {
-                  type: :array, items: { type: :string }
-                },
-                misconceptions: {
-                  type: :array, items: { type: :string }
-                },
-              },
-              required: %i(lesson)
-            }
-          }
-        }
-      )
+      request_body_json(schema: { '$ref' => '#/components/schemas/lesson' })
 
       response(200, 'lesson updated') do
         examples('application/json': { lesson: FactoryBot.attributes_for(:lesson) })
