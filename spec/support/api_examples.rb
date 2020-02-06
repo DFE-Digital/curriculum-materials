@@ -1,5 +1,5 @@
 def example_ccp(id = 1)
-  FactoryBot.attributes_for(:ccp, :randomised).merge(id: id)
+  FactoryBot.attributes_for(:ccp).merge(id: id)
 end
 
 def example_ccps(quantity)
@@ -7,7 +7,7 @@ def example_ccps(quantity)
 end
 
 def example_unit(id = 1)
-  FactoryBot.attributes_for(:unit, :randomised).merge(id: id)
+  FactoryBot.attributes_for(:unit).merge(id: id)
 end
 
 def example_units(quantity)
@@ -15,9 +15,13 @@ def example_units(quantity)
 end
 
 def example_lesson(id = 1)
-  FactoryBot.attributes_for(:lesson, :randomised).merge(id: id)
+  FactoryBot.attributes_for(:lesson).merge(id: id)
 end
 
 def example_lessons(quantity)
   1.upto(quantity).map { |i| example_lesson(i) }
+end
+
+def example_errors
+  ["Name can't be blank"]
 end
