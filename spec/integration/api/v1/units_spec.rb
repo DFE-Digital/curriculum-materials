@@ -13,20 +13,9 @@ describe 'Units' do
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
 
       response '200', 'units found' do
-        examples('application/json': [example_units(2)])
+        examples('application/json': example_units(2))
 
-        schema(
-          type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
-            }
-          }
-        )
+        schema(type: :array, items: { '$ref' => '#/components/schemas/unit' })
 
         run_test!
       end
@@ -46,35 +35,13 @@ describe 'Units' do
         name: :unit_params,
         in: :body,
         schema: {
-          properties: {
-            unit: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(unit)
-          }
+          properties: { '$ref' => '#/components/schemas/unit', required: %i(unit) }
         }
       )
 
       request_body_json(
         schema: {
-          properties: {
-            unit: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(unit)
-          }
+          properties: { '$ref' => '#/components/schemas/unit', required: %i(unit) }
         }
       )
 
@@ -126,43 +93,7 @@ describe 'Units' do
           )
         )
 
-        schema(
-          type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            benefits: { type: :string },
-            overview: { type: :string },
-            complete_curriculum_programme: {
-              type: :object,
-              properties: {
-                id: { type: :integer },
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              }
-            },
-            lessons: {
-              type: :array,
-              items: {
-                type: :object,
-                properties: {
-                  id: { type: :integer },
-                  name: { type: :string },
-                  summary: { type: :string },
-                  core_knowledge: { type: :string },
-                  previous_knowledge: { type: :string },
-                  vocabulary: {
-                    type: :array, items: { type: :string }
-                  },
-                  misconceptions: {
-                    type: :array, items: { type: :string }
-                  },
-                }
-              }
-            }
-          }
-        )
+        schema('$ref' => '#/components/schemas/unit')
 
         run_test!
       end
@@ -181,42 +112,9 @@ describe 'Units' do
 
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
+      parameter(name: :unit_params, in: :body, schema: { '$ref' => '#/components/schemas/unit' })
 
-      parameter(
-        name: :unit_params,
-        in: :body,
-        schema: {
-          properties: {
-            unit: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(unit)
-          }
-        }
-      )
-
-      request_body_json(
-        schema: {
-          properties: {
-            unit: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(unit)
-          }
-        }
-      )
+      request_body_json(schema: { '$ref' => '#/components/schemas/unit' })
 
       response(200, 'unit updated') do
         examples('application/json': { unit: FactoryBot.attributes_for(:unit) })

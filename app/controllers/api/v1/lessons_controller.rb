@@ -1,6 +1,7 @@
 class Api::V1::LessonsController < ApplicationController
   def index
     lessons = Lesson
+      .eager_load(:unit)
       .where(unit_id: params[:unit_id])
       .all
 

@@ -4,6 +4,91 @@
     "title": "API V1",
     "version": "v1"
   },
+  "components": {
+    "schemas": {
+      "ccp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "benefits",
+          "overview"
+        ]
+      },
+      "unit": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "benefits",
+          "overview"
+        ]
+      },
+      "lesson": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "core_knowledge": {
+            "type": "string"
+          },
+          "previous_knowledge": {
+            "type": "string"
+          },
+          "vocabulary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "misconceptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "summary",
+          "core_knowledge",
+          "previous_knowledge",
+          "vocabulary",
+          "misconceptions"
+        ]
+      }
+    }
+  },
   "basePath": "/api/v1",
   "paths": {
     "/ccps": {
@@ -16,35 +101,19 @@
           "200": {
             "description": "ccps found",
             "examples": {
-              "application/json": [
-                {
-                  "name": "CCP 1",
-                  "overview": "Overview",
-                  "benefits": "Benefits",
-                  "id": 1
-                }
-              ]
+              "application/json": {
+                "name": "CCP 1",
+                "overview": "Overview",
+                "benefits": "Benefits",
+                "id": 1
+              }
             },
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    }
+                    "$ref": "#/components/schemas/ccp"
                   }
                 }
               }
@@ -65,30 +134,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "ccp": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "benefits",
-                      "overview"
-                    ]
-                  },
-                  "required": [
-                    "ccp"
-                  ]
-                }
+                "$ref": "#/components/schemas/ccp"
               }
             }
           }
@@ -156,41 +202,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "benefits": {
-                      "type": "string"
-                    },
-                    "overview": {
-                      "type": "string"
-                    },
-                    "units": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "benefits": {
-                            "type": "string"
-                          },
-                          "overview": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ccp"
                 }
               }
             }
@@ -217,30 +229,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "ccp": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "benefits",
-                      "overview"
-                    ]
-                  },
-                  "required": [
-                    "ccp"
-                  ]
-                }
+                "$ref": "#/components/schemas/ccp"
               }
             }
           }
@@ -293,38 +282,36 @@
             "description": "lessons found",
             "examples": {
               "application/json": [
-                [
-                  {
-                    "name": "Lesson 1",
-                    "summary": "Lesson 1",
-                    "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
-                    "vocabulary": [
-                      "Subtraction",
-                      "Division",
-                      "Multiplication"
-                    ],
-                    "misconceptions": [
-                      "Fractions are not natural numbers"
-                    ],
-                    "id": 1
-                  },
-                  {
-                    "name": "Lesson 2",
-                    "summary": "Lesson 2",
-                    "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
-                    "vocabulary": [
-                      "Subtraction",
-                      "Division",
-                      "Multiplication"
-                    ],
-                    "misconceptions": [
-                      "Fractions are not natural numbers"
-                    ],
-                    "id": 2
-                  }
-                ]
+                {
+                  "name": "Lesson 1",
+                  "summary": "Lesson 1",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": "Previous knowledge",
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 1
+                },
+                {
+                  "name": "Lesson 2",
+                  "summary": "Lesson 2",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": "Previous knowledge",
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 2
+                }
               ]
             },
             "content": {
@@ -332,36 +319,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "summary": {
-                        "type": "string"
-                      },
-                      "core_knowledge": {
-                        "type": "string"
-                      },
-                      "previous_knowledge": {
-                        "type": "string"
-                      },
-                      "vocabulary": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "misconceptions": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    }
+                    "$ref": "#/components/schemas/lesson"
                   }
                 }
               }
@@ -398,41 +356,10 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "lesson": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "summary": {
-                        "type": "string"
-                      },
-                      "core_knowledge": {
-                        "type": "string"
-                      },
-                      "previous_knowledge": {
-                        "type": "string"
-                      },
-                      "vocabulary": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "misconceptions": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "lesson"
-                    ]
-                  }
+                  "$ref": "#/components/schemas/lesson",
+                  "required": [
+                    "lesson"
+                  ]
                 }
               }
             }
@@ -504,41 +431,10 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "lesson": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "summary": {
-                        "type": "string"
-                      },
-                      "core_knowledge": {
-                        "type": "string"
-                      },
-                      "previous_knowledge": {
-                        "type": "string"
-                      },
-                      "vocabulary": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "misconceptions": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "unit"
-                    ]
-                  }
+                  "$ref": "#/components/schemas/lesson",
+                  "required": [
+                    "lesson"
+                  ]
                 }
               }
             }
@@ -567,36 +463,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "summary": {
-                      "type": "string"
-                    },
-                    "core_knowledge": {
-                      "type": "string"
-                    },
-                    "previous_knowledge": {
-                      "type": "string"
-                    },
-                    "vocabulary": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "misconceptions": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/lesson"
                 }
               }
             }
@@ -640,41 +507,10 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "lesson": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "summary": {
-                        "type": "string"
-                      },
-                      "core_knowledge": {
-                        "type": "string"
-                      },
-                      "previous_knowledge": {
-                        "type": "string"
-                      },
-                      "vocabulary": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "misconceptions": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "lesson"
-                    ]
-                  }
+                  "$ref": "#/components/schemas/lesson",
+                  "required": [
+                    "lesson"
+                  ]
                 }
               }
             }
@@ -729,20 +565,18 @@
             "description": "units found",
             "examples": {
               "application/json": [
-                [
-                  {
-                    "name": "Unit 3",
-                    "overview": "Overview",
-                    "benefits": "Benefits",
-                    "id": 1
-                  },
-                  {
-                    "name": "Unit 4",
-                    "overview": "Overview",
-                    "benefits": "Benefits",
-                    "id": 2
-                  }
-                ]
+                {
+                  "name": "Unit 3",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "id": 1
+                },
+                {
+                  "name": "Unit 4",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "id": 2
+                }
               ]
             },
             "content": {
@@ -750,21 +584,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    }
+                    "$ref": "#/components/schemas/unit"
                   }
                 }
               }
@@ -793,25 +613,7 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "unit": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "benefits",
-                      "overview"
-                    ]
-                  },
+                  "$ref": "#/components/schemas/unit",
                   "required": [
                     "unit"
                   ]
@@ -931,73 +733,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "benefits": {
-                      "type": "string"
-                    },
-                    "overview": {
-                      "type": "string"
-                    },
-                    "complete_curriculum_programme": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "benefits": {
-                          "type": "string"
-                        },
-                        "overview": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "lessons": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "summary": {
-                            "type": "string"
-                          },
-                          "core_knowledge": {
-                            "type": "string"
-                          },
-                          "previous_knowledge": {
-                            "type": "string"
-                          },
-                          "vocabulary": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "misconceptions": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/unit"
                 }
               }
             }
@@ -1032,30 +768,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "unit": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "benefits": {
-                        "type": "string"
-                      },
-                      "overview": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "name",
-                      "benefits",
-                      "overview"
-                    ]
-                  },
-                  "required": [
-                    "unit"
-                  ]
-                }
+                "$ref": "#/components/schemas/unit"
               }
             }
           }

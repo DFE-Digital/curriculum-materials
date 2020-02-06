@@ -10,21 +10,10 @@ describe 'Complete curriculum programmes' do
 
       response 200, 'ccps found' do
         examples(
-          'application/json': [example_ccp]
+          'application/json': example_ccp
         )
 
-        schema(
-          type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
-            }
-          }
-        )
+        schema(type: :array, items: { '$ref' => '#/components/schemas/ccp' })
 
         run_test!
       end
@@ -35,41 +24,9 @@ describe 'Complete curriculum programmes' do
 
       consumes 'application/json'
 
-      parameter(
-        name: :ccp_params,
-        in: :body,
-        schema: {
-          properties: {
-            ccp: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(ccp)
-          }
-        }
-      )
+      parameter(name: :ccp_params, in: :body, schema: { '$ref' => '#/components/schemas/ccp' })
 
-      request_body_json(
-        schema: {
-          properties: {
-            ccp: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(ccp)
-          }
-        }
-      )
+      request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 
       response(201, 'ccp created') do
         let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
@@ -111,29 +68,7 @@ describe 'Complete curriculum programmes' do
       response(200, 'ccp found') do
         examples('application/json': example_ccp.merge(units: example_units(2)))
 
-        schema(
-          type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            benefits: { type: :string },
-            overview: { type: :string },
-
-            # retrieving a single CCP also returns its units
-            units: {
-              type: :array,
-              items: {
-                type: :object,
-                properties: {
-                  id: { type: :integer },
-                  name: { type: :string },
-                  benefits: { type: :string },
-                  overview: { type: :string }
-                }
-              }
-            }
-          }
-        )
+        schema('$ref' => '#/components/schemas/ccp')
 
         run_test!
       end
@@ -148,42 +83,9 @@ describe 'Complete curriculum programmes' do
       let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
 
       parameter(name: :id, in: :path, type: :string, required: true)
+      parameter(name: :ccp_params, in: :body, schema: { '$ref' => '#/components/schemas/ccp' })
 
-      parameter(
-        name: :ccp_params,
-        in: :body,
-        schema: {
-          properties: {
-            ccp: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(ccp)
-          }
-        }
-      )
-
-      request_body_json(
-        schema: {
-          properties: {
-            ccp: {
-              type: :object,
-              properties: {
-                name: { type: :string },
-                benefits: { type: :string },
-                overview: { type: :string }
-              },
-              required: %i(name benefits overview)
-            },
-            required: %i(ccp)
-          }
-        }
-      )
+      request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 
       response(200, 'ccp updated') do
         examples('application/json': { ccp: FactoryBot.attributes_for(:ccp) })

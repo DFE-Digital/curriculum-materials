@@ -19,6 +19,46 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
+      components: {
+        schemas: {
+          ccp: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              name: { type: :string },
+              benefits: { type: :string },
+              overview: { type: :string },
+            },
+            required: %i(name benefits overview)
+          },
+          unit: {
+            type: :object,
+            properties: {
+              name: { type: :string },
+              benefits: { type: :string },
+              overview: { type: :string }
+            },
+            required: %i(name benefits overview)
+          },
+          lesson: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              name: { type: :string },
+              summary: { type: :string },
+              core_knowledge: { type: :string },
+              previous_knowledge: { type: :string },
+              vocabulary: {
+                type: :array, items: { type: :string }
+              },
+              misconceptions: {
+                type: :array, items: { type: :string }
+              },
+            },
+            required: %i(name summary core_knowledge previous_knowledge vocabulary misconceptions)
+          }
+        }
+      },
       basePath: '/api/v1',
       paths: {},
       servers: [
