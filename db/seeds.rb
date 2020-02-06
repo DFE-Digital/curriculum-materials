@@ -145,3 +145,7 @@ unless Rails.env.test?
       end
   end
 end
+
+if ENV['KNOWN_TEACHER_UUID'].present?
+  Teacher.find_or_create_by! token: ENV['KNOWN_TEACHER_UUID']
+end
