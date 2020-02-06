@@ -1,4 +1,4 @@
-class Api::V1::LessonsController < ApplicationController
+class Api::V1::LessonsController < Api::BaseController
   def index
     lessons = Lesson
       .eager_load(:unit)

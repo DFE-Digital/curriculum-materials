@@ -34,7 +34,7 @@ describe 'Units' do
         name: :unit_params,
         in: :body,
         schema: {
-          properties: { 
+          properties: {
             unit: {
               '$ref' => '#/components/schemas/unit', required: %i(unit)
             }

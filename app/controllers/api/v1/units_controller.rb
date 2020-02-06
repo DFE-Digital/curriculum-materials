@@ -1,4 +1,4 @@
-class Api::V1::UnitsController < ApplicationController
+class Api::V1::UnitsController < Api::BaseController
   def index
     units = Unit
       .where(complete_curriculum_programme_id: params[:ccp_id])
