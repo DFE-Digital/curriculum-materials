@@ -22,3 +22,6 @@ production: &production
 
 staging:
   <<: *production
+
+review:
+  <<: *production
