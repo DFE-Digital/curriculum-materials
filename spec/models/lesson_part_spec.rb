@@ -18,5 +18,12 @@ describe LessonPart, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of :position }
+
+    it do
+      # explicit create to work around bug in shoulda when null constraint on
+      # column see https://github.com/thoughtbot/shoulda-matchers/issues/535
+      expect(create(:lesson_part)).to \
+        validate_uniqueness_of(:position).scoped_to :lesson_id
+    end
   end
 end
