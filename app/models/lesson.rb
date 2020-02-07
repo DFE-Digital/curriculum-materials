@@ -8,4 +8,8 @@ class Lesson < ApplicationRecord
   validates :summary, presence: true
 
   belongs_to :unit
+
+  def duration
+    '1 hour'
+  end
 end
