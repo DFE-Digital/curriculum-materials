@@ -38,7 +38,7 @@ describe 'Lessons' do
         name: :lesson_params,
         in: :body,
         schema: {
-          properties: { 
+          properties: {
             lesson: {
               '$ref' => '#/components/schemas/lesson', required: %i(lesson)
             }
@@ -126,7 +126,7 @@ describe 'Lessons' do
         name: :lesson_params,
         in: :body,
         schema: {
-          properties: { 
+          properties: {
             lesson: {
               '$ref' => '#/components/schemas/lesson', required: %i(lesson)
             }
