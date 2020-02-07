@@ -8,4 +8,6 @@ class Lesson < ApplicationRecord
   validates :summary, presence: true
 
   belongs_to :unit
+
+  has_many :lesson_parts, dependent: :destroy
 end
