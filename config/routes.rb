@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   root to: 'teachers/homes#show'
 
   # API
+  API_VERSIONS = [1].freeze
+
   if Rails.env.development?
     mount OpenApi::Rswag::Ui::Engine => '/api-docs'
     mount OpenApi::Rswag::Api::Engine => '/api-docs'
@@ -44,4 +46,18 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  api_router = Proc.new do |env|
+    original_endpoint = env.dig("action_dispatch.request.path_parameters", :original_endpoint)
+
+    version = env.fetch("HTTP_APIVERSION") { API_VERSIONS.last }
+
+    fail("Invalid API version, must be in #{API_VERSIONS}") unless version.to_i.in?(API_VERSIONS)
+
+    new_endpoint = "/" + ["api", "v#{version}", original_endpoint].join('/')
+
+    [302, { "Location" => new_endpoint }, []]
+  end
+
+  match "/api/*original_endpoint", via: %i(get post), to: api_router
 end
