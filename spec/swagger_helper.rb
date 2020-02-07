@@ -47,7 +47,7 @@ RSpec.configure do |config|
               name: { type: :string },
               summary: { type: :string },
               core_knowledge: { type: :string },
-              previous_knowledge: { type: :string },
+              previous_knowledge: { type: :object },
               vocabulary: {
                 type: :array, items: { type: :string }
               },

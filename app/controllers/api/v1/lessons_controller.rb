@@ -52,7 +52,7 @@ private
       :summary,
       :position,
       :core_knowledge,
-      :previous_knowledge,
+      previous_knowledge: {},
       vocabulary: [],
       misconceptions: []
     )
