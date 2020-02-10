@@ -1,0 +1,56 @@
+section.lesson-plan
+  p
+    | This lesson has been sequenced in a suggested order. If you'd like to make
+      changes, you can search for alternative resources.
+
+  table.lesson-parts.govuk-table
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th
+          span.govuk-visually-hidden
+            Lesson part count
+        th.govuk-table__header.activity-icons scope='col'
+          | Learning method
+        th.govuk-table__header scope='col'
+          | Teaching this activity
+        th.govuk-table__header scope='col'
+          | Change activity
+
+    tbody.govuk-table__body
+      - @lesson_parts.each do |lp|
+        tr.govuk-table__row
+          th.govuk-table__cell.big-number
+            span.govuk-visually-hidden Lesson part number
+            = lp.number
+          td.govuk-table__cell.activity-icons
+            ul.govuk-list
+              li
+                = activity_icon 'practical'
+                = lp.activity_type
+
+              li
+                = activity_icon 'reading'
+                = lp.involvement
+              li
+          td.main-content.govuk-table__cell
+            article
+              = markdown(lp.overview)
+            strong
+              | Approximately #{lp.duration}
+            .files
+              = lp.file_formats.to_sentence
+              =< link_to 'Preview', '#'
+
+
+            section.extra-requirements
+              - lp.extra_requirements.each do |er|
+                .govuk-tag = er
+
+          td.govuk-table__cell
+            - if lp.alternatives.any?
+              ul.govuk-list
+                - lp.alternatives.each do |alternative|
+                  li
+                    strong = alternative
+
+              = link_to 'Change activity', '#'

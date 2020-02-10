@@ -1,0 +1,26 @@
+.lesson-parts {
+  th {
+    background-color: govuk-tint(govuk-colour('turquoise'), 80);
+  }
+
+  .files {
+    margin-bottom: 1rem;
+  }
+
+  .activity-icons {
+    padding: 0.5rem 1rem;
+    text-align: center;
+
+    ul {
+      > li {
+        margin: 1.5rem 0;
+      }
+    }
+  }
+
+  .extra-requirements {
+    .govuk-tag {
+      background-color: govuk-colour("dark-grey");
+    }
+  }
+}

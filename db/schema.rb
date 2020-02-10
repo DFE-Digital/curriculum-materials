@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_103341) do
+ActiveRecord::Schema.define(version: 2020_02_07_163414) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "complete_curriculum_programmes", force: :cascade do |t|
@@ -30,11 +31,11 @@ ActiveRecord::Schema.define(version: 2020_01_23_103341) do
     t.text "summary"
     t.integer "position"
     t.text "core_knowledge"
-    t.text "previous_knowledge"
     t.string "vocabulary", array: true
     t.string "misconceptions", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.hstore "previous_knowledge"
     t.index ["name"], name: "index_lessons_on_name"
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end

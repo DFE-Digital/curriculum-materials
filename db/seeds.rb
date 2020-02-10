@@ -40,7 +40,7 @@ unless Rails.env.test?
               reservoirs underneath controlling their respective fissure system
             CORE_KNOWLEDGE
 
-            summary: <<~SUMMARY
+            summary: <<~SUMMARY,
               A fissure vent, also known as a volcanic fissure, eruption
               fissure or simply a fissure, is a linear volcanic vent through
               which lava erupts, usually without any explosive activity. The
@@ -52,6 +52,29 @@ unless Rails.env.test?
               from the air, but the crater rows or the canyons built up by some
               of them are.
             SUMMARY
+
+            previous_knowledge: {
+              "History" => <<~HISTORY,
+                The Laki fissures, part of the Grímsvötn volcanic system,
+                produced one of the biggest effusive eruptions on earth in
+                historical times.
+              HISTORY
+
+              "Magma reservoirs" => <<~MAGMA,
+                The dikes that feed fissures reach the surface from depths of a
+                few kilometers and connect them to deeper magma reservoirs,
+                often under volcanic centers. Fissures are usually found in or
+                along rifts and rift zones, such as Iceland and the East
+                African Rift. Fissure vents are often part of the structure of
+                shield volcanoes
+              MAGMA
+
+              "Splatter cone" => <<~SPLATTER_CONE,
+                The fragments that form a spatter cone are hot and plastic enough
+                to weld together, while the fragments that form a cinder cone
+                remain separate because of their lower temperature.
+              SPLATTER_CONE
+            }
           },
           { name: 'Shield volcanoes' },
           { name: 'Lava domes' },
