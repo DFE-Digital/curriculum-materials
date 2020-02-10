@@ -7,11 +7,25 @@ default: &default
 
 development:
   <<: *default
+  <% if ENV['DB_HOST'] %>
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_DATABASE'] %>_development
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  <% else %>
   database: curriculum_materials_development
+  <% end %>
 
 test:
   <<: *default
+  <% if ENV['DB_HOST'] %>
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_DATABASE'] %>_test
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  <% else %>
   database: curriculum_materials_test
+  <% end %>
 
 production: &production
   <<: *default
