@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end
 
+  create_table "resources", force: :cascade do |t|
+    t.bigint "activity_id", null: false
+    t.string "name", limit: 256, null: false
+    t.string "sha256", limit: 64, null: false
+    t.text "taxonomies"
+    t.text "uri"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_resources_on_activity_id"
+    t.index ["sha256"], name: "index_resources_on_sha256", unique: true
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.uuid "token", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -111,5 +123,6 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
   add_foreign_key "activity_teaching_methods", "teaching_methods"
   add_foreign_key "activities", "lessons"
   add_foreign_key "lessons", "units"
+  add_foreign_key "resources", "activities"
   add_foreign_key "units", "complete_curriculum_programmes"
 end
