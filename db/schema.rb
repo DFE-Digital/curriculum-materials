@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["activity_id"], name: "index_activity_teaching_methods_on_activity_id"
     t.index ["teaching_method_id", "activity_id"], name: "index_activity_teaching_methods_teaching_method_id_activity_id", unique: true
+    t.bigint "lesson_id", null: false
+    t.string "name", limit: 256, null: false
+    t.string "slug", limit: 256, null: false
+    t.text "summary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_id", "slug"], name: "index_activities_on_lesson_id_and_slug", unique: true
+    t.index ["lesson_id"], name: "index_activities_on_lesson_id"
   end
 
   create_table "complete_curriculum_programmes", force: :cascade do |t|
@@ -101,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
   add_foreign_key "activities", "lesson_parts"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
+  add_foreign_key "activities", "lessons"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"
 end

@@ -8,5 +8,9 @@ FactoryBot.define do
       overview { Faker::Lorem.paragraph }
       duration { 20.step(to: 60, by: 5).to_a.sample }
     end
+    lesson { nil }
+    name { "MyString" }
+    slug { "MyString" }
+    summary { "MyText" }
   end
 end
