@@ -4,23 +4,14 @@ feature 'Complete Curriculum Programme page', type: :feature do
   include_context 'logged in teacher'
 
   context 'Viewing the page' do
-    let! :complete_curriculum_programme do
-      create :complete_curriculum_programme
-    end
+    let(:lesson) { l = Lesson.new; l.from_file(file_fixture("content/year-8-history/roman-history/1-the-battle-of-hastings/_index.md")); l }
+    let(:complete_curriculum_programme) { lesson.unit.ccp }
+    let(:unit) { lesson.unit }
+    let(:units) { complete_curriculum_programme.units }
 
-    let! :units do
-      create_list \
-        :unit, 6, complete_curriculum_programme: complete_curriculum_programme
-    end
 
     before do
-      units.each do |unit|
-        create_list :lesson, 6, unit: unit
-      end
-    end
-
-    before do
-      visit "/teachers/complete_curriculum_programmes/#{complete_curriculum_programme.id}"
+      visit complete_curriculum_programme.path
     end
 
     it "shows the cpp name as the page title" do
@@ -37,7 +28,7 @@ feature 'Complete Curriculum Programme page', type: :feature do
       it "shows a card for each unit" do
         units.each do |unit|
           expect(page).to have_css 'h3', text: unit.name
-          expect(page).to have_link 'View and plan lessons', href: teachers_unit_path(unit)
+          expect(page).to have_link 'View and plan lessons', href: unit.path
           unit.lessons.each do |lesson|
             expect(page).to have_css('li', text: lesson.name)
           end

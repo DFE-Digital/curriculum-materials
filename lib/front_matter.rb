@@ -20,7 +20,7 @@ class FrontMatter
 
   # @param filename [String] file path to read
   def initialize(filename)
-    @filename = filename
+    @filename = Pathname.new(filename)
   end
 
   def self.read(filename)

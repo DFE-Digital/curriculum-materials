@@ -1,22 +1,28 @@
-class Activity < ApplicationRecord
-  belongs_to :lesson_part
-  has_many :activity_teaching_methods, dependent: :destroy
-  has_many :teaching_methods, through: :activity_teaching_methods
+class Activity < ContentBase
+  attr_accessor :duration, :weight, :taxonomies
 
-  validates :lesson_part_id, presence: true
-  validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
-  belongs_to :lesson
-  validates :lesson, presence: true
-  validates :name,
-            presence: true,
-            length: { maximum: 256 }
-  validates :slug, presence: true
+  def from_file(file)
+    super
+  end
 
-  after_validation :set_slug, only: :create
+  def slug
+    ActiveSupport::Inflector.parameterize(
+      File.basename(filename, File.extname(filename))
+    )
+  end
 
-  private
+  def lesson
+    @lesson ||= Lesson.new
+    @lesson.from_file(File.join(@filename.parent, "_index.md"))
+    @lesson
+  end
 
-  def set_slug
-    self.slug = name.to_s.parameterize unless self.slug.present?
+  def path
+    Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_unit_lesson_activity_path(
+      lesson.unit.ccp,
+      lesson.unit,
+      lesson,
+      self
+    )
   end
 end

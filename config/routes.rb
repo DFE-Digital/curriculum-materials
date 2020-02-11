@@ -14,10 +14,18 @@ Rails.application.routes.draw do
       get '/:token', to: 'sessions#create', as: 'create'
     end
 
-    resources :complete_curriculum_programmes, only: %i(index show)
+    # resources :complete_curriculum_programmes, only: %i(index show), param: :slug, path: 'ccp' do
+    #   resources :units, only: %i(show), param: :slug, path: '', controller: :unit do
+    #     resources :lessons, only: %i(show), param: :slug, path: '' do
+    #       resources :activities, param: :slug, path: ''
+    #     end
+    #   end
+    # end
 
-    resources :units, only: %i(show)
-    resources :lessons, only: %i(show)
+    get '/teachers/ccp/:slug', to: 'complete_curriculum_programmes#show', as: :complete_curriculum_programme
+    get '/teachers/ccp/:complete_curriculum_programme_slug/:slug', to: 'units#show', as: :complete_curriculum_programme_unit
+    get '/teachers/ccp/:complete_curriculum_programme_slug/:unit_slug/:slug', to: 'lessons#show', as: :complete_curriculum_programme_unit_lesson
+    get '/teachers/ccp/:complete_curriculum_programme_slug/:unit_slug/:lesson_slug/:slug', to: 'activitiies#show', as: :complete_curriculum_programme_unit_lesson_activity
 
     resource :logged_out, only: %i(show), controller: 'logged_out'
   end

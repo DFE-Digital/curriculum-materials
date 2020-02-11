@@ -3,10 +3,10 @@ module Teachers
     def index; end
 
     def show
-      @complete_curriculum_programme = \
-        CompleteCurriculumProgramme
-          .includes(units: :lessons)
-          .find(params[:id])
+      file = File.join(Rails.root, 'content', params[:slug], '_index.md')
+
+      @complete_curriculum_programme = CompleteCurriculumProgramme.new
+      @complete_curriculum_programme.from_file(file)
     end
   end
 end

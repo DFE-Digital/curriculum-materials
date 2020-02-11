@@ -1,24 +1,26 @@
-class CompleteCurriculumProgramme < ApplicationRecord
-  validates :name,
-            presence: true,
-            length: { maximum: 256 }
-  validates :overview,
-            presence: true,
-            length: { maximum: 1024 }
-  validates :benefits, presence: true
+class CompleteCurriculumProgramme < ContentBase
+  attr_accessor :title, :content, :description
 
-  has_many :units, dependent: :destroy
+  alias name title
+  alias overview content
+  alias benefits description
 
-  after_validation :set_slug, only: :create
-
-  # Stub implementation until we associate ccps with years
-  def year
-    'TODO!!'
+  def path
+    Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_path(
+      self
+    )
   end
 
-  private
+  def units
+    files = Dir.glob(File.join(File.dirname(@filename), "*/_index.md"))
+    files.collect do |file|
+      l = Unit.new
+      l.from_file(file)
+      l
+    end
+  end
 
-  def set_slug
-    self.slug = name.to_s.parameterize unless self.slug.present?
+  def year
+    "TODO"
   end
 end

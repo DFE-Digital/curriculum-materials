@@ -28,4 +28,14 @@ module ApplicationHelper
     sanitize(markdown.render(content)).html_safe
     # rubocop:enable Rails/OutputSafety
   end
+
+  def teachers_unit_path(unit)
+    unit.path
+  end
+  deprecate :teachers_unit_path
+
+  def teachers_lesson_path(lesson)
+    lesson.path
+  end
+  deprecate :teachers_lesson_path
 end

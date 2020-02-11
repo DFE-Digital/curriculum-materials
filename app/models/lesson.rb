@@ -1,25 +1,39 @@
-class Lesson < ApplicationRecord
-  validates :unit_id, presence: true
+class Lesson < ContentBase
+  attr_accessor :title, :description, :weight
 
-  validates :name,
-            presence: true,
-            length: { maximum: 256 }
-
-  validates :summary, presence: true
-
-  belongs_to :unit
-
-  has_many :lesson_parts, dependent: :destroy
-
-  def duration
-    '1 hour'
+  def from_file(file)
+    super
   end
 
-  after_validation :set_slug, only: :create
-
-  private
-
-  def set_slug
-    self.slug = name.to_s.parameterize unless self.slug.present?
+  def unit
+    @unit ||= Unit.new
+    @unit.from_file(File.join(@filename.parent.parent, "_index.md"))
+    @unit
   end
+
+  def path
+    Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_unit_lesson_path(
+      unit.ccp,
+      unit,
+      self
+    )
+  end
+
+  alias name title
+  alias summary description
+
+  def vocabulary
+    []
+  end
+  deprecate :vocabulary
+
+  def misconceptions
+    []
+  end
+  deprecate :misconceptions
+
+  def core_knowledge
+    ""
+  end
+  deprecate :core_knowledge
 end

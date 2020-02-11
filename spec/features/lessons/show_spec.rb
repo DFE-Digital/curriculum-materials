@@ -4,11 +4,11 @@ RSpec.feature "Lesson page", type: :feature do
   include_context 'logged in teacher'
 
   describe '#show' do
-    let(:lesson) { FactoryBot.create(:lesson) }
+    let(:lesson) { l = Lesson.new; l.from_file(file_fixture("content/year-8-history/roman-history/1-the-battle-of-hastings/_index.md")); l }
     let(:unit) { lesson.unit }
     let(:ccp) { unit.complete_curriculum_programme }
 
-    before { visit(teachers_lesson_path(lesson)) }
+    before { visit(lesson.path) }
 
     specify 'the page heading should be the lesson title' do
       expect(page).to have_css('h1', text: lesson.name)
@@ -20,8 +20,8 @@ RSpec.feature "Lesson page", type: :feature do
 
     specify "there should be breadcrumbs for the CCP and current unit" do
       within('.govuk-breadcrumbs') do
-        expect(page).to have_link(ccp.name, href: teachers_complete_curriculum_programme_path(ccp))
-        expect(page).to have_link(unit.name, href: teachers_unit_path(unit))
+        expect(page).to have_link(ccp.name, href: ccp.path)
+        expect(page).to have_link(unit.name, href: unit.path)
         expect(page).to have_content(lesson.name)
       end
     end
@@ -55,7 +55,7 @@ RSpec.feature "Lesson page", type: :feature do
       ].flatten.each { |value| expect(page).to have_content(value) }
     end
 
-    specify %(there should be a 'Plan the next lesosn' button) do
+    specify %(there should be a 'Plan the next lesson' button) do
       expect(page).to have_link('Plan the next lesson', href: '#', class: 'govuk-button')
     end
   end

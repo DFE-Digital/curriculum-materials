@@ -1,24 +1,33 @@
-class Unit < ApplicationRecord
-  validates :complete_curriculum_programme_id, presence: true
+class Unit < ContentBase
+  attr_accessor :unit, :weight, :description
 
-  validates :name,
-            presence: true,
-            length: { maximum: 256 }
+  def ccp
+    parent_file = File.join(@filename.parent.parent, "_index.md")
 
-  validates :overview,
-            presence: true,
-            length: { maximum: 1024 }
+    @ccp ||= CompleteCurriculumProgramme.new
+    @ccp.from_file(parent_file)
+    @ccp
+  end
 
-  validates :benefits, presence: true
+  alias complete_curriculum_programme ccp
+  alias name title
 
-  belongs_to :complete_curriculum_programme
-  has_many :lessons, dependent: :destroy
+  def path
+    Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_unit_path(
+      ccp,
+      self
+    )
+  end
 
-  after_validation :set_slug, only: :create
+  alias overview description
+  alias benefits content
 
-  private
-
-  def set_slug
-    self.slug = name.to_s.parameterize unless self.slug.present?
+  def lessons
+    lesson_files = Dir.glob(File.join(File.dirname(@filename), "*/_index.md"))
+    lesson_files.collect do |file|
+      l = Lesson.new
+      l.from_file(file)
+      l
+    end
   end
 end

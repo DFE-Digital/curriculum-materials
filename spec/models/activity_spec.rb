@@ -1,39 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
-  describe 'columns' do
-    it { is_expected.to have_db_column(:lesson_part_id).of_type(:integer).with_options(null: false) }
-    it { is_expected.to have_db_column(:overview).of_type(:text) }
-    it { is_expected.to have_db_column(:duration).of_type(:integer) }
-    it { is_expected.to have_db_column(:extra_requirements).of_type(:string).with_options(array: true) }
+  before :each do
+    @file = file_fixture('content/year-8-history/roman-history/1-the-battle-of-hastings/1.md')
+    subject.from_file(@file)
   end
 
-  describe 'relationships' do
-    it { is_expected.to belong_to(:lesson_part) }
-    it { is_expected.to have_many(:activity_teaching_methods).dependent(:destroy) }
-    it { is_expected.to have_many(:teaching_methods).through(:activity_teaching_methods) }
-  end
-
-  describe 'validation' do
-    it { is_expected.to validate_presence_of(:lesson_part_id) }
-
-    describe '#duration' do
-      it { is_expected.to validate_presence_of(:duration) }
-      it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(60) }
+  describe "from_file" do
+    it "reads from frontmatter formatted file" do
+      subject.from_file(@file)
+      expect(subject.slug).to eql("1")
+      expect(subject.title).to eql("Keyword matching")
+      expect(subject.duration).to eql(300)
+      expect(subject.taxonomies).to include("do-it-now")
+      expect(subject.weight).to eql(1)
+      expect(subject.content).to start_with('As students enter the room')
     end
-    it { is_expected.to have_db_column(:lesson_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:slug).of_type(:string).with_options(length: 256) }
-    it { is_expected.to have_db_column(:summary).of_type(:text) }
+
+    it "fails silently" do
+      subject.from_file("")
+    end
   end
 
-  describe 'validation' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_length_of(:name).is_at_most(256) }
-    it { is_expected.to validate_presence_of(:slug) }
+  describe "from_file!" do
+    it "reads from frontmatter formatted file" do
+      subject.from_file!(@file)
+      expect(subject.slug).to eql("1")
+      expect(subject.title).to eql("Keyword matching")
+      expect(subject.duration).to eql(300)
+      expect(subject.taxonomies).to include("do-it-now")
+      expect(subject.weight).to eql(1)
+      expect(subject.content).to start_with('As students enter the room')
+    end
+
+    it "fails silently" do
+      expect {
+        subject.from_file!("")
+      }.to raise_error(described_class::RecordNotFound)
+    end
   end
 
-  describe 'relationships' do
-    it { is_expected.to belong_to(:lesson) }
+  describe "path" do
+    it "returns a generated path" do
+      expect(subject.path).to eql('/teachers/ccp/year-8-history/roman-history/1-the-battle-of-hastings/1')
+    end
+  end
+
+  describe "lesson" do
+    it "returns the parent association" do
+      expect(subject.lesson).to be_a(Lesson)
+      expect(subject.lesson.slug).to eql('1-the-battle-of-hastings')
+    end
   end
 end
