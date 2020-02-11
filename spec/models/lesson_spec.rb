@@ -24,5 +24,6 @@ RSpec.describe Lesson, type: :model do
 
   describe 'relationships' do
     it { is_expected.to belong_to(:unit) }
+    it { is_expected.to have_many :lesson_parts }
   end
 end

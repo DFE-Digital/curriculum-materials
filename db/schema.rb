@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2020_02_07_163414) do
     t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
   end
 
+  create_table "lesson_parts", force: :cascade do |t|
+    t.bigint "lesson_id", null: false
+    t.integer "position", null: false
+    t.index ["lesson_id"], name: "index_lesson_parts_on_lesson_id"
+    t.index ["position", "lesson_id"], name: "index_lesson_parts_on_position_and_lesson_id", unique: true
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.integer "unit_id", null: false
     t.string "name", limit: 256
