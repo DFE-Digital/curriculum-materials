@@ -11,4 +11,12 @@ class Activity < ApplicationRecord
             presence: true,
             length: { maximum: 256 }
   validates :slug, presence: true
+
+  after_validation :set_slug, only: :create
+
+  private
+
+  def set_slug
+    self.slug = name.to_s.parameterize unless self.slug.present?
+  end
 end

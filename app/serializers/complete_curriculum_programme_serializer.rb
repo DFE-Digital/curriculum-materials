@@ -3,7 +3,7 @@ class CompleteCurriculumProgrammeSerializer
 
   adapter SimpleAMS::Adapters::AMS, root: false
 
-  fields :id, :name, :overview, :benefits
+  fields :id, :slug, :name, :overview, :benefits
   generic :include_embedded_data, false
 
   has_many :units, serializer: UnitSerializer

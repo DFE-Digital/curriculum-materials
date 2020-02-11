@@ -14,4 +14,12 @@ class Lesson < ApplicationRecord
   def duration
     '1 hour'
   end
+
+  after_validation :set_slug, only: :create
+
+  private
+
+  def set_slug
+    self.slug = name.to_s.parameterize unless self.slug.present?
+  end
 end

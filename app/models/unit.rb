@@ -13,4 +13,12 @@ class Unit < ApplicationRecord
 
   belongs_to :complete_curriculum_programme
   has_many :lessons, dependent: :destroy
+
+  after_validation :set_slug, only: :create
+
+  private
+
+  def set_slug
+    self.slug = name.to_s.parameterize unless self.slug.present?
+  end
 end

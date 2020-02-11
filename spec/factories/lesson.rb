@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "Lesson #{n}" }
     sequence(:summary) { |n| "Lesson #{n}" }
     association(:unit, factory: :unit)
+    slug { ActiveSupport::Inflector.parameterize(name) }
     core_knowledge { "Core knowledge" }
     previous_knowledge { { "Previous knowledge" => "Yes" } }
     vocabulary { %w(Subtraction Division Multiplication) }

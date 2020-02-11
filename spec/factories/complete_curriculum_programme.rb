@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "CCP #{n}" }
     overview { "Overview" }
     benefits { "Benefits" }
+    slug { ActiveSupport::Inflector.parameterize(name) }
 
     trait(:randomised) do
       name { Faker::University.name }

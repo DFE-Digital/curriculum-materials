@@ -134,7 +134,7 @@ describe 'Units' do
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
-            unit_params.dig(:unit).each do |attribute, value|
+            unit_params.dig(:unit).except(:slug).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
           end

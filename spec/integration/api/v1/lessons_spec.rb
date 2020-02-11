@@ -141,7 +141,7 @@ describe 'Lessons' do
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
-            lesson_params.dig(:lesson).each do |attribute, value|
+            lesson_params.dig(:lesson).except(:slug).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
           end

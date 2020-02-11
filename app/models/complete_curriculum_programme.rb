@@ -9,8 +9,16 @@ class CompleteCurriculumProgramme < ApplicationRecord
 
   has_many :units, dependent: :destroy
 
+  after_validation :set_slug, only: :create
+
   # Stub implementation until we associate ccps with years
   def year
     'TODO!!'
+  end
+
+  private
+
+  def set_slug
+    self.slug = name.to_s.parameterize unless self.slug.present?
   end
 end

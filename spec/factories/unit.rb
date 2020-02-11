@@ -2,6 +2,7 @@ FactoryBot.define do
   factory(:unit) do
     sequence(:name) { |n| "Unit #{n}" }
     association(:complete_curriculum_programme, factory: :ccp)
+    slug { ActiveSupport::Inflector.parameterize(name) }
     overview { "Overview" }
     benefits { "Benefits" }
 

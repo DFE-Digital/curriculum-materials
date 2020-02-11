@@ -46,6 +46,7 @@ describe 'Complete curriculum programmes' do
           # JSON, along with some others added by saving (id, timestamps)
 
           JSON.parse(response.body).with_indifferent_access.tap do |json|
+            puts json
             ccp_params.dig(:ccp).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
@@ -108,7 +109,7 @@ describe 'Complete curriculum programmes' do
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
-            ccp_params.dig(:ccp).each do |attribute, value|
+            ccp_params.dig(:ccp).except(:slug).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
           end

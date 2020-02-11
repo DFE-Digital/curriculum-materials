@@ -3,7 +3,7 @@ class LessonSerializer
 
   adapter SimpleAMS::Adapters::AMS, root: false
 
-  fields :id, :name, :summary, :position, :core_knowledge,
+  fields :id, :slug, :name, :summary, :position, :core_knowledge,
          :previous_knowledge, :vocabulary, :misconceptions
 
   belongs_to :unit, serializer: UnitSerializer
