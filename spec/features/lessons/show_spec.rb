@@ -14,6 +14,10 @@ RSpec.feature "Lesson page", type: :feature do
       expect(page).to have_css('h1', text: lesson.name)
     end
 
+    specify 'the lesson duration should be detailed in a caption' do
+      expect(page).to have_css('.govuk-caption-m', text: lesson.duration)
+    end
+
     specify "there should be breadcrumbs for the CCP and current unit" do
       within('.govuk-breadcrumbs') do
         expect(page).to have_link(ccp.name, href: teachers_complete_curriculum_programme_path(ccp))
@@ -33,12 +37,21 @@ RSpec.feature "Lesson page", type: :feature do
       end
     end
 
+    context 'if there is no previous knowledge' do
+      let(:lesson) { FactoryBot.create(:lesson, previous_knowledge: nil) }
+
+      specify 'the previous knowledge section should not be present' do
+        expect(page).not_to have_css('h2', text: 'Building on previous knowledge')
+      end
+    end
+
     specify 'the page should contain the relevant lesson details' do
       [
         lesson.summary,
         lesson.vocabulary,
         lesson.misconceptions,
-        lesson.core_knowledge
+        lesson.core_knowledge,
+        lesson.previous_knowledge.flatten
       ].flatten.each { |value| expect(page).to have_content(value) }
     end
 

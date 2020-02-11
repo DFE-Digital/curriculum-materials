@@ -4,7 +4,7 @@ FactoryBot.define do
     sequence(:summary) { |n| "Lesson #{n}" }
     association(:unit, factory: :unit)
     core_knowledge { "Core knowledge" }
-    previous_knowledge { "Previous knowledge" }
+    previous_knowledge { { "Previous knowledge" => "Yes" } }
     vocabulary { %w(Subtraction Division Multiplication) }
     misconceptions { [%(Fractions are not natural numbers)] }
 

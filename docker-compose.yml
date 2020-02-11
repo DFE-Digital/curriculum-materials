@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  curriculum_materials:
+    image: curriculum_materials:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - SECRET_KEY_BASE=stubbed
+      - DB_HOST=database
+      - DB_DATABASE=curriculum_materials
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    depends_on:
+      - db_tasks
+
+  db_tasks:
+    image: curriculum_materials:latest
+    command: bundle exec rake db:create db:schema:load db:seed
+    environment:
+      - KNOWN_TEACHER_UUID=11111111-1111-1111-1111-111111111111
+      - RAILS_ENV=development
+      - SECRET_KEY_BASE=stubbed
+      - DB_HOST=database
+      - DB_DATABASE=curriculum_materials
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=curriculum_materials
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  node_modules:

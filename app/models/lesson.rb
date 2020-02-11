@@ -10,4 +10,8 @@ class Lesson < ApplicationRecord
   belongs_to :unit
 
   has_many :lesson_parts, dependent: :destroy
+
+  def duration
+    '1 hour'
+  end
 end

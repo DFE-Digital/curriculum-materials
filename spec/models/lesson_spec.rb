@@ -8,7 +8,7 @@ RSpec.describe Lesson, type: :model do
     it { is_expected.to have_db_column(:position).of_type(:integer) }
 
     it { is_expected.to have_db_column(:core_knowledge).of_type(:text) }
-    it { is_expected.to have_db_column(:previous_knowledge).of_type(:text) }
+    it { is_expected.to have_db_column(:previous_knowledge).of_type(:hstore) }
     it { is_expected.to have_db_column(:vocabulary).of_type(:string).with_options(array: true) }
     it { is_expected.to have_db_column(:misconceptions).of_type(:string).with_options(array: true) }
   end
