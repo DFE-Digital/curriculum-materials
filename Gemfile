@@ -32,6 +32,8 @@ gem "sentry-raven"
 gem "simple_ams"
 gem "actionview-component"
 
+gem 'hashdiff', '~> 1.0' # for FrontMatter writing
+
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data
 gem "factory_bot_rails"
