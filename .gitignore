@@ -32,3 +32,4 @@ yarn-debug.log*
 
 # Ignore simplecov reports
 /coverage
+*DS_Store
