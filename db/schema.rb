@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.text "benefits", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug", limit: 256, null: false
     t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
+    t.index ["slug"], name: "index_complete_curriculum_programmes_on_slug", unique: true
   end
 
   create_table "lesson_parts", force: :cascade do |t|
@@ -62,7 +64,9 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.hstore "previous_knowledge"
+    t.string "slug", limit: 256, null: false
     t.index ["name"], name: "index_lessons_on_name"
+    t.index ["unit_id", "slug"], name: "index_lessons_on_unit_id_and_slug", unique: true
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end
 
@@ -88,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.text "benefits", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug", limit: 256, null: false
+    t.index ["complete_curriculum_programme_id", "slug"], name: "index_units_on_complete_curriculum_programme_id_and_slug", unique: true
     t.index ["complete_curriculum_programme_id"], name: "index_units_on_complete_curriculum_programme_id"
     t.index ["name"], name: "index_units_on_name"
   end
