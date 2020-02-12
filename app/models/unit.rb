@@ -23,11 +23,12 @@ class Unit < ContentBase
   alias benefits content
 
   def lessons
-    lesson_files = Dir.glob(File.join(File.dirname(@filename), "*/_index.md"))
-    lesson_files.collect do |file|
-      l = Lesson.new
-      l.from_file(file)
-      l
+    files = Dir.glob(File.join(File.dirname(@filename), "*/_index.md"))
+    sorted_files = files.sort_by do |file|
+      File.dirname(file).split('/').last.to_f
+    end
+    sorted_files.collect do |file|
+      Lesson.from_file(file)
     end
   end
 end

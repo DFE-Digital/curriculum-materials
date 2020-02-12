@@ -32,7 +32,9 @@ class Activity < ContentBase
     File.basename(@filename, File.extname(@filename)).to_f
   end
 
-  alias number part
+  def number
+    part.to_i
+  end
 
   # TODO need to understand the difference between types
   def activity_type
@@ -54,12 +56,8 @@ class Activity < ContentBase
   end
 
   def alternatives
-    files = Dir.glob(File.join(@filename, "*.md"))
-    filtered_files = files.select do |file|
-      !file.end_with?("_index.md") || file.end_with?(@filename.basename)
-    end
-    filtered_files.collect do |file|
-      self.class.from_file(file)
+    lesson.activities.select do |activity|
+      activity.number == number && activity.part != part
     end
   end
 end

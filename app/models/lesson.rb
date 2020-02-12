@@ -50,9 +50,7 @@ class Lesson < ContentBase
     files.reject do |file|
       file.ends_with? '_index.md'
     end.collect do |file|
-      instance = Activity.new
-      instance.from_file(file)
-      instance
+      Activity.from_file(file)
     end.sort_by do |file|
       File.basename(file.filename, File.extname(file.filename)).to_f
     end
@@ -60,8 +58,16 @@ class Lesson < ContentBase
 
   def duration
     activities.inject(0) do |sum, activity|
-      sum + activity.duration
+      sum + (activity.duration || 0)
     end
+  end
+
+    def part
+    File.basename(@filename, File.extname(@filename)).to_f
+  end
+
+  def number
+    part.to_i
   end
 
   def parts

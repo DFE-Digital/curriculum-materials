@@ -51,6 +51,6 @@ section.lesson-plan
               ul.govuk-list
                 - lp.alternatives.each do |alternative|
                   li
-                    strong = alternative
+                    strong = alternative.title
 
               = link_to 'Change activity', '#'
