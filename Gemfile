@@ -33,6 +33,7 @@ gem "simple_ams"
 gem "actionview-component"
 
 gem 'hashdiff', '~> 1.0' # for FrontMatter writing
+gem 'redcarpet' # for FrontMatter content markdown parsing
 
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data
