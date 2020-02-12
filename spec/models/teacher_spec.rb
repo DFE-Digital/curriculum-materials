@@ -16,4 +16,9 @@ RSpec.describe Teacher, type: :model do
       end
     end
   end
+
+  describe 'Relationships' do
+    it { is_expected.to have_many :activity_choices }
+    it { is_expected.to have_many(:activities).through :activity_choices }
+  end
 end
