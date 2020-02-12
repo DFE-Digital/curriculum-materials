@@ -1,15 +1,11 @@
 class Lesson < ContentBase
   attr_accessor :title, :description, :weight
 
-  def from_file(file)
-    super
-  end
+  belongs_to :unit
+  has_many :activities, pattern: "*.md"
 
-  def unit
-    @unit ||= Unit.new
-    @unit.from_file(File.join(@filename.parent.parent, "_index.md"))
-    @unit
-  end
+  alias name title
+  alias summary description
 
   def path
     Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_unit_lesson_path(
@@ -18,9 +14,6 @@ class Lesson < ContentBase
       self
     )
   end
-
-  alias name title
-  alias summary description
 
   def vocabulary
     []
@@ -57,12 +50,12 @@ class Lesson < ContentBase
   end
 
   def duration
-    activities.inject(0) do |sum, activity|
+    parts.inject(0) do |sum, activity|
       sum + (activity.duration || 0)
     end
   end
 
-    def part
+  def part
     File.basename(@filename, File.extname(@filename)).to_f
   end
 

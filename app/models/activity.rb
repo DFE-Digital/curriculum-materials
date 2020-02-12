@@ -1,22 +1,11 @@
 class Activity < ContentBase
   attr_accessor :duration, :weight, :taxonomies
+  belongs_to :lesson, pattern: "./_index.md"
 
   alias overview content
 
   def from_file(file)
     super
-  end
-
-  def slug
-    ActiveSupport::Inflector.parameterize(
-      File.basename(filename, File.extname(filename))
-    )
-  end
-
-  def lesson
-    @lesson ||= Lesson.new
-    @lesson.from_file(File.join(@filename.parent, "_index.md"))
-    @lesson
   end
 
   def path

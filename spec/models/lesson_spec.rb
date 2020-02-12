@@ -15,4 +15,25 @@ RSpec.describe Lesson, type: :model do
       expect(actual.second.filename.to_s).to end_with('2.md')
     end
   end
+
+  describe "unit" do
+    it "returns the parent Unit" do
+      actual = subject.unit
+      expect(actual).to be_a(Unit)
+    end
+
+    it "returns an parent instance where self is within children" do
+      actual = subject.unit
+      expect(actual.children.first).to be_a(described_class)
+      expect(actual.children).to include(subject)
+    end
+  end
+
+  describe "activities" do
+    it "returns a array of activities" do
+      actual = subject.activities
+      expect(actual).to be_a(Array)
+      expect(actual.first).to be_a(Activity)
+    end
+  end
 end

@@ -1,32 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Unit, type: :model do
-  before { skip("TODO Fix data shape") }
-  describe 'columns' do
-    it { is_expected.to have_db_column(:complete_curriculum_programme_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:overview).of_type(:string) }
-    it { is_expected.to have_db_column(:benefits).of_type(:text) }
+  before :each do
+    @file = file_fixture('content/year-8-history/roman-history/_index.md')
+    subject.from_file(@file)
   end
 
-  describe 'validation' do
-    it { is_expected.to validate_presence_of(:complete_curriculum_programme_id) }
-
-    describe 'name' do
-      it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_length_of(:name).is_at_most(256) }
+  describe "ccp" do
+    it "returns he parent object instance" do
+      actual = subject.parent
+      expect(actual).to be_a(CompleteCurriculumProgramme)
     end
 
-    describe 'overview' do
-      it { is_expected.to validate_presence_of(:overview) }
-      it { is_expected.to validate_length_of(:overview).is_at_most(1024) }
+    it "returns an parent instance where self is within children" do
+      actual = subject.parent
+      expect(actual.children).to include(subject)
     end
-
-    it { is_expected.to validate_presence_of(:benefits) }
   end
 
-  describe 'relationships' do
-    it { is_expected.to belong_to(:complete_curriculum_programme) }
-    it { is_expected.to have_many(:lessons).dependent(:destroy) }
+  describe "lessons" do
+    it "returns an array of Lesson instances" do
+      actual = subject.lessons
+      expect(actual).to be_a(Array)
+      expect(actual.first).to be_a(Lesson)
+    end
   end
 end

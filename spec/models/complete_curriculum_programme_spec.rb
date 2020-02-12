@@ -1,28 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe CompleteCurriculumProgramme, type: :model do
-  before { skip("TODO Fix data shape") }
-  describe 'columns' do
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:overview).of_type(:string) }
-    it { is_expected.to have_db_column(:benefits).of_type(:text) }
+  before :each do
+    @file = file_fixture('content/year-8-history/_index.md')
+    subject.from_file(@file)
   end
 
-  describe 'validation' do
-    describe 'name' do
-      it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_length_of(:name).is_at_most(256) }
+  describe "self" do
+    describe "all" do
+      it "returns an array of all CCP models" do
+        actual = described_class.all
+        expect(actual).to be_a(Array)
+        expect(actual.first).to be_a(CompleteCurriculumProgramme)
+      end
     end
 
-    describe 'overview' do
-      it { is_expected.to validate_presence_of(:overview) }
-      it { is_expected.to validate_length_of(:overview).is_at_most(1024) }
+    describe "first" do
     end
-
-    it { is_expected.to validate_presence_of(:benefits) }
   end
 
-  describe 'relationships' do
-    it { is_expected.to have_many(:units).dependent(:destroy) }
+  describe "path" do
+    it "returns a generated path" do
+      expect(subject.path).to eql('/teachers/ccps/year-8-history')
+    end
+  end
+
+  describe "units" do
+    it "returns an array of child Unit models" do
+      actual = subject.units
+      expect(actual).to be_a(Array)
+      expect(actual.first).to be_a(Unit)
+    end
   end
 end
