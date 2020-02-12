@@ -310,37 +310,11 @@
             "examples": {
               "application/json": [
                 {
-                  "name": "Lesson 1",
-                  "summary": "Lesson 1",
-                  "core_knowledge": "Core knowledge",
-                  "previous_knowledge": {
-                    "Previous knowledge": "Yes"
-                  },
-                  "vocabulary": [
-                    "Subtraction",
-                    "Division",
-                    "Multiplication"
-                  ],
-                  "misconceptions": [
-                    "Fractions are not natural numbers"
-                  ],
+                  "position": 1,
                   "id": 1
                 },
                 {
-                  "name": "Lesson 2",
-                  "summary": "Lesson 2",
-                  "core_knowledge": "Core knowledge",
-                  "previous_knowledge": {
-                    "Previous knowledge": "Yes"
-                  },
-                  "vocabulary": [
-                    "Subtraction",
-                    "Division",
-                    "Multiplication"
-                  ],
-                  "misconceptions": [
-                    "Fractions are not natural numbers"
-                  ],
+                  "position": 2,
                   "id": 2
                 }
               ]
@@ -412,7 +386,7 @@
             "examples": {
               "application/json": {
                 "lesson_part": {
-                  "position": 1
+                  "position": 3
                 }
               }
             }
@@ -483,20 +457,7 @@
             "description": "lesson part found",
             "examples": {
               "application/json": {
-                "name": "Lesson 3",
-                "summary": "Lesson 3",
-                "core_knowledge": "Core knowledge",
-                "previous_knowledge": {
-                  "Previous knowledge": "Yes"
-                },
-                "vocabulary": [
-                  "Subtraction",
-                  "Division",
-                  "Multiplication"
-                ],
-                "misconceptions": [
-                  "Fractions are not natural numbers"
-                ],
+                "position": 4,
                 "id": 1
               }
             },
@@ -572,7 +533,7 @@
             "examples": {
               "application/json": {
                 "lesson_part": {
-                  "position": 2
+                  "position": 5
                 }
               }
             }
@@ -613,8 +574,8 @@
             "examples": {
               "application/json": [
                 {
-                  "name": "Lesson 4",
-                  "summary": "Lesson 4",
+                  "name": "Lesson 1",
+                  "summary": "Lesson 1",
                   "core_knowledge": "Core knowledge",
                   "previous_knowledge": {
                     "Previous knowledge": "Yes"
@@ -630,8 +591,8 @@
                   "id": 1
                 },
                 {
-                  "name": "Lesson 5",
-                  "summary": "Lesson 5",
+                  "name": "Lesson 2",
+                  "summary": "Lesson 2",
                   "core_knowledge": "Core knowledge",
                   "previous_knowledge": {
                     "Previous knowledge": "Yes"
@@ -707,8 +668,8 @@
             "examples": {
               "application/json": {
                 "lesson": {
-                  "name": "Lesson 6",
-                  "summary": "Lesson 6",
+                  "name": "Lesson 3",
+                  "summary": "Lesson 3",
                   "core_knowledge": "Core knowledge",
                   "previous_knowledge": {
                     "Previous knowledge": "Yes"
@@ -783,8 +744,8 @@
             "description": "lesson found",
             "examples": {
               "application/json": {
-                "name": "Lesson 7",
-                "summary": "Lesson 7",
+                "name": "Lesson 4",
+                "summary": "Lesson 4",
                 "core_knowledge": "Core knowledge",
                 "previous_knowledge": {
                   "Previous knowledge": "Yes"
@@ -864,8 +825,8 @@
             "examples": {
               "application/json": {
                 "lesson": {
-                  "name": "Lesson 8",
-                  "summary": "Lesson 8",
+                  "name": "Lesson 5",
+                  "summary": "Lesson 5",
                   "core_knowledge": "Core knowledge",
                   "previous_knowledge": {
                     "Previous knowledge": "Yes"
@@ -1029,8 +990,8 @@
                 },
                 "lessons": [
                   {
-                    "name": "Lesson 9",
-                    "summary": "Lesson 9",
+                    "name": "Lesson 6",
+                    "summary": "Lesson 6",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": {
                       "Previous knowledge": "Yes"
@@ -1046,8 +1007,8 @@
                     "id": 1
                   },
                   {
-                    "name": "Lesson 10",
-                    "summary": "Lesson 10",
+                    "name": "Lesson 7",
+                    "summary": "Lesson 7",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": {
                       "Previous knowledge": "Yes"
@@ -1063,8 +1024,8 @@
                     "id": 2
                   },
                   {
-                    "name": "Lesson 11",
-                    "summary": "Lesson 11",
+                    "name": "Lesson 8",
+                    "summary": "Lesson 8",
                     "core_knowledge": "Core knowledge",
                     "previous_knowledge": {
                       "Previous knowledge": "Yes"

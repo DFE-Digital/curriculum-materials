@@ -17,7 +17,7 @@ describe 'Lessons' do
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
 
       response '200', 'lesson parts found' do
-        examples('application/json': example_lessons(2))
+        examples('application/json': example_lesson_parts(2))
 
         schema(type: :array, items: { '$ref' => '#/components/schemas/lesson_part' })
 
@@ -105,7 +105,7 @@ describe 'Lessons' do
       )
 
       response('200', 'lesson part found') do
-        examples('application/json': example_lesson)
+        examples('application/json': example_lesson_part)
 
         schema('$ref' => '#/components/schemas/lesson_part')
 
