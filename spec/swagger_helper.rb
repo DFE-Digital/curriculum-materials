@@ -56,6 +56,13 @@ RSpec.configure do |config|
               },
             },
             required: %i(name summary core_knowledge previous_knowledge vocabulary misconceptions)
+          },
+          lesson_part: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              position: { type: :integer }
+            }
           }
         }
       },

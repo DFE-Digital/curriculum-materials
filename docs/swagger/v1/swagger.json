@@ -63,7 +63,7 @@
             "type": "string"
           },
           "previous_knowledge": {
-            "type": "string"
+            "type": "object"
           },
           "vocabulary": {
             "type": "array",
@@ -86,6 +86,17 @@
           "vocabulary",
           "misconceptions"
         ]
+      },
+      "lesson_part": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
       }
     }
   },
@@ -261,6 +272,93 @@
         }
       }
     },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts": {
+      "get": {
+        "summary": "retrieves all lessons parts belonging to the specified lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lesson parts found",
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Lesson 1",
+                  "summary": "Lesson 1",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 1
+                },
+                {
+                  "name": "Lesson 2",
+                  "summary": "Lesson 2",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lesson_part"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ccps/{ccp_id}/units/{unit_id}/lessons": {
       "get": {
         "summary": "retrieves all lessons belonging to the specified CCP and unit",
@@ -291,10 +389,12 @@
             "examples": {
               "application/json": [
                 {
-                  "name": "Lesson 1",
-                  "summary": "Lesson 1",
+                  "name": "Lesson 3",
+                  "summary": "Lesson 3",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -306,10 +406,12 @@
                   "id": 1
                 },
                 {
-                  "name": "Lesson 2",
-                  "summary": "Lesson 2",
+                  "name": "Lesson 4",
+                  "summary": "Lesson 4",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -381,10 +483,12 @@
             "examples": {
               "application/json": {
                 "lesson": {
-                  "name": "Lesson 3",
-                  "summary": "Lesson 3",
+                  "name": "Lesson 5",
+                  "summary": "Lesson 5",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -455,10 +559,12 @@
             "description": "lesson found",
             "examples": {
               "application/json": {
-                "name": "Lesson 4",
-                "summary": "Lesson 4",
+                "name": "Lesson 6",
+                "summary": "Lesson 6",
                 "core_knowledge": "Core knowledge",
-                "previous_knowledge": "Previous knowledge",
+                "previous_knowledge": {
+                  "Previous knowledge": "Yes"
+                },
                 "vocabulary": [
                   "Subtraction",
                   "Division",
@@ -534,10 +640,12 @@
             "examples": {
               "application/json": {
                 "lesson": {
-                  "name": "Lesson 5",
-                  "summary": "Lesson 5",
+                  "name": "Lesson 7",
+                  "summary": "Lesson 7",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -697,10 +805,12 @@
                 },
                 "lessons": [
                   {
-                    "name": "Lesson 6",
-                    "summary": "Lesson 6",
+                    "name": "Lesson 8",
+                    "summary": "Lesson 8",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",
@@ -712,10 +822,12 @@
                     "id": 1
                   },
                   {
-                    "name": "Lesson 7",
-                    "summary": "Lesson 7",
+                    "name": "Lesson 9",
+                    "summary": "Lesson 9",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",
@@ -727,10 +839,12 @@
                     "id": 2
                   },
                   {
-                    "name": "Lesson 8",
-                    "summary": "Lesson 8",
+                    "name": "Lesson 10",
+                    "summary": "Lesson 10",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",
