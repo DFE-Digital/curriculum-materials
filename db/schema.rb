@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_134535) do
+ActiveRecord::Schema.define(version: 2020_02_12_080617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"
+  end
+
+  create_table "activity_choices", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "activity_id", null: false
+    t.bigint "lesson_part_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id", "teacher_id", "lesson_part_id"], name: "index_activity_choices_activity_teacher_lesson_part_ids", unique: true
+    t.index ["activity_id"], name: "index_activity_choices_on_activity_id"
+    t.index ["lesson_part_id"], name: "index_activity_choices_on_lesson_part_id"
+    t.index ["teacher_id"], name: "index_activity_choices_on_teacher_id"
   end
 
   create_table "activity_teaching_methods", force: :cascade do |t|
@@ -93,6 +105,9 @@ ActiveRecord::Schema.define(version: 2020_02_11_134535) do
   end
 
   add_foreign_key "activities", "lesson_parts"
+  add_foreign_key "activity_choices", "activities"
+  add_foreign_key "activity_choices", "lesson_parts"
+  add_foreign_key "activity_choices", "teachers"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
   add_foreign_key "lessons", "units"
