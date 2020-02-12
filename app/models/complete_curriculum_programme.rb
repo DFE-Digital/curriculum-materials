@@ -5,6 +5,13 @@ class CompleteCurriculumProgramme < ContentBase
   alias overview content
   alias benefits description
 
+  def self.first
+    file = Dir.glob(File.join(Rails.root, "content", "*/_index.md")).first
+    instance = self.new
+    instance.from_file(file)
+    instance
+  end
+
   def path
     Rails.application.routes.url_helpers.teachers_complete_curriculum_programme_path(
       self

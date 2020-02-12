@@ -4,7 +4,6 @@ RSpec.feature "Unit page", type: :feature do
   include_context 'logged in teacher'
 
   describe '#show' do
-
     let(:lesson) { l = Lesson.new; l.from_file(file_fixture("content/year-8-history/roman-history/1-the-battle-of-hastings/_index.md")); l }
     let(:ccp) { lesson.unit.ccp }
     let(:unit) { lesson.unit }

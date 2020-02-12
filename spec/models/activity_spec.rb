@@ -42,7 +42,7 @@ RSpec.describe Activity, type: :model do
 
   describe "path" do
     it "returns a generated path" do
-      expect(subject.path).to eql('/teachers/ccp/year-8-history/roman-history/1-the-battle-of-hastings/1')
+      expect(subject.path).to eql('/teachers/ccps/year-8-history/roman-history/1-the-battle-of-hastings/1')
     end
   end
 

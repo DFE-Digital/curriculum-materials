@@ -43,4 +43,10 @@ class ContentBase
   def to_param
     slug
   end
+
+  def eql?(other)
+    self.filename == other.filename if other.respond_to?(:slug)
+  end
+
+  alias == eql?
 end

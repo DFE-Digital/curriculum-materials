@@ -5,8 +5,8 @@ class Resource < ApplicationRecord
             presence: true,
             length: { maximum: 256 }
   validates :sha256,
-              presence: true,
-              length: { maximum: 64 }
+            presence: true,
+            length: { maximum: 64 }
   validates :uri,
             presence: true
 end

@@ -15,7 +15,7 @@ require 'hashdiff'
 #   fm.write
 #
 class FrontMatter
-  YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((?:---|\.\.\.)\s*$\n?)/m
+  YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((?:---|\.\.\.)\s*$\n?)/m.freeze
   attr_accessor :filename, :front_matter, :content, :front_matter_original, :content_original
 
   # @param filename [String] file path to read
@@ -35,13 +35,15 @@ class FrontMatter
   def read
     content = File.read(filename)
     if content =~ YAML_FRONT_MATTER_REGEXP
-      data, content = YAML.load($1), (Regexp.last_match.post_match || '')
+      data = YAML.safe_load($1)
+      content = (Regexp.last_match.post_match || '')
     else
-      data, content = [{}, '']
+      data = {}
+      content = ''
     end
     @front_matter = data
     # begin
-      @front_matter_original = Marshal.load(Marshal.dump(data))
+    @front_matter_original = Marshal.load(Marshal.dump(data))
     # rescue
       # puts data
     # end

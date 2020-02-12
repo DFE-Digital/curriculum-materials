@@ -22,10 +22,11 @@ Rails.application.routes.draw do
     #   end
     # end
 
-    get '/teachers/ccp/:slug', to: 'complete_curriculum_programmes#show', as: :complete_curriculum_programme
-    get '/teachers/ccp/:complete_curriculum_programme_slug/:slug', to: 'units#show', as: :complete_curriculum_programme_unit
-    get '/teachers/ccp/:complete_curriculum_programme_slug/:unit_slug/:slug', to: 'lessons#show', as: :complete_curriculum_programme_unit_lesson
-    get '/teachers/ccp/:complete_curriculum_programme_slug/:unit_slug/:lesson_slug/:slug', to: 'activitiies#show', as: :complete_curriculum_programme_unit_lesson_activity
+    get '/ccps/:slug', to: 'complete_curriculum_programmes#show', as: :complete_curriculum_programme
+    get '/ccps', to: 'complete_curriculum_programmes#index', as: :complete_curriculum_programmes
+    get '/ccps/:complete_curriculum_programme_slug/:slug', to: 'units#show', as: :complete_curriculum_programme_unit
+    get '/ccps/:complete_curriculum_programme_slug/:unit_slug/:slug', to: 'lessons#show', as: :complete_curriculum_programme_unit_lesson
+    get '/ccps/:complete_curriculum_programme_slug/:unit_slug/:lesson_slug/:slug', to: 'activities#show', as: :complete_curriculum_programme_unit_lesson_activity
 
     resource :logged_out, only: %i(show), controller: 'logged_out'
   end

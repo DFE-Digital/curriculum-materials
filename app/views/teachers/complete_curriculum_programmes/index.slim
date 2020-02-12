@@ -10,14 +10,14 @@
     / FIXME hard coding the link to the first ccp here for demonstration
     / purposes and until we're settled on how years and ccps are associated
 
-    form method="get" action="#{teachers_complete_curriculum_programme_path(CompleteCurriculumProgramme.first.id)}"
+    form method="get" action="#{teachers_complete_curriculum_programme_path(CompleteCurriculumProgramme.first)}"
       .govuk-form-group
         fieldset.govuk-fieldset
           legend.govuk-fieldset__legend.govuk-fieldset__legend--m
             h1.govuk-fieldset__heading Key stage 3 geography
           .govuk-radios
             .govuk-radios__item
-              input.govuk-radios__input id="year-7" type="radio" name="complete_curriculum_programme_id" value="#{CompleteCurriculumProgramme.first.id}"
+              input.govuk-radios__input id="year-7" type="radio" name="complete_curriculum_programme_id" value="#{CompleteCurriculumProgramme.first.slug}"
               label.govuk-label.govuk-radios__label for="year-7"
                 | Year 7
             .govuk-radios__item
