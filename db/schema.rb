@@ -10,11 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_163414) do
+ActiveRecord::Schema.define(version: 2020_02_11_134535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer "lesson_part_id", null: false
+    t.text "overview"
+    t.integer "duration", null: false
+    t.string "extra_requirements", limit: 32, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"
+  end
+
+  create_table "activity_teaching_methods", force: :cascade do |t|
+    t.integer "teaching_method_id", null: false
+    t.integer "activity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_activity_teaching_methods_on_activity_id"
+    t.index ["teaching_method_id", "activity_id"], name: "index_activity_teaching_methods_teaching_method_id_activity_id", unique: true
+  end
 
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
@@ -54,6 +73,14 @@ ActiveRecord::Schema.define(version: 2020_02_07_163414) do
     t.index ["token"], name: "index_teachers_on_token", unique: true
   end
 
+  create_table "teaching_methods", force: :cascade do |t|
+    t.string "name", limit: 32, null: false
+    t.text "description"
+    t.string "icon", limit: 64
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "units", force: :cascade do |t|
     t.integer "complete_curriculum_programme_id"
     t.string "name", limit: 256, null: false
@@ -65,6 +92,9 @@ ActiveRecord::Schema.define(version: 2020_02_07_163414) do
     t.index ["name"], name: "index_units_on_name"
   end
 
+  add_foreign_key "activities", "lesson_parts"
+  add_foreign_key "activity_teaching_methods", "activities"
+  add_foreign_key "activity_teaching_methods", "teaching_methods"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"
 end
