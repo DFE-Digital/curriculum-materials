@@ -34,6 +34,13 @@ class Api::V1::LessonPartsController < Api::BaseController
   end
 
   def update
+    lesson_part = LessonPart.find_by!(lesson_id: params[:lesson_id], id: params[:id])
+
+    if lesson_part.update(lesson_part_params)
+      render(json: serialize(lesson_part).to_json, status: :ok)
+    else
+      render(json: { errors: lesson_part.errors.full_messages }, status: :bad_request)
+    end
   end
 
 private
@@ -41,7 +48,6 @@ private
   def lesson_part_params
     params.require(:lesson_part).permit(:position)
   end
-
 
   def serialize(lesson_part)
     SimpleAMS::Renderer.new(
