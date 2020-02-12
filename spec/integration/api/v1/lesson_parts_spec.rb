@@ -80,4 +80,37 @@ describe 'Lessons' do
       end
     end
   end
+
+  path('/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{id}') do
+
+    get('retrieves a single lesson part belonging to the specified CCP, unit and lesson') do
+      tags('LessonPart')
+      produces('application/json')
+
+      let(:lesson_part) { FactoryBot.create(:lesson_part) }
+
+      let(:ccp_id) { lesson_part.lesson.unit.complete_curriculum_programme.id }
+      let(:unit_id) { lesson_part.lesson.unit.id }
+      let(:lesson_id) { lesson_part.lesson.id }
+      let(:id) { lesson_part.id }
+
+      parameter(name: :ccp_id, in: :path, type: :string, required: true)
+      parameter(name: :unit_id, in: :path, type: :string, required: true)
+      parameter(name: :lesson_id, in: :path, type: :string, required: true)
+      parameter(name: :id, in: :path, type: :string, required: true)
+
+      request_body_json(
+        schema: {
+          properties: { '$ref' => '#/components/schemas/lesson_part', required: %i(lesson_part) }
+        }
+      )
+
+      response('200', 'lesson part found') do
+        examples('application/json': example_lesson)
+
+        schema('$ref' => '#/components/schemas/lesson_part')
+
+        run_test!
+      end
+    end
 end

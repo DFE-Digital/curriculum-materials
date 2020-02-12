@@ -14,6 +14,12 @@ class Api::V1::LessonPartsController < Api::BaseController
   end
 
   def show
+    lesson_part = LessonPart
+      .eager_load(:lesson)
+      .where(lesson_id: params[:lesson_id])
+      .find(params[:id])
+
+    render(json: serialize(lesson_part).to_json)
   end
 
   def create
