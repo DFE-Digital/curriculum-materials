@@ -9,7 +9,7 @@ class Api::V1::LessonsController < Api::BaseController
       json: SimpleAMS::Renderer::Collection.new(
         lessons,
         serializer: LessonSerializer,
-        included: []
+        includes: []
       ).to_json
     )
   end

@@ -63,7 +63,7 @@
             "type": "string"
           },
           "previous_knowledge": {
-            "type": "string"
+            "type": "object"
           },
           "vocabulary": {
             "type": "array",
@@ -86,6 +86,17 @@
           "vocabulary",
           "misconceptions"
         ]
+      },
+      "lesson_part": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
       }
     }
   },
@@ -261,6 +272,278 @@
         }
       }
     },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts": {
+      "get": {
+        "summary": "retrieves all lessons parts belonging to the specified lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lesson parts found",
+            "examples": {
+              "application/json": [
+                {
+                  "position": 1,
+                  "id": 1
+                },
+                {
+                  "position": 2,
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lesson_part"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a lesson part belonging to the specified lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson_part": {
+                    "$ref": "#/components/schemas/lesson_part",
+                    "required": [
+                      "lesson_part"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "lesson created",
+            "examples": {
+              "application/json": {
+                "lesson_part": {
+                  "position": 3
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{id}": {
+      "get": {
+        "summary": "retrieves a single lesson part belonging to the specified CCP, unit and lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "$ref": "#/components/schemas/lesson_part",
+                  "required": [
+                    "lesson_part"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson part found",
+            "examples": {
+              "application/json": {
+                "position": 4,
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lesson_part"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced lesson part",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson_part": {
+                    "$ref": "#/components/schemas/lesson_part",
+                    "required": [
+                      "lesson_part"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson part updated",
+            "examples": {
+              "application/json": {
+                "lesson_part": {
+                  "position": 5
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
     "/ccps/{ccp_id}/units/{unit_id}/lessons": {
       "get": {
         "summary": "retrieves all lessons belonging to the specified CCP and unit",
@@ -294,7 +577,9 @@
                   "name": "Lesson 1",
                   "summary": "Lesson 1",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -309,7 +594,9 @@
                   "name": "Lesson 2",
                   "summary": "Lesson 2",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -384,7 +671,9 @@
                   "name": "Lesson 3",
                   "summary": "Lesson 3",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -458,7 +747,9 @@
                 "name": "Lesson 4",
                 "summary": "Lesson 4",
                 "core_knowledge": "Core knowledge",
-                "previous_knowledge": "Previous knowledge",
+                "previous_knowledge": {
+                  "Previous knowledge": "Yes"
+                },
                 "vocabulary": [
                   "Subtraction",
                   "Division",
@@ -537,7 +828,9 @@
                   "name": "Lesson 5",
                   "summary": "Lesson 5",
                   "core_knowledge": "Core knowledge",
-                  "previous_knowledge": "Previous knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
                   "vocabulary": [
                     "Subtraction",
                     "Division",
@@ -700,7 +993,9 @@
                     "name": "Lesson 6",
                     "summary": "Lesson 6",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",
@@ -715,7 +1010,9 @@
                     "name": "Lesson 7",
                     "summary": "Lesson 7",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",
@@ -730,7 +1027,9 @@
                     "name": "Lesson 8",
                     "summary": "Lesson 8",
                     "core_knowledge": "Core knowledge",
-                    "previous_knowledge": "Previous knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
                     "vocabulary": [
                       "Subtraction",
                       "Division",

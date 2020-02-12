@@ -7,4 +7,5 @@ class LessonSerializer
          :previous_knowledge, :vocabulary, :misconceptions
 
   belongs_to :unit, serializer: UnitSerializer
+  has_many :lesson_parts, serializer: LessonPartSerializer
 end
