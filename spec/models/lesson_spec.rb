@@ -36,4 +36,9 @@ RSpec.describe Lesson, type: :model do
       expect(actual.first).to be_a(Activity)
     end
   end
+
+  describe "parts_for_teacher" do
+    it "returns a custom array of chosen parts"
+    it "returns a default list of parts when none chosen"
+  end
 end

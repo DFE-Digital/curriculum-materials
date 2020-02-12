@@ -27,7 +27,7 @@ class Activity < ContentBase
 
   # TODO need to understand the difference between types
   def activity_type
-    taxonomies.first
+    (taxonomies || []).first
   end
 
   # TODO select from a set of possible taxonomies that are the "involvement"

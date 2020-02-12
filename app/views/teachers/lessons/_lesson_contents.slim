@@ -52,5 +52,6 @@ section.lesson-plan
                 - lp.alternatives.each do |alternative|
                   li
                     strong = alternative.title
+                    =< link_to("change to this", teachers_lesson_activity_change_path({activity_number: alternative.number, activity_slug: alternative.slug, lesson_slug: alternative.lesson.slug, unit_slug: alternative.lesson.unit.slug, complete_curriculum_programme_slug: alternative.lesson.unit.ccp.slug}))
 
               = link_to 'Change activity', '#'

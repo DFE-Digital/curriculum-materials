@@ -75,6 +75,26 @@ class Lesson < ContentBase
     arr
   end
 
+  def parts_for_teacher(teacher)
+    choices = teacher.activity_choices.where(
+      complete_curriculum_programme_slug: unit.ccp.slug,
+      unit_slug: unit.slug,
+      lesson_slug: slug
+    )
+    custom_parts = []
+    parts.each do |part|
+      has_choice = choices.find do |choice|
+        choice.activity_number == part.number
+      end
+      if has_choice
+        custom_parts << has_choice.activity
+      else
+        custom_parts << part
+      end
+    end.flatten
+    custom_parts
+  end
+
   def alternatives
     files = Dir.glob(File.join(File.dirname(@filename.parent), "*/_index.md"))
     filtered_files = files.reject do |file|

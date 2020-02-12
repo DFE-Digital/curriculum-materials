@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_140052) do
+ActiveRecord::Schema.define(version: 2020_02_12_161137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activity_choices", force: :cascade do |t|
+    t.integer "activity_number"
+    t.string "activity_slug"
+    t.string "lesson_slug"
+    t.string "unit_slug"
+    t.string "complete_curriculum_programme_slug"
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_number", "lesson_slug", "unit_slug", "complete_curriculum_programme_slug"], name: "activity_choices_slug_index", unique: true
+    t.index ["teacher_id"], name: "index_activity_choices_on_teacher_id"
+  end
 
   create_table "teachers", force: :cascade do |t|
     t.uuid "token", null: false
@@ -22,4 +35,5 @@ ActiveRecord::Schema.define(version: 2020_01_16_140052) do
     t.index ["token"], name: "index_teachers_on_token", unique: true
   end
 
+  add_foreign_key "activity_choices", "teachers"
 end
