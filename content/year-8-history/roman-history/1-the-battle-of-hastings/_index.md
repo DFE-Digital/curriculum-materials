@@ -6,6 +6,7 @@ description: To explain why William of Normandy won the Battle of Hastings.
 
 ### How the lesson structure benefits pupils' learning
 Students will have studied the succession crisis of 1066 and the build up to the Battle of Hastings, including an examination of the claimants to the throne, preparations for conflict and the Battle of Stamford Bridge. The purpose of this lesson is to ensure students know the reasons William was able to achieve victory, can develop them into increasingly sophisticated explanations, and understand some of the issues with evidence from this period (and historical evidence in general.) How historical factors work together, leading to a particular conclusion, is the main focus in this lesson and something students will return to consistently throughout the key stage.
+
 ### Core knowledge for pupils
 By the end of the lesson, pupils should know:
 Pupils should be able to explain the key reasons William of Normandy won the Battle of Hastings and be able to categorise those reasons. Higher attainers will be able to offer more detailed explanations of how each factor contributed to victory, whereas lower attainers may just be able to identify reasons and begin to start explaining them. Pupils should be encouraged to reflect on the nature of historical evidence, how we reach conclusions about the past, and what constitutes relevant information when addressing a specific historical question.

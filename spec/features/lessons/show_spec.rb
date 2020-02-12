@@ -38,7 +38,10 @@ RSpec.feature "Lesson page", type: :feature do
     end
 
     context 'if there is no previous knowledge' do
-      let(:lesson) { FactoryBot.create(:lesson, previous_knowledge: nil) }
+      before do
+        allow_any_instance_of(Lesson).to receive(:previous_knowledge).and_return(nil)
+        visit(lesson.path)
+      end
 
       specify 'the previous knowledge section should not be present' do
         expect(page).not_to have_css('h2', text: 'Building on previous knowledge')

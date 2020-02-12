@@ -4,6 +4,12 @@ class ContentBase
   attr_accessor :title, :date, :content
   attr_reader :slug, :filename
 
+  def self.from_file(file)
+    instance = self.new
+    instance.from_file(file)
+    instance
+  end
+
   def attributes=(hash)
     hash.each do |key, value|
       send("#{key}=", value) if self.respond_to?("#{key}=")

@@ -32,10 +32,8 @@ module ApplicationHelper
   def teachers_unit_path(unit)
     unit.path
   end
-  deprecate :teachers_unit_path
 
   def teachers_lesson_path(lesson)
     lesson.path
   end
-  deprecate :teachers_lesson_path
 end

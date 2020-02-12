@@ -52,4 +52,16 @@ RSpec.describe Activity, type: :model do
       expect(subject.lesson.slug).to eql('1-the-battle-of-hastings')
     end
   end
+
+  describe "part" do
+    it "returns a float of the of the filename" do
+      subject.instance_variable_set(:@filename, 'something/1.1.md')
+      expect(subject.part).to eql(1.1)
+    end
+
+    it "returns a start float of a string filename" do
+      subject.instance_variable_set(:@filename, 'something/1.2-something3.md')
+      expect(subject.part).to eql(1.2)
+    end
+  end
 end

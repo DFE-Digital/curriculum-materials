@@ -1,31 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Lesson, type: :model do
-  before { skip("TODO Fix data shape") }
-
-  describe 'columns' do
-    it { is_expected.to have_db_column(:unit_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:summary).of_type(:text) }
-    it { is_expected.to have_db_column(:position).of_type(:integer) }
-
-    it { is_expected.to have_db_column(:core_knowledge).of_type(:text) }
-    it { is_expected.to have_db_column(:previous_knowledge).of_type(:hstore) }
-    it { is_expected.to have_db_column(:vocabulary).of_type(:string).with_options(array: true) }
-    it { is_expected.to have_db_column(:misconceptions).of_type(:string).with_options(array: true) }
+  before :each do
+    @file = file_fixture('content/year-8-history/roman-history/1-the-battle-of-hastings/_index.md')
+    subject.from_file(@file)
   end
 
-  describe 'validation' do
-    describe 'name' do
-      it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_length_of(:name).is_at_most(256) }
+  describe "parts" do
+    # There are multiple 1.x.md files in the test fixtures, we want to select
+    # just one from each grouping
+    it "returns a list of default activities" do
+      actual = subject.parts
+      expect(actual.first.filename.to_s).to end_with('1.md')
+      expect(actual.second.filename.to_s).to end_with('2.md')
     end
-
-    it { is_expected.to validate_presence_of(:summary) }
-  end
-
-  describe 'relationships' do
-    it { is_expected.to belong_to(:unit) }
-    it { is_expected.to have_many :lesson_parts }
   end
 end
