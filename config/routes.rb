@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       resources :ccps, controller: 'complete_curriculum_programmes', only: %i(index show create update) do
         resources :units, only: %i(index show create update) do
           resources :lessons, only: %i(index show create update) do
-            resources :lesson_parts, only: %i(index show)
+            resources :lesson_parts, only: %i(index show create update)
           end
         end
       end
