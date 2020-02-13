@@ -58,9 +58,9 @@ describe 'Lessons' do
       )
 
       response(201, 'lesson created') do
-        let!(:lesson_part_params) { { lesson_part: FactoryBot.attributes_for(:lesson_part) } }
+        let!(:lesson_part_params) { { lesson_part: FactoryBot.create(:lesson_part).attributes } }
 
-        examples('application/json': { lesson_part: FactoryBot.attributes_for(:lesson_part) })
+        examples('application/json': { lesson_part: FactoryBot.create(:lesson_part).attributes })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|

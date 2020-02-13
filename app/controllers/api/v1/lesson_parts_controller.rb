@@ -29,6 +29,7 @@ class Api::V1::LessonPartsController < Api::BaseController
     if lesson_part.save
       render(json: serialize(lesson_part).to_json, status: :created)
     else
+      byebug
       render(json: { errors: lesson_part.errors.full_messages }, status: :bad_request)
     end
   end
@@ -46,7 +47,7 @@ class Api::V1::LessonPartsController < Api::BaseController
 private
 
   def lesson_part_params
-    params.require(:lesson_part).permit(:position)
+    params.require(:lesson_part).permit(:position, :default_activity_choice_id)
   end
 
   def serialize(lesson_part)

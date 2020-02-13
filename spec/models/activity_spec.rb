@@ -15,7 +15,7 @@ RSpec.describe Activity, type: :model do
   end
 
   describe 'validation' do
-    it { is_expected.to validate_presence_of(:lesson_part_id) }
+    it { is_expected.to validate_presence_of(:lesson_part) }
 
     describe '#duration' do
       it { is_expected.to validate_presence_of(:duration) }
