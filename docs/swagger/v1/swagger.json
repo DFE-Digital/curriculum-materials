@@ -97,11 +97,183 @@
             "type": "integer"
           }
         }
+      },
+      "activity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "overview": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "extra_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   },
   "basePath": "/api/v1",
   "paths": {
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities": {
+      "get": {
+        "summary": "retrieves all activities belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "activities found",
+            "examples": {
+              "application/json": [
+                {
+                  "overview": "Overview 1",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "id": 1
+                },
+                {
+                  "overview": "Overview 2",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/activity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{id}": {
+      "get": {
+        "summary": "retrieves a single activity belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "activity found",
+            "examples": {
+              "application/json": {
+                "overview": "Overview 3",
+                "duration": 20,
+                "extra_requirements": [
+                  "PVA Glue",
+                  "Glitter"
+                ],
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/activity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ccps": {
       "get": {
         "summary": "retrieves all complete curriculum programmes",

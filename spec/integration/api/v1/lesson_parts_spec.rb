@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Lessons' do
+describe 'Lessons parts' do
   path('/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts') do
     get('retrieves all lessons parts belonging to the specified lesson') do
       tags('LessonPart')
