@@ -6,6 +6,7 @@ RSpec.describe Activity, type: :model do
     it { is_expected.to have_db_column(:overview).of_type(:text) }
     it { is_expected.to have_db_column(:duration).of_type(:integer) }
     it { is_expected.to have_db_column(:extra_requirements).of_type(:string).with_options(array: true) }
+    it { is_expected.to have_db_column(:default).of_type(:boolean).with_options(null: false) }
   end
 
   describe 'relationships' do
@@ -20,6 +21,26 @@ RSpec.describe Activity, type: :model do
     describe '#duration' do
       it { is_expected.to validate_presence_of(:duration) }
       it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(60) }
+    end
+
+    describe '#default' do
+      context 'when default' do
+        subject { create :activity, default: true }
+
+        it do
+          is_expected.to \
+            validate_uniqueness_of(:default).scoped_to(:lesson_part_id)
+        end
+      end
+
+      context 'when not default' do
+        subject { create :activity, default: false }
+
+        it do
+          is_expected.not_to \
+            validate_uniqueness_of(:default).scoped_to(:lesson_part_id)
+        end
+      end
     end
   end
 end

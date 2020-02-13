@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_080617) do
     t.text "overview"
     t.integer "duration", null: false
     t.string "extra_requirements", limit: 32, array: true
+    t.boolean "default", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"
@@ -59,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_02_12_080617) do
   create_table "lesson_parts", force: :cascade do |t|
     t.bigint "lesson_id", null: false
     t.integer "position", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_id"], name: "index_lesson_parts_on_lesson_id"
     t.index ["position", "lesson_id"], name: "index_lesson_parts_on_position_and_lesson_id", unique: true
   end
