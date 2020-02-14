@@ -5,6 +5,8 @@ FactoryBot.define do
     duration { 20 }
     extra_requirements { ['PVA Glue', 'Glitter'] }
 
+    default { false }
+
     after :build do |activity|
       if activity.default == nil && activity.lesson_part.activities.none?(&:default?)
         activity.default = true

@@ -63,9 +63,9 @@ describe 'Activities' do
       )
 
       response(201, 'activity created') do
-        let!(:activity_params) { { activity: FactoryBot.attributes_for(:activity) } }
+        let!(:activity_params) { { activity: FactoryBot.attributes_for(:activity, default: true) } }
 
-        examples('application/json': { activity: FactoryBot.attributes_for(:activity) })
+        examples('application/json': { activity: FactoryBot.attributes_for(:activity, default: true) })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|

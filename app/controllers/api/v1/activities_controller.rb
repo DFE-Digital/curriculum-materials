@@ -45,7 +45,7 @@ class Api::V1::ActivitiesController < Api::BaseController
 private
 
   def activity_params
-    params.require(:activity).permit(:overview, :duration, extra_requirements: [])
+    params.require(:activity).permit(:overview, :duration, :default, extra_requirements: [])
   end
 
   def serialize(lesson_part)
