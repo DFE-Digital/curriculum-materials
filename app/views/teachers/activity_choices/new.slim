@@ -1,0 +1,6 @@
+- breadcrumbs(crumbs: lesson_part_breadcrumbs(@lesson_part), current_page: "Choose an activity")
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    = form_for @activity_choice, url: teachers_lesson_part_choice_path(@lesson_part) do |form|
+      = render 'form', form: form, activities: @activities

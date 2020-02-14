@@ -10,12 +10,10 @@ class LessonPart < ApplicationRecord
   validates :position, uniqueness: { scope: :lesson_id }
 
   def activity_for(teacher)
-    ac = ActivityChoice.find_by(teacher_id: teacher.id, lesson_part_id: id)
+    activity_choice = ActivityChoice.find_by(teacher_id: teacher.id, lesson_part_id: id)
 
-    if ac.present?
-      ac.activity
-    else
-      activities.where(default: true).first
-    end
+    return activity_choice.activity if activity_choice.present?
+
+    activities.find_by(default: true) || activities.first
   end
 end
