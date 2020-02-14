@@ -13,7 +13,7 @@ section.lesson-plan
           | Learning method
         th.govuk-table__header scope='col'
           | Teaching this activity
-        th.govuk-table__header scope='col'
+        th.alternative-content.govuk-table__header scope='col'
           | Change activity
 
     tbody.govuk-table__body
@@ -46,7 +46,7 @@ section.lesson-plan
               - lp.extra_requirements.each do |er|
                 .govuk-tag = er
 
-          td.govuk-table__cell
+          td.alternative-content.govuk-table__cell
             - if lp.alternatives.any?
               ul.govuk-list
                 - lp.alternatives.each do |alternative|
