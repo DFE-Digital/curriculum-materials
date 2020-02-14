@@ -15,6 +15,7 @@ describe LessonPart, type: :model do
   describe 'relationships' do
     it { is_expected.to belong_to :lesson }
     it { is_expected.to have_many(:activities).dependent(:destroy) }
+    it { is_expected.to have_many(:activity_choices).dependent(:destroy) }
   end
 
   describe 'validations' do

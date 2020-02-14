@@ -1,6 +1,7 @@
 class LessonPart < ApplicationRecord
   belongs_to :lesson
   has_many :activities, dependent: :destroy
+  has_many :activity_choices, dependent: :destroy
 
   validates :position,
             presence: true,
