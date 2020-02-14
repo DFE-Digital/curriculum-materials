@@ -30,6 +30,14 @@ def example_lesson_parts(quantity)
   1.upto(quantity).map { |i| example_lesson_part(i) }
 end
 
+def example_activity(id = 1)
+  FactoryBot.attributes_for(:activity).merge(id: id)
+end
+
+def example_activities(quantity)
+  1.upto(quantity).map { |i| example_activity(i) }
+end
+
 def example_errors
   ["Name can't be blank"]
 end
