@@ -30,11 +30,11 @@ section.lesson-plan
             | Change activity
 
       tbody.govuk-table__body
-        - @activities.each do |activity|
+        - @lesson_contents.each do |lesson_part, activity|
           tr.govuk-table__row
             th.govuk-table__cell.big-number
               span.govuk-visually-hidden Lesson part number
-              = activity.lesson_part.position
+              = lesson_part.position
             td.govuk-table__cell.activity-icons
               ul.govuk-list
                 li
@@ -65,4 +65,4 @@ section.lesson-plan
                     li
                       strong = alternative
 
-              = link_to 'Change activity', activity_choice_link(@current_teacher, activity.lesson_part)
+              = link_to 'Change activity', activity_choice_link(@current_teacher, lesson_part)

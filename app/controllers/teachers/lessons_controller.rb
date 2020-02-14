@@ -7,7 +7,11 @@ module Teachers
       # selected by the current teacher or, if no selection has been made, the
       # default.
       # FIXME optimise the query
-      @activities = @lesson.lesson_parts.map { |lp| lp.activity_for(current_teacher) }
+      @lesson_contents = @lesson
+        .lesson_parts
+        .each_with_object({}) do |lp, hash|
+          hash[lp] = lp.activity_for(current_teacher)
+        end
     end
   end
 end
