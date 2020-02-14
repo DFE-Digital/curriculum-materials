@@ -5,6 +5,7 @@ class CreateActivities < ActiveRecord::Migration[6.0]
       t.text :overview
       t.integer :duration, null: false
       t.string :extra_requirements, limit: 32, array: true
+      t.boolean :default, null: false
       t.timestamps
     end
 
