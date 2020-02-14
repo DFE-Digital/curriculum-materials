@@ -3,6 +3,7 @@ FactoryBot.define do
     association :lesson_part, factory: :lesson_part
     sequence(:overview) { |n| "Overview #{n}" }
     duration { 20 }
+    default { false }
 
     after :build do |activity|
       if activity.default == nil && activity.lesson_part.activities.none?(&:default?)
