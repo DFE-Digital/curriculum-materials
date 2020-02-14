@@ -7,9 +7,7 @@ module Teachers
 
           lesson_part.lesson.unit.name => teachers_unit_path(lesson_part.lesson.unit),
 
-          # The detailed view for the currently-selected activity doesn't exist yet, but
-          # it'll go here
-          "Part #{lesson_part.position}" => '#'
+          lesson_part.lesson.name => teachers_lesson_path(lesson_part.lesson)
       }
     end
 
