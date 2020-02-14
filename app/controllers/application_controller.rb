@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_raven_context
 
+  default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
+
 private
 
   def set_raven_context
