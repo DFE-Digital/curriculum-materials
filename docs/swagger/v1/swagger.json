@@ -199,6 +199,83 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "creates an activity belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "activity": {
+                    "$ref": "#/components/schemas/activity",
+                    "required": [
+                      "activity"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "activity created",
+            "examples": {
+              "application/json": {
+                "activity": {
+                  "overview": "Overview 3",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
       }
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{id}": {
@@ -254,7 +331,7 @@
             "description": "activity found",
             "examples": {
               "application/json": {
-                "overview": "Overview 3",
+                "overview": "Overview 4",
                 "duration": 20,
                 "extra_requirements": [
                   "PVA Glue",
