@@ -63,6 +63,17 @@ RSpec.configure do |config|
               id: { type: :integer },
               position: { type: :integer }
             }
+          },
+          activity: {
+            type: :object,
+            properties: {
+              id: { type: :integer },
+              overview: { type: :string },
+              duration: { type: :integer },
+              extra_requirements: {
+                type: :array, items: { type: :string }
+              }
+            }
           }
         }
       },
