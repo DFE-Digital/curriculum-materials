@@ -7,7 +7,9 @@ module Teachers
     end
 
     def create
-      @activity_choice = @lesson_part.activity_choices.new(activity_choice_params.merge(teacher: current_teacher))
+      @activity_choice = current_teacher
+        .activity_choices
+        .new(activity_choice_params.merge(lesson_part: @lesson_part))
 
       if @activity_choice.save
         redirect_to teachers_lesson_path(@lesson_part.lesson_id, anchor: 'lesson-contents')
@@ -17,11 +19,15 @@ module Teachers
     end
 
     def edit
-      @activity_choice = ActivityChoice.find_by(lesson_part: @lesson_part, teacher: current_teacher)
+      @activity_choice = current_teacher
+        .activity_choices
+        .find_by(lesson_part: @lesson_part)
     end
 
     def update
-      @activity_choice = ActivityChoice.find_by(lesson_part: @lesson_part, teacher: current_teacher)
+      @activity_choice = current_teacher
+        .activity_choices
+        .find_by(lesson_part: @lesson_part)
 
       if @activity_choice.update(activity_choice_params)
         redirect_to teachers_lesson_path(@lesson_part.lesson_id, anchor: 'lesson-contents')
