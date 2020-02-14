@@ -77,7 +77,7 @@ describe 'Activities' do
       end
 
       response(400, 'invalid lesson part') do
-        let!(:activity_params) { { lesson_part: FactoryBot.attributes_for(:activity, duration: nil) } }
+        let!(:activity_params) { { activity: FactoryBot.attributes_for(:activity, duration: nil) } }
 
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Duration can't be blank))
@@ -111,6 +111,62 @@ describe 'Activities' do
         schema('$ref' => '#/components/schemas/activity')
 
         run_test!
+      end
+    end
+
+    patch('update the referenced activity') do
+      tags('Activity')
+
+      consumes 'application/json'
+
+      let(:activity) { FactoryBot.create(:activity) }
+
+      let(:ccp_id) { activity.lesson_part.lesson.unit.complete_curriculum_programme.id }
+      let(:unit_id) { activity.lesson_part.lesson.unit.id }
+      let(:lesson_id) { activity.lesson_part.lesson.id }
+      let(:lesson_part_id) { activity.lesson_part.id }
+      let(:id) { activity.id }
+
+      let(:activity_params) { { activity: FactoryBot.attributes_for(:activity) } }
+
+      parameter(name: :ccp_id, in: :path, type: :string, required: true)
+      parameter(name: :unit_id, in: :path, type: :string, required: true)
+      parameter(name: :lesson_id, in: :path, type: :string, required: true)
+      parameter(name: :lesson_part_id, in: :path, type: :string, required: true)
+      parameter(name: :id, in: :path, type: :string, required: true)
+
+      parameter(
+        name: :activity_params,
+        in: :body,
+        schema: {
+          properties: {
+            activity: {
+              '$ref' => '#/components/schemas/activity', required: %i(activity)
+            }
+          }
+        }
+      )
+
+      request_body_json(schema: { '$ref' => '#/components/schemas/activity' })
+
+      response(200, 'activity updated') do
+        examples('application/json': { activity: FactoryBot.attributes_for(:activity) })
+
+        run_test! do |response|
+          JSON.parse(response.body).with_indifferent_access.tap do |json|
+            activity_params.dig(:activity).each do |attribute, value|
+              expect(json[attribute]).to eql(value)
+            end
+          end
+        end
+      end
+
+      response(400, 'invalid lesson part') do
+        let(:activity_params) { { activity: FactoryBot.attributes_for(:activity, duration: nil) } }
+
+        run_test! do |response|
+          expect(JSON.parse(response.body).dig('errors')).to include(%(Duration can't be blank))
+        end
       end
     end
   end

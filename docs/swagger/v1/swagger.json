@@ -349,6 +349,91 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "update the referenced activity",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "activity": {
+                    "$ref": "#/components/schemas/activity",
+                    "required": [
+                      "activity"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "activity updated",
+            "examples": {
+              "application/json": {
+                "activity": {
+                  "overview": "Overview 5",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
       }
     },
     "/ccps": {
