@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
     resources :units, only: %i(show)
 
-    resources :lessons, only: %i(show) do
+    resources :lessons, only: %i(show)
+
+    resources :lesson_parts, only: %i(show) do
       resource :activity_choice, only: %i(new create edit update), as: :choice
     end
 
