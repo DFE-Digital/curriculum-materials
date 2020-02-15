@@ -9,4 +9,8 @@ class Activity < ApplicationRecord
 
   validates :default, inclusion: [true, false]
   validates :default, uniqueness: { scope: :lesson_part_id }, if: :default?
+
+  def alternatives
+    [] # TODO return siblings
+  end
 end

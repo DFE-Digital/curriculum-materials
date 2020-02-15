@@ -30,14 +30,15 @@ section.lesson-plan
             | Change activity
 
       tbody.govuk-table__body
-        - @lesson_contents.each do |lesson_part, activity|
+        - @presenter.contents.each do |slot|
           tr.govuk-table__row
             th.govuk-table__cell.big-number
               span.govuk-visually-hidden Lesson part number
-              = lesson_part.position
+              = slot.position
+
             td.govuk-table__cell.activity-icons
               ul.govuk-list
-                - activity.teaching_methods.each do |tm|
+                - slot.teaching_methods.each do |tm|
                   li
                     = activity_icon(tm)
                     = tm.name
@@ -45,23 +46,23 @@ section.lesson-plan
 
             td.main-content.govuk-table__cell
               article
-                = markdown(activity.overview)
+                = markdown(slot.overview)
               strong
-                | Approximately #{activity.duration} minutes
+                | Approximately #{slot.duration} minutes
               .files
                 / lp.file_formats.to_sentence
                 =< link_to 'Preview', '#'
 
 
               section.extra-requirements
-                - activity.extra_requirements&.each do |er|
+                - slot.extra_requirements.each do |er|
                   .govuk-tag = er
 
             td.govuk-table__cell
-              / if lp.alternatives.any?
+              - if slot.alternatives.any?
                 ul.govuk-list
-                  - lp.alternatives.each do |alternative|
+                  - slot.alternatives.each do |alternative|
                     li
                       strong = alternative
 
-              = link_to 'Change activity', activity_choice_link(@current_teacher, lesson_part)
+              = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
