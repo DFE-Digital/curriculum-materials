@@ -12,6 +12,7 @@ RSpec.describe Activity, type: :model do
   describe 'relationships' do
     it { is_expected.to belong_to(:lesson_part) }
     it { is_expected.to have_many(:activity_teaching_methods).dependent(:destroy) }
+    it { is_expected.to have_many(:activity_choices).dependent(:destroy) }
     it { is_expected.to have_many(:teaching_methods).through(:activity_teaching_methods) }
   end
 
