@@ -1,4 +1,6 @@
 unless Rails.env.test?
+  teaching_methods = TeachingMethod.all.index_by(&:name)
+
   FactoryBot.create(
     :ccp,
     name: 'Year 7 History - The Norman Invasion',
@@ -19,6 +21,8 @@ unless Rails.env.test?
       in pupils’ long-term memories."
     BENEFITS
   ) do |ccp|
+    puts "Created #{ccp.name}"
+
     [
       {
         attributes: {
@@ -150,7 +154,8 @@ unless Rails.env.test?
                       write the number with the correct letter in their books.
                       Feed back and show correct responses.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Whole'], teaching_methods['Practical']]
                 },
                 {
                   attributes: {
@@ -163,7 +168,8 @@ unless Rails.env.test?
                       group taking it in turns to read aloud or
                       independently.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Whole'], teaching_methods['Formative']]
                 },
               ],
               2 => [
@@ -181,7 +187,8 @@ unless Rails.env.test?
                       making students start again if there is a pause of more
                       than a couple of seconds between each student.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Whole'], teaching_methods['Worksheet']]
                 },
                 {
                   attributes: {
@@ -196,7 +203,8 @@ unless Rails.env.test?
                       category headings or think of alternatives to the one you
                       give them.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Pair'], teaching_methods['Writing']]
                 },
               ],
               3 => [
@@ -210,7 +218,8 @@ unless Rails.env.test?
                       writing before you show them the complete annotated
                       version.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Writing']]
                 },
                 {
                   attributes: {
@@ -219,7 +228,8 @@ unless Rails.env.test?
                       can be displayed on the slide for students who need more
                       support.
                     OVERVIEW
-                  }
+                  },
+                  teaching_methods: [teaching_methods['Writing']]
                 },
               ],
               4 => [
@@ -244,7 +254,7 @@ unless Rails.env.test?
                       feedback.
                     OVERVIEW
                   }
-                },
+                }
               ]
             }
           },
@@ -341,14 +351,31 @@ unless Rails.env.test?
       }
     ]
     .each do |unit_data|
+      # FIXME, this is now unmanageable and really needs reworking.
+
       FactoryBot.create(:unit, unit_data[:attributes].merge(complete_curriculum_programme: ccp)) do |unit|
+        puts " Added unit: #{unit.name}"
+
         unit_data[:lessons].each do |lesson_attributes|
           FactoryBot.create(:lesson, lesson_attributes[:attributes].merge(unit: unit)).tap do |l|
+            puts "  Added lesson: #{l.name}"
+
             lesson_attributes[:lesson_parts]&.each do |position, activities|
               FactoryBot.create(:lesson_part, { lesson_id: l.id }.merge(position: position)).tap do |lp|
+                puts "  Added lesson part: #{lp.position}"
+
                 activities.each do |activity_attributes|
-                  FactoryBot.create(:activity, { lesson_part_id: lp.id }.merge(activity_attributes))
+                  Activity.create(
+                    lesson_part_id: lp.id,
+                    **FactoryBot.attributes_for(:activity).merge(activity_attributes[:attributes])
+                  ).tap do |a|
+                    activity_attributes[:teaching_methods]&.each do |tm|
+                      a.teaching_methods << tm
+                    end
+                  end
                 end
+
+                puts "   Added #{activities.count} activities"
               end
             end
           end

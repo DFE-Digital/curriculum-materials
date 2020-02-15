@@ -37,13 +37,12 @@ section.lesson-plan
               = lesson_part.position
             td.govuk-table__cell.activity-icons
               ul.govuk-list
-                li
-                  = activity_icon 'practical'
-                  / lp.activity_type
+                - activity.teaching_methods.each do |tm|
+                  li
+                    = activity_icon(tm.icon)
+                    = tm.name
 
-                li
-                  = activity_icon 'reading'
-                  / lp.involvement
+
             td.main-content.govuk-table__cell
               article
                 = markdown(activity.overview)

@@ -1,7 +1,7 @@
 module Teachers
   class LessonsController < BaseController
     def show
-      @lesson = Lesson.eager_load(lesson_parts: :activities).find(params[:id])
+      @lesson = Lesson.includes(lesson_parts: { activities: [:teaching_methods] }).find(params[:id])
 
       # We only want the 'active' activities here; those that have been
       # selected by the current teacher or, if no selection has been made, the
