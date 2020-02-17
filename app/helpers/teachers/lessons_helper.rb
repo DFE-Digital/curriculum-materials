@@ -9,7 +9,7 @@ module Teachers
       }
     end
 
-    def activity_icon(icon_type)
+    def activity_icon(teaching_method)
       # FIXME replace this when we get a proper set of icons with
       #       a real naming convention, etc.
 
@@ -26,9 +26,9 @@ module Teachers
       # thumb-writing-inv.png
 
       image_tag(
-        asset_pack_path("media/images/placeholder-icons/thumb-#{icon_type}-inv.png"),
+        asset_pack_path("media/images/placeholder-icons/thumb-#{teaching_method.icon}-inv.png"),
         width: '75px',
-        alt: 'Department for Education'
+        alt: "#{teaching_method.description} icon"
       )
     end
   end

@@ -17,10 +17,15 @@ Rails.application.routes.draw do
     resources :complete_curriculum_programmes, only: %i(index show)
 
     resources :units, only: %i(show)
+
     resources :lessons, only: %i(show) do
       member do
         get :print
       end
+    end
+
+    resources :lesson_parts, only: %i(show) do
+      resource :activity_choice, only: %i(new create edit update), as: :choice
     end
 
     resource :logged_out, only: %i(show), controller: 'logged_out'
@@ -39,7 +44,9 @@ Rails.application.routes.draw do
       resources :ccps, controller: 'complete_curriculum_programmes', only: %i(index show create update) do
         resources :units, only: %i(index show create update) do
           resources :lessons, only: %i(index show create update) do
-            resources :lesson_parts, only: %i(index show create update)
+            resources :lesson_parts, only: %i(index show create update) do
+              resources :activities, only: %i(index show create update)
+            end
           end
         end
       end

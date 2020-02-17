@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_080617) do
+ActiveRecord::Schema.define(version: 2020_02_17_080549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 2020_02_12_080617) do
     t.bigint "lesson_part_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["activity_id", "teacher_id", "lesson_part_id"], name: "index_activity_choices_activity_teacher_lesson_part_ids", unique: true
     t.index ["activity_id"], name: "index_activity_choices_on_activity_id"
     t.index ["lesson_part_id"], name: "index_activity_choices_on_lesson_part_id"
+    t.index ["teacher_id", "lesson_part_id"], name: "index_activity_choices_on_teacher_id_and_lesson_part_id", unique: true
     t.index ["teacher_id"], name: "index_activity_choices_on_teacher_id"
   end
 

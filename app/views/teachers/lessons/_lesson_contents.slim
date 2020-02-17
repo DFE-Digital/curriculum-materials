@@ -1,58 +1,69 @@
 section.lesson-plan
-  p
-    | This lesson has been sequenced in a suggested order. If you'd like to make
-      changes, you can search for alternative resources.
+  - if @lesson.lesson_parts.none?
 
-  table.lesson-parts.govuk-table
-    thead.govuk-table__head
-      tr.govuk-table__row
-        th
-          span.govuk-visually-hidden
-            Lesson part count
-        th.govuk-table__header.activity-icons scope='col'
-          | Learning method
-        th.govuk-table__header scope='col'
-          | Teaching this activity
-        - unless local_assigns[:mode] && mode == :print
-          th.alternative-content.govuk-table__header scope='col'
-            | Change activity
+    .govuk-warning-text
+      span.govuk-warning-text__icon aria-hidden="true"
+        | !
 
-    tbody.govuk-table__body
-      - @lesson_parts.each do |lp|
+      div.govuk-warning-text__text
+        span.govuk-warning-text__assistive Warning
+
+        | This lesson has no activities
+
+  - else
+
+    p
+      | This lesson has been sequenced in a suggested order. If you'd like to make
+        changes, you can search for alternative resources.
+
+    table.lesson-parts.govuk-table
+      thead.govuk-table__head
         tr.govuk-table__row
-          th.govuk-table__cell.big-number
-            span.govuk-visually-hidden Lesson part number
-            = lp.number
-          td.govuk-table__cell.activity-icons
-            ul.govuk-list
-              li
-                = activity_icon 'practical'
-                = lp.activity_type
-
-              li
-                = activity_icon 'reading'
-                = lp.involvement
-              li
-          td.main-content.govuk-table__cell
-            article
-              = markdown(lp.overview)
-            strong
-              | Approximately #{lp.duration}
-            .files
-              = lp.file_formats.to_sentence
-              =< link_to 'Preview', '#'
-
-
-            section.extra-requirements
-              - lp.extra_requirements.each do |er|
-                .govuk-tag = er
-
+          th
+            span.govuk-visually-hidden
+              Lesson part count
+          th.govuk-table__header.activity-icons scope='col'
+            | Learning method
+          th.govuk-table__header scope='col'
+            | Teaching this activity
           - unless local_assigns[:mode] && mode == :print
-            td.alternative-content.govuk-table__cell
-              - if lp.alternatives.any?
-                ul.govuk-list
-                  - lp.alternatives.each do |alternative|
-                    li
-                      strong = alternative
+            th.govuk-table__header scope='col'
+              | Change activity
 
-                = link_to 'Change activity', '#'
+      tbody.govuk-table__body
+        - @presenter.contents.each do |slot|
+          tr.govuk-table__row
+            th.govuk-table__cell.big-number
+              span.govuk-visually-hidden Lesson part number
+              = slot.position
+
+            td.govuk-table__cell.activity-icons
+              ul.govuk-list
+                - slot.teaching_methods.each do |tm|
+                  li
+                    = activity_icon(tm)
+                    = tm.name
+
+
+            td.main-content.govuk-table__cell
+              article
+                = markdown(slot.overview)
+              strong
+                | Approximately #{slot.duration} minutes
+              .files
+                / lp.file_formats.to_sentence
+                =< link_to 'Preview', '#'
+
+
+              section.extra-requirements
+                - slot.extra_requirements.each do |er|
+                  .govuk-tag = er
+            - unless local_assigns[:mode] && mode == :print
+              td.govuk-table__cell
+                - if slot.alternatives.any?
+                  ul.govuk-list
+                    - slot.alternatives.each do |alternative|
+                      li
+                        strong = alternative
+
+                = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
