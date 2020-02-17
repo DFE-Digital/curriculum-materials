@@ -21,13 +21,13 @@ module Teachers
     def edit
       @activity_choice = current_teacher
         .activity_choices
-        .find_by(lesson_part: @lesson_part)
+        .find_by!(lesson_part: @lesson_part)
     end
 
     def update
       @activity_choice = current_teacher
         .activity_choices
-        .find_by(lesson_part: @lesson_part)
+        .find_by!(lesson_part: @lesson_part)
 
       if @activity_choice.update(activity_choice_params)
         redirect_to teachers_lesson_path(@lesson_part.lesson_id, anchor: 'lesson-contents')
