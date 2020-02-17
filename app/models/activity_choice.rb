@@ -4,5 +4,5 @@ class ActivityChoice < ApplicationRecord
   belongs_to :lesson_part
 
   validates :teacher, :activity, :lesson_part, presence: true
-  validates :teacher_id, uniqueness: { scope: %i(activity_id lesson_part_id) }
+  validates :teacher_id, uniqueness: { scope: :lesson_part_id }
 end

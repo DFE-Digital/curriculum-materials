@@ -20,8 +20,7 @@ describe ActivityChoice, type: :model do
 
     it do
       expect(create(:activity_choice)).to \
-        validate_uniqueness_of(:teacher_id).scoped_to \
-          :activity_id, :lesson_part_id
+        validate_uniqueness_of(:teacher_id).scoped_to :lesson_part_id
     end
   end
 end
