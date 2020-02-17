@@ -31,6 +31,7 @@ gem "redcarpet"
 gem "sentry-raven"
 gem "simple_ams"
 gem "actionview-component"
+gem "govuk_design_system_formbuilder"
 
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data

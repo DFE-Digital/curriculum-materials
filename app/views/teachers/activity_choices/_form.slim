@@ -1,0 +1,7 @@
+= form.govuk_radio_buttons_fieldset :activty_id, legend: { text: 'Choose an activity', size: 'l', heading: true } do
+  = form.govuk_error_summary
+
+  - activities.each do |activity|
+    = form.govuk_radio_button :activity_id, activity.id, label: { text: activity.overview }
+
+= form.govuk_submit
