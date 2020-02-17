@@ -68,6 +68,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               id: { type: :integer },
+              name: { type: :string },
               overview: { type: :string },
               duration: { type: :integer },
               extra_requirements: {

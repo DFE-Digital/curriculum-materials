@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
     t.integer "duration", null: false
     t.string "extra_requirements", limit: 32, array: true
     t.boolean "default", null: false
+    t.string "name", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"

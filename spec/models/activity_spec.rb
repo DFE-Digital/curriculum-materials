@@ -19,6 +19,11 @@ RSpec.describe Activity, type: :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of(:lesson_part_id) }
 
+    describe '#name' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_length_of(:name).is_at_most(128) }
+    end
+
     describe '#duration' do
       it { is_expected.to validate_presence_of(:duration) }
       it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(60) }
