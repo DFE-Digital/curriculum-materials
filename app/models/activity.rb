@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
 
   validates :lesson_part_id, presence: true
   validates :name, presence: true, length: { maximum: 128 }
+  validates :overview, presence: true
   validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
 
   validates :default, inclusion: [true, false]
