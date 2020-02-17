@@ -5,9 +5,12 @@
 
   - activities.each do |activity|
 
-    .activity
+    .activity data-activity=activity.id
 
-      = form.govuk_radio_button :activity_id, activity.id, label: { text: activity.name, size: 'm' }, hint_text: activity.overview
+      = form.govuk_radio_button :activity_id,
+        activity.id,
+        label: { text: activity.name, size: 'm' },
+        hint_text: activity.overview
 
       .thumbnail
         = activity_thumbnail

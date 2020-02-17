@@ -3,7 +3,11 @@ module Teachers
     before_action :load_resources
 
     def new
-      @activity_choice = ActivityChoice.new
+      # pre-set the activity so the supplier-preferred (default) activity
+      # is already selected in the list
+      @activity_choice = ActivityChoice.new(
+        activity: @lesson_part.activity_for(current_teacher)
+      )
     end
 
     def create
