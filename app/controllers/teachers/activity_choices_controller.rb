@@ -1,6 +1,6 @@
 module Teachers
   class ActivityChoicesController < BaseController
-    before_action :set_lesson_part_and_activities
+    before_action :load_resources
 
     def new
       @activity_choice = ActivityChoice.new
@@ -38,8 +38,9 @@ module Teachers
 
   private
 
-    def set_lesson_part_and_activities
-      @lesson_part = LessonPart.find(params[:lesson_part_id])
+    def load_resources
+      @lesson_part = LessonPart.eager_load(:lesson).find(params[:lesson_part_id])
+      @lesson = @lesson_part.lesson
       @activities = @lesson_part.activities
     end
 
