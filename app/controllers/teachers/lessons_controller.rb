@@ -1,6 +1,16 @@
 module Teachers
   class LessonsController < BaseController
-    def show
+    before_action :load_resources, only: %i[show print]
+
+    def show; end
+
+    def print
+      render layout: 'print'
+    end
+
+    private
+
+    def load_resources
       @lesson = Lesson.find(params[:id])
 
       # lifted from prototype, these fields should guide

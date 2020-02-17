@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  knowledge_overview:
+    heading: Understand the aims of the lesson
+  lesson_contents:
+    heading: Lesson contents

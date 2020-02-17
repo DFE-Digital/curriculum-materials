@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :complete_curriculum_programmes, only: %i(index show)
 
     resources :units, only: %i(show)
-    resources :lessons, only: %i(show)
+    resources :lessons, only: %i(show) do
+      member do
+        get :print
+      end
+    end
 
     resource :logged_out, only: %i(show), controller: 'logged_out'
   end
