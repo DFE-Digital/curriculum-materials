@@ -21,6 +21,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - bundle exec rails webpacker:compile
+  - bundle exec brakeman
   - bundle exec rake
 deploy:
   provider: heroku
