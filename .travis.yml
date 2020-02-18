@@ -22,7 +22,9 @@ before_script:
 script:
   - bundle exec rails webpacker:compile
   - bundle exec brakeman
-  - bundle exec rake
+  - bundle exec rubocop app config db lib spec Gemfile --format clang
+  - bundle exec scss-lint app/webpacker/styles
+  - bundle exec rspec
 deploy:
   provider: heroku
   api_key:
