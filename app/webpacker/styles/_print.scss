@@ -1,3 +1,4 @@
+// scss-lint:disable QualifyingElement IdSelector
 @media print {
   @page {
     margin: 2rem;
@@ -14,8 +15,7 @@
   .govuk-tabs .govuk-tabs__title,
   .govuk-table__header.alternative-content,
   .govuk-table__cell.alternative-content,
-  #downloads.govuk-tabs__panel
-  {
+  #downloads.govuk-tabs__panel {
     display: none;
   }
 
@@ -23,3 +23,4 @@
     page-break-before: always;
   }
 }
+// scss-lint:enable QualifyingElement IdSelector
