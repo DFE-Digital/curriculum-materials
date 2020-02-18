@@ -1,3 +1,4 @@
+require_relative 'seeds/teaching_methods'
 require_relative 'seeds/geography'
 require_relative 'seeds/history'
 

@@ -4,7 +4,6 @@ FactoryBot.define do
     sequence(:overview) { |n| "Overview #{n}" }
     duration { 20 }
     extra_requirements { ['PVA Glue', 'Glitter'] }
-
     default { false }
 
     after :build do |activity|
