@@ -26,8 +26,9 @@ section.lesson-plan
             | Learning method
           th.govuk-table__header scope='col'
             | Teaching this activity
-          th.govuk-table__header scope='col'
-            | Change activity
+          - unless local_assigns[:mode] && mode == :print
+            th.govuk-table__header scope='col'
+              | Change activity
 
       tbody.govuk-table__body
         - @presenter.contents.each do |slot|
@@ -57,12 +58,12 @@ section.lesson-plan
               section.extra-requirements
                 - slot.extra_requirements.each do |er|
                   .govuk-tag = er
+            - unless local_assigns[:mode] && mode == :print
+              td.govuk-table__cell
+                - if slot.alternatives.any?
+                  ul.govuk-list
+                    - slot.alternatives.each do |alternative|
+                      li
+                        strong = alternative
 
-            td.govuk-table__cell
-              - if slot.alternatives.any?
-                ul.govuk-list
-                  - slot.alternatives.each do |alternative|
-                    li
-                      strong = alternative
-
-              = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
+                = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
