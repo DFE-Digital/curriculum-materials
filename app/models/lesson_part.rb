@@ -3,6 +3,13 @@ class LessonPart < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :activity_choices, dependent: :destroy
 
+  # rubocop:disable Rails/InverseOf
+  belongs_to :default_activity,
+             class_name: 'Activity',
+             foreign_key: :default_activity_id,
+             optional: true
+  # rubocop:enable Rails/InverseOf
+
   validates :position,
             presence: true,
             numericality: { only_integer: true, greater_than: 0 }
@@ -10,10 +17,16 @@ class LessonPart < ApplicationRecord
   validates :position, uniqueness: { scope: :lesson_id }
 
   def activity_for(teacher)
-    activity_choice = ActivityChoice.find_by(teacher_id: teacher.id, lesson_part_id: id)
+    selected_activity(teacher) || default_activity || fallback_activity
+  end
 
-    return activity_choice.activity if activity_choice.present?
+private
 
-    activities.find_by(default: true) || activities.first
+  def selected_activity(teacher)
+    ActivityChoice.find_by(teacher_id: teacher.id, lesson_part_id: id)&.activity
+  end
+
+  def fallback_activity
+    activities.first
   end
 end

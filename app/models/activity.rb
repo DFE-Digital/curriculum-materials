@@ -7,8 +7,7 @@ class Activity < ApplicationRecord
   validates :lesson_part_id, presence: true
   validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
 
-  validates :default, inclusion: [true, false]
-  validates :default, uniqueness: { scope: :lesson_part_id }, if: :default?
+  attr_accessor :default
 
   def alternatives
     [] # TODO return siblings

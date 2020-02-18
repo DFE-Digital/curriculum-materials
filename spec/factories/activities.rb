@@ -4,13 +4,6 @@ FactoryBot.define do
     sequence(:overview) { |n| "Overview #{n}" }
     duration { 20 }
     extra_requirements { ['PVA Glue', 'Glitter'] }
-    default { false }
-
-    after :build do |activity|
-      if activity.default == nil && activity.lesson_part.activities.none?(&:default?)
-        activity.default = true
-      end
-    end
 
     trait(:randomised) do
       overview { Faker::Lorem.paragraph }

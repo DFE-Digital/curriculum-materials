@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_080549) do
+ActiveRecord::Schema.define(version: 2020_02_18_102442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
     t.text "overview"
     t.integer "duration", null: false
     t.string "extra_requirements", limit: 32, array: true
-    t.boolean "default", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"
@@ -62,6 +61,8 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
     t.integer "position", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "default_activity_id"
+    t.index ["default_activity_id"], name: "index_lesson_parts_on_default_activity_id"
     t.index ["lesson_id"], name: "index_lesson_parts_on_lesson_id"
     t.index ["position", "lesson_id"], name: "index_lesson_parts_on_position_and_lesson_id", unique: true
   end
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
   add_foreign_key "activity_choices", "teachers"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
+  add_foreign_key "lesson_parts", "activities", column: "default_activity_id"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"
 end
