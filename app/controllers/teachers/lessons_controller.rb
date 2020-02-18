@@ -10,6 +10,8 @@ module Teachers
       render layout: 'print'
     end
 
+  private
+
     def load_resources
       @lesson = Lesson.includes(:lesson_parts).find(params[:id])
 
