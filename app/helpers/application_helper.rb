@@ -5,6 +5,10 @@ module ApplicationHelper
     end
   end
 
+  def cancel_button(path, text: 'Cancel')
+    link_to text, path, class: %i(govuk-button govuk-button--secondary)
+  end
+
   def breadcrumbs(crumbs: {}, current_page:)
     content_for(:breadcrumbs) do
       render(Page::BreadcrumbsComponent, crumbs: crumbs, current_page: current_page)

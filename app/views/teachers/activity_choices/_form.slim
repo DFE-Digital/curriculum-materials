@@ -15,4 +15,5 @@
       .thumbnail
         = activity_thumbnail
 
-= form.govuk_submit
+= form.govuk_submit 'Save lesson changes' do
+  = cancel_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'))
