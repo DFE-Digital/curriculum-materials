@@ -9,7 +9,17 @@ class Activity < ApplicationRecord
 
   attr_accessor :default
 
+  after_create :make_default!, if: :default
+
   def alternatives
     [] # TODO return siblings
+  end
+
+  def default?
+    lesson_part.default_activity == self
+  end
+
+  def make_default!
+    lesson_part.update(default_activity: self)
   end
 end
