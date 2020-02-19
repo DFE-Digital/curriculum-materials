@@ -1,4 +1,5 @@
 # This migration comes from active_storage (originally 20170806125915)
+# rubocop:disable Layout/SpaceInsideArrayLiteralBrackets, Style/SymbolArray
 class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
   def change
     create_table :active_storage_blobs do |t|
@@ -25,3 +26,4 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
     end
   end
 end
+# rubocop:enable Layout/SpaceInsideArrayLiteralBrackets, Style/SymbolArray
