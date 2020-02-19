@@ -1,12 +1,13 @@
 module Teachers
   class LessonContentsPresenter
     class Slot
-      attr_reader :position, :teaching_methods, :overview, :duration,
+      attr_reader :position, :teaching_methods, :name, :overview, :duration,
                   :extra_requirements, :lesson_part_id, :alternatives
 
       def initialize(lesson_part, activity)
         @position           = lesson_part.position
         @teaching_methods   = activity.teaching_methods
+        @name               = activity.name
         @overview           = activity.overview
         @duration           = activity.duration
         @extra_requirements = activity.extra_requirements || []

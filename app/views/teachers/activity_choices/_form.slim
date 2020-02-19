@@ -1,7 +1,19 @@
-= form.govuk_radio_buttons_fieldset :activty_id, legend: { text: 'Choose an activity', size: 'l', heading: true } do
+= form.govuk_radio_buttons_fieldset :activty_id, legend: { text: "Choose an activity for #{@lesson.name} part #{@lesson_part.position}", size: 'l', heading: true } do
   = form.govuk_error_summary
 
-  - activities.each do |activity|
-    = form.govuk_radio_button :activity_id, activity.id, label: { text: activity.overview }
+  p You can keep the selected activity or choose an alternative.
 
-= form.govuk_submit
+  - activities.each do |activity|
+
+    .activity data-activity=activity.id
+
+      = form.govuk_radio_button :activity_id,
+        activity.id,
+        label: { text: activity.name, size: 'm' },
+        hint_text: activity.overview
+
+      .thumbnail
+        = activity_thumbnail
+
+= form.govuk_submit 'Save lesson changes' do
+  = cancel_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'))

@@ -148,6 +148,7 @@ unless Rails.env.test?
               1 => [
                 {
                   attributes: {
+                    name: "Keyword matching",
                     overview: <<~OVERVIEW
                       As students enter the room, direct them to try and match up
                       each key word with the correct definition. They should
@@ -159,6 +160,7 @@ unless Rails.env.test?
                 },
                 {
                   attributes: {
+                    name: "Ordering the battle events",
                     overview: <<~OVERVIEW
                       For this lesson, students need to know the events of
                       the battle in chronological order. The teacher uses
@@ -175,6 +177,7 @@ unless Rails.env.test?
               2 => [
                 {
                   attributes: {
+                    name: "The story of the battle",
                     overview: <<~OVERVIEW
                       Give students slips of paper at random, but make sure the
                       student with the first event knows who they are. Get them
@@ -192,6 +195,7 @@ unless Rails.env.test?
                 },
                 {
                   attributes: {
+                    name: "Why did William win the battle?",
                     overview: <<~OVERVIEW
                       Students can work individually, in pairs or in groups for
                       this activity. Instructions for the activity are on slide
@@ -210,6 +214,7 @@ unless Rails.env.test?
               3 => [
                 {
                   attributes: {
+                    name: "Comparing example paragraphs",
                     overview: <<~OVERVIEW
                       Show students example paragraphs and get them to verbally
                       feed back on what they think is wrong with the first one.
@@ -223,6 +228,7 @@ unless Rails.env.test?
                 },
                 {
                   attributes: {
+                    name: "Students write their own descriptions",
                     overview: <<~OVERVIEW
                       Students attempt their own paragraphs. Starter sentences
                       can be displayed on the slide for students who need more
@@ -235,6 +241,7 @@ unless Rails.env.test?
               4 => [
                 {
                   attributes: {
+                    name: "Students score their partner's work",
                     overview: <<~OVERVIEW
                       Ask students to use the checklist on the slide to feed back
                       on the work of the person next to them. They can either
@@ -248,6 +255,7 @@ unless Rails.env.test?
               5 => [
                 {
                   attributes: {
+                    name: "Student reads their paragraph out",
                     overview: <<~OVERVIEW
                       Ask a student to read out their paragraph and either
                       offer feedback or get other students to offer verbal

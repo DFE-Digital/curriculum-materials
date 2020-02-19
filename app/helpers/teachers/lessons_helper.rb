@@ -31,5 +31,14 @@ module Teachers
         alt: "#{teaching_method.description} icon"
       )
     end
+
+    def activity_thumbnail
+      colour = %i(blue orange pink purple yellow).sample
+
+      image_tag(
+        asset_pack_path("media/images/placeholder-thumbnails/#{colour}.png"),
+        width: '100px'
+      )
+    end
   end
 end

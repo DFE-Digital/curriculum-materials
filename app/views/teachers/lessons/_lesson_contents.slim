@@ -47,6 +47,8 @@ section.lesson-plan
 
             td.main-content.govuk-table__cell
               article
+                header
+                  h3.govuk-heading-m = slot.name
                 = markdown(slot.overview)
               strong
                 | Approximately #{slot.duration} minutes
