@@ -6,7 +6,11 @@ module ApplicationHelper
   end
 
   def cancel_button(path, text: 'Cancel')
-    link_to text, path, class: %w(govuk-button govuk-button--secondary)
+    secondary_button(path, text: text)
+  end
+
+  def secondary_button(path, text:)
+    link_to(text, path, class: %w(govuk-button govuk-button--secondary))
   end
 
   def breadcrumbs(crumbs: {}, current_page:)

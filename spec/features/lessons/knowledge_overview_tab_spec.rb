@@ -38,7 +38,13 @@ RSpec.feature "Knowledge overview tab", type: :feature do
     ].flatten.each { |value| expect(page).to have_content(value) }
   end
 
-  specify %(there should be a 'Plan the next lesson' button) do
-    expect(page).to have_link('Plan the next lesson', href: '#', class: 'govuk-button')
+  specify 'there should be a secondary button link to the lesson contents tab' do
+    within('#knowledge-overview') do
+      expect(page).to have_link(
+        'Lesson contents',
+        href: teachers_lesson_path(lesson.id, anchor: 'lesson-contents'),
+        class: 'govuk-button--secondary'
+      )
+    end
   end
 end

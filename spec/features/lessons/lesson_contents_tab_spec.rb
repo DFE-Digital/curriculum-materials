@@ -9,7 +9,7 @@ RSpec.feature "Lesson contents tab", type: :feature do
 
   before do
     visit(teachers_lesson_path(lesson))
-    click_on 'Lesson contents'
+    within('ul.govuk-tabs__list') { click_on 'Lesson contents' }
   end
 
   specify 'the page should contain a table of lesson parts' do
@@ -29,6 +29,16 @@ RSpec.feature "Lesson contents tab", type: :feature do
       lesson_parts.each do |lesson_part|
         expect(page).to have_link('Change activity', href: new_teachers_lesson_part_choice_path(lesson_part.id))
       end
+    end
+  end
+
+  specify 'there should be a secondary button link to the downloads tab' do
+    within('#lesson-contents') do
+      expect(page).to have_link(
+        'Downloads',
+        href: teachers_lesson_path(lesson.id, anchor: 'downloads'),
+        class: 'govuk-button--secondary'
+      )
     end
   end
 end
