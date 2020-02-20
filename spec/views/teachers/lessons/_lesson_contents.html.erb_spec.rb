@@ -33,7 +33,7 @@ RSpec.describe "teachers/lessons/_lesson_contents" do
 
   context "mode: :print" do
     subject do
-      render "teachers/lessons/lesson_contents", { mode: :print }
+      render "teachers/lessons/lesson_contents", mode: :print
     end
     it "omits the ability to change activities" do
       subject
