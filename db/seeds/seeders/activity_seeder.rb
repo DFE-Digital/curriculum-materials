@@ -1,5 +1,5 @@
-module Loader
-  class Activity < Base
+module Seeders
+  class ActivitySeeder < BaseSeeder
     attr_accessor :id, :name, :overview, :duration, :extra_requirements
 
     def initialize(ccp, unit, lesson, lesson_part, name:, overview:, duration:, extra_requirements:)
@@ -19,6 +19,10 @@ module Loader
     end
 
   private
+
+    def model_class
+      Activity
+    end
 
     def path
       Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activities_path(

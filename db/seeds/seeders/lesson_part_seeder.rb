@@ -1,5 +1,5 @@
-module Loader
-  class LessonPart < Base
+module Seeders
+  class LessonPartSeeder < BaseSeeder
     attr_accessor :id, :position
 
     def initialize(ccp, unit, lesson, position:)
@@ -12,6 +12,10 @@ module Loader
 
     def identifier
       "Lesson part #{position}"
+    end
+
+    def model_class
+      LessonPart
     end
 
   private

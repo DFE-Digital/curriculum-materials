@@ -1,10 +1,8 @@
-module Loader
-  class Unit < Base
+module Seeders
+  class CCPSeeder < BaseSeeder
     attr_accessor :id, :name, :overview, :benefits
 
-    def initialize(ccp, name:, overview:, benefits:)
-      @ccp      = ccp
-
+    def initialize(name:, overview:, benefits:)
       @name     = name
       @overview = overview
       @benefits = benefits
@@ -14,10 +12,14 @@ module Loader
       @name
     end
 
+    def model_class
+      CompleteCurriculumProgramme
+    end
+
   private
 
     def path
-      Rails.application.routes.url_helpers.api_v1_ccp_units_path(@ccp.id)
+      Rails.application.routes.url_helpers.api_v1_ccps_path
     end
 
     def attributes
@@ -25,7 +27,7 @@ module Loader
     end
 
     def payload
-      { unit: attributes }
+      { ccp: attributes }
     end
   end
 end

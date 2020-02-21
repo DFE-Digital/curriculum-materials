@@ -1,5 +1,5 @@
-module Loader
-  class Lesson < Base
+module Seeders
+  class LessonSeeder < BaseSeeder
     attr_accessor :id, :name, :misconceptions, :core_knowledge,
                   :summary, :previous_knowledge
 
@@ -16,6 +16,10 @@ module Loader
 
     def identifier
       @name
+    end
+
+    def model_class
+      Lesson
     end
 
   private
