@@ -50,5 +50,63 @@ RSpec.describe Activity, type: :model do
         end
       end
     end
+
+    context 'attachments' do
+      it do
+        is_expected.to \
+          validate_size_of(:teacher_resources).less_than(50.megabytes)
+      end
+
+      it do
+        is_expected.to \
+          validate_size_of(:pupil_resources).less_than(50.megabytes)
+      end
+    end
+  end
+
+  context 'attachements' do
+    let :attachment_path do
+      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
+    end
+
+    let(:activity) { create :activity }
+
+    context '#pupil_resources' do
+      before do
+        activity.pupil_resources.attach \
+          io: File.open(attachment_path),
+          filename: 'pupil-test-image.png',
+          content_type: 'image/png'
+      end
+
+      subject { activity.pupil_resources.last }
+
+      it { is_expected.to be_persisted }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'pupil-test-image.png'
+        expect(subject.content_type).to eq 'image/png'
+        expect(subject.download).to eq File.binread(attachment_path)
+      end
+    end
+
+    context '#teacher_resources' do
+      before do
+        activity.teacher_resources.attach \
+          io: File.open(attachment_path),
+          filename: 'teacher-test-image.png',
+          content_type: 'image/png'
+      end
+
+      subject { activity.teacher_resources.last }
+
+      it { is_expected.to be_persisted }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'teacher-test-image.png'
+        expect(subject.content_type).to eq 'image/png'
+        expect(subject.download).to eq File.binread(attachment_path)
+      end
+    end
   end
 end
