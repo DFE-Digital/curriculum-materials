@@ -7,7 +7,7 @@
 
   .govuk-grid-column-two-thirds
 
-    p = @unit.overview
+    p = markdown(@unit.overview)
 
     = render 'table', lessons: @unit.lessons
 
@@ -15,7 +15,7 @@
       h2.govuk-heading-m
         | How this lesson sequence benefits pupils’ learning
 
-      p = @unit.benefits
+      p = markdown(@unit.benefits)
 
   .govuk-grid-column-one-third
     = render 'siblings', units: @unit.complete_curriculum_programme.units
