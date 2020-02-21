@@ -18,6 +18,10 @@ module Seeders
 
   private
 
+    def parent
+      {}
+    end
+
     def path
       Rails.application.routes.url_helpers.api_v1_ccps_path
     end

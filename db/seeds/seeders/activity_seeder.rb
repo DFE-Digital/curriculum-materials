@@ -20,6 +20,10 @@ module Seeders
 
   private
 
+    def parent
+      { lesson_part_id: @lesson_part.id }
+    end
+
     def model_class
       Activity
     end

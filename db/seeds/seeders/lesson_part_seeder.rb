@@ -20,6 +20,10 @@ module Seeders
 
   private
 
+    def parent
+      { lesson_id: @lesson.id }
+    end
+
     def path
       Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_parts_path(@ccp.id, @unit.id, @lesson.id)
     end

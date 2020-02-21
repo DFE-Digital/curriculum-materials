@@ -20,6 +20,10 @@ module Seeders
 
   private
 
+    def parent
+      { complete_curriculum_programme_id: @ccp.id }
+    end
+
     def path
       Rails.application.routes.url_helpers.api_v1_ccp_units_path(@ccp.id)
     end

@@ -24,7 +24,7 @@ module Seeders
   private
 
     def save_via_model
-      model_class.create(attributes).tap do |obj|
+      model_class.create!(attributes.merge(parent)).tap do |obj|
         @id = obj.id
       end
     end
