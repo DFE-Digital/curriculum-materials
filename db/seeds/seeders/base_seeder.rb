@@ -9,7 +9,7 @@ module Seeders
       seed_api_url + path
     end
 
-    def save
+    def save!
       if seed_api_url.present?
         save_via_api
       else

@@ -70,19 +70,19 @@ unless Rails.env.test?
   Dir.glob(Rails.root.join("db", "seeds", "data", "*", "*.yml")).each do |ccp_file|
     Seeders::CCPSeeder.new(**extract_attributes(ccp_file, 'ccp')).tap do |ccp|
       log_progress("Saving CCP: #{ccp.name}")
-      ccp.save
+      ccp.save!
 
       # Second, units
       descendents(ccp_file).each do |unit_file|
         Seeders::UnitSeeder.new(ccp, **extract_attributes(unit_file, 'unit')).tap do |unit|
           log_progress("Saving unit: #{unit.name}", 1)
-          unit.save
+          unit.save!
 
           # Third, lessons
           descendents(unit_file).each do |lesson_file|
             Seeders::LessonSeeder.new(ccp, unit, **extract_attributes(lesson_file, 'lesson')).tap do |lesson|
               log_progress("Saving lesson: #{lesson.name}", 2)
-              lesson.save
+              lesson.save!
 
               # Fourth, lesson parts
               # Note, lesson parts do not have an associated YAML file, instead their only attribute,
@@ -92,7 +92,7 @@ unless Rails.env.test?
 
                 Seeders::LessonPartSeeder.new(ccp, unit, lesson, position: position).tap do |lesson_part|
                   log_progress("Saving lesson part: #{lesson_part.position}", 3)
-                  lesson_part.save
+                  lesson_part.save!
 
                   # Fifth, activities
                   descendents(lesson_part_directory).each do |activity_file|
@@ -100,7 +100,7 @@ unless Rails.env.test?
                       log_progress("Saving activity: #{activity.name}", 4)
 
                       # TODO add teaching methods
-                      activity.save
+                      activity.save!
                     end
                   end
                 end
