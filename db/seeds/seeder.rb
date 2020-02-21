@@ -1,7 +1,52 @@
+# Seeding the application
+# =======================
+#
+# Data must be provided to the application seeds in a format that matches the
+# example below. This structure matches the hierarchy within the application that
+# mandates:
+#
+# * a complete curriculum program contains units,
+# * a units contains lessons,
+# * a lesson contains lesson parts,
+# * a lesson part contains activities.
+#
+# For consistency, this structure also requires that the descendents of a node
+# in the hierarchy are placed in a directory that matches its name. For
+# example, the CCP `the-norman-invasion.yml` has a corresponding
+# `the-norman-invasion` directory containing its units.
+#
+# Here's a full example of an example CCP with one unit, one lesson, five parts
+# and eight activities.
+#
+# db/seeds
+# └── data
+#     └── history
+#         ├── the-norman-invasion.yml                                   <--- CCP
+#         └── the-norman-invasion
+#             ├── the-battle-of-hastings.yml                            <--- Unit
+#             └── the-battle-of-hastings
+#                 ├── prelude-to-the-battle.yml                         <--- Lesson
+#                 └── prelude-to-the-battle
+#                     ├── 1                                             <--- Lesson part
+#                     │   ├── keyword-matching.yml                      <--- Activity
+#                     │   └── ordering-the-battle-events.yml
+#                     ├── 2
+#                     │   ├── the-story-of-the-battle.yml
+#                     │   └── why-did-william-win-the-battle.yml
+#                     ├── 3
+#                     │   ├── comparing-example-paragraphs.yml
+#                     │   └── students-write-their-own-paragraphs.yml
+#                     ├── 4
+#                     │   └── students-score-their-partners-work.yml
+#                     └── 5
+#                         └── student-reads-their-paragraph-out.yml
+#
+# The seeding process can be run in one of two modes; via the API or via the models. If
+# an environment variable 'SEED_API_URL' is present it will be run in API-mode, otherwise
+# model mode.
 require 'faraday'
 
 require_relative 'seeders/base_seeder'
-
 require_relative 'seeders/ccp_seeder'
 require_relative 'seeders/unit_seeder'
 require_relative 'seeders/lesson_seeder'

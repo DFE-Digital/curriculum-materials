@@ -1,4 +1,9 @@
 module Seeders
+  # The BaseSeeder is inherited by all of the model-specific seeder classes. It
+  # operates in one of two modes:
+  #
+  # * API mode - active when the environment variable SEED_API_URL is present
+  # * Model mode - active when SEED_API_URL is absent
   class BaseSeeder
     def endpoint
       seed_api_url + path
