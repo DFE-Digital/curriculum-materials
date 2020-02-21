@@ -62,6 +62,7 @@ group :development, :test do
   gem "bullet", "~> 6.1"
   gem 'open_api-rswag'
   gem "brakeman", "4.7.2"
+  gem 'faraday', require: false
 end
 
 group :development do

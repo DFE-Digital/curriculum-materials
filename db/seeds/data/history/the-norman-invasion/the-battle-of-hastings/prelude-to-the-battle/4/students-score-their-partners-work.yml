@@ -1,0 +1,10 @@
+activity:
+  name: Students score their partner's work
+  overview: |-
+      Ask students to use the checklist on the slide to feed back
+      on the work of the person next to them. They can either
+      award a mark for each element of the checklist that is
+      present, or write a “what went well” and an “even better
+      if” for their partner.
+  duration: 5
+  extra_requirements: []

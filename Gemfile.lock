@@ -342,6 +342,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  faraday
   foreman
   govuk_design_system_formbuilder
   listen (>= 3.0.5, < 3.3)
