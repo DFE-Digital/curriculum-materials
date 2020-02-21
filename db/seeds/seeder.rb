@@ -88,9 +88,7 @@ unless Rails.env.test?
               # Note, lesson parts do not have an associated YAML file, instead their only attribute,
               # position, is taken from the directory's name. It must be an integer
               descendents(lesson_file, "*").each do |lesson_part_directory|
-                position = File.basename(lesson_part_directory)
-
-                # FIXME check that position looks like an integer
+                position = Integer(File.basename(lesson_part_directory))
 
                 Seeders::LessonPartSeeder.new(ccp, unit, lesson, position: position).tap do |lesson_part|
                   log_progress("Saving lesson part: #{lesson_part.position}", 3)
