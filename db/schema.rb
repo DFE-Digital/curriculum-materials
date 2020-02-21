@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_080549) do
-
+ActiveRecord::Schema.define(version: 2020_02_21_144353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -42,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
     t.integer "lesson_part_id", null: false
     t.text "overview"
     t.integer "duration", null: false
-    t.string "extra_requirements", limit: 32, array: true
+    t.string "extra_requirements", limit: 32, default: [], array: true
     t.boolean "default", null: false
     t.string "name", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -95,8 +94,8 @@ ActiveRecord::Schema.define(version: 2020_02_17_080549) do
     t.text "summary"
     t.integer "position"
     t.text "core_knowledge"
-    t.string "vocabulary", array: true
-    t.string "misconceptions", array: true
+    t.string "vocabulary", default: [], array: true
+    t.string "misconceptions", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.hstore "previous_knowledge"
