@@ -3,15 +3,17 @@ module Seeders
     attr_accessor :id, :name, :misconceptions, :core_knowledge,
                   :summary, :previous_knowledge
 
-    def initialize(ccp, unit, name:, misconceptions:, core_knowledge:, summary:, previous_knowledge:)
+    def initialize(ccp, unit, name:, misconceptions:, core_knowledge:, summary:, previous_knowledge:, vocabulary:, position:)
       @ccp  = ccp
       @unit = unit
 
-      @name               = name
-      @misconceptions     = misconceptions
       @core_knowledge     = core_knowledge
-      @summary            = summary
+      @misconceptions     = misconceptions
+      @name               = name
+      @position           = position
       @previous_knowledge = previous_knowledge
+      @summary            = summary
+      @vocabulary         = vocabulary
     end
 
     def identifier
@@ -38,7 +40,8 @@ module Seeders
         misconceptions: @misconceptions,
         name: @name,
         previous_knowledge: @previous_knowledge,
-        summary: @summary
+        summary: @summary,
+        vocabulary: @vocabulary
       }
     end
 

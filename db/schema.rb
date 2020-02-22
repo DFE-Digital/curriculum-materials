@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_144353) do
     t.string "name", limit: 256, null: false
     t.string "overview", limit: 1024, null: false
     t.text "benefits", null: false
+    t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["complete_curriculum_programme_id"], name: "index_units_on_complete_curriculum_programme_id"
