@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get '/:token', to: 'sessions#create', as: 'create'
     end
 
-    resources :complete_curriculum_programmes, only: %i(index show)
+    resources :complete_curriculum_programmes, only: %i(index show), path: 'complete-curriculum-programmes'
 
     resources :units, only: %i(show)
 

@@ -21,6 +21,10 @@
   .extra-requirements {
     .govuk-tag {
       background-color: govuk-colour("dark-grey");
+
+      &:not(:first-child) {
+        margin-left: 0.2rem;
+      }
     }
   }
 }

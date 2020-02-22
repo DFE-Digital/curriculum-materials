@@ -20,7 +20,7 @@ feature 'Complete Curriculum Programme page', type: :feature do
     end
 
     before do
-      visit "/teachers/complete_curriculum_programmes/#{complete_curriculum_programme.id}"
+      visit "/teachers/complete-curriculum-programmes/#{complete_curriculum_programme.id}"
     end
 
     it "shows the cpp name as the page title" do
