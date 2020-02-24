@@ -6,4 +6,5 @@ class ActivitySerializer
   fields :id, :name, :overview, :duration, :default, :extra_requirements
 
   belongs_to :lesson_part, serializer: LessonPartSerializer
+  has_many :teaching_methods, serializer: TeachingMethodSerializer
 end
