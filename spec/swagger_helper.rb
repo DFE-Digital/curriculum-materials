@@ -75,6 +75,15 @@ RSpec.configure do |config|
                 type: :array, items: { type: :string }
               }
             }
+          },
+
+          # metadata
+          teaching_method: {
+            type: :object,
+            properties: {
+              name: { type: :string },
+              icon: { type: :string }
+            }
           }
         }
       },

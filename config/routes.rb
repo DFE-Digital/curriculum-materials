@@ -50,6 +50,8 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      resources :teaching_methods, only: %i(index show)
     end
   end
 end

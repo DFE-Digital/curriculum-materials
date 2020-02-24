@@ -104,6 +104,9 @@
           "id": {
             "type": "integer"
           },
+          "name": {
+            "type": "string"
+          },
           "overview": {
             "type": "string"
           },
@@ -115,6 +118,17 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "teaching_method": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
           }
         }
       }
@@ -168,21 +182,25 @@
             "examples": {
               "application/json": [
                 {
+                  "name": "Activity 1",
                   "overview": "Overview 1",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
                   ],
+                  "default": false,
                   "id": 1
                 },
                 {
+                  "name": "Activity 2",
                   "overview": "Overview 2",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
                   ],
+                  "default": false,
                   "id": 2
                 }
               ]
@@ -262,12 +280,14 @@
             "examples": {
               "application/json": {
                 "activity": {
+                  "name": "Activity 3",
                   "overview": "Overview 3",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
-                  ]
+                  ],
+                  "default": true
                 }
               }
             }
@@ -331,12 +351,14 @@
             "description": "activity found",
             "examples": {
               "application/json": {
+                "name": "Activity 4",
                 "overview": "Overview 4",
                 "duration": 20,
                 "extra_requirements": [
                   "PVA Glue",
                   "Glitter"
                 ],
+                "default": false,
                 "id": 1
               }
             },
@@ -420,12 +442,14 @@
             "examples": {
               "application/json": {
                 "activity": {
+                  "name": "Activity 5",
                   "overview": "Overview 5",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
-                  ]
+                  ],
+                  "default": false
                 }
               }
             }
@@ -1179,6 +1203,93 @@
           },
           "400": {
             "description": "invalid lesson"
+          }
+        }
+      }
+    },
+    "/teaching_methods": {
+      "get": {
+        "summary": "retrieves all teaching methods",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "responses": {
+          "200": {
+            "description": "all teaching methods found",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 1",
+                "icon": "teaching-method-1",
+                "description": "Teaching method description 1",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/teaching_method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teaching_methods/{id}": {
+      "get": {
+        "summary": "retrieves the specified teaching method",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with a valid id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 2",
+                "icon": "teaching-method-2",
+                "description": "Teaching method description 2",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "with a bad id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 3",
+                "icon": "teaching-method-3",
+                "description": "Teaching method description 3",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
           }
         }
       }
