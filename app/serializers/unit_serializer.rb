@@ -6,7 +6,7 @@ class UnitSerializer
 
   adapter SimpleAMS::Adapters::AMS, root: false
 
-  fields :id, :name, :overview, :benefits
+  fields :id, :name, :overview, :benefits, :position
 
   belongs_to :complete_curriculum_programme, serializer: CompleteCurriculumProgrammeSerializer
   has_many :lessons, serializer: LessonSerializer

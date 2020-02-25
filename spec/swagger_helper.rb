@@ -36,9 +36,10 @@ RSpec.configure do |config|
             properties: {
               name: { type: :string },
               benefits: { type: :string },
-              overview: { type: :string }
+              overview: { type: :string },
+              position: { type: :integer }
             },
-            required: %i(name benefits overview)
+            required: %i(name benefits overview position)
           },
           lesson: {
             type: :object,

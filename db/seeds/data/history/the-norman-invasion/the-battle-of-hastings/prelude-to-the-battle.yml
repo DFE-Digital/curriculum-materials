@@ -1,10 +1,10 @@
 lesson:
   name: Prelude to the battle
-
+  position: 2
+  vocabulary: []
   misconceptions:
     - Historians know exactly where and when the battle took place
     - Harold Godwinson was killed by an arrow in the eye
-
   core_knowledge: |-
     When William heard the news that Harold had become king his reaction was
     swift. He called a meeting of his greatest men.  William made plans to gather
@@ -28,7 +28,6 @@ lesson:
     Harold also received news that William had landed at
     Pevensey and came south as quickly as he could. The king rested at London for
     a few days before taking his army to meet William and his French forces.
-
   summary: |-
     On 12 September 1066 William's fleet sailed from Normandy.  Several ships
     sank in storms, which forced the fleet to take shelter at
@@ -44,7 +43,6 @@ lesson:
     was killed and his forces defeated. His brothers Gyrth and Leofwine were
     also killed in the battle, according to the Anglo-Saxon
     Chronicle.
-
   previous_knowledge:
     Who was Harold Godwinson?: |-
         Harold was a son of Godwin (c. 1001–1053), the powerful Earl of
