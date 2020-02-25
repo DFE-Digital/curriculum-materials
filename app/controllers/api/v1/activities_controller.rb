@@ -1,4 +1,8 @@
 class Api::V1::ActivitiesController < Api::BaseController
+  class TeachingMethodNotFound < ActiveRecord::RecordNotFound; end
+
+  rescue_from TeachingMethodNotFound, with: :teaching_method_not_found
+
   def index
     activities = Activity
       .where(lesson_part_id: params[:lesson_part_id])
@@ -26,7 +30,7 @@ class Api::V1::ActivitiesController < Api::BaseController
     activity = lesson_part.activities.new(activity_params)
 
     Activity.transaction do
-      if activity.save && assign_teaching_methods(activity, teaching_methods_from_params)
+      if activity.save && set_teaching_methods(activity)
         render(json: serialize(activity).to_json, status: :created)
       else
         render(json: { errors: activity.errors.full_messages }, status: :bad_request)
@@ -38,7 +42,7 @@ class Api::V1::ActivitiesController < Api::BaseController
     activity = Activity.find_by!(lesson_part_id: params[:lesson_part_id], id: params[:id])
 
     Activity.transaction do
-      if activity.update(activity_params) && assign_teaching_methods(activity, teaching_methods_from_params)
+      if activity.update(activity_params) && set_teaching_methods(activity)
         render(json: serialize(activity).to_json, status: :ok)
       else
         render(json: { errors: activity.errors.full_messages }, status: :bad_request)
@@ -53,11 +57,25 @@ private
   end
 
   def teaching_methods_from_params
-    TeachingMethod.where(name: params.dig('teaching_methods'))
+    teaching_method_params = params.dig(:teaching_methods)
+
+    return if teaching_method_params.nil?
+
+    TeachingMethod.where(name: teaching_method_params).tap do |teaching_methods|
+      diff = teaching_method_params.difference(teaching_methods.map(&:name))
+
+      fail TeachingMethodNotFound, diff.to_sentence unless diff.empty?
+    end
   end
 
-  def assign_teaching_methods(activity, teaching_methods)
-    activity.teaching_methods = teaching_methods
+  def set_teaching_methods(activity)
+    teaching_methods = teaching_methods_from_params
+
+    if teaching_methods.nil?
+      true # no params passed, don't touch the teaching methods
+    else
+      activity.teaching_methods = teaching_methods
+    end
   end
 
   def serialize(lesson_part)
@@ -66,5 +84,9 @@ private
       serializer: ActivitySerializer,
       includes: [:teaching_methods]
     )
+  end
+
+  def teaching_method_not_found(e)
+    render(json: { errors: %(Invalid teaching method: #{e.message}) }, status: :bad_request)
   end
 end
