@@ -91,4 +91,40 @@ describe 'TeacherResources' do
       end
     end
   end
+
+  path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources/{teacher_resource_id}' do
+    let :attachment_path do
+      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
+    end
+
+    let :teacher_resource do
+      activity.teacher_resources.attach(
+        io: File.open(attachment_path),
+        filename: '1px.png',
+        content_type: 'image/png'
+      )
+      activity.teacher_resources.last
+    end
+
+    let :teacher_resource_id do
+      teacher_resource.id
+    end
+
+    delete %{Removes the attached resource from the activity} do
+      tags 'TeacherResource'
+      parameter name: :ccp_id, in: :path, type: :string, required: true
+      parameter name: :unit_id, in: :path, type: :string, required: true
+      parameter name: :lesson_id, in: :path, type: :string, required: true
+      parameter name: :lesson_part_id, in: :path, type: :string, required: true
+      parameter name: :activity_id, in: :path, type: :string, required: true
+      parameter name: :teacher_resource_id, in: :path, type: :string, required: true
+
+      response '204', 'teacher resource removed' do
+        run_test! do |response|
+          expect(response.code).to eq '204'
+          expect(activity.reload.teacher_resources).to be_empty
+        end
+      end
+    end
+  end
 end

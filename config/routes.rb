@@ -46,8 +46,8 @@ Rails.application.routes.draw do
           resources :lessons, only: %i(index show create update) do
             resources :lesson_parts, only: %i(index show create update) do
               resources :activities, only: %i(index show create update) do
-                resources :pupil_resources, only: %i(index create)
-                resources :teacher_resources, only: %i(index create)
+                resources :pupil_resources, only: %i(index create destroy)
+                resources :teacher_resources, only: %i(index create destroy)
               end
             end
           end

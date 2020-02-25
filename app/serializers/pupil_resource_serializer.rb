@@ -9,6 +9,7 @@ class PupilResourceSerializer
   belongs_to :activity, serializer: ActivitySerializer
 
   def url
+    # NOTE see note in TeacherResourceSerializer#url
     Rails.application.routes.url_helpers.url_for object
   end
 end
