@@ -1197,6 +1197,67 @@
       }
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources": {
+      "get": {
+        "summary": "Returns the activity's attached pupil_resources",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pupil resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Attaches a pupil resource to the activity",
         "tags": [
@@ -1275,6 +1336,67 @@
       }
     },
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources": {
+      "get": {
+        "summary": "Returns the activity's attached teacher_resources",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "teacher resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Attaches a teacher resource to the activity",
         "tags": [

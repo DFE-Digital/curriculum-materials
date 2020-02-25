@@ -9,6 +9,25 @@ describe 'TeacherResources' do
   let(:activity_id) { activity.id }
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources' do
+    get %{Returns the activity's attached teacher_resources} do
+      tags 'TeacherResource'
+      produces 'application/json'
+      parameter name: :ccp_id, in: :path, type: :string, required: true
+      parameter name: :unit_id, in: :path, type: :string, required: true
+      parameter name: :lesson_id, in: :path, type: :string, required: true
+      parameter name: :lesson_part_id, in: :path, type: :string, required: true
+      parameter name: :activity_id, in: :path, type: :string, required: true
+
+      response '200', 'teacher resources found' do
+        examples 'application/json': [{
+          id: 1,
+          url: 'https://example.com/path-to-resource'
+        }]
+
+        run_test!
+      end
+    end
+
     post 'Attaches a teacher resource to the activity' do
       tags 'TeacherResource'
       consumes 'multipart/form-data'

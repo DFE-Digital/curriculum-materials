@@ -9,6 +9,25 @@ describe 'PupilResources' do
   let(:activity_id) { activity.id }
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources' do
+    get %{Returns the activity's attached pupil_resources} do
+      tags 'PupilResource'
+      produces 'application/json'
+      parameter name: :ccp_id, in: :path, type: :string, required: true
+      parameter name: :unit_id, in: :path, type: :string, required: true
+      parameter name: :lesson_id, in: :path, type: :string, required: true
+      parameter name: :lesson_part_id, in: :path, type: :string, required: true
+      parameter name: :activity_id, in: :path, type: :string, required: true
+
+      response '200', 'pupil resources found' do
+        examples 'application/json': [{
+          id: 1,
+          url: 'https://example.com/path-to-resource'
+        }]
+
+        run_test!
+      end
+    end
+
     post 'Attaches a pupil resource to the activity' do
       tags 'PupilResource'
       consumes 'multipart/form-data'

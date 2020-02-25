@@ -1,4 +1,16 @@
 class Api::V1::TeacherResourcesController < Api::BaseController
+  def index
+    activity = Activity.find_by! id: params[:activity_id]
+
+    teacher_resources = activity.teacher_resources
+
+    render json: SimpleAMS::Renderer::Collection.new(
+      teacher_resources,
+      serializer: TeacherResourceSerializer,
+      includes: []
+    ).to_json
+  end
+
   def create
     activity = Activity.find_by! id: params[:activity_id]
 
