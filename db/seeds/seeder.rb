@@ -57,8 +57,10 @@ def log_progress(msg, indent = 0)
   puts((" " * indent) + msg)
 end
 
-def extract_attributes(file, key)
-  YAML.load_file(file)[key].symbolize_keys
+def extract_attributes(file, key, symbolize_keys = true)
+  attributes = YAML.load_file(file)[key]
+
+  symbolize_keys ? attributes.symbolize_keys : attributes
 end
 
 def descendents(origin, matcher = "*.yml")
@@ -96,7 +98,9 @@ unless Rails.env.test?
 
                   # Fifth, activities
                   descendents(lesson_part_directory).each do |activity_file|
-                    Seeders::ActivitySeeder.new(ccp, unit, lesson, lesson_part, **extract_attributes(activity_file, 'activity')).tap do |activity|
+                    teaching_methods = extract_attributes(activity_file, 'teaching_methods', false)
+
+                    Seeders::ActivitySeeder.new(ccp, unit, lesson, lesson_part, **extract_attributes(activity_file, 'activity').merge(teaching_methods: teaching_methods)).tap do |activity|
                       log_progress("Saving activity: #{activity.name}", 4)
 
                       # TODO add teaching methods
