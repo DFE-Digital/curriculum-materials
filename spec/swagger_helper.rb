@@ -76,6 +76,9 @@ RSpec.configure do |config|
               }
             }
           },
+          teaching_methods: {
+            type: :array, items: { type: :string }
+          },
 
           # metadata
           teaching_method: {

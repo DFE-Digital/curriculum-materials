@@ -121,6 +121,12 @@
           }
         }
       },
+      "teaching_methods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
       "teaching_method": {
         "type": "object",
         "properties": {
@@ -268,6 +274,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -287,7 +296,21 @@
                     "PVA Glue",
                     "Glitter"
                   ],
-                  "default": true
+                  "default": true,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 1",
+                      "icon": "teaching-method-1",
+                      "description": "Teaching method description 1",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 2",
+                      "icon": "teaching-method-2",
+                      "description": "Teaching method description 2",
+                      "id": 2
+                    }
+                  ]
                 }
               }
             }
@@ -359,7 +382,21 @@
                   "Glitter"
                 ],
                 "default": false,
-                "id": 1
+                "id": 1,
+                "teaching_methods": [
+                  {
+                    "name": "Teaching method 3",
+                    "icon": "teaching-method-3",
+                    "description": "Teaching method description 3",
+                    "id": 1
+                  },
+                  {
+                    "name": "Teaching method 4",
+                    "icon": "teaching-method-4",
+                    "description": "Teaching method description 4",
+                    "id": 2
+                  }
+                ]
               }
             },
             "content": {
@@ -430,6 +467,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -449,7 +489,21 @@
                     "PVA Glue",
                     "Glitter"
                   ],
-                  "default": false
+                  "default": false,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 5",
+                      "icon": "teaching-method-5",
+                      "description": "Teaching method description 5",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 6",
+                      "icon": "teaching-method-6",
+                      "description": "Teaching method description 6",
+                      "id": 2
+                    }
+                  ]
                 }
               }
             }
@@ -1218,9 +1272,9 @@
             "description": "all teaching methods found",
             "examples": {
               "application/json": {
-                "name": "Teaching method 1",
-                "icon": "teaching-method-1",
-                "description": "Teaching method description 1",
+                "name": "Teaching method 7",
+                "icon": "teaching-method-7",
+                "description": "Teaching method description 7",
                 "id": 1
               }
             },
@@ -1259,9 +1313,9 @@
             "description": "with a valid id",
             "examples": {
               "application/json": {
-                "name": "Teaching method 2",
-                "icon": "teaching-method-2",
-                "description": "Teaching method description 2",
+                "name": "Teaching method 8",
+                "icon": "teaching-method-8",
+                "description": "Teaching method description 8",
                 "id": 1
               }
             },
@@ -1277,9 +1331,9 @@
             "description": "with a bad id",
             "examples": {
               "application/json": {
-                "name": "Teaching method 3",
-                "icon": "teaching-method-3",
-                "description": "Teaching method description 3",
+                "name": "Teaching method 9",
+                "icon": "teaching-method-9",
+                "description": "Teaching method description 9",
                 "id": 1
               }
             },

@@ -43,7 +43,7 @@ def example_teaching_method(id = 1)
 end
 
 def example_teaching_methods(quantity)
-  1.upto(quantity).map { |i| teaching_method(i) }
+  1.upto(quantity).map { |i| example_teaching_method(i) }
 end
 
 def example_errors

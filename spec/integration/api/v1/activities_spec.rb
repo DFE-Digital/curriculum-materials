@@ -51,6 +51,9 @@ describe 'Activities' do
           properties: {
             activity: {
               '$ref' => '#/components/schemas/activity', required: %i(activity)
+            },
+            teaching_methods: {
+              '$ref' => '#/components/schemas/teaching_methods'
             }
           }
         }
@@ -65,7 +68,7 @@ describe 'Activities' do
       response(201, 'activity created') do
         let!(:activity_params) { { activity: FactoryBot.attributes_for(:activity, default: true) } }
 
-        examples('application/json': { activity: FactoryBot.attributes_for(:activity, default: true) })
+        examples('application/json': { activity: FactoryBot.attributes_for(:activity, default: true).merge(teaching_methods: example_teaching_methods(2)) })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
@@ -106,7 +109,7 @@ describe 'Activities' do
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'activity found') do
-        examples('application/json': example_activity)
+        examples('application/json': example_activity.merge(teaching_methods: example_teaching_methods(2)))
 
         schema('$ref' => '#/components/schemas/activity')
 
@@ -142,6 +145,9 @@ describe 'Activities' do
           properties: {
             activity: {
               '$ref' => '#/components/schemas/activity', required: %i(activity)
+            },
+            teaching_methods: {
+              '$ref' => '#/components/schemas/teaching_methods'
             }
           }
         }
@@ -150,7 +156,7 @@ describe 'Activities' do
       request_body_json(schema: { '$ref' => '#/components/schemas/activity' })
 
       response(200, 'activity updated') do
-        examples('application/json': { activity: FactoryBot.attributes_for(:activity) })
+        examples('application/json': { activity: FactoryBot.attributes_for(:activity).merge(teaching_methods: example_teaching_methods(2)) })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
