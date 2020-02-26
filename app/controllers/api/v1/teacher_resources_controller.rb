@@ -1,10 +1,6 @@
 class Api::V1::TeacherResourcesController < Api::BaseController
   def index
-    render json: SimpleAMS::Renderer::Collection.new(
-      teacher_resources,
-      serializer: TeacherResourceSerializer,
-      includes: []
-    ).to_json
+    render json: TeacherResourceSerializer.render(teacher_resources.blobs)
   end
 
   def create

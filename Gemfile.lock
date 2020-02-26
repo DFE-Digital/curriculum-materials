@@ -79,6 +79,7 @@ GEM
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
     bindex (0.8.1)
+    blueprinter (0.23.0)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     brakeman (4.7.2)
@@ -334,6 +335,7 @@ DEPENDENCIES
   actionview-component
   active_storage_validations
   aws-sdk-s3
+  blueprinter
   bootsnap (>= 1.1.0)
   brakeman (= 4.7.2)
   bullet (~> 6.1)

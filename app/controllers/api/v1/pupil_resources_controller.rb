@@ -1,10 +1,6 @@
 class Api::V1::PupilResourcesController < Api::BaseController
   def index
-    render json: SimpleAMS::Renderer::Collection.new(
-      pupil_resources,
-      serializer: PupilResourceSerializer,
-      includes: []
-    ).to_json
+    render json: PupilResourceSerializer.render(pupil_resources.blobs)
   end
 
   def create

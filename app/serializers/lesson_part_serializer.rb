@@ -1,9 +1,5 @@
-class LessonPartSerializer
-  include SimpleAMS::DSL
+class LessonPartSerializer < Blueprinter::Base
+  identifier :id
 
-  adapter SimpleAMS::Adapters::AMS, root: false
-
-  fields :id, :position
-
-  belongs_to :lesson, serializer: LessonSerializer
+  fields :position
 end

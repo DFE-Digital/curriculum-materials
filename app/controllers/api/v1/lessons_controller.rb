@@ -5,13 +5,7 @@ class Api::V1::LessonsController < Api::BaseController
       .where(unit_id: params[:unit_id])
       .all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        lessons,
-        serializer: LessonSerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(lessons))
   end
 
   def show
@@ -20,7 +14,7 @@ class Api::V1::LessonsController < Api::BaseController
       .where(unit_id: params[:unit_id])
       .find(params[:id])
 
-    render(json: serialize(lesson).to_json)
+    render(json: serialize(lesson))
   end
 
   def create
@@ -28,7 +22,7 @@ class Api::V1::LessonsController < Api::BaseController
     lesson = unit.lessons.new(lesson_params)
 
     if lesson.save
-      render(json: serialize(lesson).to_json, status: :created)
+      render(json: serialize(lesson), status: :created)
     else
       render(json: { errors: lesson.errors.full_messages }, status: :bad_request)
     end
@@ -38,7 +32,7 @@ class Api::V1::LessonsController < Api::BaseController
     lesson = Lesson.find_by!(unit_id: params[:unit_id], id: params[:id])
 
     if lesson.update(lesson_params)
-      render(json: serialize(lesson).to_json, status: :ok)
+      render(json: serialize(lesson), status: :ok)
     else
       render(json: { errors: lesson.errors.full_messages }, status: :bad_request)
     end
@@ -58,10 +52,7 @@ private
     )
   end
 
-  def serialize(lesson)
-    SimpleAMS::Renderer.new(
-      lesson,
-      serializer: LessonSerializer
-    )
+  def serialize(data)
+    LessonSerializer.render(data)
   end
 end

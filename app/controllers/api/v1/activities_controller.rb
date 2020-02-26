@@ -4,13 +4,7 @@ class Api::V1::ActivitiesController < Api::BaseController
       .where(lesson_part_id: params[:lesson_part_id])
       .all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        activities,
-        serializer: ActivitySerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(activities))
   end
 
   def show
@@ -18,7 +12,7 @@ class Api::V1::ActivitiesController < Api::BaseController
       .where(lesson_part_id: params[:lesson_part_id])
       .find(params[:id])
 
-    render(json: serialize(activity).to_json)
+    render(json: serialize(activity))
   end
 
   def create
@@ -26,7 +20,7 @@ class Api::V1::ActivitiesController < Api::BaseController
     activity = lesson_part.activities.new(activity_params)
 
     if activity.save
-      render(json: serialize(activity).to_json, status: :created)
+      render(json: serialize(activity), status: :created)
     else
       render(json: { errors: activity.errors.full_messages }, status: :bad_request)
     end
@@ -36,7 +30,7 @@ class Api::V1::ActivitiesController < Api::BaseController
     activity = Activity.find_by!(lesson_part_id: params[:lesson_part_id], id: params[:id])
 
     if activity.update(activity_params)
-      render(json: serialize(activity).to_json, status: :ok)
+      render(json: serialize(activity), status: :ok)
     else
       render(json: { errors: activity.errors.full_messages }, status: :bad_request)
     end
@@ -48,10 +42,7 @@ private
     params.require(:activity).permit(:name, :overview, :duration, :default, extra_requirements: [])
   end
 
-  def serialize(lesson_part)
-    SimpleAMS::Renderer.new(
-      lesson_part,
-      serializer: ActivitySerializer
-    )
+  def serialize(data)
+    ActivitySerializer.render(data)
   end
 end

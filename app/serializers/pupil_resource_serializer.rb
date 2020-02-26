@@ -1,15 +1,7 @@
-class PupilResourceSerializer
-  include SimpleAMS::DSL
+class PupilResourceSerializer < Blueprinter::Base
+  identifier :id
 
-  adapter SimpleAMS::Adapters::AMS, root: false
-
-  fields :id
-  attributes :url
-
-  belongs_to :activity, serializer: ActivitySerializer
-
-  def url
-    # NOTE see note in TeacherResourceSerializer#url
+  field :url do |object|
     Rails.application.routes.url_helpers.url_for object
   end
 end
