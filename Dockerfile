@@ -20,8 +20,8 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock /usr/src/app/
-COPY .ruby-version Gemfile Gemfile.lock /usr/src/app/
 RUN yarn install --check-files
+COPY .ruby-version Gemfile Gemfile.lock /usr/src/app/
 ENV BUNDLE_PATH /gems
 RUN bundle install
 
