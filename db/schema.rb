@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_144353) do
+ActiveRecord::Schema.define(version: 2020_02_26_092814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_144353) do
   add_foreign_key "activity_choices", "teachers"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
+  add_foreign_key "lesson_parts", "lessons"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"
 end

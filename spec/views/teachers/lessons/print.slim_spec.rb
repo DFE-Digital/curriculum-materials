@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "teachers/lessons/print" do
-  let(:lesson) { FactoryBot.build_stubbed(:lesson, summary: "# Big things\nwonderful") }
-  let(:teacher) { FactoryBot.build_stubbed(:teacher) }
-  let!(:lesson_parts) { create_list(:lesson_part, 2, :with_activities, lesson: lesson) }
+  let(:lesson) { FactoryBot.create(:lesson, summary: "# Big things\nwonderful") }
+  let(:teacher) { FactoryBot.create(:teacher) }
+  let!(:lesson_parts) { FactoryBot.create_list(:lesson_part, 2, :with_activities, lesson: lesson) }
   let(:presenter) { Teachers::LessonContentsPresenter.new(lesson, teacher) }
 
   before :each do
