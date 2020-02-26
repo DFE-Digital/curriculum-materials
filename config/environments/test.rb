@@ -52,4 +52,6 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.raise = true
   end
+
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST', 'example.com')
 end
