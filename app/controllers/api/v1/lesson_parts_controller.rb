@@ -1,16 +1,10 @@
 class Api::V1::LessonPartsController < Api::BaseController
   def index
-    lessons_parts = LessonPart
+    lesson_parts = LessonPart
       .where(lesson_id: params[:lesson_id])
       .all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        lessons_parts,
-        serializer: LessonPartSerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(lesson_parts))
   end
 
   def show
@@ -19,7 +13,7 @@ class Api::V1::LessonPartsController < Api::BaseController
       .where(lesson_id: params[:lesson_id])
       .find(params[:id])
 
-    render(json: serialize(lesson_part).to_json)
+    render(json: serialize(lesson_part))
   end
 
   def create
@@ -27,7 +21,7 @@ class Api::V1::LessonPartsController < Api::BaseController
     lesson_part = lesson.lesson_parts.new(lesson_part_params)
 
     if lesson_part.save
-      render(json: serialize(lesson_part).to_json, status: :created)
+      render(json: serialize(lesson_part), status: :created)
     else
       render(json: { errors: lesson_part.errors.full_messages }, status: :bad_request)
     end
@@ -37,7 +31,7 @@ class Api::V1::LessonPartsController < Api::BaseController
     lesson_part = LessonPart.find_by!(lesson_id: params[:lesson_id], id: params[:id])
 
     if lesson_part.update(lesson_part_params)
-      render(json: serialize(lesson_part).to_json, status: :ok)
+      render(json: serialize(lesson_part), status: :ok)
     else
       render(json: { errors: lesson_part.errors.full_messages }, status: :bad_request)
     end
@@ -49,10 +43,7 @@ private
     params.require(:lesson_part).permit(:position)
   end
 
-  def serialize(lesson_part)
-    SimpleAMS::Renderer.new(
-      lesson_part,
-      serializer: LessonPartSerializer
-    )
+  def serialize(data)
+    LessonPartSerializer.render(data)
   end
 end
