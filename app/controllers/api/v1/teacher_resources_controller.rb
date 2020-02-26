@@ -28,7 +28,7 @@ private
   end
 
   def activity
-    @activity ||= Activity.find params[:activity_id]
+    @activity ||= Activity.with_attached_teacher_resources.find params[:activity_id]
   end
 
   def teacher_resource_params
