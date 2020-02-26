@@ -1,9 +1,5 @@
-class TeachingMethodSerializer
-  include SimpleAMS::DSL
+class TeachingMethodSerializer < Blueprinter::Base
+  identifier :id
 
-  adapter SimpleAMS::Adapters::AMS, root: false
-
-  fields :id, :name, :icon, :description
-
-  has_many :activities, serializer: ActivitySerializer
+  fields :name, :icon, :description
 end

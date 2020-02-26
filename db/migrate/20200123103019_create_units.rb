@@ -6,6 +6,7 @@ class CreateUnits < ActiveRecord::Migration[6.0]
       t.string :name, null: false, limit: 256
       t.string :overview, null: false, limit: 1024
       t.text :benefits, null: false
+      t.integer :position
 
       t.timestamps
     end

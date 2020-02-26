@@ -8,13 +8,7 @@ class Api::V1::ActivitiesController < Api::BaseController
       .where(lesson_part_id: params[:lesson_part_id])
       .all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        activities,
-        serializer: ActivitySerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(activities))
   end
 
   def show
@@ -22,7 +16,7 @@ class Api::V1::ActivitiesController < Api::BaseController
       .where(lesson_part_id: params[:lesson_part_id])
       .find(params[:id])
 
-    render(json: serialize(activity).to_json)
+    render(json: serialize(activity))
   end
 
   def create
@@ -31,7 +25,7 @@ class Api::V1::ActivitiesController < Api::BaseController
 
     Activity.transaction do
       if activity.save && set_teaching_methods(activity)
-        render(json: serialize(activity).to_json, status: :created)
+        render(json: serialize(activity), status: :created)
       else
         render(json: { errors: activity.errors.full_messages }, status: :bad_request)
       end
@@ -43,7 +37,7 @@ class Api::V1::ActivitiesController < Api::BaseController
 
     Activity.transaction do
       if activity.update(activity_params) && set_teaching_methods(activity)
-        render(json: serialize(activity).to_json, status: :ok)
+        render(json: serialize(activity), status: :ok)
       else
         render(json: { errors: activity.errors.full_messages }, status: :bad_request)
       end
@@ -78,12 +72,8 @@ private
     end
   end
 
-  def serialize(lesson_part)
-    SimpleAMS::Renderer.new(
-      lesson_part,
-      serializer: ActivitySerializer,
-      includes: [:teaching_methods]
-    )
+  def serialize(data)
+    ActivitySerializer.render(data)
   end
 
   def teaching_method_not_found(e)

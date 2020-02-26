@@ -2,15 +2,8 @@ class Api::V1::UnitsController < Api::BaseController
   def index
     units = Unit
       .where(complete_curriculum_programme_id: params[:ccp_id])
-      .all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        units,
-        serializer: UnitSerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(units))
   end
 
   def show
@@ -18,7 +11,7 @@ class Api::V1::UnitsController < Api::BaseController
       .where(complete_curriculum_programme_id: params[:ccp_id])
       .find(params[:id])
 
-    render(json: serialize(unit).to_json)
+    render(json: serialize(unit))
   end
 
   def create
@@ -26,7 +19,7 @@ class Api::V1::UnitsController < Api::BaseController
     unit = ccp.units.new(unit_params)
 
     if unit.save
-      render(json: serialize(unit).to_json, status: :created)
+      render(json: serialize(unit), status: :created)
     else
       render(json: { errors: unit.errors.full_messages }, status: :bad_request)
     end
@@ -36,7 +29,7 @@ class Api::V1::UnitsController < Api::BaseController
     unit = Unit.find_by!(id: params[:id], complete_curriculum_programme_id: params[:ccp_id])
 
     if unit.update(unit_params)
-      render(json: serialize(unit).to_json, status: :ok)
+      render(json: serialize(unit), status: :ok)
     else
       render(json: { errors: unit.errors.full_messages }, status: :bad_request)
     end
@@ -45,13 +38,10 @@ class Api::V1::UnitsController < Api::BaseController
 private
 
   def unit_params
-    params.require(:unit).permit(:name, :overview, :benefits)
+    params.require(:unit).permit(:name, :overview, :benefits, :position)
   end
 
-  def serialize(unit)
-    SimpleAMS::Renderer.new(
-      unit,
-      serializer: UnitSerializer
-    )
+  def serialize(data)
+    UnitSerializer.render(data)
   end
 end

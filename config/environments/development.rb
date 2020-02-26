@@ -60,6 +60,9 @@ Rails.application.configure do
     Bullet.raise = true
     Bullet.rails_logger = true
   end
+
+
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST', 'localhost:3000')
 end
 
 OpenApi::Rswag::Api.configure do |c|

@@ -104,4 +104,5 @@ Rails.application.configure do
 
   # Custom app config
   config.x.swagger_root = ENV.fetch('SWAGGER_ROOT') { Rails.root.join('docs', 'swagger') }
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST')
 end

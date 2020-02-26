@@ -30,6 +30,7 @@ gem "slim-rails"
 gem "redcarpet"
 gem "sentry-raven"
 gem "simple_ams"
+gem "blueprinter"
 gem "actionview-component"
 gem "aws-sdk-s3", require: false
 gem "govuk_design_system_formbuilder"
