@@ -2,7 +2,7 @@ module Seeders
   class ActivitySeeder < BaseSeeder
     attr_accessor :id, :name, :overview, :duration, :extra_requirements
 
-    def initialize(ccp, unit, lesson, lesson_part, name:, overview:, duration:, extra_requirements:)
+    def initialize(ccp, unit, lesson, lesson_part, name:, overview:, duration:, extra_requirements:, teaching_methods: [])
       @ccp         = ccp
       @unit        = unit
       @lesson      = lesson
@@ -12,6 +12,8 @@ module Seeders
       @overview           = overview
       @duration           = duration
       @extra_requirements = extra_requirements
+
+      @teaching_methods = teaching_methods
     end
 
     def identifier
@@ -49,7 +51,18 @@ module Seeders
     end
 
     def payload
-      { activity: attributes }
+      { activity: attributes, teaching_methods: @teaching_methods }
+    end
+
+    def teaching_method_objects
+      TeachingMethod.where(name: @teaching_methods)
+    end
+
+    def save_via_model
+      model_class.create!(attributes.merge(parent)).tap do |obj|
+        @id = obj.id
+        obj.teaching_methods << teaching_method_objects
+      end
     end
   end
 end

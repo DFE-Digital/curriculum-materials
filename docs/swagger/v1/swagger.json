@@ -120,6 +120,23 @@
             }
           }
         }
+      },
+      "teaching_methods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "teaching_method": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
       }
     }
   },
@@ -257,6 +274,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -276,7 +296,25 @@
                     "PVA Glue",
                     "Glitter"
                   ],
+<<<<<<< HEAD
+                  "default": true,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 1",
+                      "icon": "teaching-method-1",
+                      "description": "Teaching method description 1",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 2",
+                      "icon": "teaching-method-2",
+                      "description": "Teaching method description 2",
+                      "id": 2
+                    }
+                  ]
+=======
                   "default": true
+>>>>>>> development
                 }
               }
             }
@@ -348,7 +386,25 @@
                   "Glitter"
                 ],
                 "default": false,
+<<<<<<< HEAD
+                "id": 1,
+                "teaching_methods": [
+                  {
+                    "name": "Teaching method 3",
+                    "icon": "teaching-method-3",
+                    "description": "Teaching method description 3",
+                    "id": 1
+                  },
+                  {
+                    "name": "Teaching method 4",
+                    "icon": "teaching-method-4",
+                    "description": "Teaching method description 4",
+                    "id": 2
+                  }
+                ]
+=======
                 "id": 1
+>>>>>>> development
               }
             },
             "content": {
@@ -419,6 +475,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -438,7 +497,25 @@
                     "PVA Glue",
                     "Glitter"
                   ],
+<<<<<<< HEAD
+                  "default": false,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 5",
+                      "icon": "teaching-method-5",
+                      "description": "Teaching method description 5",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 6",
+                      "icon": "teaching-method-6",
+                      "description": "Teaching method description 6",
+                      "id": 2
+                    }
+                  ]
+=======
                   "default": false
+>>>>>>> development
                 }
               }
             }
@@ -1196,6 +1273,48 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/teaching_methods": {
+      "get": {
+        "summary": "retrieves all teaching methods",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "responses": {
+          "200": {
+            "description": "all teaching methods found",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 7",
+                "icon": "teaching-method-7",
+                "description": "Teaching method description 7",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/teaching_method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teaching_methods/{id}": {
+      "get": {
+        "summary": "retrieves the specified teaching method",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+=======
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources": {
       "get": {
         "summary": "Returns the activity's attached pupil_resources",
@@ -1439,6 +1558,7 @@
           },
           {
             "name": "activity_id",
+>>>>>>> development
             "in": "path",
             "required": true,
             "schema": {
@@ -1448,6 +1568,39 @@
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "with a valid id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 8",
+                "icon": "teaching-method-8",
+                "description": "Teaching method description 8",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "with a bad id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 9",
+                "icon": "teaching-method-9",
+                "description": "Teaching method description 9",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+=======
             "description": "teacher resources found",
             "examples": {
               "application/json": [
@@ -1522,10 +1675,13 @@
               "encoding": {
                 "teacher_resource": {
                   "contentType": "image/png"
+>>>>>>> development
                 }
               }
             }
           }
+<<<<<<< HEAD
+=======
         },
         "responses": {
           "201": {
@@ -1597,6 +1753,7 @@
           "204": {
             "description": "teacher resource removed"
           }
+>>>>>>> development
         }
       }
     },
