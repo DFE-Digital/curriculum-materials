@@ -29,7 +29,6 @@ gem "strong_migrations", "~> 0.5"
 gem "slim-rails"
 gem "redcarpet"
 gem "sentry-raven"
-gem "simple_ams"
 gem "blueprinter"
 gem "actionview-component"
 gem "aws-sdk-s3", require: false
