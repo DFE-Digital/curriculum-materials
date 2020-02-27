@@ -20,6 +20,27 @@ module Seeders
       @name
     end
 
+    def attach_slide_deck(path)
+      fail ArgumentError, @activity.errors.full_messages unless @activity.slide_deck.attach(
+        io: File.open(path),
+        filename: 'slides.odp'
+      )
+    end
+
+    def attach_teacher_resource(path)
+      fail ArgumentError, @activity.errors.full_messages unless @activity.teacher_resources.attach(
+        io: File.open(path),
+        filename: File.basename(path)
+      )
+    end
+
+    def attach_pupil_resources(path)
+      fail ArgumentError, @activity.errors.full_messages unless @activity.pupil_resources.attach(
+        io: File.open(path),
+        filename: File.basename(path)
+      )
+    end
+
   private
 
     def parent
@@ -59,7 +80,7 @@ module Seeders
     end
 
     def save_via_model
-      model_class.create!(attributes.merge(parent)).tap do |obj|
+      @activity = model_class.create!(attributes.merge(parent)).tap do |obj|
         @id = obj.id
         obj.teaching_methods << teaching_method_objects
       end

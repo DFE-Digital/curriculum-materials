@@ -103,8 +103,25 @@ unless Rails.env.test?
                     Seeders::ActivitySeeder.new(ccp, unit, lesson, lesson_part, **extract_attributes(activity_file, 'activity').merge(teaching_methods: teaching_methods)).tap do |activity|
                       log_progress("Saving activity: #{activity.name}", 4)
 
-                      # TODO add teaching methods
                       activity.save!
+
+                      # slide deck
+                      descendents(activity_file, '*.odp').each do |slide_deck_path|
+                        log_progress("Attaching slide deck", 5)
+                        activity.attach_slide_deck(slide_deck_path)
+                      end
+
+                      # teacher resources
+                      descendents(activity_file, "teacher/*").each do |attachment|
+                        log_progress("Attaching teacher resource: #{File.basename(attachment)}", 5)
+                        activity.attach_teacher_resource(attachment)
+                      end
+
+                      # pupil resources
+                      descendents(activity_file, "pupil/*").each do |attachment|
+                        log_progress("Attaching pupil resource: #{File.basename(attachment)}", 5)
+                        activity.attach_pupil_resources(attachment)
+                      end
                     end
                   end
                 end
