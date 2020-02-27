@@ -48,6 +48,7 @@ Rails.application.routes.draw do
               resources :activities, only: %i(index show create update) do
                 resources :pupil_resources, only: %i(index create destroy)
                 resources :teacher_resources, only: %i(index create destroy)
+                resource :slide_deck, only: %i(show create destroy)
               end
             end
           end
