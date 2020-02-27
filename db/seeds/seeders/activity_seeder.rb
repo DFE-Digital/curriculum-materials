@@ -21,27 +21,60 @@ module Seeders
     end
 
     def attach_slide_deck(path)
+      if seed_api_url.present?
+        attach_slide_deck_via_api(path)
+      else
+        attach_slide_deck_via_model(path)
+      end
+    end
+
+    def attach_teacher_resource(path)
+      if seed_api_url.present?
+        attach_teacher_resource_via_api(path)
+      else
+        attach_teacher_resource_via_model(path)
+      end
+    end
+
+    def attach_pupil_resource(path)
+      if seed_api_url.present?
+        attach_pupil_resource_via_api(path)
+      else
+        attach_pupil_resource_via_model(path)
+      end
+    end
+
+  private
+
+    def attach_slide_deck_via_api(path)
+    end
+
+    def attach_teacher_resource_via_api(path)
+    end
+
+    def attach_pupil_resource_via_api(path)
+    end
+
+    def attach_slide_deck_via_model(path)
       fail ArgumentError, @activity.errors.full_messages unless @activity.slide_deck.attach(
         io: File.open(path),
         filename: 'slides.odp'
       )
     end
 
-    def attach_teacher_resource(path)
+    def attach_teacher_resource_via_model(path)
       fail ArgumentError, @activity.errors.full_messages unless @activity.teacher_resources.attach(
         io: File.open(path),
         filename: File.basename(path)
       )
     end
 
-    def attach_pupil_resources(path)
+    def attach_pupil_resource_via_model(path)
       fail ArgumentError, @activity.errors.full_messages unless @activity.pupil_resources.attach(
         io: File.open(path),
         filename: File.basename(path)
       )
     end
-
-  private
 
     def parent
       { lesson_part_id: @lesson_part.id }

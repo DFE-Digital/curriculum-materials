@@ -120,7 +120,7 @@ unless Rails.env.test?
                       # pupil resources
                       descendents(activity_file, "pupil/*").each do |attachment|
                         log_progress("Attaching pupil resource: #{File.basename(attachment)}", 5)
-                        activity.attach_pupil_resources(attachment)
+                        activity.attach_pupil_resource(attachment)
                       end
                     end
                   end
