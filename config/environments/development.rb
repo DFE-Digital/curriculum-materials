@@ -59,6 +59,8 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.raise = true
     Bullet.rails_logger = true
+    # FIXME: Remove once https://github.com/flyerhzm/bullet/issues/474 is resolved
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: "ActiveStorage::Attachment", association: :blob
   end
 
 
