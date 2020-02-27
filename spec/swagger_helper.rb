@@ -26,10 +26,9 @@ RSpec.configure do |config|
             properties: {
               id: { type: :integer },
               name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
+              ratoinale: { type: :string }
             },
-            required: %i(name benefits overview)
+            required: %i(name rationale)
           },
           unit: {
             type: :object,

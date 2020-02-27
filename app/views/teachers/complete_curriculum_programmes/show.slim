@@ -4,12 +4,8 @@ h1 = @complete_curriculum_programme.name
 
 section
   h2.govuk-heading-m What is covered in #{@complete_curriculum_programme.year}
-  = markdown @complete_curriculum_programme.overview
+  = markdown @complete_curriculum_programme.rationale
 
 section.cards-container
   - @complete_curriculum_programme.units.each do |unit|
     = render "unit_card", unit: unit
-
-section class="govuk-!-margin-top-4"
-  h2.govuk-heading-m How the #{@complete_curriculum_programme.name} benefits pupils’ learning
-  = markdown @complete_curriculum_programme.benefits
