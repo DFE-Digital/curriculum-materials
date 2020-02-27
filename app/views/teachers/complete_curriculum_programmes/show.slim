@@ -2,8 +2,7 @@
 
 h1 = @complete_curriculum_programme.name
 
-section
-  h2.govuk-heading-m What is covered in #{@complete_curriculum_programme.year}
+section.rationale
   = markdown @complete_curriculum_programme.rationale
 
 section.cards-container
