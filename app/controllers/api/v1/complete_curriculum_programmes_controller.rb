@@ -36,7 +36,7 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
 private
 
   def ccp_params
-    params.require(:ccp).permit(:name, :overview, :benefits)
+    params.require(:ccp).permit(:name, :rationale)
   end
 
   def serialize(data)

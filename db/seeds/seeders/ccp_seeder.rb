@@ -2,10 +2,9 @@ module Seeders
   class CCPSeeder < BaseSeeder
     attr_accessor :id, :name, :overview, :benefits
 
-    def initialize(name:, overview:, benefits:)
-      @name     = name
-      @overview = overview
-      @benefits = benefits
+    def initialize(name:, rationale:)
+      @name      = name
+      @rationale = rationale
     end
 
     def identifier
@@ -27,7 +26,7 @@ module Seeders
     end
 
     def attributes
-      { name: @name, overview: @overview, benefits: @benefits }
+      { name: @name, rationale: @rationale }
     end
 
     def payload
