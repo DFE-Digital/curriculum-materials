@@ -51,5 +51,9 @@ Rails.application.configure do
   config.after_initialize do
     Bullet.enable = true
     Bullet.raise = true
+    # FIXME: Remove once https://github.com/flyerhzm/bullet/issues/474 is resolved
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: "ActiveStorage::Attachment", association: :blob
   end
+
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST', 'example.com')
 end

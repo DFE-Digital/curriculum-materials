@@ -39,12 +39,16 @@
           },
           "overview": {
             "type": "string"
+          },
+          "position": {
+            "type": "integer"
           }
         },
         "required": [
           "name",
           "benefits",
-          "overview"
+          "overview",
+          "position"
         ]
       },
       "lesson": {
@@ -104,6 +108,9 @@
           "id": {
             "type": "integer"
           },
+          "name": {
+            "type": "string"
+          },
           "overview": {
             "type": "string"
           },
@@ -115,6 +122,23 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "teaching_methods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "teaching_method": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
           }
         }
       }
@@ -168,21 +192,25 @@
             "examples": {
               "application/json": [
                 {
+                  "name": "Activity 1",
                   "overview": "Overview 1",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
                   ],
+                  "default": false,
                   "id": 1
                 },
                 {
+                  "name": "Activity 2",
                   "overview": "Overview 2",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
                   ],
+                  "default": false,
                   "id": 2
                 }
               ]
@@ -250,6 +278,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -262,11 +293,27 @@
             "examples": {
               "application/json": {
                 "activity": {
+                  "name": "Activity 3",
                   "overview": "Overview 3",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
+                  ],
+                  "default": true,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 1",
+                      "icon": "teaching-method-1",
+                      "description": "Teaching method description 1",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 2",
+                      "icon": "teaching-method-2",
+                      "description": "Teaching method description 2",
+                      "id": 2
+                    }
                   ]
                 }
               }
@@ -331,13 +378,29 @@
             "description": "activity found",
             "examples": {
               "application/json": {
+                "name": "Activity 4",
                 "overview": "Overview 4",
                 "duration": 20,
                 "extra_requirements": [
                   "PVA Glue",
                   "Glitter"
                 ],
-                "id": 1
+                "default": false,
+                "id": 1,
+                "teaching_methods": [
+                  {
+                    "name": "Teaching method 3",
+                    "icon": "teaching-method-3",
+                    "description": "Teaching method description 3",
+                    "id": 1
+                  },
+                  {
+                    "name": "Teaching method 4",
+                    "icon": "teaching-method-4",
+                    "description": "Teaching method description 4",
+                    "id": 2
+                  }
+                ]
               }
             },
             "content": {
@@ -408,6 +471,9 @@
                     "required": [
                       "activity"
                     ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
                   }
                 }
               }
@@ -420,11 +486,27 @@
             "examples": {
               "application/json": {
                 "activity": {
+                  "name": "Activity 5",
                   "overview": "Overview 5",
                   "duration": 20,
                   "extra_requirements": [
                     "PVA Glue",
                     "Glitter"
+                  ],
+                  "default": false,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 5",
+                      "icon": "teaching-method-5",
+                      "description": "Teaching method description 5",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 6",
+                      "icon": "teaching-method-6",
+                      "description": "Teaching method description 6",
+                      "id": 2
+                    }
                   ]
                 }
               }
@@ -537,12 +619,14 @@
                     "name": "Unit 1",
                     "overview": "Overview",
                     "benefits": "Benefits",
+                    "position": 1,
                     "id": 1
                   },
                   {
                     "name": "Unit 2",
                     "overview": "Overview",
                     "benefits": "Benefits",
+                    "position": 2,
                     "id": 2
                   }
                 ]
@@ -1183,6 +1267,684 @@
         }
       }
     },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources": {
+      "get": {
+        "summary": "Returns the activity's attached pupil_resources",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pupil resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Attaches a pupil resource to the activity",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pupil_resource": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "pupil_resource": {
+                  "contentType": "image/png"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "pupil_resouce created"
+          },
+          "400": {
+            "description": "invalid pupil_resource"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources/{pupil_resource_id}": {
+      "delete": {
+        "summary": "Removes the attached resource from the activity",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pupil_resource_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "pupil resource removed"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/slide_deck": {
+      "post": {
+        "summary": "Attaches a slide deck to the activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slide_deck": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "slide_deck": {
+                  "contentType": "application/vnd.oasis.opendocument.presentation"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "slide_deck created"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the slide deck for an activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "slide deck found",
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "url": "https://example.com/path-to-resource"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Removes the slide deck for an activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "slide deck removed"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources": {
+      "get": {
+        "summary": "Returns the activity's attached teacher_resources",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "teacher resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Attaches a teacher resource to the activity",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "teacher_resource": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "teacher_resource": {
+                  "contentType": "image/png"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "teacher_resouce created"
+          },
+          "400": {
+            "description": "invalid teacher_resource"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources/{teacher_resource_id}": {
+      "delete": {
+        "summary": "Removes the attached resource from the activity",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "teacher_resource_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "teacher resource removed"
+          }
+        }
+      }
+    },
+    "/teaching_methods": {
+      "get": {
+        "summary": "retrieves all teaching methods",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "responses": {
+          "200": {
+            "description": "all teaching methods found",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 7",
+                "icon": "teaching-method-7",
+                "description": "Teaching method description 7",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/teaching_method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teaching_methods/{id}": {
+      "get": {
+        "summary": "retrieves the specified teaching method",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with a valid id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 8",
+                "icon": "teaching-method-8",
+                "description": "Teaching method description 8",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "with a bad id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 9",
+                "icon": "teaching-method-9",
+                "description": "Teaching method description 9",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ccps/{ccp_id}/units": {
       "get": {
         "summary": "retrieves all units belonging to the provided CCP",
@@ -1208,12 +1970,14 @@
                   "name": "Unit 3",
                   "overview": "Overview",
                   "benefits": "Benefits",
+                  "position": 3,
                   "id": 1
                 },
                 {
                   "name": "Unit 4",
                   "overview": "Overview",
                   "benefits": "Benefits",
+                  "position": 4,
                   "id": 2
                 }
               ]
@@ -1272,6 +2036,7 @@
                   "name": "Unit 5",
                   "overview": "Overview",
                   "benefits": "Benefits",
+                  "position": 5,
                   "id": 1
                 }
               }
@@ -1315,6 +2080,7 @@
                 "name": "Unit 6",
                 "overview": "Overview",
                 "benefits": "Benefits",
+                "position": 6,
                 "id": 1,
                 "complete_curriculum_programme": {
                   "name": "CCP 5",
@@ -1435,7 +2201,8 @@
                 "unit": {
                   "name": "Unit 7",
                   "overview": "Overview",
-                  "benefits": "Benefits"
+                  "benefits": "Benefits",
+                  "position": 7
                 }
               }
             }

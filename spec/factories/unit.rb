@@ -4,6 +4,7 @@ FactoryBot.define do
     association(:complete_curriculum_programme, factory: :ccp)
     overview { "Overview" }
     benefits { "Benefits" }
+    sequence(:position) { |n| n }
 
     trait(:randomised) do
       name { Faker::Lorem.word.capitalize }

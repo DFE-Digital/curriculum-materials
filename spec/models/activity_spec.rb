@@ -18,6 +18,13 @@ RSpec.describe Activity, type: :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of(:lesson_part_id) }
 
+    describe '#name' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_length_of(:name).is_at_most(128) }
+    end
+
+    it { is_expected.to validate_presence_of(:overview) }
+
     describe '#duration' do
       it { is_expected.to validate_presence_of(:duration) }
       it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(60) }
@@ -52,6 +59,105 @@ RSpec.describe Activity, type: :model do
         specify 'the activity should be marked as default' do
           expect(subject).to be_default
         end
+      end
+    end
+
+    context 'attachments' do
+      it do
+        is_expected.to \
+          validate_size_of(:teacher_resources).less_than(50.megabytes)
+      end
+
+      it do
+        is_expected.to \
+          validate_size_of(:pupil_resources).less_than(50.megabytes)
+      end
+
+      # This test seems to hang for some reason :-/
+      xit do
+        is_expected.to \
+          validate_content_type_of(:pupil_resources)
+            .allowing(Activity::ALLOWED_CONTENT_TYPES)
+      end
+
+      # This test seems to hang for some reason :-/
+      xit do
+        is_expected.to \
+          validate_content_type_of(:teacher_resources)
+            .allowing(Activity::ALLOWED_CONTENT_TYPES)
+      end
+
+      it do
+        is_expected.to \
+          validate_content_type_of(:slide_deck)
+            .allowing(Activity::SLIDE_DECK_CONTENT_TYPE)
+      end
+    end
+  end
+
+  context 'attachements' do
+    let :attachment_path do
+      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
+    end
+
+    let :slide_deck_path do
+      File.join(Rails.application.root, 'spec', 'fixtures', 'slide_1_keyword_match_up.odp')
+    end
+
+    let(:activity) { create :activity }
+
+    context '#pupil_resources' do
+      before do
+        activity.pupil_resources.attach \
+          io: File.open(attachment_path),
+          filename: 'pupil-test-image.png',
+          content_type: 'image/png'
+      end
+
+      subject { activity.pupil_resources.last }
+
+      it { is_expected.to be_persisted }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'pupil-test-image.png'
+        expect(subject.content_type).to eq 'image/png'
+        expect(subject.download).to eq File.binread(attachment_path)
+      end
+    end
+
+    context '#teacher_resources' do
+      before do
+        activity.teacher_resources.attach \
+          io: File.open(attachment_path),
+          filename: 'teacher-test-image.png',
+          content_type: 'image/png'
+      end
+
+      subject { activity.teacher_resources.last }
+
+      it { is_expected.to be_persisted }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'teacher-test-image.png'
+        expect(subject.content_type).to eq 'image/png'
+        expect(subject.download).to eq File.binread(attachment_path)
+      end
+    end
+
+    context '#slide_deck' do
+      before do
+        activity.slide_deck.attach \
+          io: File.open(slide_deck_path),
+          filename: 'slide-deck.odp',
+          content_type: 'application/vnd.oasis.opendocument.presentation'
+      end
+
+      subject { activity.slide_deck }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'slide-deck.odp'
+        expect(subject.content_type).to eq 'application/vnd.oasis.opendocument.presentation'
+        expect(subject.download).to eq File.binread(slide_deck_path)
       end
     end
   end

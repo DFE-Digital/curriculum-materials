@@ -29,9 +29,12 @@ gem "strong_migrations", "~> 0.5"
 gem "slim-rails"
 gem "redcarpet"
 gem "sentry-raven"
-gem "simple_ams"
+gem "blueprinter"
 gem "actionview-component"
+gem "aws-sdk-s3", require: false
 gem "govuk_design_system_formbuilder"
+gem "active_storage_validations"
+gem "delayed_job_active_record"
 
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data
@@ -59,6 +62,8 @@ group :development, :test do
 
   gem "bullet", "~> 6.1"
   gem 'open_api-rswag'
+  gem "brakeman", "4.7.2"
+  gem 'faraday', require: false
 end
 
 group :development do
@@ -69,7 +74,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-  gem "brakeman", "4.7.2"
 end
 
 group :test do

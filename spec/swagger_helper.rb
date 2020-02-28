@@ -26,19 +26,19 @@ RSpec.configure do |config|
             properties: {
               id: { type: :integer },
               name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
+              ratoinale: { type: :string }
             },
-            required: %i(name benefits overview)
+            required: %i(name rationale)
           },
           unit: {
             type: :object,
             properties: {
               name: { type: :string },
               benefits: { type: :string },
-              overview: { type: :string }
+              overview: { type: :string },
+              position: { type: :integer }
             },
-            required: %i(name benefits overview)
+            required: %i(name benefits overview position)
           },
           lesson: {
             type: :object,
@@ -68,11 +68,24 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               id: { type: :integer },
+              name: { type: :string },
               overview: { type: :string },
               duration: { type: :integer },
               extra_requirements: {
                 type: :array, items: { type: :string }
               }
+            }
+          },
+          teaching_methods: {
+            type: :array, items: { type: :string }
+          },
+
+          # metadata
+          teaching_method: {
+            type: :object,
+            properties: {
+              name: { type: :string },
+              icon: { type: :string }
             }
           }
         }

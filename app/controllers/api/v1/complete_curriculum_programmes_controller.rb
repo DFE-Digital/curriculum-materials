@@ -2,13 +2,7 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
   def index
     ccps = CompleteCurriculumProgramme.all
 
-    render(
-      json: SimpleAMS::Renderer::Collection.new(
-        ccps,
-        serializer: CompleteCurriculumProgrammeSerializer,
-        includes: []
-      ).to_json
-    )
+    render(json: serialize(ccps))
   end
 
   def show
@@ -16,14 +10,14 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
       .eager_load(:units)
       .find(params[:id])
 
-    render(json: serialize(ccp).to_json)
+    render(json: serialize(ccp))
   end
 
   def create
     ccp = CompleteCurriculumProgramme.new(ccp_params)
 
     if ccp.save
-      render(json: serialize(ccp).to_json, status: :created)
+      render(json: serialize(ccp), status: :created)
     else
       render(json: { errors: ccp.errors.full_messages }, status: :bad_request)
     end
@@ -33,7 +27,7 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
     ccp = CompleteCurriculumProgramme.find(params[:id])
 
     if ccp.update(ccp_params)
-      render(json: serialize(ccp).to_json, status: :ok)
+      render(json: serialize(ccp), status: :ok)
     else
       render(json: { errors: ccp.errors.full_messages }, status: :bad_request)
     end
@@ -42,13 +36,10 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
 private
 
   def ccp_params
-    params.require(:ccp).permit(:name, :overview, :benefits)
+    params.require(:ccp).permit(:name, :rationale)
   end
 
-  def serialize(ccp)
-    SimpleAMS::Renderer.new(
-      ccp,
-      serializer: CompleteCurriculumProgrammeSerializer
-    )
+  def serialize(data)
+    CompleteCurriculumProgrammeSerializer.render(data)
   end
 end

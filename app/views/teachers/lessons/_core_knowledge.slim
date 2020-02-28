@@ -1,5 +1,6 @@
 section.core-knowledge-for-teachers
-  h2.govuk-heading-m Core knowledge for teachers
+  h2.govuk-heading-m
+    =t(:heading, scope: :core_knowledge)
 
   p
-    = lesson.core_knowledge
+    = markdown(lesson.core_knowledge)

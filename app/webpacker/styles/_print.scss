@@ -1,0 +1,26 @@
+// scss-lint:disable QualifyingElement IdSelector
+@media print {
+  @page {
+    margin: 2rem;
+  }
+
+  a.govuk-footer__copyright-logo::after {
+    display: none;
+  }
+
+  .govuk-header,
+  .govuk-phase-banner,
+  .govuk-breadcrumbs,
+  .govuk-tabs .govuk-tabs__list,
+  .govuk-tabs .govuk-tabs__title,
+  .govuk-table__header.alternative-content,
+  .govuk-table__cell.alternative-content,
+  #downloads.govuk-tabs__panel {
+    display: none;
+  }
+
+  #lesson-contents.govuk-tabs__panel {
+    page-break-before: always;
+  }
+}
+// scss-lint:enable QualifyingElement IdSelector

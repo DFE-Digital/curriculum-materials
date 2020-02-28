@@ -10,17 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_102442) do
+ActiveRecord::Schema.define(version: 2020_02_28_094121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.jsonb "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "activities", force: :cascade do |t|
     t.integer "lesson_part_id", null: false
     t.text "overview"
     t.integer "duration", null: false
-    t.string "extra_requirements", limit: 32, array: true
+    t.string "extra_requirements", limit: 32, default: [], array: true
+    t.string "name", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lesson_part_id"], name: "index_activities_on_lesson_part_id"
@@ -49,11 +71,25 @@ ActiveRecord::Schema.define(version: 2020_02_18_102442) do
 
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
-    t.string "overview", limit: 1024, null: false
-    t.text "benefits", null: false
+    t.text "rationale", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "lesson_parts", force: :cascade do |t|
@@ -73,8 +109,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_102442) do
     t.text "summary"
     t.integer "position"
     t.text "core_knowledge"
-    t.string "vocabulary", array: true
-    t.string "misconceptions", array: true
+    t.string "vocabulary", default: [], array: true
+    t.string "misconceptions", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.hstore "previous_knowledge"
@@ -102,12 +138,14 @@ ActiveRecord::Schema.define(version: 2020_02_18_102442) do
     t.string "name", limit: 256, null: false
     t.string "overview", limit: 1024, null: false
     t.text "benefits", null: false
+    t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["complete_curriculum_programme_id"], name: "index_units_on_complete_curriculum_programme_id"
     t.index ["name"], name: "index_units_on_name"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "lesson_parts"
   add_foreign_key "activity_choices", "activities"
   add_foreign_key "activity_choices", "lesson_parts"
@@ -115,6 +153,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_102442) do
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
   add_foreign_key "lesson_parts", "activities", column: "default_activity_id"
+  add_foreign_key "lesson_parts", "lessons"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"
 end

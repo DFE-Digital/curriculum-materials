@@ -5,6 +5,14 @@ module ApplicationHelper
     end
   end
 
+  def cancel_button(path, text: 'Cancel')
+    secondary_button(path, text: text)
+  end
+
+  def secondary_button(path, text:)
+    link_to(text, path, class: %w(govuk-button govuk-button--secondary))
+  end
+
   def breadcrumbs(crumbs: {}, current_page:)
     content_for(:breadcrumbs) do
       render(Page::BreadcrumbsComponent, crumbs: crumbs, current_page: current_page)

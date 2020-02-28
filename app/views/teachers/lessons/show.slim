@@ -18,7 +18,8 @@
           = link_to 'Downloads', '#downloads', class: 'govuk-tabs__tab'
 
       section#knowledge-overview.govuk-tabs__panel
-        h2 Understand the aims of the lesson
+        h2
+          =t(:heading, scope: :knowledge_overview)
 
         = markdown(@lesson.summary)
         = render 'core_knowledge', lesson: @lesson
@@ -26,10 +27,15 @@
         = render 'misconceptions', lesson: @lesson
         = render 'previous_knowledge', lesson: @lesson
 
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents')
+
       section#lesson-contents.govuk-tabs__panel
-        h2 Lesson contents
+        h2
+          =t(:heading, scope: :lesson_contents)
 
         = render 'lesson_contents', lesson: @lesson
+
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads')
 
       section#downloads.govuk-tabs__panel
         h2 Downloads

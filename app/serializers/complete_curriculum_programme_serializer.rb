@@ -1,10 +1,5 @@
-class CompleteCurriculumProgrammeSerializer
-  include SimpleAMS::DSL
+class CompleteCurriculumProgrammeSerializer < Blueprinter::Base
+  identifier :id
 
-  adapter SimpleAMS::Adapters::AMS, root: false
-
-  fields :id, :name, :overview, :benefits
-  generic :include_embedded_data, false
-
-  has_many :units, serializer: UnitSerializer
+  fields :name, :rationale
 end

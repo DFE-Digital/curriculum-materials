@@ -10,6 +10,7 @@ require "support/api_examples"
 require "support/logged_in_teacher"
 require "faker"
 require "action_view/component/test_helpers"
+require "active_storage_validations/matchers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -66,6 +67,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include ActionView::Component::TestHelpers, type: :component
+  config.include ActiveStorageValidations::Matchers
 end
 
 Shoulda::Matchers.configure do |config|

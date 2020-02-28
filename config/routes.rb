@@ -14,11 +14,15 @@ Rails.application.routes.draw do
       get '/:token', to: 'sessions#create', as: 'create'
     end
 
-    resources :complete_curriculum_programmes, only: %i(index show)
+    resources :complete_curriculum_programmes, only: %i(index show), path: 'complete-curriculum-programmes'
 
     resources :units, only: %i(show)
 
-    resources :lessons, only: %i(show)
+    resources :lessons, only: %i(show) do
+      member do
+        get :print
+      end
+    end
 
     resources :lesson_parts, only: %i(show) do
       resource :activity_choice, only: %i(new create edit update), as: :choice
@@ -41,11 +45,17 @@ Rails.application.routes.draw do
         resources :units, only: %i(index show create update) do
           resources :lessons, only: %i(index show create update) do
             resources :lesson_parts, only: %i(index show create update) do
-              resources :activities, only: %i(index show create update)
+              resources :activities, only: %i(index show create update) do
+                resources :pupil_resources, only: %i(index create destroy)
+                resources :teacher_resources, only: %i(index create destroy)
+                resource :slide_deck, only: %i(show create destroy)
+              end
             end
           end
         end
       end
+
+      resources :teaching_methods, only: %i(index show)
     end
   end
 end
