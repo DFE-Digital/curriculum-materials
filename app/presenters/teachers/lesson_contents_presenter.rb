@@ -22,6 +22,7 @@ module Teachers
       @contents = lesson
         .lesson_parts
         .each_with_object({}) { |lesson_part, hash| hash[lesson_part] = lesson_part.activity_for(teacher) }
+        .reject { |_, activity| activity.nil? }
         .map { |lesson_part, activity| Slot.new(lesson_part, activity) }
     end
   end
