@@ -1,0 +1,14 @@
+activity:
+  name: Write about a king
+  overview: |-
+    Get students to think about persuasive writing techniques they have used in
+    English or other subjects. Draw their attention to the bank of techniques
+    and ask them to produce a paragraph of persuasive writing about their
+    preferred candidate.
+  duration: 15
+  extra_requirements: []
+  default: false
+
+teaching_methods:
+  # FIXME this is listed as persuasive writing in the source
+  - Writing
