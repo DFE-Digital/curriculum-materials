@@ -21,7 +21,7 @@ module Seeders
     end
 
     def attach_slide_deck(path)
-      if seed_api_url.present?
+      if api_mode_enabled?
         attach_slide_deck_via_api(path)
       else
         attach_slide_deck_via_model(path)
@@ -29,7 +29,7 @@ module Seeders
     end
 
     def attach_teacher_resource(path)
-      if seed_api_url.present?
+      if api_mode_enabled?
         attach_teacher_resource_via_api(path)
       else
         attach_teacher_resource_via_model(path)
@@ -37,7 +37,7 @@ module Seeders
     end
 
     def attach_pupil_resource(path)
-      if seed_api_url.present?
+      if api_mode_enabled?
         attach_pupil_resource_via_api(path)
       else
         attach_pupil_resource_via_model(path)
@@ -47,12 +47,53 @@ module Seeders
   private
 
     def attach_slide_deck_via_api(path)
+      save_file_via_api(
+        endpoint(
+          Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_slide_deck_path(
+            *path_args, @id
+          )
+        ),
+        :slide_deck,
+        path
+      )
     end
 
     def attach_teacher_resource_via_api(path)
+      save_file_via_api(
+        endpoint(
+          Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_teacher_resources_path(
+            *path_args, @id
+          )
+        ),
+        :teacher_resource,
+        path
+      )
     end
 
     def attach_pupil_resource_via_api(path)
+      save_file_via_api(
+        endpoint(
+          Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_teacher_resources_path(
+            *path_args, @id
+          )
+        ),
+        :pupil_resource,
+        path
+      )
+    end
+
+    def save_file_via_api(path, param, file)
+      conn = Faraday.new(url: path) do |faraday|
+        faraday.request :multipart
+        faraday.request :url_encoded
+        faraday.adapter Faraday.default_adapter
+      end
+
+      # ActiveStorage will identify the content type, just set it to
+      # something generic for the time being
+      upload = Faraday::UploadIO.new(file, 'application/octet-stream')
+
+      conn.post(path, param => upload)
     end
 
     def attach_slide_deck_via_model(path)
@@ -85,12 +126,11 @@ module Seeders
     end
 
     def path
-      Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activities_path(
-        @ccp.id,
-        @unit.id,
-        @lesson.id,
-        @lesson_part.id
-      )
+      Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activities_path(*path_args)
+    end
+
+    def path_args
+      [@ccp.id, @unit.id, @lesson.id, @lesson_part.id]
     end
 
     def attributes

@@ -5,12 +5,12 @@ module Seeders
   # * API mode - active when the environment variable SEED_API_URL is present
   # * Model mode - active when SEED_API_URL is absent
   class BaseSeeder
-    def endpoint
-      seed_api_url + path
+    def endpoint(overridden_path = nil)
+      seed_api_url + (overridden_path || path)
     end
 
     def save!
-      if seed_api_url.present?
+      if api_mode_enabled?
         save_via_api
       else
         save_via_model
@@ -22,6 +22,10 @@ module Seeders
     end
 
   private
+
+    def api_mode_enabled?
+      seed_api_url.present?
+    end
 
     def save_via_model
       model_class.create!(attributes.merge(parent)).tap do |obj|
