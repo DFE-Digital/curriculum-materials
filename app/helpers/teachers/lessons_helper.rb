@@ -11,7 +11,7 @@ module Teachers
 
     def activity_icon(teaching_method)
       image_tag(
-        asset_pack_path("media/images/placeholder-icons/#{teaching_method.icon}.png"),
+        asset_pack_path("media/images/activity-icons/#{teaching_method.icon}.png"),
         width: '75px',
         alt: "#{teaching_method.description} icon"
       )
