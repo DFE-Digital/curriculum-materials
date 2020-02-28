@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_092814) do
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
-    t.text "metadata"
+    t.jsonb "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
