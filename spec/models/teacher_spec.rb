@@ -61,23 +61,23 @@ RSpec.describe Teacher, type: :model do
 
     let! :teacher_1_choice do
       create :activity_choice,
-        teacher: teacher_1,
-        lesson_part: lesson_1_part,
-        activity: lesson_1_part_activity_1
+             teacher: teacher_1,
+             lesson_part: lesson_1_part,
+             activity: lesson_1_part_activity_1
     end
 
     let! :teacher_1_choice_for_other_lesson do
       create :activity_choice,
-        teacher: teacher_1,
-        lesson_part: lesson_2_part,
-        activity: lesson_2_part_activity_1
+             teacher: teacher_1,
+             lesson_part: lesson_2_part,
+             activity: lesson_2_part_activity_1
     end
 
     let! :teacher_2_choice do
       create :activity_choice,
-        teacher: teacher_2,
-        lesson_part: lesson_1_part,
-        activity: lesson_1_part_activity_2
+             teacher: teacher_2,
+             lesson_part: lesson_1_part,
+             activity: lesson_1_part_activity_2
     end
 
     subject { teacher_1.chosen_activities lesson_1 }
