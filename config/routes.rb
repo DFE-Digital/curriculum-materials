@@ -14,19 +14,18 @@ Rails.application.routes.draw do
       get '/:token', to: 'sessions#create', as: 'create'
     end
 
-    resources :complete_curriculum_programmes, only: %i(index show), path: 'complete-curriculum-programmes'
-
-    resources :units, only: %i(show)
-
-    resources :lessons, only: %i(show) do
-      member do
-        get :print
+    resources :complete_curriculum_programmes, only: %i(index show), path: 'complete-curriculum-programmes' do
+      resources :units, only: %i(show), shallow: true do
+        resources :lessons, only: %i(show), shallow: true do
+          member do
+            get :print
+          end
+          resources :lesson_parts, only: %i(show), shallow: true do
+            resource :activity_choice, only: %i(new create edit update), as: :choice, shallow: true
+          end
+          resources :downloads, only: %i(show create), shallow: true
+        end
       end
-      resources :downloads, only: %i(show create), shallow: true
-    end
-
-    resources :lesson_parts, only: %i(show) do
-      resource :activity_choice, only: %i(new create edit update), as: :choice
     end
 
     resource :logged_out, only: %i(show), controller: 'logged_out'
