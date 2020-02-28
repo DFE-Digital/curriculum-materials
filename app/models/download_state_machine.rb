@@ -3,9 +3,9 @@ class DownloadStateMachine
 
   state :pending, initial: true
   state :completed
-  #state :failed TODO handle failure case
+  state :failed
 
-  transition from: :pending, to: %i(completed)
+  transition from: :pending, to: %i(completed failed)
 
   guard_transition from: :pending, to: :completed do |download|
     download.lesson_bundle.attached?
