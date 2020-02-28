@@ -1,5 +1,13 @@
 class Activity < ApplicationRecord
-  ALLOWED_CONTENT_TYPES = %w(image/png).freeze
+  ALLOWED_CONTENT_TYPES = %w(
+    application/pdf
+    application/vnd.oasis.opendocument.text
+    image/gif
+    image/jpeg
+    image/jpg
+    image/png
+  ).freeze
+
   SLIDE_DECK_CONTENT_TYPE = 'application/vnd.oasis.opendocument.presentation'.freeze
   MAX_UPLOAD_SIZE = 50.megabytes
 
