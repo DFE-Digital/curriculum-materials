@@ -34,6 +34,7 @@ gem "actionview-component"
 gem "aws-sdk-s3", require: false
 gem "govuk_design_system_formbuilder"
 gem "active_storage_validations"
+gem "delayed_job_active_record"
 
 # FIXME we're using factorybot and faker for seed data, move them back to
 # development/test once we're up and running with real data
