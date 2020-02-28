@@ -1,0 +1,13 @@
+activity:
+  name: "Understand propaganda: create a poster"
+  overview: |-
+    Discuss examples of political propaganda with students. Draw out what makes
+    an effective piece of political propaganda and get students to apply this
+    to the candidates for the throne in 1066. Sketches should be rough as this
+    isn’t an artistic challenge. The focus should be on conveying a message.
+  duration: 15
+  extra_requirements: []
+  default: true
+
+teaching_methods:
+  - Poster

@@ -34,4 +34,12 @@ RSpec.describe Teachers::LessonContentsPresenter do
       end
     end
   end
+
+  context 'when a lesson part has no activities' do
+    let!(:lesson_part_with_no_activities) { create(:lesson_part, lesson: lesson) }
+
+    it 'should be omitted from the slots' do
+      expect(subject.contents.map(&:lesson_part_id)).not_to include(lesson_part_with_no_activities.id)
+    end
+  end
 end

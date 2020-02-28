@@ -10,23 +10,8 @@ module Teachers
     end
 
     def activity_icon(teaching_method)
-      # FIXME replace this when we get a proper set of icons with
-      #       a real naming convention, etc.
-
-      # options currently are:
-      #
-      # thumb-formative-inv.png
-      # thumb-group-inv.png
-      # thumb-individual-inv.png
-      # thumb-pair-inv.png
-      # thumb-practical-inv.png
-      # thumb-reading-inv.png
-      # thumb-whole-inv.png
-      # thumb-worksheet-inv.png
-      # thumb-writing-inv.png
-
       image_tag(
-        asset_pack_path("media/images/placeholder-icons/thumb-#{teaching_method.icon}-inv.png"),
+        asset_pack_path("media/images/activity-icons/#{teaching_method.icon}.png"),
         width: '75px',
         alt: "#{teaching_method.description} icon"
       )
