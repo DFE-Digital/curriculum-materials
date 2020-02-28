@@ -8,7 +8,9 @@
 # * a complete curriculum program contains units,
 # * a units contains lessons,
 # * a lesson contains lesson parts,
-# * a lesson part contains activities.
+# * a lesson part contains activities,
+# * activities may contain a single slide deck and multiple teacher
+#   and pupil resources
 #
 # For consistency, this structure also requires that the descendents of a node
 # in the hierarchy are placed in a directory that matches its name. For
@@ -16,7 +18,7 @@
 # `the-norman-invasion` directory containing its units.
 #
 # Here's a full example of an example CCP with one unit, one lesson, five parts
-# and eight activities.
+# and eight activities; one with resources:
 #
 # db/seeds
 # └── data
@@ -29,6 +31,13 @@
 #                 └── prelude-to-the-battle
 #                     ├── 1                                             <--- Lesson part
 #                     │   ├── keyword-matching.yml                      <--- Activity
+#                     │   ├── keyword-matching
+#                     │   │   ├── pupil
+#                     │   │   │   ├── normans.odt                       <--- Pupil resource
+#                     │   │   │   └── the-house-of-normandy.pdf
+#                     │   │   ├── slides.odp                            <--- Activity slide deck
+#                     │   │   └── teacher
+#                     │   │       └── norman-conquest.gif               <--- Teacher resource
 #                     │   └── ordering-the-battle-events.yml
 #                     ├── 2
 #                     │   ├── the-story-of-the-battle.yml
