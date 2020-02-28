@@ -2,7 +2,7 @@ module Seeders
   class ActivitySeeder < BaseSeeder
     attr_accessor :id, :name, :overview, :duration, :extra_requirements
 
-    def initialize(ccp, unit, lesson, lesson_part, name:, overview:, duration:, extra_requirements:, teaching_methods: [])
+    def initialize(ccp, unit, lesson, lesson_part, name:, overview:, duration:, extra_requirements:, teaching_methods: [], default: false)
       @ccp         = ccp
       @unit        = unit
       @lesson      = lesson
@@ -12,6 +12,7 @@ module Seeders
       @overview           = overview
       @duration           = duration
       @extra_requirements = extra_requirements
+      @default            = default
 
       @teaching_methods = teaching_methods
     end
@@ -139,8 +140,7 @@ module Seeders
         overview: @overview,
         duration: @duration,
         extra_requirements: @extra_requirements,
-
-        default: false
+        default: @default
       }
     end
 
