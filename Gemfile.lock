@@ -302,6 +302,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    statesman (7.1.0)
     strong_migrations (0.5.1)
       activerecord (>= 5)
     temple (0.8.2)
@@ -370,6 +371,7 @@ DEPENDENCIES
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
+  statesman (~> 7.1.0)
   strong_migrations (~> 0.5)
   tzinfo-data
   web-console (>= 3.3.0)
