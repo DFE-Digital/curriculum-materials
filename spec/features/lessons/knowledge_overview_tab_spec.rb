@@ -14,7 +14,7 @@ RSpec.feature "Knowledge overview tab", type: :feature do
       'Vocabulary',
       'Common misconceptions',
       'Building on previous knowledge',
-      'Core knowledge for teachers'
+      'Core knowledge for pupils'
     ].each do |heading|
       expect(page).to have_css('h2', text: heading)
     end
