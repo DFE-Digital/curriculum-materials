@@ -23,7 +23,13 @@ class LessonPart < ApplicationRecord
 private
 
   def selected_activity(teacher)
-    ActivityChoice.find_by(teacher_id: teacher.id, lesson_part_id: id)&.activity
+    # if we've eager loaded the activity_choices already, loop through
+    # rather than execute a new query
+    if activity_choices.loaded?
+      activity_choices.detect { |ac| ac.teacher_id == teacher.id }&.activity
+    else
+      activity_choices.find_by(teacher_id: teacher.id)&.activity
+    end
   end
 
   def fallback_activity
