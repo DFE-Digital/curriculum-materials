@@ -14,17 +14,9 @@ class Download < ApplicationRecord
     initial_state: :pending
   ]
 
+  delegate :transition_to!, :current_state, :in_state?, to: :state_machine
+
   def state_machine
     @state_machine ||= DownloadStateMachine.new(self, transition_class: DownloadTransition)
-  end
-
-  delegate :transition_to!, :current_state, to: :state_machine
-
-  def completed?
-    current_state == 'completed'
-  end
-
-  def pending?
-    current_state == 'pending'
   end
 end

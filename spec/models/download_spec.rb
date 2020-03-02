@@ -51,7 +51,7 @@ describe Download, type: :model do
         expect { subject.transition_to! :completed }.to \
           raise_error Statesman::GuardFailedError
 
-        expect(subject).to be_pending
+        expect(subject).to be_in_state(:pending)
       end
     end
 
@@ -65,7 +65,7 @@ describe Download, type: :model do
 
       it 'can transition to completed' do
         subject.transition_to! :completed
-        expect(subject).to be_completed
+        expect(subject).to be_in_state(:completed)
       end
     end
   end
