@@ -42,8 +42,9 @@ section.lesson-plan
                 - slot.teaching_methods.each do |tm|
                   li
                     = activity_icon(tm)
-                    = tm.name
 
+                    div
+                      = tm.name
 
             td.main-content.govuk-table__cell
               article
@@ -55,7 +56,6 @@ section.lesson-plan
               .files
                 / lp.file_formats.to_sentence
                 =< link_to 'Preview', '#'
-
 
               section.extra-requirements
                 - slot.extra_requirements.each do |er|

@@ -13,7 +13,7 @@ module Teachers
       image_tag(
         asset_pack_path("media/images/activity-icons/#{teaching_method.icon}.png"),
         width: '75px',
-        alt: "#{teaching_method.description} icon"
+        alt: "#{teaching_method.name} icon"
       )
     end
 
