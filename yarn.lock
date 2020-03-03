@@ -692,10 +692,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@dfe-digital/presentation-merger@0.0.1-alpha.1":
-  version "0.0.1-alpha.1"
-  resolved "https://npm.pkg.github.com/download/@dfe-digital/presentation-merger/0.0.1-alpha.1/2867b2bc207e66cd3f6dd22bdd86bf7ef29181d3489fa30a8b8c13342c29e340#589de21dbb0e3a9a7b0f47cd886bc34292b530ce"
-  integrity sha512-/i59sRx1p6+Ab8Z/5bn+ZvCTjcE7ZzluloqF7ZWszs7ApOJL30SXNIn/jex4Fmq2tlS81hz9K3n2yEe6D1udrw==
+"@dfe-digital/presentation-merger@^0.0.1-alpha.2":
+  version "0.0.1-alpha.2"
+  resolved "https://npm.pkg.github.com/download/@dfe-digital/presentation-merger/0.0.1-alpha.2/9e87ec27137a9173b5a757344d1956a451315044f123af39af5ee06d7fe11b6e#0ebcc79151c30c8d54590003c73853f7c8e1fd42"
+  integrity sha512-4j6BYKasnVMecW5FFur8nOJ+eJdRDE7oDW9lOU1soobVVgDc9T1hMANmK9LLKsDxuJCqLaiEwWEOU0gp0+SvbA==
   dependencies:
     "@prettier/plugin-xml" "^0.7.2"
     chalk "^3.0.0"
