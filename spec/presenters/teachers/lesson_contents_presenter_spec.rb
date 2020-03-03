@@ -43,4 +43,24 @@ RSpec.describe Teachers::LessonContentsPresenter do
       expect(subject.contents.map(&:lesson_part_id)).not_to include(lesson_part_with_no_activities.id)
     end
   end
+
+  context 'Slot#resources' do
+    let :activity do
+      create :activity,
+             :with_pupil_resources, # previewable
+             :with_teacher_resources, # previewable
+             :with_slide_deck # not yet previewable
+    end
+
+    let :slot do
+      described_class.new(activity.lesson_part.lesson, teacher).contents.last
+    end
+
+    subject { slot.resources }
+
+    specify %{returns the previewable resources for the activity} do
+      is_expected.to \
+        match_array(activity.pupil_resources + activity.teacher_resources)
+    end
+  end
 end

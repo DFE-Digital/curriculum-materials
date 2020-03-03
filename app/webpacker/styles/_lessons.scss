@@ -35,17 +35,17 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
       font-size: 4rem;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       flex-shrink: 0;
     }
 
     .teaching-methods {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       text-align: center;
       flex-shrink: 0;
       flex-basis: 150px;
+      padding-top: 0.4rem;
 
       .teaching-method {
         margin: inherit inherit 0.5rem 0;
@@ -152,4 +152,14 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
   .govuk-tabs__list-item.govuk-tabs__list-item--selected {
     background-color: $lesson-part-blue;
   }
+}
+
+.resource-badge {
+  margin-left: 0.3rem;
+  border: 1px solid govuk-colour("dark-blue");
+  padding: 0.1rem;
+  background-color: govuk-colour("white");
+  font-size: 16px;
+  color: govuk-colour("dark-blue");
+  text-transform: none;
 }
