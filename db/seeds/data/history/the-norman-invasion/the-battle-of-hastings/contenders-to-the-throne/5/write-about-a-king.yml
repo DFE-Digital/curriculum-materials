@@ -10,5 +10,4 @@ activity:
   default: false
 
 teaching_methods:
-  # FIXME this is listed as persuasive writing in the source
-  - Writing
+  - Do it now

@@ -1,6 +1,10 @@
 [
   {
     name: "Do it now",
+    icon: "writing"
+  },
+  {
+    name: "Writing",
     icon: "writing",
     description: "Help pupils to understand a topic by writing about it"
   },
