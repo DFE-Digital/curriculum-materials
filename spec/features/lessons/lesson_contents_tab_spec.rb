@@ -12,20 +12,20 @@ RSpec.feature "Lesson contents tab", type: :feature do
     within('ul.govuk-tabs__list') { click_on 'Lesson contents' }
   end
 
-  specify 'the page should contain a table of lesson parts' do
-    expect(page).to have_css('table.lesson-parts')
+  specify 'the page should contain a list of lesson parts' do
+    expect(page).to have_css('.lesson-parts > .lesson-part')
   end
 
-  specify 'there should be one row per lesson part' do
-    within('table.lesson-parts > tbody') do
-      expect(page).to have_css('tr', count: lesson_part_count)
+  specify 'all lesson parts belonging to the lesson should be listed' do
+    within('.lesson-parts') do
+      expect(page).to have_css('.lesson-part', count: lesson_part_count)
     end
   end
 
   # FIXME it would probably make sense to hide the link
   #       when there are no alternative activities
   specify 'each part should have a change link' do
-    within('table.lesson-parts > tbody') do
+    within('.lesson-parts') do
       lesson_parts.each do |lesson_part|
         expect(page).to have_link('Change activity', href: new_teachers_lesson_part_choice_path(lesson_part.id))
       end

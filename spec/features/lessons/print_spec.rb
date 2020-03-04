@@ -15,7 +15,9 @@ RSpec.feature "Lesson print", type: :feature do
     end
 
     specify "the page contains the lesson activities" do
-      expect(page).to have_css('table.lesson-parts.govuk-table')
+      within('.lesson-parts') do
+        expect(page).to have_css('.lesson-part', count: lesson_part_count)
+      end
     end
 
     specify "the page doesn't contain the ability to change activities" do
