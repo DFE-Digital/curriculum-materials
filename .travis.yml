@@ -11,10 +11,11 @@ install:
   - nvm install 12.14.1
   - node -v
   - npm i -g yarn
+  - yarn config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+  - yarn config set @dfe-digital:registry=https://npm.pkg.github.com
   - yarn
 before_script:
   - bundle exec rake db:create db:migrate RAILS_ENV=test
-
   # code climate's coverage check reporter
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -28,3 +29,5 @@ script:
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+dd:
+  secure: C+IJTNsqD0WtrkGrJc+OE7LxOrnkGxIEOZdi0zE8vPG/lMG64LNlxlerjTj/hDxOBbielBb/68dwULAIbDWIEl2fT5z3KyfV0JpDqs85pPa2V3CxlgwWPxVyeA7g5bLUezH6xcq0vU9We+8j+Qhx33pUdrpON+RPqxh7+9AlIg/w3/sadYj4qbQvTV/EqiAvNc24mJsE0eQokJc7Msd2Kj0bjjrUnv3kz1Prx7zyNiD+MVcps5V2Zz1uNs+zPLjCPTGi0ElkdgjD6OxpGas88KeZ02aUGKCMpr+QeYFLJ53vQkEJX+ybyRjcPtPF/zRaqigs+zHEzMNmfHUAywCuSC7Z6DRHwLdXChgT+c12mWuyJlqAlcNuI5fQAoLYyOu6PsrJKNRqXq/Q5O/0TQU2fKHT24aMEhJs2KOqpT5eUONbNm2jWhWBzbtLikkjvVWJe8oLgPr2nSb/vtzhlDwTzf0451Yr13ZKWMQ0SeyvsEGOIGWmSuTre3pumIz0oKOedKj3QKksAOm7HXqRg+LHS+qdEWIUch8jLrH5ZragkmQf6wKzta9yDrmW9xMVP9hkGVzzI1GuV3KRxEuAhdEnSRE3+O8S1+dgALNeiRtARjMsLfSF3m9XwkeLNkdAckzppXP/zpN5v/aAIKjgXHvShHoLv94+cnneljA30ozFgBk=
