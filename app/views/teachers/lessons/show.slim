@@ -6,7 +6,7 @@
     h1.govuk-heading-l
       = @lesson.name
 
-    .govuk-tabs data-module="govuk-tabs"
+    .lesson-tabs.govuk-tabs data-module="govuk-tabs"
       h2.govuk-tabs__title
         | Lesson details
       ul.govuk-tabs__list
@@ -17,11 +17,12 @@
         li.govuk-tabs__list-item
           = link_to 'Downloads', '#downloads', class: 'govuk-tabs__tab'
 
-      section#knowledge-overview.govuk-tabs__panel
+      section#knowledge-overview.govuk-tabs__panel.lesson-tab
         h2
           =t(:heading, scope: :knowledge_overview)
 
         = markdown(@lesson.summary)
+
         = render 'core_knowledge', lesson: @lesson
         = render 'vocabulary', lesson: @lesson
         = render 'misconceptions', lesson: @lesson
@@ -29,7 +30,7 @@
 
         = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents')
 
-      section#lesson-contents.govuk-tabs__panel
+      section#lesson-contents.govuk-tabs__panel.lesson-tab
         h2
           =t(:heading, scope: :lesson_contents)
 
@@ -37,7 +38,7 @@
 
         = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads')
 
-      section#downloads.govuk-tabs__panel
+      section#downloads.govuk-tabs__panel.lesson-tab
         h2 Downloads
 
         = render 'downloads', lesson: @lesson
