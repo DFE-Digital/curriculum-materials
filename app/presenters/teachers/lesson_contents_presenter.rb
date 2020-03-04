@@ -20,9 +20,7 @@ module Teachers
 
     def initialize(lesson, teacher)
       @contents = lesson
-        .lesson_parts
-        .each_with_object({}) { |lesson_part, hash| hash[lesson_part] = lesson_part.activity_for(teacher) }
-        .reject { |_, activity| activity.nil? }
+        .lesson_parts_for(teacher)
         .map
         .with_index(1) { |(lesson_part, activity), i| Slot.new(i, lesson_part, activity) }
     end

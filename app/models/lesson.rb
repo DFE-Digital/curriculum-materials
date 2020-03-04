@@ -15,4 +15,10 @@ class Lesson < ApplicationRecord
   def duration
     '1 hour'
   end
+
+  def lesson_parts_for(teacher)
+    lesson_parts
+      .each_with_object({}) { |lesson_part, hash| hash[lesson_part] = lesson_part.activity_for(teacher) }
+      .reject { |_, activity| activity.nil? }
+  end
 end
