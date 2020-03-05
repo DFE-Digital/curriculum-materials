@@ -23,8 +23,6 @@
 /public/packs-test
 /node_modules
 /vendor/cache
-yarn-debug.log*
-.yarn-integrity
 
 .env
 .env.*
