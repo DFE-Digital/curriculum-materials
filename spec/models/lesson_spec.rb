@@ -32,33 +32,19 @@ RSpec.describe Lesson, type: :model do
       let(:teacher) { create(:teacher) }
       it { is_expected.to respond_to(:lesson_parts_for).with(1).argument }
 
-      let(:lesson_parts_with_activities) do
-        4.times.map do
-          double(LessonPart, activity_for: build(:activity))
-        end
-      end
-
-      let(:lesson_parts_without_activities) do
-        3.times.map do
-          double(LessonPart, activity_for: nil)
-        end
-      end
-
-      let(:lesson_parts) { lesson_parts_with_activities + lesson_parts_without_activities }
-
       subject { create(:lesson) }
 
-      before do
-        allow(subject).to receive(:lesson_parts).and_return(lesson_parts)
+      let!(:lesson_parts_with_activities) do
+        create_list(:lesson_part, 2, :with_activities, lesson: subject)
       end
 
-      specify 'should call LessonPart#activity_for for every lesson part' do
-        subject.lesson_parts_for(teacher)
-        expect(subject.lesson_parts).to all(have_received(:activity_for).with(teacher))
+      let!(:lesson_parts_without_activities) do
+        create_list(:lesson_part, 3, lesson: subject)
       end
 
       specify 'should only return lesson_part and activity pairs' do
-        expect(subject.lesson_parts_for(teacher).size).to be(lesson_parts_with_activities.size)
+        lesson_parts_for_teacher = subject.lesson_parts_for(teacher)
+        expect(lesson_parts_for_teacher.keys.map(&:id)).to match_array(lesson_parts_with_activities.map(&:id))
       end
     end
   end
