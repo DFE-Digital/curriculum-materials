@@ -20,26 +20,47 @@ describe Download, type: :model do
     end
   end
 
-  context '#lesson_bundle' do
-    let :download do
-      create :download
+  describe 'methods' do
+    describe '#lesson_parts' do
+      subject { create(:download) }
+      let(:teacher) { subject.teacher }
+
+      before do
+        allow(subject.lesson).to(
+          receive(:lesson_parts_for)
+            .with(teacher)
+            .and_return([])
+        )
+      end
+
+      before { subject.lesson_parts }
+
+      it "should use Lesson#lesson_parts_for with assigned lesson and teacher" do
+        expect(subject.lesson).to have_received(:lesson_parts_for).with(teacher)
+      end
     end
 
-    before do
-      download.lesson_bundle.attach \
-        io: File.open(lesson_bundle_path),
-        filename: 'lesson_bundle.zip',
-        content_type: 'application/zip'
-    end
+    context '#lesson_bundle' do
+      let :download do
+        create :download
+      end
 
-    subject { download.lesson_bundle }
+      before do
+        download.lesson_bundle.attach \
+          io: File.open(lesson_bundle_path),
+          filename: 'lesson_bundle.zip',
+          content_type: 'application/zip'
+      end
 
-    it { is_expected.to be_attached }
+      subject { download.lesson_bundle }
 
-    it "is attached correctly" do
-      expect(subject.filename).to eq 'lesson_bundle.zip'
-      expect(subject.content_type).to eq 'application/zip'
-      expect(subject.download).to eq File.binread(lesson_bundle_path)
+      it { is_expected.to be_attached }
+
+      it "is attached correctly" do
+        expect(subject.filename).to eq 'lesson_bundle.zip'
+        expect(subject.content_type).to eq 'application/zip'
+        expect(subject.download).to eq File.binread(lesson_bundle_path)
+      end
     end
   end
 
