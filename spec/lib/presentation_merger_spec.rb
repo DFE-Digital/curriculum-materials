@@ -83,7 +83,7 @@ describe PresentationMerger do
   describe "#run_command" do
     it "raises ProcessExitError when unsuccessful" do
       instance = described_class.new(StringIO.new(""), true)
-      file = double()
+      file = double
       allow(file).to receive(:path).and_return('./l33.t')
       allow(instance).to receive(:files).and_return([file])
       expect {
