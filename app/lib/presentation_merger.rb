@@ -96,8 +96,8 @@ private
     command = "./node_modules/.bin/presentation-merger #{file_paths}"
 
     stderr_str = ''
-    exit_status = Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
-      while line = stdout.gets
+    exit_status = Open3.popen3(command) do |_stdin, stdout, stderr, wait_thr|
+      while (line = stdout.gets)
         @output_stream.puts line
       end
       stderr_str = stderr.read
