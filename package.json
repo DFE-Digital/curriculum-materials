@@ -4,8 +4,11 @@
   "engines": {
     "node": "^12.14.1"
   },
+  "scripts": {
+    "heroku-prebuild": "echo \"//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}\" >> .npmrc"
+  },
   "dependencies": {
-    "@dfe-digital/presentation-merger": "^0.0.1-alpha.2",
+    "@dfe-digital/presentation-merger": "^0.0.1-alpha.4",
     "@rails/webpacker": "^4.2.2",
     "govuk-frontend": "^3.4.0",
     "rails-ujs": "^5.2.4",
