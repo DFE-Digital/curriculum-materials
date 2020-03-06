@@ -4,9 +4,4 @@ class CompleteCurriculumProgramme < ApplicationRecord
 
   has_many :units, dependent: :destroy
   belongs_to :subject
-
-  # Stub implementation until we associate ccps with years
-  def year
-    'TODO!!'
-  end
 end
