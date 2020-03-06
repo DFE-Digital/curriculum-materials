@@ -1,13 +1,13 @@
 class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
   def index
-    ccps = CompleteCurriculumProgramme.all
+    ccps = CompleteCurriculumProgramme.eager_load(:subject).all
 
     render(json: serialize(ccps))
   end
 
   def show
     ccp = CompleteCurriculumProgramme
-      .eager_load(:units)
+      .eager_load(:units, :subject)
       .find(params[:id])
 
     render(json: serialize(ccp))
@@ -15,6 +15,8 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
 
   def create
     ccp = CompleteCurriculumProgramme.new(ccp_params)
+
+    ccp.subject = Subject.find_by(name: subject_param)
 
     if ccp.save
       render(json: serialize(ccp), status: :created)
@@ -25,6 +27,10 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
 
   def update
     ccp = CompleteCurriculumProgramme.find(params[:id])
+
+    if new_subject = subject_param
+      ccp.subject = Subject.find_by(name: new_subject)
+    end
 
     if ccp.update(ccp_params)
       render(json: serialize(ccp), status: :ok)
@@ -37,6 +43,10 @@ private
 
   def ccp_params
     params.require(:ccp).permit(:name, :rationale, :key_stage)
+  end
+
+  def subject_param
+    params.dig(:subject)
   end
 
   def serialize(data)

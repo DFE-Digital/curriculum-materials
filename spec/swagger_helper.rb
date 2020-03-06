@@ -27,7 +27,8 @@ RSpec.configure do |config|
               id: { type: :integer },
               name: { type: :string },
               rationale: { type: :string },
-              key_stage: { type: :integer }
+              key_stage: { type: :integer },
+              subject: { type: :string }
             },
             required: %i(name rationale)
           },

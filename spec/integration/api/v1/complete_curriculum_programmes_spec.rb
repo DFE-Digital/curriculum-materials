@@ -1,6 +1,9 @@
 require 'swagger_helper'
 
 describe 'Complete curriculum programmes' do
+  let(:maths) { 'Maths' }
+  let!(:maths_subject) { FactoryBot.create(:subject, name: maths) }
+
   path('/ccps') do
     get('retrieves all complete curriculum programmes') do
       tags('CCP')
@@ -38,9 +41,9 @@ describe 'Complete curriculum programmes' do
       request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 
       response(201, 'ccp created') do
-        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp), subject: maths } }
 
-        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp) })
+        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp), subject: 'English' })
 
         run_test! do |response|
           # all of the values in the payload should be present in the returned
@@ -50,6 +53,8 @@ describe 'Complete curriculum programmes' do
             ccp_params.dig(:ccp).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
+
+            expect(json['subject']).to eql('Maths')
           end
         end
       end
@@ -59,6 +64,14 @@ describe 'Complete curriculum programmes' do
 
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
+        end
+      end
+
+      response(400, 'non-existant subject') do
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp, name: ''), subject: 'Defense Against the Dark Arts' } }
+
+        run_test! do |response|
+          expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
       end
     end
@@ -89,7 +102,7 @@ describe 'Complete curriculum programmes' do
       consumes 'application/json'
       let(:ccp) { FactoryBot.create(:ccp) }
       let(:id) { ccp.id }
-      let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp) } }
+      let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp), subject: maths } }
 
       parameter(name: :id, in: :path, type: :string, required: true)
       parameter(
@@ -106,13 +119,15 @@ describe 'Complete curriculum programmes' do
       request_body_json(schema: { '$ref' => '#/components/schemas/ccp' })
 
       response(200, 'ccp updated') do
-        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp) })
+        examples('application/json': { ccp: FactoryBot.attributes_for(:ccp), subject: 'French' })
 
         run_test! do |response|
           JSON.parse(response.body).with_indifferent_access.tap do |json|
             ccp_params.dig(:ccp).each do |attribute, value|
               expect(json[attribute]).to eql(value)
             end
+
+            expect(json['subject']).to eql('Maths')
           end
         end
       end
@@ -122,6 +137,14 @@ describe 'Complete curriculum programmes' do
 
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
+        end
+      end
+
+      response(400, 'non-existant subject') do
+        let!(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp, name: ''), subject: 'Defense Against the Dark Arts' } }
+
+        run_test! do |response|
+          expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
       end
     end
