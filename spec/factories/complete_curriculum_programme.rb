@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory(:complete_curriculum_programme, aliases: %i(ccp)) do
     sequence(:name) { |n| "CCP #{n}" }
+    association(:subject, factory: :subject)
     rationale { "Rationale" }
 
     trait(:randomised) do

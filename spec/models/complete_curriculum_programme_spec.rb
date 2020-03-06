@@ -16,5 +16,6 @@ RSpec.describe CompleteCurriculumProgramme, type: :model do
 
   describe 'relationships' do
     it { is_expected.to have_many(:units).dependent(:destroy) }
+    it { is_expected.to belong_to(:subject) }
   end
 end
