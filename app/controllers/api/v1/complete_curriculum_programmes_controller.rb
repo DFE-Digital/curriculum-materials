@@ -28,7 +28,7 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
   def update
     ccp = CompleteCurriculumProgramme.find(params[:id])
 
-    if new_subject = subject_param
+    if (new_subject = subject_param)
       ccp.subject = Subject.find_by(name: new_subject)
     end
 
