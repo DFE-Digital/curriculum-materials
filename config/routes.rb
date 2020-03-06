@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       end
 
       resources :teaching_methods, only: %i(index show)
+      resources :subjects, only: %i(index show)
     end
   end
 end

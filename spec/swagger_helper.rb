@@ -89,6 +89,12 @@ RSpec.configure do |config|
               name: { type: :string },
               icon: { type: :string }
             }
+          },
+          subject: {
+            type: :object,
+            properties: {
+              name: { type: :string }
+            }
           }
         }
       },

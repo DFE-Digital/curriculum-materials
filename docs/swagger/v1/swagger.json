@@ -15,17 +15,16 @@
           "name": {
             "type": "string"
           },
-          "benefits": {
+          "rationale": {
             "type": "string"
           },
-          "overview": {
-            "type": "string"
+          "key_stage": {
+            "type": "integer"
           }
         },
         "required": [
           "name",
-          "benefits",
-          "overview"
+          "rationale"
         ]
       },
       "unit": {
@@ -41,6 +40,9 @@
             "type": "string"
           },
           "position": {
+            "type": "integer"
+          },
+          "year": {
             "type": "integer"
           }
         },
@@ -138,6 +140,14 @@
             "type": "string"
           },
           "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "subject": {
+        "type": "object",
+        "properties": {
+          "name": {
             "type": "string"
           }
         }
@@ -530,8 +540,8 @@
             "examples": {
               "application/json": {
                 "name": "CCP 1",
-                "overview": "Overview",
-                "benefits": "Benefits",
+                "rationale": "Rationale",
+                "key_stage": 3,
                 "id": 1
               }
             },
@@ -564,6 +574,9 @@
                 "properties": {
                   "ccp": {
                     "$ref": "#/components/schemas/ccp"
+                  },
+                  "subject": {
+                    "type": "string"
                   }
                 }
               }
@@ -577,8 +590,8 @@
               "application/json": {
                 "ccp": {
                   "name": "CCP 2",
-                  "overview": "Overview",
-                  "benefits": "Benefits"
+                  "rationale": "Rationale",
+                  "key_stage": 4
                 }
               }
             }
@@ -611,8 +624,8 @@
             "examples": {
               "application/json": {
                 "name": "CCP 3",
-                "overview": "Overview",
-                "benefits": "Benefits",
+                "rationale": "Rationale",
+                "key_stage": 2,
                 "id": 1,
                 "units": [
                   {
@@ -620,6 +633,7 @@
                     "overview": "Overview",
                     "benefits": "Benefits",
                     "position": 1,
+                    "year": 1,
                     "id": 1
                   },
                   {
@@ -627,6 +641,7 @@
                     "overview": "Overview",
                     "benefits": "Benefits",
                     "position": 2,
+                    "year": 1,
                     "id": 2
                   }
                 ]
@@ -665,6 +680,9 @@
                 "properties": {
                   "ccp": {
                     "$ref": "#/components/schemas/ccp"
+                  },
+                  "subject": {
+                    "type": "string"
                   }
                 }
               }
@@ -678,8 +696,8 @@
               "application/json": {
                 "ccp": {
                   "name": "CCP 4",
-                  "overview": "Overview",
-                  "benefits": "Benefits"
+                  "rationale": "Rationale",
+                  "key_stage": 2
                 }
               }
             }
@@ -1390,7 +1408,7 @@
               },
               "encoding": {
                 "pupil_resource": {
-                  "contentType": "image/png"
+                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,image/gif,image/jpeg,image/jpg,image/png"
                 }
               }
             }
@@ -1656,6 +1674,87 @@
         }
       }
     },
+    "/subjects": {
+      "get": {
+        "summary": "retrieves all subjects",
+        "tags": [
+          "Subject"
+        ],
+        "responses": {
+          "200": {
+            "description": "all subjects found",
+            "examples": {
+              "application/json": {
+                "name": "Subject 1",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/subject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subjects/{id}": {
+      "get": {
+        "summary": "retrieves the specified subject",
+        "tags": [
+          "Subject"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with a valid id",
+            "examples": {
+              "application/json": {
+                "name": "Subject 2",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subject"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "with a bad id",
+            "examples": {
+              "application/json": {
+                "name": "Subject 3",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/subject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources": {
       "get": {
         "summary": "Returns the activity's attached teacher_resources",
@@ -1779,7 +1878,7 @@
               },
               "encoding": {
                 "teacher_resource": {
-                  "contentType": "image/png"
+                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,image/gif,image/jpeg,image/jpg,image/png"
                 }
               }
             }
@@ -1971,6 +2070,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 3,
+                  "year": 9,
                   "id": 1
                 },
                 {
@@ -1978,6 +2078,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 4,
+                  "year": 3,
                   "id": 2
                 }
               ]
@@ -2037,6 +2138,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 5,
+                  "year": 7,
                   "id": 1
                 }
               }
@@ -2081,11 +2183,12 @@
                 "overview": "Overview",
                 "benefits": "Benefits",
                 "position": 6,
+                "year": 1,
                 "id": 1,
                 "complete_curriculum_programme": {
                   "name": "CCP 5",
-                  "overview": "Overview",
-                  "benefits": "Benefits",
+                  "rationale": "Rationale",
+                  "key_stage": 3,
                   "id": 1
                 },
                 "lessons": [
@@ -2202,7 +2305,8 @@
                   "name": "Unit 7",
                   "overview": "Overview",
                   "benefits": "Benefits",
-                  "position": 7
+                  "position": 7,
+                  "year": 11
                 }
               }
             }

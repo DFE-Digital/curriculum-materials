@@ -29,7 +29,8 @@ describe 'Complete curriculum programmes' do
         in: :body,
         schema: {
           properties: {
-            ccp: { '$ref' => '#/components/schemas/ccp' }
+            ccp: { '$ref' => '#/components/schemas/ccp' },
+            subject: { type: :string }
           }
         }
       )
@@ -96,7 +97,8 @@ describe 'Complete curriculum programmes' do
         in: :body,
         schema: {
           properties: {
-            ccp: { '$ref' => '#/components/schemas/ccp' }
+            ccp: { '$ref' => '#/components/schemas/ccp' },
+            subject: { type: :string }
           }
         }
       )

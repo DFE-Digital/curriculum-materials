@@ -46,6 +46,14 @@ def example_teaching_methods(quantity)
   1.upto(quantity).map { |i| example_teaching_method(i) }
 end
 
+def example_subject(id = 1)
+  FactoryBot.attributes_for(:subject).merge(id: id)
+end
+
+def example_subjects(quantity)
+  1.upto(quantity).map { |i| example_subject(i) }
+end
+
 def example_errors
   ["Name can't be blank"]
 end
