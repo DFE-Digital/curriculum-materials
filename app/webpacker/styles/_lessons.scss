@@ -10,6 +10,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
 
 .lesson-parts {
   align-items: center;
+
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr;
@@ -17,15 +18,25 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
   .lesson-part {
     background-color: govuk-colour('white');
     border-radius: 5px;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: 1fr 2fr 8fr 2fr;
+
+    @supports (display: grid) {
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: 1fr 2fr 8fr 2fr;
+    }
+
+    // grid will take priority and fall back to
+    // flex for older browsers (lookin' at you, IE11)
+    display: flex;
+    flex-direction: row;
+    flex-flow: column-wrap;
 
     .counter {
       font-size: 4rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-shrink: 0;
     }
 
     .teaching-methods {
@@ -33,6 +44,8 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
       flex-direction: column;
       justify-content: center;
       text-align: center;
+      flex-shrink: 0;
+      flex-basis: 150px;
 
       .teaching-method {
         margin: inherit inherit 0.5rem 0;
@@ -40,6 +53,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
         .activity-icon {
           width: 70px;
           height: 70px;
+          display: inline;
         }
 
         .activity-name {
@@ -117,6 +131,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
     .lesson-part {
       .counter {
         border-left: 8px solid $lesson-part-dark-blue;
+        padding-left: 2rem;
       }
 
       .teaching-method {
