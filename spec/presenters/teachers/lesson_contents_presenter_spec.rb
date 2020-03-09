@@ -28,7 +28,7 @@ RSpec.describe Teachers::LessonContentsPresenter do
         expect(slot.duration).to eql(activity.duration)
         expect(slot.overview).to eql(activity.overview)
         expect(slot.extra_requirements).to eql(activity.extra_requirements)
-        expect(slot.alternatives).to eql(activity.alternatives)
+        expect(slot.alternatives).to match_array(activity.alternatives)
         expect(slot.teaching_methods).to match_array(activity.teaching_methods)
 
         expect(slot.lesson_part_id).to eql(lesson_part.id)
