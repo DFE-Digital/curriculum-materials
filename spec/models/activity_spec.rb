@@ -84,7 +84,7 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  context 'attachements' do
+  context 'attachments' do
     let :attachment_path do
       File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
     end
