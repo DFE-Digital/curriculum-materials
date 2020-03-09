@@ -165,4 +165,17 @@ RSpec.describe Activity, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe '#alternatives' do
+      it { is_expected.to respond_to(:alternatives) }
+
+      let(:current_activity) { create(:activity) }
+      let(:other_activities) { create(:activity, lesson_part: current_activity.lesson_part) }
+
+      specify 'returns siblings but not self' do
+        expect(current_activity.alternatives).to match_array(other_activities)
+      end
+    end
+  end
 end

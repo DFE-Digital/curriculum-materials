@@ -43,6 +43,6 @@ class Activity < ApplicationRecord
   scope :omit, ->(activity) { where.not(id: activity.id) }
 
   def alternatives
-    [] # TODO return siblings
+    lesson_part.activities.omit(self)
   end
 end
