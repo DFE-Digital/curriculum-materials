@@ -50,6 +50,24 @@ RSpec.describe Teachers::LessonContentsPresenter do
     end
   end
 
+  context '#show_download_link?' do
+    subject do
+      described_class.new(activity.lesson_part.lesson, teacher).show_download_link?
+    end
+
+    context 'when the lesson has at least one activity with resources' do
+      let(:activity) { create :activity, :with_pupil_resources }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when the lesson no activities with resources' do
+      let(:activity) { create :activity }
+
+      it { is_expected.to be false }
+    end
+  end
+
   context 'Slot#resources' do
     let :activity do
       create :activity

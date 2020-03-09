@@ -45,5 +45,15 @@
         = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Download resources', number: 3)
 
       section#downloads.govuk-tabs__panel.lesson-tab
-        = render 'downloads', lesson: @lesson
-        = render 'plan_the_next_lesson', lesson: @lesson
+        section.downloads
+          - if @presenter.show_download_link?
+            h2.govuk-heading-l Download the lesson plan and resources
+
+            = render "downloads", lesson: @lesson
+            = render "plan_the_next_lesson", lesson: @lesson
+
+          - else
+
+            h2.govuk-heading-l Print this lesson plan
+            = render "downloads_print_only", lesson: @lesson
+            = render "plan_the_next_lesson", lesson: @lesson

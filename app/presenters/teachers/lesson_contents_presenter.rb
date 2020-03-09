@@ -39,6 +39,10 @@ module Teachers
         .with_index(1) { |(lesson_part, activity), i| Slot.new(i, lesson_part, activity) }
     end
 
+    def show_download_link?
+      @lesson.activities_for(@teacher).any?(&:has_lesson_resources?)
+    end
+
   private
 
     def load_parts

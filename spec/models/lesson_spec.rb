@@ -47,6 +47,59 @@ RSpec.describe Lesson, type: :model do
         expect(lesson_parts_for_teacher.keys.map(&:id)).to match_array(lesson_parts_with_activities.map(&:id))
       end
     end
+
+    describe '#activities_for' do
+      let! :teacher do
+        create :teacher
+      end
+
+      let! :lesson do
+        create :lesson
+      end
+
+      let! :lesson_part_1 do
+        create :lesson_part, lesson: lesson
+      end
+
+      let! :lesson_part_2 do
+        create :lesson_part, lesson: lesson
+      end
+
+      let! :lesson_part_3 do
+        create :lesson_part, lesson: lesson
+      end
+
+      let! :lesson_part_4 do
+        create :lesson_part, lesson: lesson
+      end
+
+      let! :activity_with_pupil_resource do
+        create :activity, :with_pupil_resources, lesson_part: lesson_part_1
+      end
+
+      let! :activity_with_teacher_resource do
+        create :activity, :with_teacher_resources, lesson_part: lesson_part_2
+      end
+
+      let! :activity_with_slide_deck do
+        create :activity, :with_slide_deck, lesson_part: lesson_part_3
+      end
+
+      let! :activity_with_no_resource do
+        create :activity, lesson_part: lesson_part_4
+      end
+
+      subject { lesson.reload.activities_for teacher }
+
+      it do
+        is_expected.to match_array [
+          activity_with_pupil_resource,
+          activity_with_teacher_resource,
+          activity_with_slide_deck,
+          activity_with_no_resource
+        ]
+      end
+    end
   end
 
   describe 'scopes' do

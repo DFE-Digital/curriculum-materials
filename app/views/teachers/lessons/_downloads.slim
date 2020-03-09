@@ -1,10 +1,8 @@
-section.downloads
-  h2.govuk-heading-l Download the lesson plan and resources
+p
+  | You can download the lesson plan and resources you'll need to
+    teach the lesson (for example, worksheets and presentation
+    slides).
 
-  p
-    | You can download the lesson plan and resources you'll need to
-      teach the lesson (for example, worksheets and presentation
-      slides).
+p = link_to("Print lesson plan", print_teachers_lesson_path(lesson: lesson, auto_print: true), target: "_blank")
 
-  p = link_to("Print lesson plan", print_teachers_lesson_path(lesson: @lesson, auto_print: true), target: "_blank")
-  p = button_to 'Download lesson resources', teachers_lesson_downloads_path(@lesson), class: 'govuk-button'
+p = button_to 'Download lesson resources', teachers_lesson_downloads_path(lesson), class: 'govuk-button'
