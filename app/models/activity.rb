@@ -40,6 +40,8 @@ class Activity < ApplicationRecord
             content_type: SLIDE_DECK_CONTENT_TYPE,
             size: { less_than: MAX_UPLOAD_SIZE }
 
+  scope :omit, ->(activity) { where.not(id: activity.id) }
+
   def alternatives
     [] # TODO return siblings
   end

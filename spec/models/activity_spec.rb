@@ -150,4 +150,19 @@ RSpec.describe Activity, type: :model do
       end
     end
   end
+
+  describe 'scopes' do
+    describe '.omit' do
+      let(:activities) { create_list(:activity, 2) }
+      let(:unwanted_activity) { create(:activity) }
+
+      specify 'the unwanted activity should be omitted' do
+        expect(Activity.omit(unwanted_activity)).not_to include(unwanted_activity)
+      end
+
+      specify 'the other activities should be present' do
+        expect(Activity.omit(unwanted_activity)).to match_array(activities)
+      end
+    end
+  end
 end
