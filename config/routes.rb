@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       member do
         get :print
       end
+      resources :downloads, only: %i(show create), shallow: true
     end
 
     resources :lesson_parts, only: %i(show) do

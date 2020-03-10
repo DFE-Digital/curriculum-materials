@@ -16,6 +16,8 @@ class LessonPart < ApplicationRecord
 
   validates :position, uniqueness: { scope: :lesson_id }
 
+  scope :ordered_by_position, -> { order(position: 'asc') }
+
   def activity_for(teacher)
     selected_activity(teacher) || default_activity || fallback_activity
   end

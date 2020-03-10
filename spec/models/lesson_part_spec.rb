@@ -78,4 +78,17 @@ describe LessonPart, type: :model do
       end
     end
   end
+
+  describe 'scopes' do
+    describe '.ordered_by_position' do
+      let!(:second) { create(:lesson_part, position: 3) }
+      let!(:third) { create(:lesson_part, position: 1) }
+      let!(:first) { create(:lesson_part, position: 5) }
+
+      specify 'should return the lesson parts in ascending order of position' do
+        expect(LessonPart.all).to contain_exactly(second, third, first)
+        expect(LessonPart.all.ordered_by_position).to contain_exactly(first, second, third)
+      end
+    end
+  end
 end

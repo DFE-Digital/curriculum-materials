@@ -1,4 +1,4 @@
-section.lesson-plan
+section
   - if @lesson.lesson_parts.none?
 
     .govuk-warning-text
@@ -16,56 +16,50 @@ section.lesson-plan
       | This lesson has been sequenced in a suggested order. If you'd like to make
         changes, you can search for alternative resources.
 
-    table.lesson-parts.govuk-table
-      thead.govuk-table__head
-        tr.govuk-table__row
-          th
-            span.govuk-visually-hidden
-              Lesson part count
-          th.govuk-table__header.activity-icons scope='col'
-            | Learning method
-          th.govuk-table__header scope='col'
-            | Teaching this activity
+
+    div.lesson-parts
+      - @presenter.contents.each do |slot|
+
+        div.lesson-part
+          div.counter.big-number
+            = slot.counter
+
+          div.teaching-methods
+            - slot.teaching_methods.each do |tm|
+
+              div.teaching-method
+                = activity_icon(tm)
+                p.activity-name
+                  = tm.name
+
+          article.lesson-name-and-description
+            header
+              h3.govuk-heading-m = slot.name
+
+            = markdown(slot.overview)
+
+            section.extra-requirements
+              - slot.extra_requirements.each do |er|
+                .govuk-tag.govuk-tag__grey = er
+
+            p.duration
+              | Approximately #{slot.duration} minutes
+
           - unless local_assigns[:mode] && mode == :print
-            th.govuk-table__header scope='col'
-              | Change activity
 
-      tbody.govuk-table__body
-        - @presenter.contents.each do |slot|
-          tr.govuk-table__row
-            th.govuk-table__cell.big-number
-              span.govuk-visually-hidden Lesson part number
-              = slot.position
+            - if slot.alternatives.any?
+              div.alternatives
+                div.alternatives-list
+                  h4 Alternative activities:
 
-            td.govuk-table__cell.activity-icons
-              ul.govuk-list
-                - slot.teaching_methods.each do |tm|
-                  li
-                    = activity_icon(tm)
-                    = tm.name
-
-
-            td.main-content.govuk-table__cell
-              article
-                header
-                  h3.govuk-heading-m = slot.name
-                = markdown(slot.overview)
-              strong
-                | Approximately #{slot.duration} minutes
-              .files
-                / lp.file_formats.to_sentence
-                =< link_to 'Preview', '#'
-
-
-              section.extra-requirements
-                - slot.extra_requirements.each do |er|
-                  .govuk-tag = er
-            - unless local_assigns[:mode] && mode == :print
-              td.govuk-table__cell
-                - if slot.alternatives.any?
-                  ul.govuk-list
+                  ul.govuk-list.govuk-list--bullet
                     - slot.alternatives.each do |alternative|
-                      li
-                        strong = alternative
+                      li = alternative.name
 
-                = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part)
+                div.change-link
+                  = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part)
+
+            - else
+
+              div.govuk-hint.no-alternatives
+                | No alternatives

@@ -74,7 +74,7 @@ module Seeders
     def attach_pupil_resource_via_api(path)
       save_file_via_api(
         endpoint(
-          Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_teacher_resources_path(
+          Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_pupil_resources_path(
             *path_args, @id
           )
         ),

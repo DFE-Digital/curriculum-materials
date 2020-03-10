@@ -22,5 +22,13 @@
   #lesson-contents.govuk-tabs__panel {
     page-break-before: always;
   }
+
+  .teaching-method {
+    max-width: 250px !important;
+
+    img {
+      max-width: 250px !important;
+    }
+  }
 }
 // scss-lint:enable QualifyingElement IdSelector

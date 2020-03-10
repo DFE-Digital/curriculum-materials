@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_28_094121) do
+ActiveRecord::Schema.define(version: 2020_02_28_132329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -92,6 +92,27 @@ ActiveRecord::Schema.define(version: 2020_02_28_094121) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "download_transitions", force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.integer "download_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["download_id", "most_recent"], name: "index_download_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["download_id", "sort_key"], name: "index_download_transitions_parent_sort", unique: true
+  end
+
+  create_table "downloads", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "lesson_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_id"], name: "index_downloads_on_lesson_id"
+    t.index ["teacher_id"], name: "index_downloads_on_teacher_id"
+  end
+
   create_table "lesson_parts", force: :cascade do |t|
     t.bigint "lesson_id", null: false
     t.integer "position", null: false
@@ -152,6 +173,9 @@ ActiveRecord::Schema.define(version: 2020_02_28_094121) do
   add_foreign_key "activity_choices", "teachers"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
+  add_foreign_key "download_transitions", "downloads"
+  add_foreign_key "downloads", "lessons"
+  add_foreign_key "downloads", "teachers"
   add_foreign_key "lesson_parts", "activities", column: "default_activity_id"
   add_foreign_key "lesson_parts", "lessons"
   add_foreign_key "lessons", "units"

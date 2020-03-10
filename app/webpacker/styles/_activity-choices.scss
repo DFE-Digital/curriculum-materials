@@ -1,0 +1,11 @@
+.activity {
+  .govuk-radios__item {
+    width: 100%;
+  }
+
+  @include govuk-media-query($until: tablet) {
+    .thumbnail {
+      display: none;
+    }
+  }
+}

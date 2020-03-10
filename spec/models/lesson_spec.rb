@@ -26,4 +26,26 @@ RSpec.describe Lesson, type: :model do
     it { is_expected.to belong_to(:unit) }
     it { is_expected.to have_many :lesson_parts }
   end
+
+  describe 'methods' do
+    describe '#lesson_parts_for' do
+      let(:teacher) { create(:teacher) }
+      it { is_expected.to respond_to(:lesson_parts_for).with(1).argument }
+
+      subject { create(:lesson) }
+
+      let!(:lesson_parts_with_activities) do
+        create_list(:lesson_part, 2, :with_activities, lesson: subject)
+      end
+
+      let!(:lesson_parts_without_activities) do
+        create_list(:lesson_part, 3, lesson: subject)
+      end
+
+      specify 'should only return lesson_part and activity pairs' do
+        lesson_parts_for_teacher = subject.lesson_parts_for(teacher)
+        expect(lesson_parts_for_teacher.keys.map(&:id)).to match_array(lesson_parts_with_activities.map(&:id))
+      end
+    end
+  end
 end

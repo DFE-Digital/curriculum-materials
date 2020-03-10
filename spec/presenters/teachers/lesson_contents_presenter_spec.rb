@@ -19,17 +19,18 @@ RSpec.describe Teachers::LessonContentsPresenter do
   end
 
   specify 'each slot should have the correct attributes' do
-    lesson.lesson_parts.each do |lesson_part|
+    lesson.lesson_parts.each.with_index(1) do |lesson_part, i|
       subject.contents.find { |slot| slot.lesson_part_id == lesson_part.id }.tap do |slot|
         activity = lesson_part.activity_for(teacher)
+
+        expect(slot.counter).to eql(i)
 
         expect(slot.duration).to eql(activity.duration)
         expect(slot.overview).to eql(activity.overview)
         expect(slot.extra_requirements).to eql(activity.extra_requirements)
-        expect(slot.alternatives).to eql(activity.alternatives)
+        expect(slot.alternatives).to match_array(activity.alternatives)
         expect(slot.teaching_methods).to match_array(activity.teaching_methods)
 
-        expect(slot.position).to eql(lesson_part.position)
         expect(slot.lesson_part_id).to eql(lesson_part.id)
       end
     end
