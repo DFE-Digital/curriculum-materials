@@ -14,6 +14,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr;
+  margin: 1rem 0 1.5rem;
 
   .lesson-part {
     background-color: govuk-colour('white');
