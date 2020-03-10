@@ -14,6 +14,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr;
+  margin: 1rem 0 1.5rem;
 
   .lesson-part {
     background-color: govuk-colour('white');
@@ -74,8 +75,7 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
     }
 
     .alternatives {
-      padding: 1rem 0.5rem 1rem 0;
-      @include govuk-font($size: 16);
+      padding: 1rem;
 
       display: flex;
       flex-direction: column;
@@ -83,6 +83,10 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
       .alternatives-list {
         flex-grow: 1;
       }
+    }
+
+    .no-alternatives {
+      padding: 1rem;
     }
   }
 
