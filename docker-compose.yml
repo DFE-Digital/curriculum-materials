@@ -14,7 +14,7 @@ services:
       - DB_PASSWORD=secret
     volumes:
       - .:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - /usr/src/app/node_modules/
     depends_on:
       - db_tasks
 
@@ -43,4 +43,3 @@ services:
 
 volumes:
   db_data:
-  node_modules:
