@@ -1,8 +1,7 @@
 section.plan-the-next-lesson
-  h3.govuk-heading-m Plan the next lesson
+  h3.govuk-heading-m View and prepare the next lesson
 
   p
     | Once you've downloaded this lesson plan and all its resources, you
       can continue to plan the next lesson.
-
-  = link_to 'Plan the next lesson', '#', class: 'govuk-button'
+  = link_to 'Go to next lesson', teachers_unit_path(@lesson.unit)
