@@ -1,0 +1,26 @@
+- back_button teachers_home_path
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    section.govuk-splash
+      h1.govuk-heading-l How the service works
+      markdown:
+        Access your school’s curriculum online is a service for teachers. It enables
+        them to access their school’s curriculum, including all lessons and their
+        accompanying resources.
+
+        The Department for Education has collaborated with educational experts
+        and cultural institutions to develop a knowledge-rich curriculum and
+        service that aims to enhance the quality of learning in schools and
+        reduce teacher workloads.
+
+      / FIXME hard coding the link to the first ccp here for demonstration
+      / purposes and until we're settled on how years and ccps are associated
+      = link_to teachers_complete_curriculum_programmes_path, class: %i(govuk-button govuk-button--start)
+        | Continue
+        = govuk_chevron "#1d70b8"
+
+      = image_tag \
+          asset_pack_path('media/images/dfe-logo.png'),
+          width: '125px',
+          alt: 'Department for Education'

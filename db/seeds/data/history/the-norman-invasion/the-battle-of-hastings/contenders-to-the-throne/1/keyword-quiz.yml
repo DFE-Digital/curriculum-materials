@@ -1,0 +1,10 @@
+activity:
+  name: Keyword quiz
+  overview: |-
+    If students have completed the “What is history?” unit then the can
+    complete this keyword quiz.
+  duration: 10
+  extra_requirements: []
+
+teaching_methods:
+  - Do it now

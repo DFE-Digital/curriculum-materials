@@ -1,0 +1,45 @@
+- breadcrumbs(crumbs: lessons_breadcrumbs(@lesson), current_page: @lesson.name)
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    span.govuk-caption-m= @lesson.duration
+    h1.govuk-heading-l
+      = @lesson.name
+
+    .lesson-tabs.govuk-tabs data-module="govuk-tabs"
+      h2.govuk-tabs__title
+        | Lesson details
+      ul.govuk-tabs__list
+        li.govuk-tabs__list-item.govuk-tabs__list-item--selected
+          = link_to 'Knowledge overview', '#knowledge-overview', class: 'govuk-tabs__tab'
+        li.govuk-tabs__list-item
+          = link_to 'Lesson contents', '#lesson-contents', class: 'govuk-tabs__tab'
+        li.govuk-tabs__list-item
+          = link_to 'Downloads', '#downloads', class: 'govuk-tabs__tab'
+
+      section#knowledge-overview.govuk-tabs__panel.lesson-tab
+        h2
+          =t(:heading, scope: :knowledge_overview)
+
+        = markdown(@lesson.summary)
+
+        = render 'core_knowledge', lesson: @lesson
+        = render 'vocabulary', lesson: @lesson
+        = render 'misconceptions', lesson: @lesson
+        = render 'previous_knowledge', lesson: @lesson
+
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents')
+
+      section#lesson-contents.govuk-tabs__panel.lesson-tab
+        h2
+          =t(:heading, scope: :lesson_contents)
+
+        = render 'lesson_contents', lesson: @lesson
+
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads')
+
+      section#downloads.govuk-tabs__panel.lesson-tab
+        h2 Downloads
+
+        = render 'downloads', lesson: @lesson
+        = render 'plan_the_next_lesson', lesson: @lesson

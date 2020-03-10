@@ -13,10 +13,22 @@
     "RAILS_ENV": {
       "required": true
     },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
     "RAILS_SERVE_STATIC_FILES": {
       "required": true
     },
     "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SENTRY_DSN": {
+      "required": true
+    },
+    "HTTP_AUTH_PASSWORD": {
+      "required": true
+    },
+    "HTTP_AUTH_USER": {
       "required": true
     }
   },
@@ -29,6 +41,9 @@
     "heroku-postgresql"
   ],
   "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
     {
       "url": "heroku/nodejs"
     },

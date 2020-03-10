@@ -2,15 +2,14 @@
   "name": "curriculum_materials",
   "private": true,
   "engines": {
-    "node": "12.13.1"
+    "node": "^12.14.1"
   },
   "dependencies": {
     "@rails/webpacker": "^4.2.2",
     "govuk-frontend": "^3.4.0",
     "rails-ujs": "^5.2.4",
     "serialize-javascript": "^2.1.1",
-    "set-value": "^3.0.1",
-    "turbolinks": "^5.2.0"
+    "set-value": "^3.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.1"

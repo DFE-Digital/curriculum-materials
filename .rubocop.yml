@@ -2,3 +2,35 @@ inherit_gem:
   rubocop-govuk:
     - config/default.yml
     - config/rails.yml
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/**/*.rb
+    - config/routes.rb
+    - spec/**/*
+    - db/**/*
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - staging
+    - production
+
+Style/StringLiterals:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false

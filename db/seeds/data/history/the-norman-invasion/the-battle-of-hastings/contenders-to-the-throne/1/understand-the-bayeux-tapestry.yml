@@ -1,0 +1,15 @@
+activity:
+  name: "Picture source: understand the Bayeux Tapestry"
+  overview: |-
+    Give students a busy section of the Bayeux Tapestry to look at to see if
+    they can make any inferences about what is happening. Students should not
+    be expected to work out exactly what is going on (it is the scene where
+    Harold Godwinson allegedly swears an oath to William of Normandy, possibly
+    in reality under duress) but could point out things like the weapons,
+    throne, or ship and draw some inferences from these things.
+  duration: 10
+  extra_requirements: []
+  default: true
+
+teaching_methods:
+  - Do it now

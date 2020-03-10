@@ -1,0 +1,2227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "components": {
+    "schemas": {
+      "ccp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "benefits",
+          "overview"
+        ]
+      },
+      "unit": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "benefits",
+          "overview",
+          "position"
+        ]
+      },
+      "lesson": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "core_knowledge": {
+            "type": "string"
+          },
+          "previous_knowledge": {
+            "type": "object"
+          },
+          "vocabulary": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "misconceptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "summary",
+          "core_knowledge",
+          "previous_knowledge",
+          "vocabulary",
+          "misconceptions"
+        ]
+      },
+      "lesson_part": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "integer"
+          }
+        }
+      },
+      "activity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "extra_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "teaching_methods": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "teaching_method": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities": {
+      "get": {
+        "summary": "retrieves all activities belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "activities found",
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Activity 1",
+                  "overview": "Overview 1",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "default": false,
+                  "id": 1
+                },
+                {
+                  "name": "Activity 2",
+                  "overview": "Overview 2",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "default": false,
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/activity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates an activity belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "activity": {
+                    "$ref": "#/components/schemas/activity",
+                    "required": [
+                      "activity"
+                    ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "activity created",
+            "examples": {
+              "application/json": {
+                "activity": {
+                  "name": "Activity 3",
+                  "overview": "Overview 3",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "default": true,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 1",
+                      "icon": "teaching-method-1",
+                      "description": "Teaching method description 1",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 2",
+                      "icon": "teaching-method-2",
+                      "description": "Teaching method description 2",
+                      "id": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{id}": {
+      "get": {
+        "summary": "retrieves a single activity belonging to the specified lesson part",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "activity found",
+            "examples": {
+              "application/json": {
+                "name": "Activity 4",
+                "overview": "Overview 4",
+                "duration": 20,
+                "extra_requirements": [
+                  "PVA Glue",
+                  "Glitter"
+                ],
+                "default": false,
+                "id": 1,
+                "teaching_methods": [
+                  {
+                    "name": "Teaching method 3",
+                    "icon": "teaching-method-3",
+                    "description": "Teaching method description 3",
+                    "id": 1
+                  },
+                  {
+                    "name": "Teaching method 4",
+                    "icon": "teaching-method-4",
+                    "description": "Teaching method description 4",
+                    "id": 2
+                  }
+                ]
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/activity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced activity",
+        "tags": [
+          "Activity"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "activity": {
+                    "$ref": "#/components/schemas/activity",
+                    "required": [
+                      "activity"
+                    ]
+                  },
+                  "teaching_methods": {
+                    "$ref": "#/components/schemas/teaching_methods"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "activity updated",
+            "examples": {
+              "application/json": {
+                "activity": {
+                  "name": "Activity 5",
+                  "overview": "Overview 5",
+                  "duration": 20,
+                  "extra_requirements": [
+                    "PVA Glue",
+                    "Glitter"
+                  ],
+                  "default": false,
+                  "teaching_methods": [
+                    {
+                      "name": "Teaching method 5",
+                      "icon": "teaching-method-5",
+                      "description": "Teaching method description 5",
+                      "id": 1
+                    },
+                    {
+                      "name": "Teaching method 6",
+                      "icon": "teaching-method-6",
+                      "description": "Teaching method description 6",
+                      "id": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
+    "/ccps": {
+      "get": {
+        "summary": "retrieves all complete curriculum programmes",
+        "tags": [
+          "CCP"
+        ],
+        "responses": {
+          "200": {
+            "description": "ccps found",
+            "examples": {
+              "application/json": {
+                "name": "CCP 1",
+                "overview": "Overview",
+                "benefits": "Benefits",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ccp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a new complete curriculum programme",
+        "tags": [
+          "CCP"
+        ],
+        "parameters": [
+
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "ccp": {
+                    "$ref": "#/components/schemas/ccp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ccp created",
+            "examples": {
+              "application/json": {
+                "ccp": {
+                  "name": "CCP 2",
+                  "overview": "Overview",
+                  "benefits": "Benefits"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid ccp"
+          }
+        }
+      }
+    },
+    "/ccps/{id}": {
+      "get": {
+        "summary": "retrieves one complete curriculum programme",
+        "tags": [
+          "CCP"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ccp found",
+            "examples": {
+              "application/json": {
+                "name": "CCP 3",
+                "overview": "Overview",
+                "benefits": "Benefits",
+                "id": 1,
+                "units": [
+                  {
+                    "name": "Unit 1",
+                    "overview": "Overview",
+                    "benefits": "Benefits",
+                    "position": 1,
+                    "id": 1
+                  },
+                  {
+                    "name": "Unit 2",
+                    "overview": "Overview",
+                    "benefits": "Benefits",
+                    "position": 2,
+                    "id": 2
+                  }
+                ]
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ccp"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced complete curriculum programme",
+        "tags": [
+          "CCP"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "ccp": {
+                    "$ref": "#/components/schemas/ccp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ccp updated",
+            "examples": {
+              "application/json": {
+                "ccp": {
+                  "name": "CCP 4",
+                  "overview": "Overview",
+                  "benefits": "Benefits"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid ccp"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts": {
+      "get": {
+        "summary": "retrieves all lessons parts belonging to the specified lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lesson parts found",
+            "examples": {
+              "application/json": [
+                {
+                  "position": 1,
+                  "id": 1
+                },
+                {
+                  "position": 2,
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lesson_part"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a lesson part belonging to the specified lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson_part": {
+                    "$ref": "#/components/schemas/lesson_part",
+                    "required": [
+                      "lesson_part"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "lesson created",
+            "examples": {
+              "application/json": {
+                "lesson_part": {
+                  "position": 3
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{id}": {
+      "get": {
+        "summary": "retrieves a single lesson part belonging to the specified CCP, unit and lesson",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "$ref": "#/components/schemas/lesson_part",
+                  "required": [
+                    "lesson_part"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson part found",
+            "examples": {
+              "application/json": {
+                "position": 4,
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lesson_part"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced lesson part",
+        "tags": [
+          "LessonPart"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson_part": {
+                    "$ref": "#/components/schemas/lesson_part",
+                    "required": [
+                      "lesson_part"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson part updated",
+            "examples": {
+              "application/json": {
+                "lesson_part": {
+                  "position": 5
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson part"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons": {
+      "get": {
+        "summary": "retrieves all lessons belonging to the specified CCP and unit",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lessons found",
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Lesson 1",
+                  "summary": "Lesson 1",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 1
+                },
+                {
+                  "name": "Lesson 2",
+                  "summary": "Lesson 2",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ],
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lesson"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a lesson belonging to the specified unit",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson": {
+                    "$ref": "#/components/schemas/lesson",
+                    "required": [
+                      "lesson"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "lesson created",
+            "examples": {
+              "application/json": {
+                "lesson": {
+                  "name": "Lesson 3",
+                  "summary": "Lesson 3",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{id}": {
+      "get": {
+        "summary": "retrieves a single lesson belonging to the specified CCP and unit",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "$ref": "#/components/schemas/lesson",
+                  "required": [
+                    "lesson"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson found",
+            "examples": {
+              "application/json": {
+                "name": "Lesson 4",
+                "summary": "Lesson 4",
+                "core_knowledge": "Core knowledge",
+                "previous_knowledge": {
+                  "Previous knowledge": "Yes"
+                },
+                "vocabulary": [
+                  "Subtraction",
+                  "Division",
+                  "Multiplication"
+                ],
+                "misconceptions": [
+                  "Fractions are not natural numbers"
+                ],
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lesson"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced lesson",
+        "tags": [
+          "Lesson"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "lesson": {
+                    "$ref": "#/components/schemas/lesson",
+                    "required": [
+                      "lesson"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "lesson updated",
+            "examples": {
+              "application/json": {
+                "lesson": {
+                  "name": "Lesson 5",
+                  "summary": "Lesson 5",
+                  "core_knowledge": "Core knowledge",
+                  "previous_knowledge": {
+                    "Previous knowledge": "Yes"
+                  },
+                  "vocabulary": [
+                    "Subtraction",
+                    "Division",
+                    "Multiplication"
+                  ],
+                  "misconceptions": [
+                    "Fractions are not natural numbers"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid lesson"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources": {
+      "get": {
+        "summary": "Returns the activity's attached pupil_resources",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "pupil resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Attaches a pupil resource to the activity",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pupil_resource": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "pupil_resource": {
+                  "contentType": "image/png"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "pupil_resouce created"
+          },
+          "400": {
+            "description": "invalid pupil_resource"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources/{pupil_resource_id}": {
+      "delete": {
+        "summary": "Removes the attached resource from the activity",
+        "tags": [
+          "PupilResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pupil_resource_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "pupil resource removed"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/slide_deck": {
+      "post": {
+        "summary": "Attaches a slide deck to the activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slide_deck": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "slide_deck": {
+                  "contentType": "application/vnd.oasis.opendocument.presentation"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "slide_deck created"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the slide deck for an activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "slide deck found",
+            "examples": {
+              "application/json": {
+                "id": 1,
+                "url": "https://example.com/path-to-resource"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Removes the slide deck for an activity",
+        "tags": [
+          "SlideDeck"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "slide deck removed"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources": {
+      "get": {
+        "summary": "Returns the activity's attached teacher_resources",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "teacher resources found",
+            "examples": {
+              "application/json": [
+                {
+                  "id": 1,
+                  "url": "https://example.com/path-to-resource"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Attaches a teacher resource to the activity",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "teacher_resource": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "teacher_resource": {
+                  "contentType": "image/png"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "teacher_resouce created"
+          },
+          "400": {
+            "description": "invalid teacher_resource"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources/{teacher_resource_id}": {
+      "delete": {
+        "summary": "Removes the attached resource from the activity",
+        "tags": [
+          "TeacherResource"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lesson_part_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "teacher_resource_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "teacher resource removed"
+          }
+        }
+      }
+    },
+    "/teaching_methods": {
+      "get": {
+        "summary": "retrieves all teaching methods",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "responses": {
+          "200": {
+            "description": "all teaching methods found",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 7",
+                "icon": "teaching-method-7",
+                "description": "Teaching method description 7",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/teaching_method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teaching_methods/{id}": {
+      "get": {
+        "summary": "retrieves the specified teaching method",
+        "tags": [
+          "TeachingMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "with a valid id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 8",
+                "icon": "teaching-method-8",
+                "description": "Teaching method description 8",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "with a bad id",
+            "examples": {
+              "application/json": {
+                "name": "Teaching method 9",
+                "icon": "teaching-method-9",
+                "description": "Teaching method description 9",
+                "id": 1
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/teaching_method"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units": {
+      "get": {
+        "summary": "retrieves all units belonging to the provided CCP",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "units found",
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Unit 3",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "position": 3,
+                  "id": 1
+                },
+                {
+                  "name": "Unit 4",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "position": 4,
+                  "id": 2
+                }
+              ]
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/unit"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "creates a new unit belonging to the specified CCP",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "unit": {
+                    "$ref": "#/components/schemas/unit",
+                    "required": [
+                      "unit"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "unit created",
+            "examples": {
+              "application/json": {
+                "unit": {
+                  "name": "Unit 5",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "position": 5,
+                  "id": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
+          }
+        }
+      }
+    },
+    "/ccps/{ccp_id}/units/{id}": {
+      "get": {
+        "summary": "retrieves a single unit belonging to the specified CCP",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "unit found",
+            "examples": {
+              "application/json": {
+                "name": "Unit 6",
+                "overview": "Overview",
+                "benefits": "Benefits",
+                "position": 6,
+                "id": 1,
+                "complete_curriculum_programme": {
+                  "name": "CCP 5",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "id": 1
+                },
+                "lessons": [
+                  {
+                    "name": "Lesson 6",
+                    "summary": "Lesson 6",
+                    "core_knowledge": "Core knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
+                    "vocabulary": [
+                      "Subtraction",
+                      "Division",
+                      "Multiplication"
+                    ],
+                    "misconceptions": [
+                      "Fractions are not natural numbers"
+                    ],
+                    "id": 1
+                  },
+                  {
+                    "name": "Lesson 7",
+                    "summary": "Lesson 7",
+                    "core_knowledge": "Core knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
+                    "vocabulary": [
+                      "Subtraction",
+                      "Division",
+                      "Multiplication"
+                    ],
+                    "misconceptions": [
+                      "Fractions are not natural numbers"
+                    ],
+                    "id": 2
+                  },
+                  {
+                    "name": "Lesson 8",
+                    "summary": "Lesson 8",
+                    "core_knowledge": "Core knowledge",
+                    "previous_knowledge": {
+                      "Previous knowledge": "Yes"
+                    },
+                    "vocabulary": [
+                      "Subtraction",
+                      "Division",
+                      "Multiplication"
+                    ],
+                    "misconceptions": [
+                      "Fractions are not natural numbers"
+                    ],
+                    "id": 3
+                  }
+                ]
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unit"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update the referenced unit",
+        "tags": [
+          "Unit"
+        ],
+        "parameters": [
+          {
+            "name": "ccp_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "unit": {
+                    "$ref": "#/components/schemas/unit",
+                    "required": [
+                      "unit"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "unit updated",
+            "examples": {
+              "application/json": {
+                "unit": {
+                  "name": "Unit 7",
+                  "overview": "Overview",
+                  "benefits": "Benefits",
+                  "position": 7
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid unit"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000/api/v1"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+activity:
+  name: Keyword matching
+  overview: |-
+    As students enter the room, direct them to try and match up
+    each key word with the correct definition. They should
+    write the number with the correct letter in their books.
+    Feed back and show correct responses.
+  duration: 15
+  extra_requirements:
+    - Textbook
+    - List of keywords
+
+teaching_methods:
+  - Mind map
+  - Teacher instruction

@@ -52,9 +52,25 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Custom app config
+  config.x.swagger_root = ENV.fetch('SWAGGER_ROOT') { Rails.root.join('docs', 'swagger') }
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.raise = true
     Bullet.rails_logger = true
+    # FIXME: Remove once https://github.com/flyerhzm/bullet/issues/474 is resolved
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: "ActiveStorage::Attachment", association: :blob
   end
+
+
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST', 'localhost:3000')
+end
+
+OpenApi::Rswag::Api.configure do |c|
+  c.swagger_root = Rails.configuration.x.swagger_root
+end
+
+OpenApi::Rswag::Ui.configure do |c|
+  c.swagger_endpoint '/api-docs/v1/swagger.json', 'API V1 Docs'
 end

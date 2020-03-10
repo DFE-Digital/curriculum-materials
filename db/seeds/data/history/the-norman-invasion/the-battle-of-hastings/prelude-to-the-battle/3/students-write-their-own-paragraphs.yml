@@ -1,0 +1,11 @@
+activity:
+  name: Students write their own descriptions
+  overview: |-
+    Students attempt their own paragraphs. Starter sentences
+    can be displayed on the slide for students who need more
+    support.
+  duration: 15
+  extra_requirements: []
+
+teaching_methods:
+  - Writing

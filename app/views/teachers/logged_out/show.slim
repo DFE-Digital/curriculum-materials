@@ -1,0 +1,8 @@
+h1.govuk-heading-l You have logged out
+
+- if @token
+  p To log in again click the link below or use the link that was emailed to you.
+
+  = link_to 'Log in', create_teachers_session_path(token: @token)
+- else
+  p To log in again use the link that was emailed to you.

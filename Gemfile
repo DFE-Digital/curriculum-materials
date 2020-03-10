@@ -26,6 +26,23 @@ gem "foreman"
 
 gem "strong_migrations", "~> 0.5"
 
+gem "slim-rails"
+gem "redcarpet"
+gem "sentry-raven"
+gem "blueprinter"
+gem "actionview-component"
+gem "aws-sdk-s3", require: false
+gem "govuk_design_system_formbuilder"
+gem "active_storage_validations"
+gem "delayed_job_active_record"
+gem 'statesman', '~> 7.1.0'
+gem "rubyzip"
+
+# FIXME we're using factorybot and faker for seed data, move them back to
+# development/test once we're up and running with real data
+gem "factory_bot_rails"
+gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -36,6 +53,7 @@ group :development, :test do
 
   # Debugging
   gem "pry-byebug"
+  gem "pry-rails"
 
   # Testing framework
   gem "rspec-rails", "~> 4.0.0.beta3"
@@ -45,6 +63,9 @@ group :development, :test do
   gem "dotenv-rails"
 
   gem "bullet", "~> 6.1"
+  gem 'open_api-rswag'
+  gem "brakeman", "4.7.2"
+  gem 'faraday', require: false
 end
 
 group :development do
@@ -55,13 +76,13 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-  gem "brakeman", "4.7.2"
 end
 
 group :test do
   gem 'simplecov', require: false
   gem "webdrivers", "~> 4.2"
   gem 'shoulda-matchers', "~> 4.1"
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

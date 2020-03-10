@@ -1,0 +1,32 @@
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+
+    h1.govuk-heading-l Which year group would you like to view?
+
+    p
+      | Select a year group to view its full geography curriculum, access
+        resources, and plan lessons.
+
+    / FIXME hard coding the link to the last ccp here for demonstration
+    / purposes and until we're settled on how years and ccps are associated
+
+    form method="get" action="#{teachers_complete_curriculum_programme_path(CompleteCurriculumProgramme.last.id)}"
+      .govuk-form-group
+        fieldset.govuk-fieldset
+          legend.govuk-fieldset__legend.govuk-fieldset__legend--m
+            h1.govuk-fieldset__heading Key stage 3 geography
+          .govuk-radios
+            .govuk-radios__item
+              input.govuk-radios__input id="year-7" type="radio" name="complete_curriculum_programme_id" value="#{CompleteCurriculumProgramme.last.id}"
+              label.govuk-label.govuk-radios__label for="year-7"
+                | Year 7
+            .govuk-radios__item
+              input.govuk-radios__input id="year-8" type="radio" name="complete_curriculum_programme_id" value="N/A" disabled=true
+              label.govuk-label.govuk-radios__label for="year-8"
+                | Year 8
+            .govuk-radios__item
+              input.govuk-radios__input id="year-9" type="radio" name="complete_curriculum_programme_id" value="N/A" disabled=true
+              label.govuk-label.govuk-radios__label for="year-9"
+                | Year 9
+      input.govuk-button type="submit" value="Continue" data-module="govuk-button"
+

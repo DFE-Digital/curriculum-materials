@@ -1,0 +1,13 @@
+activity:
+  name: "Decision time: who should be the next king?"
+  overview: |-
+    Ask students to feed back on their different perspectives about who should
+    be the next king. Get the class to vote and then reveal who the Witan
+    really chose. Ask students to predict what might happen next, thus
+    anticipating the next lesson.
+  duration: 5
+  extra_requirements: []
+  default: true
+
+teaching_methods:
+  - Feedback

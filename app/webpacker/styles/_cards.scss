@@ -1,0 +1,74 @@
+.cards-container {
+  counter-reset: card-number;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+
+  @include govuk-media-query($until: desktop) {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    margin: 0.5rem 0;
+    padding: 20px;
+    padding-top: 10px;
+    list-style-type: decimal;
+    border-top: 10px solid govuk-colour("light-green");
+    background-color: govuk-colour("light-grey");
+
+    a {
+      text-decoration: none;
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &::before {
+        counter-increment: card-number;
+        content: counter(card-number);
+        @extend %govuk-heading-xl;
+        color: $govuk-secondary-text-colour;
+        font-size: 4.5rem;
+        padding: 0;
+        margin: 0;
+        width: 3rem;
+      }
+
+      .card-header-title {
+        padding-left: 0.5rem;
+
+        a > h3 {
+          color: $govuk-link-colour;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+        }
+
+        .govuk-caption-m {
+          color: $govuk-secondary-text-colour;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .card-body {
+      p,
+      li,
+      a {
+        font-size: 16px;
+      }
+
+      a {
+        font-weight: bold;
+      }
+
+      li > a {
+        font-weight: normal;
+      }
+    }
+  }
+}

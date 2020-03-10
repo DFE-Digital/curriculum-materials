@@ -1,0 +1,58 @@
+section
+  - if @lesson.lesson_parts.none?
+
+    .govuk-warning-text
+      span.govuk-warning-text__icon aria-hidden="true"
+        | !
+
+      div.govuk-warning-text__text
+        span.govuk-warning-text__assistive Warning
+
+        | This lesson has no activities
+
+  - else
+
+    p
+      | This lesson has been sequenced in a suggested order. If you'd like to make
+        changes, you can search for alternative resources.
+
+
+    div.lesson-parts
+      - @presenter.contents.each do |slot|
+
+        div.lesson-part
+          div.counter.big-number
+            = slot.counter
+
+          div.teaching-methods
+            - slot.teaching_methods.each do |tm|
+
+              div.teaching-method
+                = activity_icon(tm)
+                p.activity-name
+                  = tm.name
+
+          article.lesson-name-and-description
+            header
+              h3.govuk-heading-m = slot.name
+
+            = markdown(slot.overview)
+
+            section.extra-requirements
+              - slot.extra_requirements.each do |er|
+                .govuk-tag.govuk-tag__grey = er
+
+            p.duration
+              | Approximately #{slot.duration} minutes
+
+          - unless local_assigns[:mode] && mode == :print
+            div.alternatives
+              div.alternatives-list
+
+                // example list for the time being
+                ul.govuk-list
+                  li Alternative One
+                  li Alternative Two
+
+              div.change-link
+                = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)

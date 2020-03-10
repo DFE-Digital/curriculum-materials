@@ -1,0 +1,11 @@
+nav.siblings
+  ol
+    - units.each do |unit|
+
+      - if @unit == unit
+        li.current
+          = unit.name
+
+      - else
+        li
+          = link_to(unit.name, teachers_unit_path(unit))

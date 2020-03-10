@@ -1,0 +1,8 @@
+activity:
+  name: Student reads their paragraph out
+  overview: |-
+      Ask a student to read out their paragraph and either
+      offer feedback or get other students to offer verbal
+      feedback.
+  duration: 10
+  extra_requirements: []

@@ -1,0 +1,25 @@
+.govuk-splash {
+  @include govuk-font(16);
+  @include govuk-responsive-padding(6);
+  background-color: govuk-colour("blue");
+
+  * {
+    color: govuk-colour("white");
+
+    .govuk-link {
+      color: govuk-colour("white");
+    }
+  }
+
+  .govuk-button {
+    background-color: govuk-colour("white");
+    color: govuk-colour("blue");
+    margin: 0;
+  }
+
+  img {
+    width: 160px;
+    display: block;
+    margin-top: 20px;
+  }
+}

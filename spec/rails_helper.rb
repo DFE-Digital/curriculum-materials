@@ -5,6 +5,13 @@ require File.expand_path("../config/environment", __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
+require "support/factory_bot"
+require "support/api_examples"
+require "support/logged_in_teacher"
+require "faker"
+require "action_view/component/test_helpers"
+require "active_storage_validations/matchers"
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -58,6 +65,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include ActionView::Component::TestHelpers, type: :component
+  config.include ActiveStorageValidations::Matchers
 end
 
 Shoulda::Matchers.configure do |config|

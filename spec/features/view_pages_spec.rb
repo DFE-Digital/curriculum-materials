@@ -1,9 +1,12 @@
 require "rails_helper"
 
 RSpec.feature "View pages", type: :feature do
-  scenario "Navigate to home" do
-    visit "/pages/home"
+  describe 'how-to-get-access' do
+    before { visit("/pages/#{subject}") }
+    let(:support_email_address) { "curriculum-materials@digital.education.gov.uk" }
 
-    expect(page).to have_text("Lorem")
+    specify 'the page should contain the support email address' do
+      expect(page).to have_link(support_email_address, href: "mailto:#{support_email_address}")
+    end
   end
 end
