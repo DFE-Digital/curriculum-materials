@@ -84,7 +84,7 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  context 'attachements' do
+  context 'attachments' do
     let :attachment_path do
       File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
     end
@@ -147,6 +147,34 @@ RSpec.describe Activity, type: :model do
         expect(subject.filename).to eq 'slide-deck.odp'
         expect(subject.content_type).to eq 'application/vnd.oasis.opendocument.presentation'
         expect(subject.download).to eq File.binread(slide_deck_path)
+      end
+    end
+  end
+
+  describe 'scopes' do
+    describe '.omit' do
+      let(:activities) { create_list(:activity, 2) }
+      let(:unwanted_activity) { create(:activity) }
+
+      specify 'the unwanted activity should be omitted' do
+        expect(Activity.omit(unwanted_activity)).not_to include(unwanted_activity)
+      end
+
+      specify 'the other activities should be present' do
+        expect(Activity.omit(unwanted_activity)).to match_array(activities)
+      end
+    end
+  end
+
+  describe 'methods' do
+    describe '#alternatives' do
+      it { is_expected.to respond_to(:alternatives) }
+
+      let(:current_activity) { create(:activity) }
+      let(:other_activities) { create(:activity, lesson_part: current_activity.lesson_part) }
+
+      specify 'returns siblings but not self' do
+        expect(current_activity.alternatives).to match_array(other_activities)
       end
     end
   end
