@@ -1,8 +1,14 @@
 module Teachers
   class LessonContentsPresenter
     class Slot
+      PREVIEWABLE_RESOURCE_TYPES = %w(
+        png
+        pdf
+        gif
+      ).freeze
+
       attr_reader :counter, :teaching_methods, :name, :overview, :duration,
-                  :extra_requirements, :lesson_part, :alternatives
+                  :extra_requirements, :lesson_part, :alternatives, :activity
 
       def initialize(counter, lesson_part, activity)
         @counter            = counter
@@ -13,6 +19,17 @@ module Teachers
         @extra_requirements = activity.extra_requirements || []
         @alternatives       = activity.alternatives
         @lesson_part        = lesson_part
+        @activity           = activity
+      end
+
+      def resources
+        [
+          @activity.pupil_resources,
+          @activity.teacher_resources,
+          @activity.slide_deck
+        ].select(&:attached?)
+          .flatten
+          .select { |r| PREVIEWABLE_RESOURCE_TYPES.include? r.filename.extension }
       end
     end
 
@@ -34,7 +51,10 @@ module Teachers
     def load_parts
       @lesson
         .lesson_parts
-        .eager_load(:activity_choices, activities: %i(activity_teaching_methods teaching_methods))
+        .eager_load(
+          :activity_choices,
+          activities: %i(activity_teaching_methods teaching_methods pupil_resources_attachments teacher_resources_attachments slide_deck_attachment)
+        )
         .merge(LessonPart.ordered_by_position)
         .merge(Activity.ordered_by_id)
         .merge(ActivityChoice.made_by(@teacher).or(ActivityChoice.where(teacher_id: nil)))
