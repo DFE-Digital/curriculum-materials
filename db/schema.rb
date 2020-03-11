@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 2020_03_06_141111) do
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
     t.text "rationale", null: false
+    t.integer "subject_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "subject_id", null: false
     t.integer "key_stage", null: false
     t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
   end
