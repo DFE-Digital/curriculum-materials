@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
     t.text "overview"
     t.integer "duration", null: false
     t.string "extra_requirements", limit: 32, default: [], array: true
-    t.boolean "default", null: false
     t.string "name", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -119,6 +118,8 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
     t.integer "position", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "default_activity_id"
+    t.index ["default_activity_id"], name: "index_lesson_parts_on_default_activity_id"
     t.index ["lesson_id"], name: "index_lesson_parts_on_lesson_id"
     t.index ["position", "lesson_id"], name: "index_lesson_parts_on_position_and_lesson_id", unique: true
   end
@@ -175,6 +176,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
   add_foreign_key "download_transitions", "downloads"
   add_foreign_key "downloads", "lessons"
   add_foreign_key "downloads", "teachers"
+  add_foreign_key "lesson_parts", "activities", column: "default_activity_id"
   add_foreign_key "lesson_parts", "lessons"
   add_foreign_key "lessons", "units"
   add_foreign_key "units", "complete_curriculum_programmes"

@@ -6,7 +6,6 @@ RSpec.describe Activity, type: :model do
     it { is_expected.to have_db_column(:overview).of_type(:text) }
     it { is_expected.to have_db_column(:duration).of_type(:integer) }
     it { is_expected.to have_db_column(:extra_requirements).of_type(:string).with_options(array: true) }
-    it { is_expected.to have_db_column(:default).of_type(:boolean).with_options(null: false) }
   end
 
   describe 'relationships' do
@@ -30,23 +29,35 @@ RSpec.describe Activity, type: :model do
       it { is_expected.to validate_presence_of(:duration) }
       it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(60) }
     end
+  end
 
-    describe '#default' do
-      context 'when default' do
-        subject { create :activity, default: true }
+  describe 'methods' do
+    describe '#make_default!' do
+      subject { create(:activity, default: false) }
 
-        it do
-          is_expected.to \
-            validate_uniqueness_of(:default).scoped_to(:lesson_part_id)
+      specify 'should promote the activity to be default for the lesson part' do
+        subject.make_default!
+
+        expect(subject).to be_default
+      end
+    end
+  end
+
+  describe 'callbacks' do
+    describe 'setting the default activity at creation' do
+      context 'when default arg is not supplied' do
+        subject { create(:activity, default: false) }
+
+        specify 'the activity should not be marked as default' do
+          expect(subject).not_to be_default
         end
       end
 
-      context 'when not default' do
-        subject { create :activity, default: false }
+      context 'when default arg is supplied' do
+        subject { create(:activity, default: true) }
 
-        it do
-          is_expected.not_to \
-            validate_uniqueness_of(:default).scoped_to(:lesson_part_id)
+        specify 'the activity should be marked as default' do
+          expect(subject).to be_default
         end
       end
     end

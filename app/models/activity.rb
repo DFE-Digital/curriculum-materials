@@ -25,8 +25,10 @@ class Activity < ApplicationRecord
   validates :overview, presence: true
   validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
 
-  validates :default, inclusion: [true, false]
-  validates :default, uniqueness: { scope: :lesson_part_id }, if: :default?
+  # the default attr is used to maintain compatibility with the previous approach
+  # and allows an activity to be specified as being the default at creation time:w
+  attr_accessor :default
+  after_create :make_default!, if: :default
 
   validates :teacher_resources,
             content_type: ALLOWED_CONTENT_TYPES,
@@ -41,8 +43,17 @@ class Activity < ApplicationRecord
             size: { less_than: MAX_UPLOAD_SIZE }
 
   scope :omit, ->(activity) { where.not(id: activity.id) }
+  scope :ordered_by_id, -> { order(id: 'asc') }
 
   def alternatives
     lesson_part.activities.omit(self)
+  end
+
+  def default?
+    lesson_part.default_activity == self
+  end
+
+  def make_default!
+    lesson_part.update!(default_activity: self)
   end
 end

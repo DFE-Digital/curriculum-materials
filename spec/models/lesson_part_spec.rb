@@ -16,6 +16,14 @@ describe LessonPart, type: :model do
     it { is_expected.to belong_to :lesson }
     it { is_expected.to have_many(:activities).dependent(:destroy) }
     it { is_expected.to have_many(:activity_choices).dependent(:destroy) }
+    it do
+      is_expected.to(
+        belong_to(:default_activity)
+          .class_name('Activity')
+          .with_foreign_key('default_activity_id')
+          .optional
+      )
+    end
   end
 
   describe 'validations' do

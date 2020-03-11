@@ -60,8 +60,9 @@ section
                       li = alternative.name
 
                 div.change-link
-                  = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
+                  = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part)
 
             - else
+
               div.govuk-hint.no-alternatives
                 | No alternatives
