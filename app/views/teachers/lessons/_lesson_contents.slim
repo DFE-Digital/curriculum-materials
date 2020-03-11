@@ -45,14 +45,23 @@ section
             p.duration
               | Approximately #{slot.duration} minutes
 
+            .files
+              = render "preview", resources: slot.resources
+
           - unless local_assigns[:mode] && mode == :print
-            div.alternatives
-              div.alternatives-list
 
-                // example list for the time being
-                ul.govuk-list
-                  li Alternative One
-                  li Alternative Two
+            - if slot.alternatives.any?
+              div.alternatives
+                div.alternatives-list
+                  h4 Alternative activities:
 
-              div.change-link
-                = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
+                  ul.govuk-list.govuk-list--bullet
+                    - slot.alternatives.each do |alternative|
+                      li = alternative.name
+
+                div.change-link
+                  = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part_id)
+
+            - else
+              div.govuk-hint.no-alternatives
+                | No alternatives

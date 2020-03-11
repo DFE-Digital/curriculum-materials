@@ -15,15 +15,33 @@ RSpec.feature "Downloads tab", type: :feature do
     within('#downloads') { expect(page).to have_link('Print lesson plan') }
   end
 
-  specify %(there should be a 'Download teacher resources' link) do
-    within('#downloads') { expect(page).to have_link('Download teacher resources') }
+  specify %(there should be a 'Download lesson resources' button) do
+    within('#downloads') { expect(page).to have_button('Download lesson resources') }
   end
 
-  specify %(there should be a 'Download pupil resources' link) do
-    within('#downloads') { expect(page).to have_link('Download pupil resources') }
+  specify %(there should be a 'Go to next lesson' link) do
+    expect(page).to \
+      have_link('Go to next lesson', href: teachers_unit_path(lesson.unit))
   end
 
-  specify %(there should be a 'Plan the next lesson' button) do
-    expect(page).to have_link('Plan the next lesson', href: '#', class: 'govuk-button')
+  context 'Download lesson resources' do
+    before do
+      click_button 'Download lesson resources'
+    end
+
+    specify "it should redirect to the download page" do
+      expect(page.current_path).to eq \
+        teachers_download_path(teacher.downloads.last)
+    end
+  end
+
+  context 'Print lesson plan' do
+    before do
+      click_link 'Print lesson plan'
+    end
+
+    specify "it should redirect to the print lesson page" do
+      expect(page.current_path).to eq print_teachers_lesson_path(lesson)
+    end
   end
 end

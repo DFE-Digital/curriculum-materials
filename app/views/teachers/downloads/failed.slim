@@ -1,1 +1,13 @@
-failed
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h1 Something has gone wrong
+
+    = image_tag \
+        asset_pack_path('media/images/download-failed.png'),
+        alt: 'Something has gone wrong',
+        width: '275px'
+
+    p
+      strong Please try your build again
+
+    = link_to 'Continue', teachers_lesson_path(@download.lesson), class: 'govuk-button'

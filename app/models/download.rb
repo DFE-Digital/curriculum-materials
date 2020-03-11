@@ -19,4 +19,8 @@ class Download < ApplicationRecord
   def state_machine
     @state_machine ||= DownloadStateMachine.new(self, transition_class: DownloadTransition)
   end
+
+  def lesson_parts
+    lesson.lesson_parts_for(teacher)
+  end
 end

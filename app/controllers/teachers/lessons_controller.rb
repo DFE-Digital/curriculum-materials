@@ -14,7 +14,7 @@ module Teachers
 
     def load_resources
       @lesson = Lesson
-        .eager_load(lesson_parts: { activities: [:activity_choices, :teaching_methods, { activity_teaching_methods: :teaching_method }] })
+        .eager_load(lesson_parts: { activities: [:activity_choices, :teaching_methods, { activity_teaching_methods: :teaching_method }, :pupil_resources_attachments, :teacher_resources_attachments, :slide_deck_attachment] })
         .merge(LessonPart.ordered_by_position)
         .find(params[:id])
 
