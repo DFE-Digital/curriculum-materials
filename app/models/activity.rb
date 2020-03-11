@@ -54,6 +54,6 @@ class Activity < ApplicationRecord
   end
 
   def make_default!
-    lesson_part.update(default_activity: self)
+    lesson_part.update!(default_activity: self)
   end
 end
