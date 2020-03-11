@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_28_132329) do
+ActiveRecord::Schema.define(version: 2020_03_06_141111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -72,8 +72,10 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
     t.text "rationale", null: false
+    t.integer "subject_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "key_stage", null: false
     t.index ["name"], name: "index_complete_curriculum_programmes_on_name"
   end
 
@@ -139,6 +141,13 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.string "name", limit: 64, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_subjects_on_name", unique: true
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.uuid "token", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -162,6 +171,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "year", null: false
     t.index ["complete_curriculum_programme_id"], name: "index_units_on_complete_curriculum_programme_id"
     t.index ["name"], name: "index_units_on_name"
   end
@@ -173,6 +183,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_132329) do
   add_foreign_key "activity_choices", "teachers"
   add_foreign_key "activity_teaching_methods", "activities"
   add_foreign_key "activity_teaching_methods", "teaching_methods"
+  add_foreign_key "complete_curriculum_programmes", "subjects"
   add_foreign_key "download_transitions", "downloads"
   add_foreign_key "downloads", "lessons"
   add_foreign_key "downloads", "teachers"

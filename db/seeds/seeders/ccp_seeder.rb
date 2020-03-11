@@ -1,10 +1,12 @@
 module Seeders
   class CCPSeeder < BaseSeeder
-    attr_accessor :id, :name, :overview, :benefits
+    attr_accessor :id, :name, :overview, :benefits, :subject
 
-    def initialize(name:, rationale:)
+    def initialize(name:, rationale:, subject:, key_stage:)
       @name      = name
       @rationale = rationale
+      @subject   = subject
+      @key_stage = key_stage
     end
 
     def identifier
@@ -26,11 +28,17 @@ module Seeders
     end
 
     def attributes
-      { name: @name, rationale: @rationale }
+      { name: @name, rationale: @rationale, key_stage: @key_stage }
     end
 
     def payload
-      { ccp: attributes }
+      { ccp: attributes, subject: @subject }
+    end
+
+    def save_via_model
+      subject = Subject.find_by(name: @subject)
+
+      @id = model_class.create!(attributes.merge(subject: subject)).id
     end
   end
 end

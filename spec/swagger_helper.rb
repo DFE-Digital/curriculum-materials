@@ -26,7 +26,9 @@ RSpec.configure do |config|
             properties: {
               id: { type: :integer },
               name: { type: :string },
-              ratoinale: { type: :string }
+              rationale: { type: :string },
+              key_stage: { type: :integer },
+              subject: { type: :string }
             },
             required: %i(name rationale)
           },
@@ -36,7 +38,8 @@ RSpec.configure do |config|
               name: { type: :string },
               benefits: { type: :string },
               overview: { type: :string },
-              position: { type: :integer }
+              position: { type: :integer },
+              year: { type: :integer }
             },
             required: %i(name benefits overview position)
           },
@@ -86,6 +89,12 @@ RSpec.configure do |config|
             properties: {
               name: { type: :string },
               icon: { type: :string }
+            }
+          },
+          subject: {
+            type: :object,
+            properties: {
+              name: { type: :string }
             }
           }
         }

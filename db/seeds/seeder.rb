@@ -79,7 +79,9 @@ end
 unless Rails.env.test?
   # First loop through the sample CCPs which can be found in db/seeds/data/{subject}
   Dir.glob(Rails.root.join("db", "seeds", "data", "*", "*.yml")).each do |ccp_file|
-    Seeders::CCPSeeder.new(**extract_attributes(ccp_file, 'ccp')).tap do |ccp|
+    subject = extract_attributes(ccp_file, 'subject', false)
+
+    Seeders::CCPSeeder.new(**extract_attributes(ccp_file, 'ccp').merge(subject: subject)).tap do |ccp|
       log_progress("Saving CCP: #{ccp.name}")
       ccp.save!
 

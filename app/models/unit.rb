@@ -10,6 +10,7 @@ class Unit < ApplicationRecord
             length: { maximum: 1024 }
 
   validates :benefits, presence: true
+  validates :year, inclusion: SchoolYear.instance.years
 
   belongs_to :complete_curriculum_programme
   has_many :lessons, dependent: :destroy

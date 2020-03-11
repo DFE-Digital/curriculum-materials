@@ -5,6 +5,7 @@ FactoryBot.define do
     overview { "Overview" }
     benefits { "Benefits" }
     sequence(:position) { |n| n }
+    year { [1, 3, 5, 7, 9, 11].sample }
 
     trait(:randomised) do
       name { Faker::Lorem.word.capitalize }

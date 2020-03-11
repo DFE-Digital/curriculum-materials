@@ -38,7 +38,7 @@ class Api::V1::UnitsController < Api::BaseController
 private
 
   def unit_params
-    params.require(:unit).permit(:name, :overview, :benefits, :position)
+    params.require(:unit).permit(:name, :overview, :benefits, :position, :year)
   end
 
   def serialize(data)

@@ -23,6 +23,7 @@ RSpec.describe Unit, type: :model do
     end
 
     it { is_expected.to validate_presence_of(:benefits) }
+    it { is_expected.to validate_inclusion_of(:year).in_array(SchoolYear.instance.years) }
   end
 
   describe 'relationships' do

@@ -12,9 +12,11 @@ RSpec.describe CompleteCurriculumProgramme, type: :model do
     end
 
     it { is_expected.to validate_presence_of(:rationale) }
+    it { is_expected.to validate_inclusion_of(:key_stage).in_array(SchoolYear.instance.key_stages) }
   end
 
   describe 'relationships' do
     it { is_expected.to have_many(:units).dependent(:destroy) }
+    it { is_expected.to belong_to(:subject) }
   end
 end
