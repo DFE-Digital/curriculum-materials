@@ -25,8 +25,9 @@ class Activity < ApplicationRecord
   validates :overview, presence: true
   validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
 
+  # the default attr is used to maintain compatibility with the previous approach
+  # and allows an activity to be specified as being the default at creation time:w
   attr_accessor :default
-
   after_create :make_default!, if: :default
 
   validates :teacher_resources,
