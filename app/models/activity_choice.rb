@@ -6,5 +6,5 @@ class ActivityChoice < ApplicationRecord
   validates :teacher, :activity, :lesson_part, presence: true
   validates :teacher_id, uniqueness: { scope: :lesson_part_id }
 
-  scope :made_by, -> (teacher) { where(teacher: teacher) }
+  scope :made_by, ->(teacher) { where(teacher: teacher) }
 end

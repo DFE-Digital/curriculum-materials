@@ -12,7 +12,7 @@ module Teachers
     end
 
     def activity_choice_link(teacher, lesson_part)
-      if lesson_part.activity_choices.any?
+      if lesson_part.activity_choices.made_by(teacher).exists?
         edit_teachers_lesson_part_choice_path(lesson_part)
       else
         new_teachers_lesson_part_choice_path(lesson_part)

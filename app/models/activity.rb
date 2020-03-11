@@ -42,6 +42,7 @@ class Activity < ApplicationRecord
             size: { less_than: MAX_UPLOAD_SIZE }
 
   scope :omit, ->(activity) { where.not(id: activity.id) }
+  scope :ordered_by_id, -> { order(id: 'asc') }
 
   def alternatives
     lesson_part.activities.omit(self)

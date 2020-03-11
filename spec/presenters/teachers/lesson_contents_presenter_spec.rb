@@ -13,6 +13,12 @@ RSpec.describe Teachers::LessonContentsPresenter do
 
   subject { Teachers::LessonContentsPresenter.new(lesson, teacher) }
 
+  describe 'attributes' do
+    it { is_expected.to respond_to(:lesson) }
+    it { is_expected.to respond_to(:teacher) }
+    it { is_expected.to respond_to(:contents) }
+  end
+
   specify 'should have the correct number of slots' do
     expect(subject.contents).to all(be_a(Teachers::LessonContentsPresenter::Slot))
     expect(subject.contents.size).to eql(number_of_parts)
@@ -20,7 +26,7 @@ RSpec.describe Teachers::LessonContentsPresenter do
 
   specify 'each slot should have the correct attributes' do
     lesson.lesson_parts.each.with_index(1) do |lesson_part, i|
-      subject.contents.find { |slot| slot.lesson_part_id == lesson_part.id }.tap do |slot|
+      subject.contents.find { |slot| slot.lesson_part.id == lesson_part.id }.tap do |slot|
         activity = lesson_part.activity_for(teacher)
 
         expect(slot.counter).to eql(i)
@@ -31,7 +37,7 @@ RSpec.describe Teachers::LessonContentsPresenter do
         expect(slot.alternatives).to match_array(activity.alternatives)
         expect(slot.teaching_methods).to match_array(activity.teaching_methods)
 
-        expect(slot.lesson_part_id).to eql(lesson_part.id)
+        expect(slot.lesson_part.id).to eql(lesson_part.id)
       end
     end
   end
@@ -40,7 +46,7 @@ RSpec.describe Teachers::LessonContentsPresenter do
     let!(:lesson_part_with_no_activities) { create(:lesson_part, lesson: lesson) }
 
     it 'should be omitted from the slots' do
-      expect(subject.contents.map(&:lesson_part_id)).not_to include(lesson_part_with_no_activities.id)
+      expect(subject.contents.map(&:lesson_part)).not_to include(lesson_part_with_no_activities)
     end
   end
 end

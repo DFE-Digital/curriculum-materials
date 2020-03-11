@@ -19,22 +19,32 @@ class LessonPart < ApplicationRecord
   scope :ordered_by_position, -> { order(position: 'asc') }
 
   def activity_for(teacher)
-    selected_activity(teacher) || default_activity || fallback_activity
+    retrieve_selected_activity(teacher) || retrieve_default_activity || retrieve_fallback_activity
   end
 
 private
 
-  def selected_activity(teacher)
-    # if we've eager loaded the activity_choices already, loop through
-    # rather than execute a new query
-    if activity_choices.loaded?
-      activity_choices.detect { |ac| ac.teacher_id == teacher.id }&.activity
+  def retrieve_selected_activity(teacher)
+    activity_choice = if activity_choices.loaded?
+                        activity_choices.detect { |ac| ac.teacher_id == teacher.id }
+                      else
+                        activity_choices.find_by(teacher_id: teacher.id)
+                      end
+
+    activity_choice&.activity
+  end
+
+  def retrieve_default_activity
+    return nil if default_activity_id.blank?
+
+    if activities.loaded?
+      activities.detect { |activity| activity.id == default_activity_id }
     else
-      activity_choices.find_by(teacher_id: teacher.id)&.activity
+      activities.find_by(id: default_activity_id)
     end
   end
 
-  def fallback_activity
+  def retrieve_fallback_activity
     activities.first
   end
 end
