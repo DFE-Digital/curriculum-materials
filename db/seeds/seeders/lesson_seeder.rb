@@ -41,7 +41,8 @@ module Seeders
         name: @name,
         previous_knowledge: @previous_knowledge,
         summary: @summary,
-        vocabulary: @vocabulary
+        vocabulary: @vocabulary,
+        position: @position
       }
     end
 
