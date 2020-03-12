@@ -27,7 +27,7 @@ class Activity < ApplicationRecord
            dependent: :destroy,
            inverse_of: :activity
 
-  has_one :temp_slide_deck,
+  has_one :temp_slide_deck_resource,
           -> { where type: 'SlideDeckResource' },
           class_name: 'SlideDeckResource',
           dependent: :destroy,

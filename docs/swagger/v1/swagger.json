@@ -589,7 +589,7 @@
               "application/json": {
                 "name": "CCP 1",
                 "rationale": "Rationale",
-                "key_stage": 3,
+                "key_stage": 4,
                 "id": 1
               }
             },
@@ -648,7 +648,7 @@
                 "ccp": {
                   "name": "CCP 2",
                   "rationale": "Rationale",
-                  "key_stage": 3
+                  "key_stage": 1
                 },
                 "subject": "English"
               }
@@ -693,7 +693,7 @@
               "application/json": {
                 "name": "CCP 3",
                 "rationale": "Rationale",
-                "key_stage": 1,
+                "key_stage": 4,
                 "id": 1,
                 "units": [
                   {
@@ -701,7 +701,7 @@
                     "overview": "Overview",
                     "benefits": "Benefits",
                     "position": 1,
-                    "year": 11,
+                    "year": 5,
                     "id": 1
                   },
                   {
@@ -709,7 +709,7 @@
                     "overview": "Overview",
                     "benefits": "Benefits",
                     "position": 2,
-                    "year": 1,
+                    "year": 7,
                     "id": 2
                   }
                 ]
@@ -775,7 +775,7 @@
                 "ccp": {
                   "name": "CCP 4",
                   "rationale": "Rationale",
-                  "key_stage": 4
+                  "key_stage": 2
                 },
                 "subject": "French"
               }
@@ -1509,7 +1509,8 @@
               "application/json": [
                 {
                   "id": 1,
-                  "url": "https://example.com/path-to-resource"
+                  "file_url": "https://example.com/path-to-resource",
+                  "preview_url": "https://example.com/path-to-resource"
                 }
               ]
             }
@@ -1579,15 +1580,22 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "pupil_resource": {
+                  "pupil_resource[file]": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "pupil_resource[preview]": {
                     "type": "string",
                     "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "pupil_resource": {
-                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,image/gif,image/jpeg,image/jpg,image/png"
+                "pupil_resource[file]": {
+                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.presentation,image/gif,image/jpeg,image/jpg,image/png"
+                },
+                "pupil_resource[preview]": {
+                  "contentType": "image/png"
                 }
               }
             }
@@ -1683,7 +1691,7 @@
       "post": {
         "summary": "Attaches a slide deck to the activity",
         "tags": [
-          "SlideDeck"
+          "SlideDeckResource"
         ],
         "parameters": [
           {
@@ -1740,15 +1748,26 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "slide_deck": {
+                  "slide_deck_resource[file]": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "slide_deck_resource[preview]": {
                     "type": "string",
                     "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "slide_deck": {
-                  "contentType": "application/vnd.oasis.opendocument.presentation"
+                "slide_deck_resource[file]": {
+                  "contentType": [
+                    "application/vnd.oasis.opendocument.presentation"
+                  ]
+                },
+                "slide_deck_resource[preview]": {
+                  "contentType": [
+                    "image/png"
+                  ]
                 }
               }
             }
@@ -1756,7 +1775,7 @@
         },
         "responses": {
           "201": {
-            "description": "slide_deck created"
+            "description": "slide_deck_resource created"
           },
           "401": {
             "description": "unauthorized"
@@ -1766,7 +1785,7 @@
       "get": {
         "summary": "Returns the slide deck for an activity",
         "tags": [
-          "SlideDeck"
+          "SlideDeckResource"
         ],
         "parameters": [
           {
@@ -1823,7 +1842,8 @@
             "examples": {
               "application/json": {
                 "id": 1,
-                "url": "https://example.com/path-to-resource"
+                "file_url": "https://example.com/path-to-resource",
+                "preview_url": "https://example.com/path-to-resource"
               }
             }
           },
@@ -1835,7 +1855,7 @@
       "delete": {
         "summary": "Removes the slide deck for an activity",
         "tags": [
-          "SlideDeck"
+          "SlideDeckResource"
         ],
         "parameters": [
           {
@@ -2061,7 +2081,8 @@
               "application/json": [
                 {
                   "id": 1,
-                  "url": "https://example.com/path-to-resource"
+                  "file_url": "https://example.com/path-to-resource",
+                  "preview_url": "https://example.com/path-to-resource"
                 }
               ]
             }
@@ -2131,15 +2152,22 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "teacher_resource": {
+                  "teacher_resource[file]": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "teacher_resource[preview]": {
                     "type": "string",
                     "format": "binary"
                   }
                 }
               },
               "encoding": {
-                "teacher_resource": {
-                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,image/gif,image/jpeg,image/jpg,image/png"
+                "teacher_resource[file]": {
+                  "contentType": "application/pdf,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.presentation,image/gif,image/jpeg,image/jpg,image/png"
+                },
+                "teacher_resource[preview]": {
+                  "contentType": "image/png"
                 }
               }
             }
@@ -2373,7 +2401,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 3,
-                  "year": 11,
+                  "year": 5,
                   "id": 1
                 },
                 {
@@ -2381,7 +2409,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 4,
-                  "year": 11,
+                  "year": 7,
                   "id": 2
                 }
               ]
@@ -2448,7 +2476,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 5,
-                  "year": 1,
+                  "year": 5,
                   "id": 1
                 }
               }
@@ -2508,7 +2536,7 @@
                 "complete_curriculum_programme": {
                   "name": "CCP 5",
                   "rationale": "Rationale",
-                  "key_stage": 3,
+                  "key_stage": 2,
                   "id": 1
                 },
                 "lessons": [

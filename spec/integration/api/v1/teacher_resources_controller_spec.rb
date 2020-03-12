@@ -25,7 +25,8 @@ describe 'TeacherResources' do
       response '200', 'teacher resources found' do
         examples 'application/json': [{
           id: 1,
-          url: 'https://example.com/path-to-resource'
+          file_url: 'https://example.com/path-to-resource',
+          preview_url: 'https://example.com/path-to-resource'
         }]
 
         run_test!
@@ -47,14 +48,19 @@ describe 'TeacherResources' do
       parameter name: :lesson_id, in: :path, type: :string, required: true
       parameter name: :lesson_part_id, in: :path, type: :string, required: true
       parameter name: :activity_id, in: :path, type: :string, required: true
-      parameter name: :teacher_resource, in: :formData, type: :file, required: true
+      parameter name: 'teacher_resource[file]', in: :formData, type: :file, required: true
+      parameter name: 'teacher_resource[preview]', in: :formData, type: :file, required: true
 
       response 201, 'teacher_resouce created' do
         let :attachment_path do
           File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
         end
 
-        let :teacher_resource do
+        let 'teacher_resource[file]' do
+          fixture_file_upload attachment_path, 'image/png'
+        end
+
+        let 'teacher_resource[preview]' do
           fixture_file_upload attachment_path, 'image/png'
         end
 
@@ -64,15 +70,22 @@ describe 'TeacherResources' do
               schema: {
                 type: 'object',
                 properties: {
-                  teacher_resource: {
+                  'teacher_resource[file]': {
+                    type: :string,
+                    format: :binary
+                  },
+                  'teacher_resource[preview]': {
                     type: :string,
                     format: :binary
                   }
                 }
               },
               encoding: {
-                teacher_resource: {
-                  contentType: Activity::ALLOWED_CONTENT_TYPES.join(',')
+                'teacher_resource[file]': {
+                  contentType: TeacherResource::ALLOWED_CONTENT_TYPES.join(',')
+                },
+                'teacher_resource[preview]': {
+                  contentType: TeacherResource::ALLOWED_PREVIEW_CONTENT_TYPES.join(',')
                 }
               }
             }
@@ -88,7 +101,11 @@ describe 'TeacherResources' do
           File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
         end
 
-        let :teacher_resource do
+        let 'teacher_resource[file]' do
+          fixture_file_upload attachment_path, 'text/xml'
+        end
+
+        let 'teacher_resource[preview]' do
           fixture_file_upload attachment_path, 'text/xml'
         end
 
@@ -96,7 +113,7 @@ describe 'TeacherResources' do
           expect(response.code).to eq '400'
 
           expect(JSON.parse(response.body).dig('errors')).to include \
-            "Teacher resources has an invalid content type"
+            "File has an invalid content type"
         end
       end
 
@@ -105,7 +122,11 @@ describe 'TeacherResources' do
           File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
         end
 
-        let :teacher_resource do
+        let 'teacher_resource[file]' do
+          fixture_file_upload attachment_path, 'image/png'
+        end
+
+        let 'teacher_resource[preview]' do
           fixture_file_upload attachment_path, 'image/png'
         end
 
@@ -115,17 +136,8 @@ describe 'TeacherResources' do
   end
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources/{teacher_resource_id}' do
-    let :attachment_path do
-      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
-    end
-
     let :teacher_resource do
-      activity.teacher_resources.attach(
-        io: File.open(attachment_path),
-        filename: '1px.png',
-        content_type: 'image/png'
-      )
-      activity.teacher_resources.last
+      create :teacher_resource, :with_file, activity: activity
     end
 
     let :teacher_resource_id do
@@ -146,7 +158,7 @@ describe 'TeacherResources' do
       response '204', 'teacher resource removed' do
         run_test! do |response|
           expect(response.code).to eq '204'
-          expect(activity.reload.teacher_resources).to be_empty
+          expect(activity.reload.temp_teacher_resources).to be_empty
         end
       end
 
