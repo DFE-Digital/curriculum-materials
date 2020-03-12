@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_141111) do
+ActiveRecord::Schema.define(version: 2020_03_11_165603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -141,6 +141,14 @@ ActiveRecord::Schema.define(version: 2020_03_06_141111) do
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end
 
+  create_table "resources", force: :cascade do |t|
+    t.bigint "activity_id", null: false
+    t.string "type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_resources_on_activity_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "name", limit: 64, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -190,5 +198,6 @@ ActiveRecord::Schema.define(version: 2020_03_06_141111) do
   add_foreign_key "lesson_parts", "activities", column: "default_activity_id"
   add_foreign_key "lesson_parts", "lessons"
   add_foreign_key "lessons", "units"
+  add_foreign_key "resources", "activities"
   add_foreign_key "units", "complete_curriculum_programmes"
 end
