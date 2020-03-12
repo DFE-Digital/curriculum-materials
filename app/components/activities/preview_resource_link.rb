@@ -2,7 +2,7 @@ module Activities
   class PreviewResourceLink < ActionView::Component::Base
     attr_reader :resource
 
-    def initialize(resource)
+    def initialize(resource:)
       @resource = resource
     end
 

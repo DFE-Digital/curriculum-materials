@@ -6,7 +6,7 @@
 
     .govuk-details__text
       - resources.each do |resource|
-        = render(Activities::PreviewResourceLink, resource)
+        = render(Activities::PreviewResourceLink, resource: resource)
 
 - elsif resources.one?
-  = render(Activities::PreviewResourceLink, resources.first)
+  = render(Activities::PreviewResourceLink, resource: resources.first)

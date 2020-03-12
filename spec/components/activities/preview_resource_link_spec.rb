@@ -11,7 +11,7 @@ describe Activities::PreviewResourceLink, type: :component do
 
   context 'generated HTML' do
     let :page do
-      Capybara::Node::Simple.new(render_inline(described_class.new(resource)))
+      Capybara::Node::Simple.new(render_inline(described_class, resource: resource))
     end
 
     it 'renders the correct link' do
