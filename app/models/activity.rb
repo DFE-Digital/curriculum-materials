@@ -15,6 +15,9 @@ class Activity < ApplicationRecord
   has_many :activity_teaching_methods, dependent: :destroy
   has_many :activity_choices, dependent: :destroy
   has_many :teaching_methods, through: :activity_teaching_methods
+  has_many :temp_teacher_resources, -> { where type: 'TeacherResource' }, class_name: 'TeacherResource', dependent: :destroy
+  has_many :temp_pupil_resources, -> { where type: 'PupilResource' }, class_name: 'PupilResource', dependent: :destroy
+  has_one :temp_slide_deck, -> { where type: 'SlideDeckResource' }, class_name: 'SlideDeckResource', dependent: :destroy
 
   has_many_attached :teacher_resources
   has_many_attached :pupil_resources
