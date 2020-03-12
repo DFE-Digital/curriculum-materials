@@ -4,7 +4,7 @@ require_relative 'resource_shared_examples'
 describe TeacherResource, type: :model do
   let(:resource) { create :teacher_resource }
   let(:max_upload_size) { 50.megabytes }
-  let(:allowed_content_types) do
+  let(:allowed_file_content_types) do
     %w(
       application/pdf
       application/vnd.oasis.opendocument.text
@@ -12,6 +12,15 @@ describe TeacherResource, type: :model do
       image/jpeg
       image/jpg
       image/png
+    )
+  end
+  let(:allowed_preview_content_types) do
+    %w(
+      image/png
+      image/jpeg
+      image/jpg
+      image/gif
+      application/pdf
     )
   end
 
