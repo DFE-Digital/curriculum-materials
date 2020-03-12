@@ -1,18 +1,19 @@
 class Api::V1::SlideDecksController < Api::BaseController
   def show
-    render json: SlideDeckSerializer.render(activity.slide_deck)
+    render json: SlideDeckResourceSerializer.render(activity.temp_slide_deck_resource)
   end
 
   def create
-    if activity.slide_deck.attach slide_deck_params
+    slide_deck_resource = activity.build_temp_slide_deck_resource slide_deck_params
+    if slide_deck_resource.save
       head :created
     else
-      render json: { errors: activity.errors.full_messages }, status: :bad_request
+      render json: { errors: slide_deck_resource.errors.full_messages }, status: :bad_request
     end
   end
 
   def destroy
-    activity.slide_deck.purge
+    activity.temp_slide_deck_resource.destroy!
     head :no_content
   end
 
@@ -23,6 +24,6 @@ private
   end
 
   def slide_deck_params
-    params.require :slide_deck
+    params.require(:slide_deck_resource).permit :file, :preview
   end
 end

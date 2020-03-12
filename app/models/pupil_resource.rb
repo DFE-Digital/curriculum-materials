@@ -11,6 +11,8 @@ class PupilResource < Resource
 
   MAX_UPLOAD_SIZE = 50.megabytes
 
+  ALLOWED_PREVIEW_CONTENT_TYPES = %w(image/png).freeze
+
   validates :type, inclusion: %w(PupilResource).freeze
 
   validates :file,
@@ -18,6 +20,6 @@ class PupilResource < Resource
             size: { less_than: MAX_UPLOAD_SIZE }
 
   validates :preview,
-            content_type: 'image/png',
+            content_type: ALLOWED_PREVIEW_CONTENT_TYPES,
             size: { less_than: MAX_UPLOAD_SIZE }
 end

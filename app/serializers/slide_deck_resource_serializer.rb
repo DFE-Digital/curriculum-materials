@@ -1,4 +1,4 @@
-class TeacherResourceSerializer < Blueprinter::Base
+class SlideDeckResourceSerializer < Blueprinter::Base
   identifier :id
 
   field :file_url do |object|
