@@ -34,10 +34,14 @@
 #                     │   ├── keyword-matching
 #                     │   │   ├── pupil
 #                     │   │   │   ├── normans.odt                       <--- Pupil resource
+#                     │   │   │   ├── normans.preview.pdf               <--- Preview of the pupil resource
 #                     │   │   │   └── the-house-of-normandy.pdf
+#                     │   │   │   └── the-house-of-normandy.preview.pdf
 #                     │   │   ├── slides.odp                            <--- Activity slide deck
+#                     │   │   ├── slides.preview.png                    <--- Preview of the slide deck
 #                     │   │   └── teacher
 #                     │   │       └── norman-conquest.gif               <--- Teacher resource
+#                     │   │       └── norman-conquest.preview.gif       <--- Preview of the teacher resource
 #                     │   └── ordering-the-battle-events.yml
 #                     ├── 2
 #                     │   ├── the-story-of-the-battle.yml
