@@ -8,9 +8,9 @@ shared_examples 'a Resource' do
 
     context 'attachments' do
       it { is_expected.to validate_size_of(:file).less_than(max_upload_size) }
-      it { is_expected.to validate_content_type_of(:file).allowing(allowed_content_types) }
+      it { is_expected.to validate_content_type_of(:file).allowing(allowed_file_content_types) }
       it { is_expected.to validate_size_of(:preview).less_than(max_upload_size) }
-      it { is_expected.to validate_content_type_of(:preview).allowing('image/png') }
+      it { is_expected.to validate_content_type_of(:preview).allowing(allowed_preview_content_types) }
     end
   end
 

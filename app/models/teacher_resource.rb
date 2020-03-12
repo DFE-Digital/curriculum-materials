@@ -11,7 +11,13 @@ class TeacherResource < Resource
 
   MAX_UPLOAD_SIZE = 50.megabytes
 
-  ALLOWED_PREVIEW_CONTENT_TYPES = %w(image/png).freeze
+  ALLOWED_PREVIEW_CONTENT_TYPES = %w(
+    image/png
+    image/jpeg
+    image/jpg
+    image/gif
+    application/pdf
+  ).freeze
 
   validates :type, inclusion: %w(TeacherResource).freeze
 

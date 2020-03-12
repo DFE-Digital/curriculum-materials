@@ -80,6 +80,19 @@ def descendents(origin, matcher = "*.yml")
   Dir.glob(File.join(File.dirname(origin), File.basename(origin, ".yml"), matcher))
 end
 
+# Attempt to find a preview matching the naming convention `filename.preview.*`
+def find_preview(file_path)
+  dir_path         = File.dirname file_path
+  extension        = File.extname file_path
+  name             = File.basename file_path, extension
+  preview_pattern  = name + '.preview.*'
+  preview_matches = Dir.glob(File.join(dir_path, preview_pattern))
+
+  fail "more than one preview for #{file_path}" if preview_matches.length > 1
+
+  preview_matches.first
+end
+
 unless Rails.env.test?
   # First loop through the sample CCPs which can be found in db/seeds/data/{subject}
   Dir.glob(Rails.root.join("db", "seeds", "data", "*", "*.yml")).each do |ccp_file|
@@ -123,19 +136,19 @@ unless Rails.env.test?
                       # slide deck
                       descendents(activity_file, '*.odp').each do |slide_deck_path|
                         log_progress("Attaching slide deck", 5)
-                        activity.attach_slide_deck(slide_deck_path)
+                        activity.attach_slide_deck(file_path: slide_deck_path, preview_path: find_preview(slide_deck_path))
                       end
 
                       # teacher resources
                       descendents(activity_file, "teacher/*").each do |attachment|
                         log_progress("Attaching teacher resource: #{File.basename(attachment)}", 5)
-                        activity.attach_teacher_resource(attachment)
+                        activity.attach_teacher_resource(file_path: attachment, preview_path: find_preview(attachment))
                       end
 
                       # pupil resources
                       descendents(activity_file, "pupil/*").each do |attachment|
                         log_progress("Attaching pupil resource: #{File.basename(attachment)}", 5)
-                        activity.attach_pupil_resource(attachment)
+                        activity.attach_pupil_resource(file_path: attachment, preview_path: find_preview(attachment))
                       end
                     end
                   end

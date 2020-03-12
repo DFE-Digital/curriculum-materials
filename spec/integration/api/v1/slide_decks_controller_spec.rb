@@ -10,7 +10,6 @@ describe 'Slide decks' do
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/slide_deck' do
     post %{Attaches a slide deck to the activity} do
-
       let :slide_deck_path do
         File.join(Rails.application.root, 'spec', 'fixtures', 'slide_1_keyword_match_up.odp')
       end
