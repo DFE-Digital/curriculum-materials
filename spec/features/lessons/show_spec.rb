@@ -20,7 +20,7 @@ RSpec.feature "Lesson page", type: :feature do
 
     specify "there should be breadcrumbs for the CCP and current unit" do
       within('.govuk-breadcrumbs') do
-        expect(page).to have_link(ccp.name, href: teachers_complete_curriculum_programme_path(ccp))
+        expect(page).to have_link(ccp.title, href: teachers_complete_curriculum_programme_year_path(ccp, unit.year))
         expect(page).to have_link(unit.name, href: teachers_unit_path(unit))
         expect(page).to have_content(lesson.name)
       end
