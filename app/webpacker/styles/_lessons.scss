@@ -152,9 +152,25 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
   }
 }
 
+.button-number-prefix {
+  font-weight: bold;
+  margin-right: 0.2rem;
+}
+
 .lesson-tabs {
   .govuk-tabs__list-item.govuk-tabs__list-item--selected {
     background-color: $lesson-part-blue;
+  }
+
+  ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+
+    li {
+      &::marker {
+        font-weight: bold;
+      }
+    }
   }
 }
 

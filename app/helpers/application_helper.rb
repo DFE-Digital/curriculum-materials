@@ -9,8 +9,16 @@ module ApplicationHelper
     secondary_button(path, text: text)
   end
 
-  def secondary_button(path, text:)
-    link_to(text, path, class: %w(govuk-button govuk-button--secondary))
+  def secondary_button(path, text:, number: nil)
+    button_text = if number
+                    capture do
+                      concat(tag.span("#{number}.", class: 'button-number-prefix'))
+                      concat(text)
+                    end
+                  else
+                    content_tag('span') { concat(text) }
+                  end
+    link_to(button_text, path, class: %w(govuk-button govuk-button--secondary))
   end
 
   def breadcrumbs(crumbs: {}, current_page:)

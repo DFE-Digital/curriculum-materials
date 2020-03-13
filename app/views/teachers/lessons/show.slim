@@ -9,7 +9,7 @@
     .lesson-tabs.govuk-tabs data-module="govuk-tabs"
       h2.govuk-tabs__title
         | Lesson details
-      ul.govuk-tabs__list
+      ol.govuk-tabs__list
         li.govuk-tabs__list-item.govuk-tabs__list-item--selected
           = link_to 'Knowledge overview', '#knowledge-overview', class: 'govuk-tabs__tab'
         li.govuk-tabs__list-item
@@ -28,7 +28,7 @@
         = render 'misconceptions', lesson: @lesson
         = render 'previous_knowledge', lesson: @lesson
 
-        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents')
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents', number: 2)
 
       section#lesson-contents.govuk-tabs__panel.lesson-tab
         h2
@@ -36,7 +36,7 @@
 
         = render 'lesson_contents', lesson: @lesson
 
-        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads')
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads', number: 3)
 
       section#downloads.govuk-tabs__panel.lesson-tab
         h2 Downloads

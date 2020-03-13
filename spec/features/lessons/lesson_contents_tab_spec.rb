@@ -9,7 +9,7 @@ RSpec.feature "Lesson contents tab", type: :feature do
 
   before do
     visit(teachers_lesson_path(lesson))
-    within('ul.govuk-tabs__list') { click_on 'Lesson contents' }
+    within('ol.govuk-tabs__list') { click_on 'Lesson contents' }
   end
 
   specify 'the page should contain a list of lesson parts' do
