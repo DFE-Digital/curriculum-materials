@@ -1,0 +1,20 @@
+unit:
+  position: 2
+  year: 7
+  name: Julius Caesar
+
+  # Note, the contents are hard-coded as a list here while we await final content
+  overview: |-
+    An interpretations focused unit that helps to meet the history key stage 3
+    National Curriculum requirement to study an aspect or theme in British
+    history that consolidates and extends pupils’ chronological knowledge from
+    before 1066. The unit covers:
+
+    * who were the Romans?
+    * who was Julius Caesar?
+    * what links Julius Caesar to Britain?
+    * interpretations of Julius Caesar
+
+
+  benefits: |-
+    TODO
