@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Units' do
+  include_context 'setup api token'
+
   path('/ccps/{ccp_id}/units') do
     get('retrieves all units belonging to the provided CCP') do
       tags('Unit')
@@ -10,6 +12,7 @@ describe 'Units' do
       let(:ccp_id) { ccp.id }
       let!(:units) { FactoryBot.create_list(:unit, 2, complete_curriculum_programme_id: ccp_id) }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
 
       response '200', 'units found' do
@@ -29,6 +32,7 @@ describe 'Units' do
 
       consumes 'application/json'
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(
         name: :unit_params,
@@ -85,6 +89,7 @@ describe 'Units' do
       let!(:id) { unit.id }
       let!(:lessons) { FactoryBot.create_list(:lesson, 3, unit_id: id) }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
 
@@ -113,6 +118,7 @@ describe 'Units' do
       let(:id) { unit.id }
       let(:unit_params) { { unit: FactoryBot.attributes_for(:unit) } }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :id, in: :path, type: :string, required: true)
       parameter(

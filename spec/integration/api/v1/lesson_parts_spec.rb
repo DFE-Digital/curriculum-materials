@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Lessons parts' do
+  include_context 'setup api token'
+
   path('/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts') do
     get('retrieves all lessons parts belonging to the specified lesson') do
       tags('LessonPart')
@@ -12,6 +14,7 @@ describe 'Lessons parts' do
       let(:unit_id) { lesson_part.lesson.unit.id }
       let(:lesson_id) { lesson_part.lesson.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -35,6 +38,7 @@ describe 'Lessons parts' do
       let(:unit_id) { lesson_part.lesson.unit.id }
       let(:lesson_id) { lesson_part.lesson.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -93,6 +97,7 @@ describe 'Lessons parts' do
       let(:lesson_id) { lesson_part.lesson.id }
       let(:id) { lesson_part.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -130,6 +135,7 @@ describe 'Lessons parts' do
 
       let(:lesson_part_params) { { lesson_part: FactoryBot.attributes_for(:lesson_part) } }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)

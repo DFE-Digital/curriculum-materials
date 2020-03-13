@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Slide decks' do
+  include_context 'setup api token'
+
   let(:activity) { create(:activity) }
   let(:ccp_id) { activity.lesson_part.lesson.unit.complete_curriculum_programme.id }
   let(:unit_id) { activity.lesson_part.lesson.unit.id }
@@ -21,6 +23,8 @@ describe 'Slide decks' do
       tags 'SlideDeck'
       consumes 'multipart/form-data'
       produces 'application/json'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -61,6 +65,8 @@ describe 'Slide decks' do
     get %{Returns the slide deck for an activity} do
       tags 'SlideDeck'
       produces 'application/json'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -85,6 +91,8 @@ describe 'Slide decks' do
 
     delete %{Removes the slide deck for an activity} do
       tags 'SlideDeck'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true

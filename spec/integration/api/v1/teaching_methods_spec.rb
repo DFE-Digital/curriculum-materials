@@ -1,10 +1,14 @@
 require 'swagger_helper'
 
 describe 'Teaching methods' do
+  include_context 'setup api token'
+
   path('/teaching_methods') do
     get('retrieves all teaching methods') do
       tags('TeachingMethod')
       produces('application/json')
+
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
 
       let!(:teaching_methods) { FactoryBot.create_list(:teaching_method, 3) }
 
@@ -30,6 +34,7 @@ describe 'Teaching methods' do
 
       let!(:teaching_method) { FactoryBot.create(:teaching_method) }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'with a valid id') do

@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'PupilResources' do
+  include_context 'setup api token'
+
   let(:activity) { create(:activity) }
   let(:ccp_id) { activity.lesson_part.lesson.unit.complete_curriculum_programme.id }
   let(:unit_id) { activity.lesson_part.lesson.unit.id }
@@ -12,6 +14,8 @@ describe 'PupilResources' do
     get %{Returns the activity's attached pupil_resources} do
       tags 'PupilResource'
       produces 'application/json'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -32,6 +36,8 @@ describe 'PupilResources' do
       tags 'PupilResource'
       consumes 'multipart/form-data'
       produces 'application/json'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -112,6 +118,8 @@ describe 'PupilResources' do
 
     delete %{Removes the attached resource from the activity} do
       tags 'PupilResource'
+
+      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true

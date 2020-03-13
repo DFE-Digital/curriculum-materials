@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Activities' do
+  include_context 'setup api token'
+
   path('/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities') do
     get('retrieves all activities belonging to the specified lesson part') do
       tags('Activity')
@@ -13,6 +15,7 @@ describe 'Activities' do
       let(:lesson_id) { activity.lesson_part.lesson.id }
       let(:lesson_part_id) { activity.lesson_part.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -39,6 +42,7 @@ describe 'Activities' do
       let(:lesson_part_id) { activity.lesson_part.id }
       let(:id) { activity.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -102,6 +106,7 @@ describe 'Activities' do
       let(:lesson_part_id) { activity.lesson_part.id }
       let(:id) { activity.id }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -132,6 +137,7 @@ describe 'Activities' do
 
       let(:activity_params) { { activity: FactoryBot.attributes_for(:activity) } }
 
+      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)

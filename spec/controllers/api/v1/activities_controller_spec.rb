@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ActivitiesController, type: :request do
+  include_context 'setup api token'
+
+  let(:headers) { { headers: { HTTP_API_TOKEN: api_token } } }
   let(:new_activity_name) { "Maths quiz" }
 
   describe '#create' do
@@ -12,7 +15,12 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     let(:path_args) { [ccp, unit, lesson, lesson_part] }
 
     subject do
-      post(api_v1_ccp_unit_lesson_lesson_part_activities_path(*path_args), params: params, as: :json)
+      post(
+        api_v1_ccp_unit_lesson_lesson_part_activities_path(*path_args),
+        **headers,
+        params: params,
+        as: :json,
+      )
     end
 
     context 'when no teaching methods are provided' do
@@ -58,7 +66,12 @@ RSpec.describe Api::V1::ActivitiesController, type: :request do
     let(:path_args) { [ccp, unit, lesson, lesson_part, activity] }
 
     subject do
-      patch(api_v1_ccp_unit_lesson_lesson_part_activity_path(*path_args), params: params, as: :json)
+      patch(
+        api_v1_ccp_unit_lesson_lesson_part_activity_path(*path_args),
+        **headers,
+        params: params,
+        as: :json
+      )
     end
 
     context 'when an empty array of teaching methods is provided' do
