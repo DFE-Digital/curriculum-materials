@@ -1,4 +1,5 @@
 module Api
+  class NoToken < ActiveRecord::RecordNotFound; end
   class InvalidToken < ActiveRecord::RecordNotFound; end
 
   class BaseController < ApplicationController
@@ -10,6 +11,10 @@ module Api
   private
 
     def ensure_token_exists
+      if supplied_token.blank?
+        raise InvalidToken, "no token supplied"
+      end
+
       return true if matches_master_token?
 
       # check suppliers
@@ -22,7 +27,7 @@ module Api
     end
 
     def invalid_token(e)
-      render(json: { errors: %(Invalid token #{e}) }, status: :unauthorized)
+      render(json: { errors: e }, status: :unauthorized)
     end
 
     def matches_master_token?
