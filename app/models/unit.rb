@@ -16,4 +16,5 @@ class Unit < ApplicationRecord
   has_many :lessons, dependent: :destroy
 
   scope :at_year, ->(year) { where(year: year) }
+  scope :ordered_by_position, -> { order(position: 'asc') }
 end
