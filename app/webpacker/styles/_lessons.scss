@@ -82,6 +82,10 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
 
       .alternatives-list {
         flex-grow: 1;
+
+        ul > li {
+          padding-bottom: 1rem;
+        }
       }
     }
 
