@@ -1,10 +1,14 @@
 - breadcrumbs(current_page: @complete_curriculum_programme.title)
 
-h1 = @complete_curriculum_programme.name
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h1 = @complete_curriculum_programme.name
 
-section.rationale
-  = markdown @complete_curriculum_programme.rationale
+    section.rationale
+      = markdown @complete_curriculum_programme.rationale
 
-section.cards-container
-  - @units.each do |unit|
-    = render "unit_card", unit: unit
+.govuk-grid-row
+  .govuk-grid-column-full
+    section.cards-container
+      - @units.each do |unit|
+        = render "unit_card", unit: unit
