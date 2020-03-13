@@ -6,6 +6,7 @@ module Teachers
       @units = @complete_curriculum_programme
         .units
         .eager_load(:lessons)
+        .merge(Unit.ordered_by_position)
         .merge(Lesson.ordered_by_position)
         .at_year(params[:id])
     end
