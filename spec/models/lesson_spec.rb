@@ -48,4 +48,17 @@ RSpec.describe Lesson, type: :model do
       end
     end
   end
+
+  describe 'scopes' do
+    describe '.ordered_by_position' do
+      let!(:second) { create(:lesson, position: 3) }
+      let!(:third) { create(:lesson, position: 1) }
+      let!(:first) { create(:lesson, position: 5) }
+
+      specify 'should return the lessons in ascending order of position' do
+        expect(Lesson.all).to contain_exactly(second, third, first)
+        expect(Lesson.all.ordered_by_position).to contain_exactly(first, second, third)
+      end
+    end
+  end
 end

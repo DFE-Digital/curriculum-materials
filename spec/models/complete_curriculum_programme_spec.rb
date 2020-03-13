@@ -19,4 +19,25 @@ RSpec.describe CompleteCurriculumProgramme, type: :model do
     it { is_expected.to have_many(:units).dependent(:destroy) }
     it { is_expected.to belong_to(:subject) }
   end
+
+  describe 'methods' do
+    describe '#title' do
+      it { is_expected.to respond_to(:title) }
+
+      describe 'contents' do
+        let(:key_stage) { 4 }
+        let(:school_subject_name) { 'Defence against the dark arts' }
+        let(:school_subject) { create(:subject, name: school_subject_name) }
+        subject { create(:ccp, subject: school_subject, key_stage: key_stage) }
+
+        specify 'contains the key stage' do
+          expect(subject.title).to include("Key stage #{key_stage}")
+        end
+
+        specify 'contains the subject' do
+          expect(subject.title).to include(school_subject_name)
+        end
+      end
+    end
+  end
 end

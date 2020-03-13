@@ -9,7 +9,7 @@ RSpec.feature "Home page", type: :feature do
     end
 
     specify 'the page should have the correct heading' do
-      expect(page).to have_css('h1', text: 'Access your school’s curriculum online')
+      expect(page).to have_css('h1', text: 'Access curriculum resources')
     end
 
     specify "there should be a 'Start now' button" do

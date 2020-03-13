@@ -1,0 +1,18 @@
+unit:
+  position: 4
+  year: 7
+  name: Tudor England
+
+  # Note, the contents are hard-coded as a list here while we await final content
+  overview: |-
+    The development of Church, state and society in Britain 1509-1745, covering:
+
+    * the English Reformation and Counter Reformation (Henry VIII to Mary I)
+    * the Elizabethan religious settlement and conflict with Catholics
+      (including Scotland, Spain and Ireland)
+    * the first colony in America and first contact with India poverty in the
+      Tudor period
+    * interpretations of Elizabeth I
+
+  benefits: |-
+    TODO

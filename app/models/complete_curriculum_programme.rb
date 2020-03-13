@@ -5,4 +5,11 @@ class CompleteCurriculumProgramme < ApplicationRecord
 
   has_many :units, dependent: :destroy
   belongs_to :subject
+
+  def title
+    "Key stage %<key_stage>d %<subject>s" % {
+      key_stage: key_stage,
+      subject: subject.name
+    }
+  end
 end

@@ -26,7 +26,7 @@ RSpec.feature "Unit page", type: :feature do
 
     specify "there should be breadcrumbs for the CCP and current unit" do
       within('.govuk-breadcrumbs') do
-        expect(page).to have_link(ccp.name, href: teachers_complete_curriculum_programme_path(ccp))
+        expect(page).to have_link(ccp.title, href: teachers_complete_curriculum_programme_year_path(ccp, unit.year))
         expect(page).to have_content(unit.name)
       end
     end
@@ -41,6 +41,14 @@ RSpec.feature "Unit page", type: :feature do
       within('table.units > thead') do
         ['Lesson number', 'Learning objective', 'Duration'].each do |heading|
           expect(page).to have_css('th', text: heading)
+        end
+      end
+    end
+
+    specify %(the table should contain each lesson's summary) do
+      within('table.units > tbody') do
+        unit.lessons.map(&:summary).each do |summary|
+          expect(page).to have_css('td', text: summary)
         end
       end
     end
@@ -66,7 +74,7 @@ RSpec.feature "Unit page", type: :feature do
         end
       end
 
-      specify 'there should be a  navigation list containing other units in the CCP' do
+      xspecify 'there should be a  navigation list containing other units in the CCP' do
         within('nav.siblings') do
           other_units.each do |unit|
             expect(page).to have_link(unit.name, href: teachers_unit_path(unit))

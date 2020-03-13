@@ -2,8 +2,8 @@ module Teachers
   module LessonsHelper
     def lessons_breadcrumbs(lesson)
       {
-        lesson.unit.complete_curriculum_programme.name =>
-          teachers_complete_curriculum_programme_path(lesson.unit.complete_curriculum_programme),
+        lesson.unit.complete_curriculum_programme.title =>
+          teachers_complete_curriculum_programme_year_path(lesson.unit.complete_curriculum_programme, lesson.unit.year),
 
         lesson.unit.name => teachers_unit_path(lesson.unit)
       }

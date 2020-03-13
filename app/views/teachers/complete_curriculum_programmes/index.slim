@@ -1,20 +1,79 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds
 
-    h1.govuk-heading-l Which year group would you like to view?
+    h1.govuk-heading-l Key stage 3 history
 
-    p
-      | Select a year group to view its full geography curriculum, access
-        resources, and plan lessons.
 
-    / FIXME hard coding the link to the last ccp here for demonstration
-    / purposes and until we're settled on how years and ccps are associated
+    p.govuk-body
+      | Curriculum content across key stage 3 has been carefully and coherently
+        sequenced.
+
+    markdown:
+      #### Chronological study
+
+      The approach at key stage 3 is broadly chronological. Key stage content has
+      been designed with the belief that although an engaging, enquiry-based
+      approach is pedagogically sound, this should not be at the expense of
+      knowledge rich, chronological coherence.
+
+      #### A study of British history and society
+
+      Particularly with reference to British history, students should have, at
+      the end of key stage 3, an overview of many of the major events and
+      changes that have taken place in British society over the last one
+      thousand plus years.
+
+      The focus is a number of themes that recur throughout key stage 3 and key
+      stage 4, looking at change and continuity in political power, social and
+      economic issues, religious beliefs, and scientific knowledge.
+
+      #### The study of world history
+
+      Interspersed throughout our key stage 3 study of these changes and
+      continuities in British history, are a number of world history studies.
+
+      A key principle in the curriculum design is that students come from a
+      diverse range of backgrounds and that, although an overview of British
+      history is important as this is the identity we all share, an
+      understanding of the importance, history and contribution of other
+      cultures is vital.
+
+      #### The ability to engage with history
+
+      Curriculum content has been designed with the belief that engagement and
+      enthusiasm is key to student progress. The aim is to make the study of
+      history relevant to the modern world where possible, whilst recognising
+      the value of knowledge for its own sake. History can, in both the
+      knowledge and skills it develops, help students make sense of what is a
+      complex world around them.
+
+      #### Key themes and skills across key stage 3 and key stage 4
+
+      Engagement and careful exam preparation need to be kept in balance.
+      Interleaving across both key stage 3 and key stage 4 allows key themes
+      and skills to be returned to regularly.
+
+      The volume of content that students need to learn at key stage 4 in
+      history, and the importance of key stage 3 history providing a
+      comprehensive historical education in its own right, mean that there is
+      some return to key topics over the course of both key stages. However,
+      the academic demands of the topic and the materials used are different
+      between both key stages.
+
+      Care is taken to ensure topics such as the rise of Hitler do not become
+      stale, but instead that key stage 4 builds on what is done at key stage
+      3.
 
     form method="get" action="#{teachers_complete_curriculum_programme_path(CompleteCurriculumProgramme.last.id)}"
       .govuk-form-group
         fieldset.govuk-fieldset
           legend.govuk-fieldset__legend.govuk-fieldset__legend--m
-            h1.govuk-fieldset__heading Key stage 3 geography
+            h1.govuk-fieldset__heading Which year group would you like to view?
+
+            span.govuk-hint
+              | Select a year group to view its full history curriculum, access
+                resources, and prepare lessons.
+
           .govuk-radios
             .govuk-radios__item
               input.govuk-radios__input id="year-7" type="radio" name="complete_curriculum_programme_id" value="#{CompleteCurriculumProgramme.last.id}"
@@ -28,5 +87,5 @@
               input.govuk-radios__input id="year-9" type="radio" name="complete_curriculum_programme_id" value="N/A" disabled=true
               label.govuk-label.govuk-radios__label for="year-9"
                 | Year 9
-      input.govuk-button type="submit" value="Continue" data-module="govuk-button"
 
+      = link_to "Continue", teachers_complete_curriculum_programme_year_path(CompleteCurriculumProgramme.first, 7), class: 'govuk-button'

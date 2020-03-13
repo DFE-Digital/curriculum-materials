@@ -1,10 +1,42 @@
 $lesson-part-blue: #f0f9ff;
 $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
 
-.lesson-tab {
-  @include govuk-media-query($from: tablet) {
-    border: 1px solid $lesson-part-dark-blue;
-    background-color: $lesson-part-blue;
+
+.lesson-tabs {
+  .button-number-prefix {
+    font-weight: bold;
+    margin-right: 0.2rem;
+  }
+
+  .lesson-tab,
+  .govuk-tabs__list-item--selected {
+    @include govuk-media-query($from: tablet) {
+      background-color: $lesson-part-blue;
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+
+    @include govuk-media-query($from: tablet) {
+      list-style-position: inside;
+    }
+
+    .govuk-tabs__list-item {
+      &::marker {
+        font-weight: bold;
+      }
+
+      // the design system formats this tab list with a long dash "\2014" when narrower than
+      // tablet. As we're unconventionally using a ol rather than ul, remove the left padding
+      // the dash appears *after* the number but before the list item content
+      &::before {
+        @include govuk-media-query($until: tablet) {
+          margin-left: 0;
+        }
+      }
+    }
   }
 }
 
@@ -82,6 +114,10 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
 
       .alternatives-list {
         flex-grow: 1;
+
+        ul > li {
+          padding-bottom: 1rem;
+        }
       }
     }
 
@@ -149,12 +185,6 @@ $lesson-part-dark-blue: darken($lesson-part-blue, 15%);
         }
       }
     }
-  }
-}
-
-.lesson-tabs {
-  .govuk-tabs__list-item.govuk-tabs__list-item--selected {
-    background-color: $lesson-part-blue;
   }
 }
 

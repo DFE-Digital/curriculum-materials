@@ -6,6 +6,10 @@ nav.siblings
         li.current
           = unit.name
 
+      - elsif unit.lessons.none?
+        li
+          = link_to(unit.name, '#')
+
       - else
         li
           = link_to(unit.name, teachers_unit_path(unit))
