@@ -16,10 +16,6 @@
     border-top: 10px solid govuk-colour("light-green");
     background-color: govuk-colour("light-grey");
 
-    a {
-      text-decoration: none;
-    }
-
     .card-header {
       display: flex;
       flex-direction: row;
@@ -56,6 +52,8 @@
     }
 
     .card-body {
+      margin: 0.8rem 0;
+
       p,
       li,
       a {
@@ -68,6 +66,12 @@
 
       li > a {
         font-weight: normal;
+      }
+    }
+
+    .card-footer {
+      a {
+        font-weight: bold;
       }
     }
   }

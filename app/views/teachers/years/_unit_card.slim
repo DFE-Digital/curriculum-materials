@@ -1,8 +1,7 @@
 article.card
   .card-header
     .card-header-title
-      = link_to teachers_unit_path(unit)
-        h3 = unit.name
+      h3 = unit.name
       span.govuk-caption-m = pluralize(unit.lessons.size, 'lesson')
 
   .card-body
@@ -12,4 +11,4 @@ article.card
         li = lesson.name
 
   .card-footer
-    = link_to 'View and plan lessons', teachers_unit_path(unit)
+    = link_to 'View and plan lessons', teachers_unit_path(unit), class: 'govuk-link govuk-link--no-visited-state'
