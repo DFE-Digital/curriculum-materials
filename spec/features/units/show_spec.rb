@@ -74,7 +74,7 @@ RSpec.feature "Unit page", type: :feature do
         end
       end
 
-      specify 'there should be a  navigation list containing other units in the CCP' do
+      xspecify 'there should be a  navigation list containing other units in the CCP' do
         within('nav.siblings') do
           other_units.each do |unit|
             expect(page).to have_link(unit.name, href: teachers_unit_path(unit))

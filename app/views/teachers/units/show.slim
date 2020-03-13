@@ -14,4 +14,7 @@
     = render 'table', lessons: @unit.lessons.ordered_by_position
 
   .govuk-grid-column-one-third
-    = render 'siblings', units: @unit.complete_curriculum_programme.units.ordered_by_position
+    / FIXME once we're beyond MVP and don't have any units without lessons
+    /       remove @siblings
+    /= render 'siblings', units: @unit.complete_curriculum_programme.units.ordered_by_position
+    = render 'siblings', units: @siblings
