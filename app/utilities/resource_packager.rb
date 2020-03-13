@@ -20,7 +20,7 @@ private
   end
 
   def slide_deck_tempfiles
-    activities.map { |activity| activity.temp_slide_deck_resource.file.attachment.open { |f| f } }
+    activities.map { |activity| activity.slide_deck_resource.file.attachment.open { |f| f } }
   end
 
   def combined_slide_deck

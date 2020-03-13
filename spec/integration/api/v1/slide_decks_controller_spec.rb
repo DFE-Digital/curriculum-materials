@@ -71,11 +71,11 @@ describe 'Slide decks' do
 
         run_test! do |response|
           expect(response.code).to eq '201'
-          expect(activity.reload.temp_slide_deck_resource).to be_persisted
-          expect(activity.reload.temp_slide_deck_resource.file).to be_attached
-          expect(activity.reload.temp_slide_deck_resource.preview).to be_attached
-          expect(activity.reload.temp_slide_deck_resource.file.download).to eq File.binread slide_deck_path
-          expect(activity.reload.temp_slide_deck_resource.preview.download).to eq File.binread slide_deck_preview_path
+          expect(activity.reload.slide_deck_resource).to be_persisted
+          expect(activity.reload.slide_deck_resource.file).to be_attached
+          expect(activity.reload.slide_deck_resource.preview).to be_attached
+          expect(activity.reload.slide_deck_resource.file.download).to eq File.binread slide_deck_path
+          expect(activity.reload.slide_deck_resource.preview.download).to eq File.binread slide_deck_preview_path
         end
       end
 
@@ -130,7 +130,7 @@ describe 'Slide decks' do
       response '204', 'slide deck removed' do
         run_test! do |response|
           expect(response.code).to eq '204'
-          expect(activity.reload.temp_slide_deck_resource).not_to be_present
+          expect(activity.reload.slide_deck_resource).not_to be_present
         end
       end
 

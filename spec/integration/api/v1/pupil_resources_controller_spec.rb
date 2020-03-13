@@ -158,7 +158,7 @@ describe 'PupilResources' do
       response '204', 'pupil resource removed' do
         run_test! do |response|
           expect(response.code).to eq '204'
-          expect(activity.reload.temp_pupil_resources).to be_empty
+          expect(activity.reload.pupil_resources).to be_empty
         end
       end
 

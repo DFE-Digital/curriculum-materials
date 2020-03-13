@@ -113,7 +113,7 @@ module Seeders
         filename: 'slides.odp'
       )
 
-      attach_to_resource @activity.build_temp_slide_deck_resource, file_path, preview_path
+      attach_to_resource @activity.build_slide_deck_resource, file_path, preview_path
     end
 
     def attach_teacher_resource_via_model(file_path, preview_path)
@@ -122,7 +122,7 @@ module Seeders
         filename: File.basename(file_path)
       )
 
-      attach_to_resource @activity.temp_teacher_resources.new, file_path, preview_path
+      attach_to_resource @activity.teacher_resources.new, file_path, preview_path
     end
 
     def attach_pupil_resource_via_model(file_path, preview_path)
@@ -131,7 +131,7 @@ module Seeders
         filename: File.basename(file_path)
       )
 
-      attach_to_resource @activity.temp_pupil_resources.new, file_path, preview_path
+      attach_to_resource @activity.pupil_resources.new, file_path, preview_path
     end
 
     def parent
