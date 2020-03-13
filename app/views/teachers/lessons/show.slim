@@ -18,14 +18,15 @@
         li.govuk-tabs__list-item.govuk-tabs__list-item--selected
           = link_to 'Knowledge overview', '#knowledge-overview', class: 'govuk-tabs__tab'
         li.govuk-tabs__list-item
-          = link_to 'Lesson contents', '#lesson-contents', class: 'govuk-tabs__tab'
+          = link_to 'Lesson plan', '#lesson-contents', class: 'govuk-tabs__tab'
         li.govuk-tabs__list-item
-          = link_to 'Downloads', '#downloads', class: 'govuk-tabs__tab'
+          = link_to 'Download resources', '#downloads', class: 'govuk-tabs__tab'
 
       section#knowledge-overview.govuk-tabs__panel.lesson-tab
         h2
           =t(:heading, scope: :knowledge_overview)
 
+        h3 Lesson objective
         = markdown(@lesson.summary)
 
         = render 'core_knowledge', lesson: @lesson
@@ -33,7 +34,7 @@
         = render 'misconceptions', lesson: @lesson
         = render 'previous_knowledge', lesson: @lesson
 
-        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson contents', number: 2)
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'lesson-contents'), text: 'Lesson plan', number: 2)
 
       section#lesson-contents.govuk-tabs__panel.lesson-tab
         h2
@@ -41,10 +42,8 @@
 
         = render 'lesson_contents', lesson: @lesson
 
-        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Downloads', number: 3)
+        = secondary_button(teachers_lesson_path(@lesson.id, anchor: 'downloads'), text: 'Download resources', number: 3)
 
       section#downloads.govuk-tabs__panel.lesson-tab
-        h2 Downloads
-
         = render 'downloads', lesson: @lesson
         = render 'plan_the_next_lesson', lesson: @lesson

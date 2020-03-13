@@ -4,4 +4,5 @@ section.plan-the-next-lesson
   p
     | Once you've downloaded this lesson plan and all its resources, you
       can continue to the next lesson.
-  = link_to 'Go to next lesson', teachers_unit_path(@lesson.unit)
+
+  p = link_to 'Go to next lesson', teachers_unit_path(@lesson.unit), class: 'govuk-link'
