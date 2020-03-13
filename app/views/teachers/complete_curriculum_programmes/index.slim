@@ -8,7 +8,6 @@
       | Curriculum content across key stage 3 has been carefully and coherently
         sequenced.
 
-
     markdown:
       #### Chronological study
 
@@ -65,10 +64,6 @@
       stale, but instead that key stage 4 builds on what is done at key stage
       3.
 
-
-    / FIXME hard coding the link to the last ccp here for demonstration
-    / purposes and until we're settled on how years and ccps are associated
-
     form method="get" action="#{teachers_complete_curriculum_programme_path(CompleteCurriculumProgramme.last.id)}"
       .govuk-form-group
         fieldset.govuk-fieldset
@@ -92,5 +87,5 @@
               input.govuk-radios__input id="year-9" type="radio" name="complete_curriculum_programme_id" value="N/A" disabled=true
               label.govuk-label.govuk-radios__label for="year-9"
                 | Year 9
-      input.govuk-button type="submit" value="Continue" data-module="govuk-button"
 
+      = link_to "Continue", teachers_complete_curriculum_programme_year_path(CompleteCurriculumProgramme.first, 7), class: 'govuk-button'

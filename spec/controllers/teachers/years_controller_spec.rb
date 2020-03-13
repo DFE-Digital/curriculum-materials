@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Teachers::YearsController , type: :request do
+describe Teachers::YearsController, type: :request do
   include_context 'logged in teacher'
 
   context '#show' do

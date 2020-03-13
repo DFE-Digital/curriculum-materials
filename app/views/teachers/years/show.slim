@@ -1,4 +1,4 @@
-- breadcrumbs(current_page: @complete_curriculum_programme.name)
+- breadcrumbs(current_page: @complete_curriculum_programme.title)
 
 h1 = @complete_curriculum_programme.name
 
@@ -6,5 +6,5 @@ section.rationale
   = markdown @complete_curriculum_programme.rationale
 
 section.cards-container
-  - @complete_curriculum_programme.units.each do |unit|
+  - @units.each do |unit|
     = render "unit_card", unit: unit

@@ -14,4 +14,6 @@ class Unit < ApplicationRecord
 
   belongs_to :complete_curriculum_programme
   has_many :lessons, dependent: :destroy
+
+  scope :at_year, ->(year) { where(year: year) }
 end
