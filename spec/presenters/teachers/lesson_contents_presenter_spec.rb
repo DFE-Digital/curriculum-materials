@@ -56,15 +56,15 @@ RSpec.describe Teachers::LessonContentsPresenter do
     end
 
     let! :teacher_resource do
-      create :teacher_resource, :with_file, :with_preview, activity: activity
+      create :teacher_resource, :with_preview, activity: activity
     end
 
     let! :pupil_resource do
-      create :teacher_resource, :with_file, activity: activity
+      create :teacher_resource, activity: activity
     end
 
     let! :slide_deck do
-      create :slide_deck_resource, :with_file, :with_preview, activity: activity
+      create :slide_deck_resource, :with_preview, activity: activity
     end
 
     let :slot do

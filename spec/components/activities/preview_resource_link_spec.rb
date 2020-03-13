@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Activities::PreviewResourceLink, type: :component do
   context 'generated HTML' do
     let :resource do
-      create :slide_deck_resource, :with_file, :with_preview
+      create :slide_deck_resource, :with_preview
     end
 
     let :page do
@@ -11,7 +11,7 @@ describe Activities::PreviewResourceLink, type: :component do
     end
 
     context 'when resource has preview' do
-      let(:resource) { create :slide_deck_resource, :with_file, :with_preview }
+      let(:resource) { create :slide_deck_resource, :with_preview }
 
       it 'renders the correct link' do
         expect(page.find('p.preview-resource-link')).to have_link \
@@ -27,7 +27,7 @@ describe Activities::PreviewResourceLink, type: :component do
     end
 
     context 'when resource does not have a preview' do
-      let(:resource) { create :slide_deck_resource, :with_file }
+      let(:resource) { create :slide_deck_resource }
 
       it 'renders the correct link' do
         expect(page.find('p.preview-resource-link')).to have_link \

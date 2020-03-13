@@ -15,21 +15,21 @@ FactoryBot.define do
     trait :with_pupil_resources do
       after :create do |activity|
         create_list \
-          :pupil_resource, 1, :with_file, :with_preview, activity: activity
+          :pupil_resource, 1, :with_preview, activity: activity
       end
     end
 
     trait :with_teacher_resources do
       after :create do |activity|
         create_list \
-          :teacher_resource, 1, :with_file, :with_preview, activity: activity
+          :teacher_resource, 1, :with_preview, activity: activity
       end
     end
 
     trait :with_slide_deck do
       after :create do |activity|
         create \
-          :slide_deck_resource, :with_file, :with_preview, activity: activity
+          :slide_deck_resource, :with_preview, activity: activity
       end
     end
   end

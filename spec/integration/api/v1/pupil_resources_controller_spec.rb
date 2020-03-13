@@ -111,7 +111,7 @@ describe 'PupilResources' do
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources/{pupil_resource_id}' do
     let :pupil_resource do
-      create :pupil_resource, :with_file, activity: activity
+      create :pupil_resource, activity: activity
     end
 
     let :pupil_resource_id do
