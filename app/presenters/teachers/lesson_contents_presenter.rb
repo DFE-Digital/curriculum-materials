@@ -1,12 +1,6 @@
 module Teachers
   class LessonContentsPresenter
     class Slot
-      PREVIEWABLE_RESOURCE_TYPES = %w(
-        png
-        pdf
-        gif
-      ).freeze
-
       attr_reader :counter, :teaching_methods, :name, :overview, :duration,
                   :extra_requirements, :lesson_part, :alternatives, :activity
 
@@ -24,12 +18,13 @@ module Teachers
 
       def resources
         [
-          @activity.pupil_resources,
-          @activity.teacher_resources,
-          @activity.slide_deck
-        ].select(&:attached?)
-          .flatten
-          .select { |r| PREVIEWABLE_RESOURCE_TYPES.include? r.filename.extension }
+          @activity.temp_teacher_resources,
+          @activity.temp_pupil_resources,
+          @activity.temp_slide_deck_resource
+        ].flatten
+         .compact # An activity may not have a teacher/pupil/slide deck resource
+         .map(&:preview)
+         .select(&:attached?)
       end
     end
 
@@ -53,7 +48,16 @@ module Teachers
         .lesson_parts
         .eager_load(
           :activity_choices,
-          activities: %i(activity_teaching_methods teaching_methods pupil_resources_attachments teacher_resources_attachments slide_deck_attachment)
+          activities: [
+            :activity_teaching_methods,
+            :teaching_methods,
+            :pupil_resources_attachments,
+            :teacher_resources_attachments,
+            :slide_deck_attachment,
+            { temp_pupil_resources: :preview_attachment },
+            { temp_teacher_resources: :preview_attachment },
+            { temp_slide_deck_resource: :preview_attachment }
+          ]
         )
         .merge(LessonPart.ordered_by_position)
         .merge(Activity.ordered_by_id)
