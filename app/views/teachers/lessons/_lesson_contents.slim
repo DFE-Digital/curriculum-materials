@@ -46,7 +46,7 @@ section
               | Approximately #{slot.duration} minutes
 
             .files
-              = render "preview", previews: slot.previews
+              = render "preview", resources: slot.resources
 
           - unless local_assigns[:mode] && mode == :print
 

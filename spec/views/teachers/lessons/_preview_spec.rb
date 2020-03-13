@@ -7,13 +7,12 @@ describe "teachers/lessons/_preview" do
 
   before :each do
     render partial: "teachers/lessons/preview.slim",
-           locals: { previews: previews }
+           locals: { resources: resources }
   end
 
-  context 'multiple previews' do
-    let :previews do
-      activity.pupil_resources.map(&:preview) \
-        + activity.teacher_resources.map(&:preview)
+  context 'multiple resources' do
+    let :resources do
+      activity.pupil_resources + activity.teacher_resources
     end
 
     it 'renders a details list of previews' do
@@ -27,31 +26,31 @@ describe "teachers/lessons/_preview" do
 
       expect(summary).to have_text 'Preview resources'
 
-      previews.each do |preview|
+      resources.each do |resource|
         expect(details).to have_link \
-          text: "Preview #{preview.filename.base}", href: /#{preview.filename}/, visible: :all
+          text: "Preview #{resource.file.filename.base}", href: /#{resource.preview.filename}/, visible: :all
       end
     end
   end
 
   context 'single preview' do
-    let :previews do
-      activity.pupil_resources.map(&:preview)
+    let :resources do
+      activity.pupil_resources
     end
 
-    let :preview do
-      previews.first
+    let :resource do
+      resources.first
     end
 
-    it 'renders a link to the preview' do
+    it 'renders a link to the resource' do
       expect(rendered).not_to have_css %{details.govuk-details}
       expect(rendered).to have_link \
-        text: "Preview #{preview.filename.base}", href: /#{preview.filename}/, visible: :all
+        text: "Preview #{resource.file.filename.base}", href: /#{resource.preview.filename}/, visible: :all
     end
   end
 
-  context 'no preview' do
-    let :previews do
+  context 'no resource' do
+    let :resources do
       []
     end
 
