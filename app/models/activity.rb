@@ -3,23 +3,9 @@ class Activity < ApplicationRecord
   has_many :activity_teaching_methods, dependent: :destroy
   has_many :activity_choices, dependent: :destroy
   has_many :teaching_methods, through: :activity_teaching_methods
-  has_many :teacher_resources,
-           -> { where type: 'TeacherResource' },
-           class_name: 'TeacherResource',
-           dependent: :destroy,
-           inverse_of: :activity
-
-  has_many :pupil_resources,
-           -> { where type: 'PupilResource' },
-           class_name: 'PupilResource',
-           dependent: :destroy,
-           inverse_of: :activity
-
-  has_one :slide_deck_resource,
-          -> { where type: 'SlideDeckResource' },
-          class_name: 'SlideDeckResource',
-          dependent: :destroy,
-          inverse_of: :activity
+  has_many :teacher_resources, dependent: :destroy, inverse_of: :activity
+  has_many :pupil_resources, dependent: :destroy, inverse_of: :activity
+  has_one :slide_deck_resource, dependent: :destroy, inverse_of: :activity
 
   validates :lesson_part_id, presence: true
   validates :name, presence: true, length: { maximum: 128 }
