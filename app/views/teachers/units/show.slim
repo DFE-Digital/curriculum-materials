@@ -5,17 +5,15 @@
     h1.govuk-heading-l
       = @unit.name
 
+.govuk-grid-row
   .govuk-grid-column-two-thirds
 
-    p = markdown(@unit.overview)
-
-    = render 'table', lessons: @unit.lessons
-
     section.benefits
-      h2.govuk-heading-m
-        | How this lesson sequence benefits pupils’ learning
-
       p = markdown(@unit.benefits)
 
   .govuk-grid-column-one-third
-    = render 'siblings', units: @unit.complete_curriculum_programme.units
+    = render 'siblings', units: @unit.complete_curriculum_programme.units.ordered_by_position
+
+.govuk-grid-row
+  .govuk-grid-column-full class="govuk-!-margin-top-5"
+    = render 'table', lessons: @unit.lessons.ordered_by_position
