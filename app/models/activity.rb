@@ -3,19 +3,19 @@ class Activity < ApplicationRecord
   has_many :activity_teaching_methods, dependent: :destroy
   has_many :activity_choices, dependent: :destroy
   has_many :teaching_methods, through: :activity_teaching_methods
-  has_many :temp_teacher_resources,
+  has_many :teacher_resources,
            -> { where type: 'TeacherResource' },
            class_name: 'TeacherResource',
            dependent: :destroy,
            inverse_of: :activity
 
-  has_many :temp_pupil_resources,
+  has_many :pupil_resources,
            -> { where type: 'PupilResource' },
            class_name: 'PupilResource',
            dependent: :destroy,
            inverse_of: :activity
 
-  has_one :temp_slide_deck_resource,
+  has_one :slide_deck_resource,
           -> { where type: 'SlideDeckResource' },
           class_name: 'SlideDeckResource',
           dependent: :destroy,

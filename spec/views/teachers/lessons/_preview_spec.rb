@@ -12,8 +12,8 @@ describe "teachers/lessons/_preview" do
 
   context 'multiple previews' do
     let :previews do
-      activity.temp_pupil_resources.map(&:preview) \
-        + activity.temp_teacher_resources.map(&:preview)
+      activity.pupil_resources.map(&:preview) \
+        + activity.teacher_resources.map(&:preview)
     end
 
     it 'renders a details list of previews' do
@@ -36,7 +36,7 @@ describe "teachers/lessons/_preview" do
 
   context 'single preview' do
     let :previews do
-      activity.temp_pupil_resources.map(&:preview)
+      activity.pupil_resources.map(&:preview)
     end
 
     let :preview do

@@ -21,7 +21,7 @@ class Api::V1::PupilResourcesController < Api::BaseController
 private
 
   def pupil_resources
-    @pupil_resources ||= activity.temp_pupil_resources
+    @pupil_resources ||= activity.pupil_resources
   end
 
   def activity

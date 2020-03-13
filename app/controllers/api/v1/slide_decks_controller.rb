@@ -1,10 +1,10 @@
 class Api::V1::SlideDecksController < Api::BaseController
   def show
-    render json: SlideDeckResourceSerializer.render(activity.temp_slide_deck_resource)
+    render json: SlideDeckResourceSerializer.render(activity.slide_deck_resource)
   end
 
   def create
-    slide_deck_resource = activity.build_temp_slide_deck_resource slide_deck_params
+    slide_deck_resource = activity.build_slide_deck_resource slide_deck_params
     if slide_deck_resource.save
       head :created
     else
@@ -13,7 +13,7 @@ class Api::V1::SlideDecksController < Api::BaseController
   end
 
   def destroy
-    activity.temp_slide_deck_resource.destroy!
+    activity.slide_deck_resource.destroy!
     head :no_content
   end
 

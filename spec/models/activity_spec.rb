@@ -13,9 +13,9 @@ RSpec.describe Activity, type: :model do
     it { is_expected.to have_many(:activity_teaching_methods).dependent(:destroy) }
     it { is_expected.to have_many(:activity_choices).dependent(:destroy) }
     it { is_expected.to have_many(:teaching_methods).through(:activity_teaching_methods) }
-    it { is_expected.to have_many(:temp_teacher_resources).conditions(type: 'TeacherResource').class_name('TeacherResource').dependent(:destroy) }
-    it { is_expected.to have_many(:temp_pupil_resources).conditions(type: 'PupilResource').class_name('PupilResource').dependent(:destroy) }
-    it { is_expected.to have_one(:temp_slide_deck_resource).conditions(type: 'SlideDeckResource').class_name('SlideDeckResource').dependent(:destroy) }
+    it { is_expected.to have_many(:teacher_resources).conditions(type: 'TeacherResource').class_name('TeacherResource').dependent(:destroy) }
+    it { is_expected.to have_many(:pupil_resources).conditions(type: 'PupilResource').class_name('PupilResource').dependent(:destroy) }
+    it { is_expected.to have_one(:slide_deck_resource).conditions(type: 'SlideDeckResource').class_name('SlideDeckResource').dependent(:destroy) }
   end
 
   describe 'validation' do

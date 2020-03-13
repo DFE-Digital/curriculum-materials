@@ -20,7 +20,7 @@ private
 
   def combined_slide_deck
     # TODO retrieve the combined slide deck
-    # activities.map { |activity| activity.temp_slide_deck_resource.file }
+    # activities.map { |activity| activity.slide_deck_resource.file }
   end
 
   def pupil_resource_blobs

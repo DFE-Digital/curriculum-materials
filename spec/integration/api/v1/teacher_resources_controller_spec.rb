@@ -130,7 +130,7 @@ describe 'TeacherResources' do
       response '204', 'teacher resource removed' do
         run_test! do |response|
           expect(response.code).to eq '204'
-          expect(activity.reload.temp_teacher_resources).to be_empty
+          expect(activity.reload.teacher_resources).to be_empty
         end
       end
     end

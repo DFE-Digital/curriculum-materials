@@ -18,9 +18,9 @@ module Teachers
 
       def previews
         [
-          @activity.temp_teacher_resources,
-          @activity.temp_pupil_resources,
-          @activity.temp_slide_deck_resource
+          @activity.teacher_resources,
+          @activity.pupil_resources,
+          @activity.slide_deck_resource
         ].flatten
          .compact # An activity may not have a teacher/pupil/slide deck resource
          .map(&:preview)
@@ -51,9 +51,9 @@ module Teachers
           activities: [
             :activity_teaching_methods,
             :teaching_methods,
-            { temp_pupil_resources: :preview_attachment },
-            { temp_teacher_resources: :preview_attachment },
-            { temp_slide_deck_resource: :preview_attachment }
+            { pupil_resources: :preview_attachment },
+            { teacher_resources: :preview_attachment },
+            { slide_deck_resource: :preview_attachment }
           ]
         )
         .merge(LessonPart.ordered_by_position)

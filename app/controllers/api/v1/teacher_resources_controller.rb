@@ -21,7 +21,7 @@ class Api::V1::TeacherResourcesController < Api::BaseController
 private
 
   def teacher_resources
-    @teacher_resources ||= activity.temp_teacher_resources
+    @teacher_resources ||= activity.teacher_resources
   end
 
   def activity
