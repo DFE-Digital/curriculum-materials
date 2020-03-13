@@ -96,7 +96,7 @@ describe 'Slide decks' do
       parameter name: :activity_id, in: :path, type: :string, required: true
 
       let! :slide_deck_resource do
-        create :slide_deck_resource, :with_file, :with_preview, activity: activity
+        create :slide_deck_resource, :with_preview, activity: activity
       end
 
       response '200', 'slide deck found' do
@@ -124,7 +124,7 @@ describe 'Slide decks' do
       parameter name: :activity_id, in: :path, type: :string, required: true
 
       let! :slide_deck_resource do
-        create :slide_deck_resource, :with_file, activity: activity
+        create :slide_deck_resource, activity: activity
       end
 
       response '204', 'slide deck removed' do

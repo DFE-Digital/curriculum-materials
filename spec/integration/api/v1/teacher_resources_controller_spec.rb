@@ -137,7 +137,7 @@ describe 'TeacherResources' do
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/teacher_resources/{teacher_resource_id}' do
     let :teacher_resource do
-      create :teacher_resource, :with_file, activity: activity
+      create :teacher_resource, activity: activity
     end
 
     let :teacher_resource_id do

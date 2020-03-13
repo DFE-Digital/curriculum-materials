@@ -6,17 +6,15 @@ FactoryBot.define do
 
     type { "TeacherResource" }
 
-    trait :with_file do
-      after :create do |teacher_resource|
-        teacher_resource.file.attach \
-          io: File.open(attachment_path),
-          filename: 'teacher-test-image.png',
-          content_type: 'image/png'
-      end
+    after :build do |teacher_resource|
+      teacher_resource.file.attach \
+        io: File.open(attachment_path),
+        filename: 'teacher-test-image.png',
+        content_type: 'image/png'
     end
 
     trait :with_preview do
-      after :create do |teacher_resource|
+      after :build do |teacher_resource|
         teacher_resource.preview.attach \
           io: File.open(attachment_path),
           filename: 'teacher-test-image.png',

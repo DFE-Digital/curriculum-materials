@@ -10,9 +10,9 @@ RSpec.describe(ResourcePackager) do
 
   describe '#lesson_bundle' do
     let(:activity) { create(:activity) }
-    let!(:teacher_resources) { create_list :teacher_resource, 1, :with_file, activity: activity }
-    let!(:pupil_resources) { create_list :pupil_resource, 1, :with_file, activity: activity }
-    let!(:slide_deck_resource) { create :slide_deck_resource, :with_file, activity: activity }
+    let!(:teacher_resources) { create_list :teacher_resource, 1, activity: activity }
+    let!(:pupil_resources) { create_list :pupil_resource, 1, activity: activity }
+    let!(:slide_deck_resource) { create :slide_deck_resource, activity: activity }
 
     let(:teacher_attachment_filenames) do
       teacher_resources.map(&:file).map(&:filename).map(&:to_s)

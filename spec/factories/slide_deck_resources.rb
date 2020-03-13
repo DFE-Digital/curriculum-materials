@@ -7,17 +7,15 @@ FactoryBot.define do
 
     type { "SlideDeckResource" }
 
-    trait :with_file do
-      after :create do |slide_deck_resource|
-        slide_deck_resource.file.attach \
-          io: File.open(slide_deck_path),
-          filename: 'slide-1-keyword-match-up.odp',
-          content_type: 'application/vnd.oasis.opendocument.presentation'
-      end
+    after :build do |slide_deck_resource|
+      slide_deck_resource.file.attach \
+        io: File.open(slide_deck_path),
+        filename: 'slide-1-keyword-match-up.odp',
+        content_type: 'application/vnd.oasis.opendocument.presentation'
     end
 
     trait :with_preview do
-      after :create do |slide_deck_resource|
+      after :build do |slide_deck_resource|
         slide_deck_resource.preview.attach \
           io: File.open(attachment_path),
           filename: 'slide-deck-image.png',

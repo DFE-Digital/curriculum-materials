@@ -7,8 +7,6 @@ class SlideDeckResource < Resource
 
   validates :type, inclusion: %w(SlideDeckResource).freeze
 
-  # FIXME validate presence of file, there's no point having a slide deck
-  # or any other resource type if there's no file!
   validates :file,
             content_type: ALLOWED_CONTENT_TYPES,
             size: { less_than: MAX_UPLOAD_SIZE }
