@@ -77,7 +77,9 @@ def extract_attributes(file, key, symbolize_keys = true)
 end
 
 def descendents(origin, matcher = "*.yml")
-  Dir.glob(File.join(File.dirname(origin), File.basename(origin, ".yml"), matcher))
+  # Reject any previews to avoid them being attached to Resource#file
+  # They will be attached by find_preview
+  Dir.glob(File.join(File.dirname(origin), File.basename(origin, ".yml"), matcher)).reject { |f| f.include? '.preview.' }
 end
 
 # Attempt to find a preview matching the naming convention `filename.preview.*`
