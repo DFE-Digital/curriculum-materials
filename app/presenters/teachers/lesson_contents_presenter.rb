@@ -16,7 +16,7 @@ module Teachers
         @activity           = activity
       end
 
-      def resources
+      def previews
         [
           @activity.temp_teacher_resources,
           @activity.temp_pupil_resources,
@@ -51,9 +51,6 @@ module Teachers
           activities: [
             :activity_teaching_methods,
             :teaching_methods,
-            :pupil_resources_attachments,
-            :teacher_resources_attachments,
-            :slide_deck_attachment,
             { temp_pupil_resources: :preview_attachment },
             { temp_teacher_resources: :preview_attachment },
             { temp_slide_deck_resource: :preview_attachment }

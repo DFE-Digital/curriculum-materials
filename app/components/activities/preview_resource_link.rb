@@ -1,13 +1,13 @@
 module Activities
   class PreviewResourceLink < ActionView::Component::Base
-    attr_reader :resource
+    attr_reader :attachment
 
-    def initialize(resource:)
-      @resource = resource
+    def initialize(attachment:)
+      @attachment = attachment
     end
 
     def filename
-      resource.filename
+      attachment.filename
     end
 
     def base
@@ -21,7 +21,7 @@ module Activities
     def preview_path
       # NOTE this will want changing to link to the preview variant when we
       # add in previews for odp, odt, etc
-      url_for resource
+      url_for attachment
     end
 
     def badge

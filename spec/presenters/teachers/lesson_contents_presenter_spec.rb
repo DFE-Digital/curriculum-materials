@@ -71,7 +71,7 @@ RSpec.describe Teachers::LessonContentsPresenter do
       described_class.new(activity.lesson_part.lesson, teacher).contents.last
     end
 
-    subject { slot.resources }
+    subject { slot.previews }
 
     specify %{returns the previewable resources for the activity} do
       # NOTE activie storage attached, which is what's returned from
