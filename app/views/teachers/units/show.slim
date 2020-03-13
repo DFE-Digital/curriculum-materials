@@ -11,9 +11,7 @@
     section.benefits
       p = markdown(@unit.benefits)
 
+    = render 'table', lessons: @unit.lessons.ordered_by_position
+
   .govuk-grid-column-one-third
     = render 'siblings', units: @unit.complete_curriculum_programme.units.ordered_by_position
-
-.govuk-grid-row
-  .govuk-grid-column-full class="govuk-!-margin-top-5"
-    = render 'table', lessons: @unit.lessons.ordered_by_position
