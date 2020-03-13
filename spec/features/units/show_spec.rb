@@ -45,6 +45,14 @@ RSpec.feature "Unit page", type: :feature do
       end
     end
 
+    specify %(the table should contain each lesson's summary) do
+      within('table.units > tbody') do
+        unit.lessons.map(&:summary).each do |summary|
+          expect(page).to have_css('td', text: summary)
+        end
+      end
+    end
+
     specify 'the table should contain a link to each lesson' do
       within('table.units > tbody') do
         unit.lessons.each do |lesson|
