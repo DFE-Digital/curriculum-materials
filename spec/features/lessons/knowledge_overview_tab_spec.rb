@@ -11,10 +11,10 @@ RSpec.feature "Knowledge overview tab", type: :feature do
 
   specify 'there should be the correct sections' do
     [
-      'Vocabulary',
+      'Key vocabulary',
       'Common misconceptions',
       'Building on previous knowledge',
-      'Core knowledge for pupils'
+      #'Core knowledge for pupils'
     ].each do |heading|
       expect(page).to have_css('h2', text: heading)
     end
@@ -41,7 +41,7 @@ RSpec.feature "Knowledge overview tab", type: :feature do
   specify 'there should be a secondary button link to the lesson contents tab' do
     within('#knowledge-overview') do
       expect(page).to have_link(
-        'Lesson contents',
+        '2.Lesson plan',
         href: teachers_lesson_path(lesson.id, anchor: 'lesson-contents'),
         class: 'govuk-button--secondary'
       )
