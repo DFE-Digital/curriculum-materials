@@ -20,15 +20,15 @@ private
 
   def combined_slide_deck
     # TODO retrieve the combined slide deck
-    # activities.map { |activity| activity.slide_deck }
+    # activities.map { |activity| activity.temp_slide_deck_resource.file }
   end
 
   def pupil_resource_blobs
-    activities.map(&:pupil_resources).flat_map(&:blobs)
+    PupilResource.where(activity: activities).includes(:file_attachment).map(&:file).map(&:blob)
   end
 
   def teacher_resource_blobs
-    activities.map(&:teacher_resources).flat_map(&:blobs)
+    TeacherResource.where(activity: activities).includes(:file_attachment).map(&:file).map(&:blob)
   end
 
   def build_lesson_bundle

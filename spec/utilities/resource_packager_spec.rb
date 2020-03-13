@@ -10,38 +10,15 @@ RSpec.describe(ResourcePackager) do
 
   describe '#lesson_bundle' do
     let(:activity) { create(:activity) }
-    let(:teacher_attachments) do
-      [{ filename: '1px.png', content_type: 'image/png' }]
-    end
-
-    let(:pupil_attachments) do
-      [{ filename: '1px.png', content_type: 'image/png' }]
-    end
-
-    before do
-      teacher_attachments.each do |attachment|
-        activity.teacher_resources.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', attachment[:filename])),
-          filename: attachment[:filename],
-          content_type: attachment[:content_type]
-        )
-      end
-
-      pupil_attachments.each do |attachment|
-        activity.pupil_resources.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', attachment[:filename])),
-          filename: attachment[:filename],
-          content_type: attachment[:content_type]
-        )
-      end
-    end
+    let!(:teacher_resources) { create_list :teacher_resource, 1, :with_file, activity: activity }
+    let!(:pupil_resources) { create_list :pupil_resource, 1, :with_file, activity: activity }
 
     let(:teacher_attachment_filenames) do
-      teacher_attachments.map { |ta| ta[:filename] }
+      teacher_resources.map(&:file).map(&:filename).map(&:to_s)
     end
 
     let(:pupil_attachment_filenames) do
-      pupil_attachments.map { |ta| ta[:filename] }
+      pupil_resources.map(&:file).map(&:filename).map(&:to_s)
     end
 
     let(:download) { create(:download, lesson: activity.lesson_part.lesson) }
@@ -53,12 +30,12 @@ RSpec.describe(ResourcePackager) do
 
     specify 'all attachments should be added to the zip file' do
       Zip::File.open_buffer(subject) do |zip|
-        teacher_resources, pupil_resources = *zip.map(&:name).partition do |p|
+        returned_teacher_resources, returned_pupil_resources = *zip.map(&:name).partition do |p|
           p.starts_with?('teacher')
         end
 
-        expect(teacher_attachment_filenames).to match_array(strip_paths(teacher_resources))
-        expect(pupil_attachment_filenames).to match_array(strip_paths(pupil_resources))
+        expect(teacher_attachment_filenames).to match_array(strip_paths(returned_teacher_resources))
+        expect(pupil_attachment_filenames).to match_array(strip_paths(returned_pupil_resources))
       end
     end
   end
