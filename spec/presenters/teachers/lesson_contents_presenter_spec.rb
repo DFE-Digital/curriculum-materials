@@ -71,15 +71,11 @@ RSpec.describe Teachers::LessonContentsPresenter do
       described_class.new(activity.lesson_part.lesson, teacher).contents.last
     end
 
-    subject { slot.previews }
+    subject { slot.resources }
 
-    specify %{returns the previewable resources for the activity} do
-      # NOTE activie storage attached, which is what's returned from
-      # Slot#resources, doesn't implement == (falls back to basic object ==)
-      # so we can't directly compare objects, hence we need to compare the
-      # filename instead.
-      expect(subject.map(&:filename)).to match_array \
-        [teacher_resource.preview.filename, slide_deck.preview.filename]
+    specify %{returns the resources for the activity} do
+      expect(subject).to match_array \
+        [pupil_resource, teacher_resource, slide_deck]
     end
   end
 end

@@ -1,12 +1,12 @@
-- if previews.many?
+- if resources.many?
   details.govuk-details data-module="govuk-details"
 
     summary.govuk-details__summary
       span.govuk-details__summary-text Preview resources
 
     .govuk-details__text
-      - previews.each do |preview|
-        = render(Activities::PreviewResourceLink, attachment: preview)
+      - resources.each do |resources|
+        = render(Activities::PreviewResourceLink, resource: resources)
 
-- elsif previews.one?
-  = render(Activities::PreviewResourceLink, attachment: previews.first)
+- elsif resources.one?
+  = render(Activities::PreviewResourceLink, resource: resources.first)
