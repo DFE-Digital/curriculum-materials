@@ -7,15 +7,16 @@ describe "teachers/lessons/_preview" do
 
   before :each do
     render partial: "teachers/lessons/preview.slim",
-           locals: { resources: resources }
+           locals: { previews: previews }
   end
 
-  context 'multiple resources' do
-    let :resources do
-      activity.pupil_resources + activity.teacher_resources
+  context 'multiple previews' do
+    let :previews do
+      activity.temp_pupil_resources.map(&:preview) \
+        + activity.temp_teacher_resources.map(&:preview)
     end
 
-    it 'renders a details list of resources' do
+    it 'renders a details list of previews' do
       page = Capybara.string rendered
 
       summary = page.find \
@@ -26,31 +27,31 @@ describe "teachers/lessons/_preview" do
 
       expect(summary).to have_text 'Preview resources'
 
-      resources.each do |resource|
+      previews.each do |preview|
         expect(details).to have_link \
-          text: "Preview #{resource.filename.base}", href: /#{resource.filename}/, visible: :all
+          text: "Preview #{preview.filename.base}", href: /#{preview.filename}/, visible: :all
       end
     end
   end
 
-  context 'single resource' do
-    let :resources do
-      activity.pupil_resources
+  context 'single preview' do
+    let :previews do
+      activity.temp_pupil_resources.map(&:preview)
     end
 
-    let :resource do
-      resources.first
+    let :preview do
+      previews.first
     end
 
-    it 'renders a link to the resource' do
+    it 'renders a link to the preview' do
       expect(rendered).not_to have_css %{details.govuk-details}
       expect(rendered).to have_link \
-        text: "Preview #{resource.filename.base}", href: /#{resource.filename}/, visible: :all
+        text: "Preview #{preview.filename.base}", href: /#{preview.filename}/, visible: :all
     end
   end
 
-  context 'no resource' do
-    let :resources do
+  context 'no preview' do
+    let :previews do
       []
     end
 
