@@ -108,29 +108,14 @@ module Seeders
     end
 
     def attach_slide_deck_via_model(file_path, preview_path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.slide_deck.attach(
-        io: File.open(file_path),
-        filename: 'slides.odp'
-      )
-
       attach_to_resource @activity.build_slide_deck_resource, file_path, preview_path
     end
 
     def attach_teacher_resource_via_model(file_path, preview_path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.teacher_resources.attach(
-        io: File.open(file_path),
-        filename: File.basename(file_path)
-      )
-
       attach_to_resource @activity.teacher_resources.new, file_path, preview_path
     end
 
     def attach_pupil_resource_via_model(file_path, preview_path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.pupil_resources.attach(
-        io: File.open(file_path),
-        filename: File.basename(file_path)
-      )
-
       attach_to_resource @activity.pupil_resources.new, file_path, preview_path
     end
 
