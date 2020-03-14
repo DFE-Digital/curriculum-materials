@@ -26,6 +26,10 @@ describe 'Lessons parts' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post('creates a lesson part belonging to the specified lesson') do
@@ -82,6 +86,10 @@ describe 'Lessons parts' do
           expect(JSON.parse(response.body).dig('errors')).to include(%(Position can't be blank))
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -115,6 +123,10 @@ describe 'Lessons parts' do
         schema('$ref' => '#/components/schemas/lesson_part')
 
         run_test!
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
 
@@ -173,6 +185,10 @@ describe 'Lessons parts' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Position can't be blank))
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

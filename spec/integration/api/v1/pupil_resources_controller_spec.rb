@@ -30,6 +30,10 @@ describe 'PupilResources' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post 'Attaches a pupil resource to the activity' do
@@ -95,6 +99,18 @@ describe 'PupilResources' do
             "Pupil resources has an invalid content type"
         end
       end
+
+      response(401, 'unauthorized') do
+        let :attachment_path do
+          File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
+        end
+
+        let :pupil_resource do
+          fixture_file_upload attachment_path, 'text/xml'
+        end
+
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -132,6 +148,10 @@ describe 'PupilResources' do
           expect(response.code).to eq '204'
           expect(activity.reload.pupil_resources).to be_empty
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

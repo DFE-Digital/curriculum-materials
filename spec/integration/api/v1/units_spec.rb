@@ -1,16 +1,16 @@
 require 'swagger_helper'
 
 describe 'Units' do
-  include_context 'setup api token'
-
   path('/ccps/{ccp_id}/units') do
     get('retrieves all units belonging to the provided CCP') do
+      include_context 'setup api token'
+
       tags('Unit')
       produces('application/json')
 
-      let!(:ccp) { FactoryBot.create(:ccp) }
+      let(:ccp) { FactoryBot.create(:ccp) }
       let(:ccp_id) { ccp.id }
-      let!(:units) { FactoryBot.create_list(:unit, 2, complete_curriculum_programme_id: ccp_id) }
+      let(:units) { FactoryBot.create_list(:unit, 2, complete_curriculum_programme_id: ccp_id) }
 
       parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
@@ -53,7 +53,9 @@ describe 'Units' do
       )
 
       response(201, 'unit created') do
-        let!(:unit_params) { { unit: FactoryBot.attributes_for(:unit) } }
+        include_context 'setup api token'
+
+        let(:unit_params) { { unit: FactoryBot.attributes_for(:unit) } }
 
         examples('application/json': { unit: example_unit })
 
@@ -70,24 +72,34 @@ describe 'Units' do
       end
 
       response(400, 'invalid unit') do
-        let!(:unit_params) { { unit: FactoryBot.attributes_for(:unit, name: '') } }
+        include_context 'setup api token'
+
+        let(:unit_params) { { unit: FactoryBot.attributes_for(:unit, name: '') } }
 
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
         end
+      end
+
+      response(401, 'unauthorized') do
+        let(:unit_params) { { unit: FactoryBot.attributes_for(:unit, name: '') } }
+
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end
 
   path('/ccps/{ccp_id}/units/{id}') do
     get('retrieves a single unit belonging to the specified CCP') do
+      include_context 'setup api token'
+
       tags('Unit')
       produces('application/json')
 
-      let!(:unit) { FactoryBot.create(:unit) }
-      let!(:ccp_id) { unit.complete_curriculum_programme_id }
-      let!(:id) { unit.id }
-      let!(:lessons) { FactoryBot.create_list(:lesson, 3, unit_id: id) }
+      let(:unit) { FactoryBot.create(:unit) }
+      let(:ccp_id) { unit.complete_curriculum_programme_id }
+      let(:id) { unit.id }
+      let(:lessons) { FactoryBot.create_list(:lesson, 3, unit_id: id) }
 
       parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
@@ -108,6 +120,8 @@ describe 'Units' do
     end
 
     patch('update the referenced unit') do
+      include_context 'setup api token'
+
       tags('Unit')
 
       consumes 'application/json'
@@ -153,6 +167,12 @@ describe 'Units' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Name can't be blank))
         end
+      end
+
+      response(401, 'unauthorized') do
+        let(:unit_params) { { unit: FactoryBot.attributes_for(:unit, name: '') } }
+
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

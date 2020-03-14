@@ -24,6 +24,10 @@ describe 'Subjects' do
           expect(actual_names).to match_array(expected_names)
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -62,6 +66,12 @@ describe 'Subjects' do
             %(Subject #{id} not found)
           )
         end
+      end
+
+      response(401, 'unauthorized') do
+        let(:id) { maths.id }
+
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

@@ -24,6 +24,10 @@ describe 'Complete curriculum programmes' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post('creates a new complete curriculum programme') do
@@ -79,6 +83,10 @@ describe 'Complete curriculum programmes' do
           expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -99,6 +107,10 @@ describe 'Complete curriculum programmes' do
         schema('$ref' => '#/components/schemas/ccp')
 
         run_test!
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
 
@@ -153,6 +165,10 @@ describe 'Complete curriculum programmes' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

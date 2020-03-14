@@ -28,6 +28,10 @@ describe 'Activities' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post('creates an activity belonging to the specified lesson part') do
@@ -90,6 +94,10 @@ describe 'Activities' do
           expect(JSON.parse(response.body).dig('errors')).to include(%(Duration can't be blank))
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -119,6 +127,10 @@ describe 'Activities' do
         schema('$ref' => '#/components/schemas/activity')
 
         run_test!
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
 
@@ -179,6 +191,10 @@ describe 'Activities' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Duration can't be blank))
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

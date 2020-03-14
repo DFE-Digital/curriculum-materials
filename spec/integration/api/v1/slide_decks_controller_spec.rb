@@ -60,6 +60,10 @@ describe 'Slide decks' do
             File.binread slide_deck_path
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     get %{Returns the slide deck for an activity} do
@@ -87,6 +91,10 @@ describe 'Slide decks' do
         }
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     delete %{Removes the slide deck for an activity} do
@@ -111,6 +119,10 @@ describe 'Slide decks' do
           expect(response.code).to eq '204'
           expect(activity.reload.slide_deck).not_to be_attached
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end
