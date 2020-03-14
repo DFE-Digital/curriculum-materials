@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Api::V1::ActivitiesController, type: :request do
   include_context 'setup api token'
 
-  let(:headers) { { headers: { HTTP_API_TOKEN: api_token } } }
+  let(:headers) { { headers: { Authorization: "Bearer #{api_token}" } } }
   let(:new_activity_name) { "Maths quiz" }
 
   describe '#create' do

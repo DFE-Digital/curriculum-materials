@@ -16,14 +16,14 @@ RSpec.describe 'API Token Security', type: :request do
 
   context 'when an invalid token is supplied' do
     let(:bad_token) { 'ABC123' }
-    subject! { get(api_v1_ccps_path, headers: { HTTP_API_TOKEN: bad_token }) }
+    subject! { get(api_v1_ccps_path, headers: { Authorization: "Bearer #{bad_token}" }) }
 
     specify 'should be unauthorized' do
       expect(response).to be_unauthorized
     end
 
     specify 'should return an invalid token error' do
-      expect(parsed_body).to eql('errors' => "bad token #{bad_token}")
+      expect(parsed_body).to eql('errors' => "bad token Bearer #{bad_token}")
     end
   end
 end

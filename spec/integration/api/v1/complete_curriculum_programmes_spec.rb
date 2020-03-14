@@ -11,7 +11,7 @@ describe 'Complete curriculum programmes' do
       tags('CCP')
       produces('application/json')
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:ccps) { FactoryBot.create_list(:ccp, 2) }
 
@@ -35,7 +35,7 @@ describe 'Complete curriculum programmes' do
 
       consumes 'application/json'
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(
         name: :ccp_params,
         in: :body,
@@ -95,7 +95,7 @@ describe 'Complete curriculum programmes' do
       tags('CCP')
       produces('application/json')
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       let!(:ccp) { FactoryBot.create(:ccp) }
@@ -122,7 +122,7 @@ describe 'Complete curriculum programmes' do
       let(:id) { ccp.id }
       let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp), subject: maths } }
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
       parameter(
         name: :ccp_params,

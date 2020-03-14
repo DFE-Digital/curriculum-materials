@@ -8,7 +8,7 @@ describe 'Subjects' do
       tags('Subject')
       produces('application/json')
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:subjects) { FactoryBot.create_list(:subject, 3) }
 
@@ -38,7 +38,7 @@ describe 'Subjects' do
 
       let!(:maths) { FactoryBot.create(:subject, name: 'Maths') }
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'with a valid id') do

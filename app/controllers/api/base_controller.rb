@@ -15,7 +15,9 @@ module Api
         raise InvalidToken, "no token supplied"
       end
 
-      return true if matches_master_token?
+      return true if authenticated_against_master_token?
+
+      # return true if ActiveSupport::SecurityUtils.secure_compare(master_token, supplied_token)
 
       # check suppliers
 
@@ -23,15 +25,17 @@ module Api
     end
 
     def supplied_token
-      request.headers['HTTP_API_TOKEN']
+      request.headers['Authorization']
     end
 
     def invalid_token(e)
       render(json: { errors: e }, status: :unauthorized)
     end
 
-    def matches_master_token?
-      master_token.present? && supplied_token == master_token
+    def authenticated_against_master_token?
+      authenticate_with_http_token do |token, _options|
+        ActiveSupport::SecurityUtils.secure_compare(master_token, token)
+      end
     end
 
     def master_token

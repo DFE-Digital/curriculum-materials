@@ -24,7 +24,7 @@ describe 'Slide decks' do
       consumes 'multipart/form-data'
       produces 'application/json'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -70,7 +70,7 @@ describe 'Slide decks' do
       tags 'SlideDeck'
       produces 'application/json'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -100,7 +100,7 @@ describe 'Slide decks' do
     delete %{Removes the slide deck for an activity} do
       tags 'SlideDeck'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true

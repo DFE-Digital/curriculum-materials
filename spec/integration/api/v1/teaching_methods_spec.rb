@@ -8,7 +8,7 @@ describe 'Teaching methods' do
       tags('TeachingMethod')
       produces('application/json')
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:teaching_methods) { FactoryBot.create_list(:teaching_method, 3) }
 
@@ -38,7 +38,7 @@ describe 'Teaching methods' do
 
       let!(:teaching_method) { FactoryBot.create(:teaching_method) }
 
-      parameter(name: 'HTTP_API_TOKEN', in: :header, type: :string)
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'with a valid id') do

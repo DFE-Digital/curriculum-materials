@@ -15,7 +15,7 @@ describe 'TeacherResources' do
       tags 'TeacherResource'
       produces 'application/json'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -41,7 +41,7 @@ describe 'TeacherResources' do
       consumes 'multipart/form-data'
       produces 'application/json'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -135,7 +135,7 @@ describe 'TeacherResources' do
     delete %{Removes the attached resource from the activity} do
       tags 'TeacherResource'
 
-      parameter name: 'HTTP_API_TOKEN', in: :header, type: :string
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
