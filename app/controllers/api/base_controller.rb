@@ -16,10 +16,7 @@ module Api
       end
 
       return true if authenticated_against_master_token?
-
-      # return true if ActiveSupport::SecurityUtils.secure_compare(master_token, supplied_token)
-
-      # check suppliers
+      return true if authenticated_against_supplier_token?
 
       raise InvalidToken, "bad token #{supplied_token}"
     end
@@ -33,8 +30,16 @@ module Api
     end
 
     def authenticated_against_master_token?
+      return false if master_token.blank?
+
       authenticate_with_http_token do |token, _options|
         ActiveSupport::SecurityUtils.secure_compare(master_token, token)
+      end
+    end
+
+    def authenticated_against_supplier_token?
+      authenticate_with_http_token do |token, _options|
+        @supplier = Supplier.find_by(token: token)
       end
     end
 
