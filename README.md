@@ -19,8 +19,8 @@ entire national curriculum.
 
 ## Running the application
 
-The application is a very standard [Rails](https://www.rubyonrails.org/) application and no
-special steps should be required in order to get up and running.
+The application is a standard [Ruby on Rails](https://www.rubyonrails.org/) application requiring
+no special stesp to set up.
 
 ### Locally
 
@@ -30,8 +30,7 @@ Ensure you have the following installed on your machine:
 
  * Ruby 2.6.5
  * PostgreSQL (with an account that has superuser privileges)
- * NodeJS
- * NPM
+ * NodeJS `^12.14.1`
 
 Clone the repository:
 
@@ -45,8 +44,9 @@ Install bundler and bundle the Ruby gems:
 $ bundle install
 ```
 
-If your database user needs a password, set that first by editing
-`config/database.yml`.  Now run the app:
+_If your database user needs a password, set that first by editing `config/database.yml`_
+
+Now run the app:
 
 ```bash
 $ bundle exec rails db:setup
@@ -82,7 +82,7 @@ Hopefully everything should be green!
 
 ![Schema diagram](docs/schema.png)
 
-## Lingo
+## Glossary
 
 | Word                | Description                                                                                                                                                                                    |
 | ----                | -----------                                                                                                                                                                                    |
