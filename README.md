@@ -17,7 +17,7 @@ entire national curriculum.
 
 ## Getting started
 
-## Running the application locally
+## Running the application
 
 The application is a very standard [Rails](https://www.rubyonrails.org/) application and no
 special steps should be required in order to get up and running.
