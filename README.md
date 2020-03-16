@@ -78,6 +78,10 @@ $ budle exec rspec
 
 Hopefully everything should be green!
 
+## Schema
+
+![Schema diagram](docs/schema.png)
+
 ## Lingo
 
 | Word                | Description                                                                                                                                                                                    |
