@@ -13,8 +13,12 @@ RUN mkdir /usr/src/app
 
 WORKDIR /usr/src/app
 
+ARG GITHUB_TOKEN
+COPY .npmrc /usr/src/app/.npmrc
+RUN echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
 COPY package.json /usr/src/app/
 RUN npm install --check-files
+
 COPY .ruby-version Gemfile Gemfile.lock /usr/src/app/
 ENV BUNDLE_PATH /gems
 RUN bundle install

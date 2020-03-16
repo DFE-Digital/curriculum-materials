@@ -7,7 +7,7 @@ Before starting up the container stack you'll first need to build the image and
 create the database.
 
 #### Step 1 - Build the docker image
-`docker build . -t curriculum_materials:latest`
+`docker build --build-arg GITHUB_TOKEN=<token> . -t curriculum_materials:latest`
 
 #### Step 2 - Setup the database
 `docker-compose run --rm db_tasks bundle exec rake db:setup`
