@@ -98,3 +98,7 @@ Hopefully everything should be green!
 | SEN                 | Special Educational Needs or SEND, Special Educational Needs and Disabilities                                                                                                                  |
 | Unit                | A Unit of a CCP refers to the lessons that are delivered over the course of one half term. Normally 6 or 7 weeks                                                                               |
 
+
+## Licence
+
+[The MIT Licence](LICENCE)
