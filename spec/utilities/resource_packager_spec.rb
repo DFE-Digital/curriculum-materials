@@ -18,6 +18,13 @@ RSpec.describe(ResourcePackager) do
       [{ filename: '1px.png', content_type: 'image/png' }]
     end
 
+    let(:slide_deck_attachments) do
+      [
+        { filename: 'file1.odp', content_type: 'application/vnd.oasis.opendocument.presentation' },
+        { filename: 'file2.odp', content_type: 'application/vnd.oasis.opendocument.presentation' }
+      ]
+    end
+
     before do
       teacher_attachments.each do |attachment|
         activity.teacher_resources.attach(
@@ -34,10 +41,20 @@ RSpec.describe(ResourcePackager) do
           content_type: attachment[:content_type]
         )
       end
+
+      slide_deck_attachments.each do |attachment|
+        activity.slide_deck.attach(
+          io: File.open(Rails.root.join(file_fixture(attachment[:filename])), 'rb'),
+          filename: attachment[:filename],
+          content_type: attachment[:content_type]
+        )
+      end
     end
 
     let(:teacher_attachment_filenames) do
-      teacher_attachments.map { |ta| ta[:filename] }
+      arr = teacher_attachments.map { |ta| ta[:filename] }
+      arr << "presentation.odp"
+      arr
     end
 
     let(:pupil_attachment_filenames) do

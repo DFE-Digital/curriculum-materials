@@ -15,7 +15,7 @@ RSpec.shared_examples "a ODP zip" do
 end
 
 describe PresentationMerger do
-  let(:file1) { File.new(File.join(File.dirname(__FILE__), "..", "fixtures", "file1.odp")) }
+  let(:file1) { File.new(File.join(File.dirname(__FILE__), "..", "fixtures", "files", "file1.odp")) }
 
   describe ".write_buffer" do
     subject do
