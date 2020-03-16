@@ -13,11 +13,14 @@
     padding: 20px;
     padding-top: 10px;
     list-style-type: decimal;
-    border-top: 10px solid govuk-colour("light-green");
     background-color: govuk-colour("light-grey");
 
-    a {
-      text-decoration: none;
+    &.card-with-lessons {
+      border-top: 10px solid govuk-colour("light-green");
+    }
+
+    &.card-without-lessons {
+      border-top: 10px solid govuk-colour("dark-grey");
     }
 
     .card-header {
@@ -56,6 +59,8 @@
     }
 
     .card-body {
+      margin: 0.8rem 0;
+
       p,
       li,
       a {
@@ -68,6 +73,12 @@
 
       li > a {
         font-weight: normal;
+      }
+    }
+
+    .card-footer {
+      a {
+        font-weight: bold;
       }
     }
   }

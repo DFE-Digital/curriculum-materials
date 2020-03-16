@@ -9,12 +9,12 @@
 - Ruby 2.6.5
 - PostgreSQL
 - NodeJS 12.13.x
-- Yarn 1.12.x
 
 ## Setting up the app in development
 
 1. Run `bundle install` to install the gem dependencies
-2. Run `yarn` to install node dependencies
+1. Run `npm login --registry=https://npm.pkg.github.com --scope=@dfe-digital` and enter your github details
+2. Run `npm install` to install node dependencies
 3. Run `bin/rails db:setup` to set up the database development and test schemas, and seed with test data
 4. Run `bundle exec rails server` to launch the app on http://localhost:3000
 5. Run `./bin/webpack-dev-server` in a separate shell for faster compilation of assets
@@ -61,7 +61,7 @@ bundle exec scss-lint app/webpacker/styles
 
 1. Run `cf login -a api.london.cloud.service.gov.uk -u USERNAME`, `USERNAME` is your personal GOV.UK PaaS account email address
 2. Run `bundle package --all` to vendor ruby dependencies
-3. Run `yarn` to vendor node dependencies
+3. Run `npm install` to vendor node dependencies
 4. Run `bundle exec rails webpacker:compile` to compile assets
 5. Run `cf push` to push the app to Cloud Foundry Application Runtime
 

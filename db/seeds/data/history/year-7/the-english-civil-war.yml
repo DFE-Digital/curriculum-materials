@@ -1,0 +1,17 @@
+unit:
+  position: 5
+  year: 7
+  name: The English Civil War
+
+  # Note, the contents are hard-coded as a list here while we await final content
+  overview: |-
+    The development of Church, state and society in Britain 1509-1745, covering:
+
+    * the causes and events of the civil wars throughout Britain
+    * the execution of Charles I
+    * the Interregnum (including Cromwell in Ireland)
+    * the Restoration, ‘Glorious Revolution’ and power of Parliament
+    * life in early modern England
+
+  benefits: |-
+    TODO

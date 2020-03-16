@@ -1,0 +1,14 @@
+- breadcrumbs(current_page: @complete_curriculum_programme.title)
+
+.govuk-grid-row
+  .govuk-grid-column-two-thirds
+    h1 = @complete_curriculum_programme.name
+
+    section.rationale
+      = markdown @complete_curriculum_programme.rationale
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    section.cards-container
+      - @units.each do |unit|
+        = render "unit_card", unit: unit

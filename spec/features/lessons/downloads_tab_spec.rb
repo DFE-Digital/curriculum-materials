@@ -7,8 +7,8 @@ RSpec.feature "Downloads tab", type: :feature do
 
   before { visit(teachers_lesson_path(lesson)) }
 
-  specify %(the tab's main heading should be 'Downloads') do
-    within('#downloads') { expect(page).to have_css('h2', text: 'Downloads') }
+  specify %(the tab's main heading should be 'Download the lesson plan and resources') do
+    within('#downloads') { expect(page).to have_css('h2', text: 'Download the lesson plan and resources') }
   end
 
   specify %(there should be a 'Print lesson plan' link) do

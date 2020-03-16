@@ -1,21 +1,30 @@
 // units table
 .units {
-  margin-bottom: 4rem;
-
   th {
     text-align: left;
   }
 
-  thead > tr > th {
-    &.lesson-number {
-      width: 5rem;
-      overflow-wrap: break-word;
-    }
+  thead {
+    th {
+      &.lesson-number {
+        width: 5rem;
+        overflow-wrap: break-word;
+      }
 
-    text-align: left;
+      text-align: left;
+    }
   }
 
   tbody {
+    th,
+    td {
+      padding: 0.4rem 0;
+    }
+
+    th {
+      text-align: center;
+    }
+
     td {
       vertical-align: middle;
     }
