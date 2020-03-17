@@ -28,7 +28,7 @@ no special stesp to set up.
 
 Ensure you have the following installed on your machine:
 
- * Ruby 2.6.5
+ * Ruby `2.6.5`
  * PostgreSQL (with an account that has superuser privileges)
  * NodeJS `^12.14.1`
 
