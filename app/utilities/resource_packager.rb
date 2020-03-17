@@ -13,6 +13,10 @@ class ResourcePackager
     build_lesson_bundle.tap(&:rewind)
   end
 
+  def filename
+    download.lesson.name.parameterize
+  end
+
 private
 
   def activities
@@ -20,23 +24,42 @@ private
   end
 
   def slide_decks
-    activities.map(&:slide_deck)
+    activities.map(&:slide_deck_resource)
   end
 
-  def slide_deck_tempfiles
+  def slide_decks_tempfiles
     slide_decks
-      .select { |slide_deck| slide_deck.attached? }
-      .map { |activity| activity.attachment.open { |f| f } }
+      .select { |slide_deck| slide_deck.file.attached? }
+      .map do |slide_deck|
+        file = Tempfile.open('ResourcePackager-') do |tempfile|
+          tempfile.binmode
+          slide_deck.file.download { |chunk| tempfile.write(chunk) }
+          tempfile.flush
+          tempfile.rewind
+          tempfile
+        end
+        file
+      end
   end
 
-  def combined_slide_deck
-    return nil if slide_deck_tempfiles.empty?
+  def combined_slide_decks
+    return nil unless has_slide_decks?
 
-    PresentationMerger.write_buffer do |pres|
-      slide_deck_tempfiles.each do |file|
+    @combined_slide_decks ||= PresentationMerger.write_buffer do |pres|
+      slide_decks_tempfiles.each do |file|
         pres << file
       end
     end
+    @combined_slide_decks
+  ensure
+    slide_decks_tempfiles.each do |file|
+      file.close!
+    end
+    @combined_slide_decks
+  end
+
+  def has_slide_decks?
+    slide_decks_tempfiles.any?
   end
 
   def pupil_resource_blobs
@@ -61,9 +84,9 @@ private
   end
 
   def add_presentation_to_zip(zip)
-    if combined_slide_deck
-      zip.put_next_entry('teacher/presentation.odp')
-      zip.print(combined_slide_deck)
+    if has_slide_decks?
+      zip.put_next_entry("#{filename}.odp")
+      zip.write(combined_slide_decks.string)
     end
   end
 end
