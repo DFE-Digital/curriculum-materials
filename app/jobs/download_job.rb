@@ -1,4 +1,13 @@
 class DownloadJob < ApplicationJob
+  # We don't want to retry the job if it fails as we'll be leaving the
+  # teacher waiting for their download. Instead the teacher can manually
+  # trigger another download.
+  discard_on StandardError do |job, error|
+    download = job.arguments.first
+    download.transition_to! :failed
+    Raven.capture_exception error
+  end
+
   queue_as :default
 
   def perform(download)
@@ -11,9 +20,5 @@ class DownloadJob < ApplicationJob
     )
 
     download.transition_to!(:completed)
-  rescue StandardError => e
-    download.transition_to! :failed
-    Raven.capture_exception e
-    raise e
   end
 end
