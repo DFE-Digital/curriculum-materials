@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  include HTTPAuth
+
   PAGES = %w(
     how-to-get-access
   ).freeze

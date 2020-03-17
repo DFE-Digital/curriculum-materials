@@ -1,5 +1,7 @@
 module Teachers
   class BaseController < ApplicationController
+    include HTTPAuth
+
     before_action :ensure_token_exists
 
     def current_teacher
