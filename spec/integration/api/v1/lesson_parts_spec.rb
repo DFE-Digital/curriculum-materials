@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Lessons parts' do
+  include_context 'setup api token'
+
   path('/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts') do
     get('retrieves all lessons parts belonging to the specified lesson') do
       tags('LessonPart')
@@ -12,6 +14,7 @@ describe 'Lessons parts' do
       let(:unit_id) { lesson_part.lesson.unit.id }
       let(:lesson_id) { lesson_part.lesson.id }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -22,6 +25,10 @@ describe 'Lessons parts' do
         schema(type: :array, items: { '$ref' => '#/components/schemas/lesson_part' })
 
         run_test!
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
 
@@ -35,6 +42,7 @@ describe 'Lessons parts' do
       let(:unit_id) { lesson_part.lesson.unit.id }
       let(:lesson_id) { lesson_part.lesson.id }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -78,6 +86,10 @@ describe 'Lessons parts' do
           expect(JSON.parse(response.body).dig('errors')).to include(%(Position can't be blank))
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -93,6 +105,7 @@ describe 'Lessons parts' do
       let(:lesson_id) { lesson_part.lesson.id }
       let(:id) { lesson_part.id }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -110,6 +123,10 @@ describe 'Lessons parts' do
         schema('$ref' => '#/components/schemas/lesson_part')
 
         run_test!
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
 
@@ -130,6 +147,7 @@ describe 'Lessons parts' do
 
       let(:lesson_part_params) { { lesson_part: FactoryBot.attributes_for(:lesson_part) } }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :ccp_id, in: :path, type: :string, required: true)
       parameter(name: :unit_id, in: :path, type: :string, required: true)
       parameter(name: :lesson_id, in: :path, type: :string, required: true)
@@ -167,6 +185,10 @@ describe 'Lessons parts' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Position can't be blank))
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

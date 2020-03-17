@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Slide decks' do
+  include_context 'setup api token'
+
   let(:activity) { create(:activity) }
   let(:ccp_id) { activity.lesson_part.lesson.unit.complete_curriculum_programme.id }
   let(:unit_id) { activity.lesson_part.lesson.unit.id }
@@ -21,6 +23,8 @@ describe 'Slide decks' do
       tags 'SlideDeck'
       consumes 'multipart/form-data'
       produces 'application/json'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -56,11 +60,17 @@ describe 'Slide decks' do
             File.binread slide_deck_path
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     get %{Returns the slide deck for an activity} do
       tags 'SlideDeck'
       produces 'application/json'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -81,10 +91,16 @@ describe 'Slide decks' do
         }
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     delete %{Removes the slide deck for an activity} do
       tags 'SlideDeck'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -103,6 +119,10 @@ describe 'Slide decks' do
           expect(response.code).to eq '204'
           expect(activity.reload.slide_deck).not_to be_attached
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

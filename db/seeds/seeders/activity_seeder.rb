@@ -84,7 +84,7 @@ module Seeders
     end
 
     def save_file_via_api(path, param, file)
-      conn = Faraday.new(url: path) do |faraday|
+      conn = Faraday.new(**faraday_connection_params) do |faraday|
         faraday.request :multipart
         faraday.request :url_encoded
         faraday.adapter Faraday.default_adapter

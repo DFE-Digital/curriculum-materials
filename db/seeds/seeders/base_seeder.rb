@@ -6,7 +6,7 @@ module Seeders
   # * Model mode - active when SEED_API_URL is absent
   class BaseSeeder
     def endpoint(overridden_path = nil)
-      seed_api_url + (overridden_path || path)
+      overridden_path || path
     end
 
     def save!
@@ -34,7 +34,7 @@ module Seeders
     end
 
     def save_via_api
-      resp = Faraday.post(endpoint, payload)
+      resp = connection.post(endpoint, payload)
 
       if resp.success?
         @id = JSON.parse(resp.body).dig("id")
@@ -42,6 +42,23 @@ module Seeders
         puts "Can't save #{identifier}"
         fail resp.body
       end
+    end
+
+    def connection
+      Faraday.new(**faraday_connection_params)
+    end
+
+    def faraday_connection_params
+      {
+        url: seed_api_url,
+        headers: {
+          Authorization: %(Bearer #{api_token})
+        }
+      }
+    end
+
+    def api_token
+      ENV.fetch('API_TOKEN') { fail 'API_TOKEN must be set' }
     end
   end
 end

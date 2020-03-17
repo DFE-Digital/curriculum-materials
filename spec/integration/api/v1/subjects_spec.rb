@@ -1,10 +1,14 @@
 require 'swagger_helper'
 
 describe 'Subjects' do
+  include_context 'setup api token'
+
   path('/subjects') do
     get('retrieves all subjects') do
       tags('Subject')
       produces('application/json')
+
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:subjects) { FactoryBot.create_list(:subject, 3) }
 
@@ -20,6 +24,10 @@ describe 'Subjects' do
           expect(actual_names).to match_array(expected_names)
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -30,6 +38,7 @@ describe 'Subjects' do
 
       let!(:maths) { FactoryBot.create(:subject, name: 'Maths') }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'with a valid id') do
@@ -57,6 +66,12 @@ describe 'Subjects' do
             %(Subject #{id} not found)
           )
         end
+      end
+
+      response(401, 'unauthorized') do
+        let(:id) { maths.id }
+
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

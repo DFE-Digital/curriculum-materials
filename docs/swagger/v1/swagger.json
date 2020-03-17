@@ -20,6 +20,9 @@
           },
           "key_stage": {
             "type": "integer"
+          },
+          "subject": {
+            "type": "string"
           }
         },
         "required": [
@@ -164,6 +167,13 @@
         ],
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "ccp_id",
             "in": "path",
             "required": true,
@@ -209,7 +219,6 @@
                     "PVA Glue",
                     "Glitter"
                   ],
-                  "default": false,
                   "id": 1
                 },
                 {
@@ -220,7 +229,6 @@
                     "PVA Glue",
                     "Glitter"
                   ],
-                  "default": false,
                   "id": 2
                 }
               ]
@@ -235,6 +243,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -244,6 +255,13 @@
           "Activity"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -331,6 +349,9 @@
           },
           "400": {
             "description": "invalid lesson part"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -342,6 +363,13 @@
           "Activity"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -395,7 +423,6 @@
                   "PVA Glue",
                   "Glitter"
                 ],
-                "default": false,
                 "id": 1,
                 "teaching_methods": [
                   {
@@ -420,6 +447,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -429,6 +459,13 @@
           "Activity"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -503,7 +540,6 @@
                     "PVA Glue",
                     "Glitter"
                   ],
-                  "default": false,
                   "teaching_methods": [
                     {
                       "name": "Teaching method 5",
@@ -524,6 +560,9 @@
           },
           "400": {
             "description": "invalid lesson part"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -533,6 +572,15 @@
         "summary": "retrieves all complete curriculum programmes",
         "tags": [
           "CCP"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -555,6 +603,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -564,7 +615,13 @@
           "CCP"
         ],
         "parameters": [
-
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "required": true,
@@ -591,13 +648,17 @@
                 "ccp": {
                   "name": "CCP 2",
                   "rationale": "Rationale",
-                  "key_stage": 4
-                }
+                  "key_stage": 3
+                },
+                "subject": "English"
               }
             }
           },
           "400": {
-            "description": "invalid ccp"
+            "description": "non-existant subject"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -609,6 +670,13 @@
           "CCP"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -625,7 +693,7 @@
               "application/json": {
                 "name": "CCP 3",
                 "rationale": "Rationale",
-                "key_stage": 2,
+                "key_stage": 1,
                 "id": 1,
                 "units": [
                   {
@@ -633,7 +701,7 @@
                     "overview": "Overview",
                     "benefits": "Benefits",
                     "position": 1,
-                    "year": 1,
+                    "year": 11,
                     "id": 1
                   },
                   {
@@ -654,6 +722,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -663,6 +734,13 @@
           "CCP"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -697,13 +775,17 @@
                 "ccp": {
                   "name": "CCP 4",
                   "rationale": "Rationale",
-                  "key_stage": 2
-                }
+                  "key_stage": 4
+                },
+                "subject": "French"
               }
             }
           },
           "400": {
-            "description": "invalid ccp"
+            "description": "non-existant subject"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -715,6 +797,13 @@
           "LessonPart"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -765,6 +854,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -774,6 +866,13 @@
           "LessonPart"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -829,6 +928,9 @@
           },
           "400": {
             "description": "invalid lesson part"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -840,6 +942,13 @@
           "LessonPart"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -904,6 +1013,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -913,6 +1025,13 @@
           "LessonPart"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -976,6 +1095,9 @@
           },
           "400": {
             "description": "invalid lesson part"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -987,6 +1109,13 @@
           "Lesson"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1055,6 +1184,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1064,6 +1196,13 @@
           "Lesson"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1124,6 +1263,9 @@
           },
           "400": {
             "description": "invalid unit"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1135,6 +1277,13 @@
           "Lesson"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1204,6 +1353,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1213,6 +1365,13 @@
           "Lesson"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1281,6 +1440,9 @@
           },
           "400": {
             "description": "invalid lesson"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1292,6 +1454,13 @@
           "PupilResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1344,6 +1513,9 @@
                 }
               ]
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1353,6 +1525,13 @@
           "PupilResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1420,6 +1599,9 @@
           },
           "400": {
             "description": "invalid pupil_resource"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1431,6 +1613,13 @@
           "PupilResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1483,6 +1672,9 @@
         "responses": {
           "204": {
             "description": "pupil resource removed"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1494,6 +1686,13 @@
           "SlideDeck"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1558,6 +1757,9 @@
         "responses": {
           "201": {
             "description": "slide_deck created"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1567,6 +1769,13 @@
           "SlideDeck"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1617,6 +1826,9 @@
                 "url": "https://example.com/path-to-resource"
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1626,6 +1838,13 @@
           "SlideDeck"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1670,6 +1889,9 @@
         "responses": {
           "204": {
             "description": "slide deck removed"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1679,6 +1901,15 @@
         "summary": "retrieves all subjects",
         "tags": [
           "Subject"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1699,6 +1930,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1707,9 +1941,16 @@
       "get": {
         "summary": "retrieves the specified subject",
         "tags": [
-          "Subject"
+          "/ubjec"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -1751,6 +1992,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1762,6 +2006,13 @@
           "TeacherResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1814,6 +2065,9 @@
                 }
               ]
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       },
@@ -1823,6 +2077,13 @@
           "TeacherResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1890,6 +2151,9 @@
           },
           "400": {
             "description": "invalid teacher_resource"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1901,6 +2165,13 @@
           "TeacherResource"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -1953,6 +2224,9 @@
         "responses": {
           "204": {
             "description": "teacher resource removed"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1962,6 +2236,15 @@
         "summary": "retrieves all teaching methods",
         "tags": [
           "TeachingMethod"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1984,6 +2267,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -1995,6 +2281,13 @@
           "TeachingMethod"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -2040,6 +2333,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -2051,6 +2347,13 @@
           "Unit"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -2070,7 +2373,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 3,
-                  "year": 9,
+                  "year": 11,
                   "id": 1
                 },
                 {
@@ -2078,7 +2381,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 4,
-                  "year": 3,
+                  "year": 11,
                   "id": 2
                 }
               ]
@@ -2102,6 +2405,13 @@
           "Unit"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -2138,7 +2448,7 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 5,
-                  "year": 7,
+                  "year": 1,
                   "id": 1
                 }
               }
@@ -2146,6 +2456,9 @@
           },
           "400": {
             "description": "invalid unit"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }
@@ -2157,6 +2470,13 @@
           "Unit"
         ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "ccp_id",
             "in": "path",
@@ -2183,7 +2503,7 @@
                 "overview": "Overview",
                 "benefits": "Benefits",
                 "position": 6,
-                "year": 1,
+                "year": 3,
                 "id": 1,
                 "complete_curriculum_programme": {
                   "name": "CCP 5",
@@ -2263,6 +2583,13 @@
         ],
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "ccp_id",
             "in": "path",
             "required": true,
@@ -2306,13 +2633,16 @@
                   "overview": "Overview",
                   "benefits": "Benefits",
                   "position": 7,
-                  "year": 11
+                  "year": 1
                 }
               }
             }
           },
           "400": {
             "description": "invalid unit"
+          },
+          "401": {
+            "description": "unauthorized"
           }
         }
       }

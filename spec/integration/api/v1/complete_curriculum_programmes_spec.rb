@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'Complete curriculum programmes' do
+  include_context 'setup api token'
+
   let(:maths) { 'Maths' }
   let!(:maths_subject) { FactoryBot.create(:subject, name: maths) }
 
@@ -8,6 +10,8 @@ describe 'Complete curriculum programmes' do
     get('retrieves all complete curriculum programmes') do
       tags('CCP')
       produces('application/json')
+
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:ccps) { FactoryBot.create_list(:ccp, 2) }
 
@@ -20,6 +24,10 @@ describe 'Complete curriculum programmes' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post('creates a new complete curriculum programme') do
@@ -27,6 +35,7 @@ describe 'Complete curriculum programmes' do
 
       consumes 'application/json'
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(
         name: :ccp_params,
         in: :body,
@@ -74,6 +83,10 @@ describe 'Complete curriculum programmes' do
           expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -82,6 +95,7 @@ describe 'Complete curriculum programmes' do
       tags('CCP')
       produces('application/json')
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       let!(:ccp) { FactoryBot.create(:ccp) }
@@ -94,6 +108,10 @@ describe 'Complete curriculum programmes' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     patch('update the referenced complete curriculum programme') do
@@ -104,6 +122,7 @@ describe 'Complete curriculum programmes' do
       let(:id) { ccp.id }
       let(:ccp_params) { { ccp: FactoryBot.attributes_for(:ccp), subject: maths } }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
       parameter(
         name: :ccp_params,
@@ -146,6 +165,10 @@ describe 'Complete curriculum programmes' do
         run_test! do |response|
           expect(JSON.parse(response.body).dig('errors')).to include(%(Subject must exist))
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

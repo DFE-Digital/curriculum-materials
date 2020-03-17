@@ -1,10 +1,14 @@
 require 'swagger_helper'
 
 describe 'Teaching methods' do
+  include_context 'setup api token'
+
   path('/teaching_methods') do
     get('retrieves all teaching methods') do
       tags('TeachingMethod')
       produces('application/json')
+
+      parameter(name: 'Authorization', in: :header, type: :string)
 
       let!(:teaching_methods) { FactoryBot.create_list(:teaching_method, 3) }
 
@@ -20,6 +24,10 @@ describe 'Teaching methods' do
           expect(actual_names).to match_array(expected_names)
         end
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -30,6 +38,7 @@ describe 'Teaching methods' do
 
       let!(:teaching_method) { FactoryBot.create(:teaching_method) }
 
+      parameter(name: 'Authorization', in: :header, type: :string)
       parameter(name: :id, in: :path, type: :string, required: true)
 
       response('200', 'with a valid id') do
@@ -57,6 +66,12 @@ describe 'Teaching methods' do
             %(Teaching method #{id} not found)
           )
         end
+      end
+
+      response(401, 'unauthorized') do
+        let(:id) { teaching_method.id }
+
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end

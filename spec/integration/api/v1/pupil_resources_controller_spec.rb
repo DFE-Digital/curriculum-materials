@@ -1,6 +1,8 @@
 require 'swagger_helper'
 
 describe 'PupilResources' do
+  include_context 'setup api token'
+
   let(:activity) { create(:activity) }
   let(:ccp_id) { activity.lesson_part.lesson.unit.complete_curriculum_programme.id }
   let(:unit_id) { activity.lesson_part.lesson.unit.id }
@@ -12,6 +14,8 @@ describe 'PupilResources' do
     get %{Returns the activity's attached pupil_resources} do
       tags 'PupilResource'
       produces 'application/json'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -26,12 +30,18 @@ describe 'PupilResources' do
 
         run_test!
       end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
 
     post 'Attaches a pupil resource to the activity' do
       tags 'PupilResource'
       consumes 'multipart/form-data'
       produces 'application/json'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -89,6 +99,18 @@ describe 'PupilResources' do
             "Pupil resources has an invalid content type"
         end
       end
+
+      response(401, 'unauthorized') do
+        let :attachment_path do
+          File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
+        end
+
+        let :pupil_resource do
+          fixture_file_upload attachment_path, 'text/xml'
+        end
+
+        it_should_behave_like 'an endpoint that requires token auth'
+      end
     end
   end
 
@@ -112,6 +134,8 @@ describe 'PupilResources' do
 
     delete %{Removes the attached resource from the activity} do
       tags 'PupilResource'
+
+      parameter name: 'Authorization', in: :header, type: :string
       parameter name: :ccp_id, in: :path, type: :string, required: true
       parameter name: :unit_id, in: :path, type: :string, required: true
       parameter name: :lesson_id, in: :path, type: :string, required: true
@@ -124,6 +148,10 @@ describe 'PupilResources' do
           expect(response.code).to eq '204'
           expect(activity.reload.pupil_resources).to be_empty
         end
+      end
+
+      response(401, 'unauthorized') do
+        it_should_behave_like 'an endpoint that requires token auth'
       end
     end
   end
