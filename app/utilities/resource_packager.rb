@@ -19,11 +19,17 @@ private
     @lesson_parts.values
   end
 
+  def slide_decks
+    activities.map(&:slide_deck)
+  end
+
   def slide_deck_tempfiles
-    activities.map { |activity| activity.slide_deck_resource.file.attachment.open { |f| f } }
+    slide_decks.map { |activity| activity.attachment.open { |f| f } if activity.attached? }.compact
   end
 
   def combined_slide_deck
+    return nil if slide_deck_tempfiles.empty?
+
     PresentationMerger.write_buffer do |pres|
       slide_deck_tempfiles.each do |file|
         pres << file
@@ -53,7 +59,9 @@ private
   end
 
   def add_presentation_to_zip(zip)
-    zip.put_next_entry('teacher/presentation.odp')
-    zip.print(combined_slide_deck)
+    if combined_slide_deck
+      zip.put_next_entry('teacher/presentation.odp')
+      zip.print(combined_slide_deck)
+    end
   end
 end
