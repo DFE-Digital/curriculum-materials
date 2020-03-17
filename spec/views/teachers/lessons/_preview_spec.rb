@@ -15,7 +15,7 @@ describe "teachers/lessons/_preview" do
       activity.pupil_resources + activity.teacher_resources
     end
 
-    it 'renders a details list of resources' do
+    it 'renders a details list of previews' do
       page = Capybara.string rendered
 
       summary = page.find \
@@ -28,12 +28,12 @@ describe "teachers/lessons/_preview" do
 
       resources.each do |resource|
         expect(details).to have_link \
-          text: "Preview #{resource.filename.base}", href: /#{resource.filename}/, visible: :all
+          text: "Preview #{resource.file.filename.base}", href: /#{resource.preview.filename}/, visible: :all
       end
     end
   end
 
-  context 'single resource' do
+  context 'single preview' do
     let :resources do
       activity.pupil_resources
     end
@@ -45,7 +45,7 @@ describe "teachers/lessons/_preview" do
     it 'renders a link to the resource' do
       expect(rendered).not_to have_css %{details.govuk-details}
       expect(rendered).to have_link \
-        text: "Preview #{resource.filename.base}", href: /#{resource.filename}/, visible: :all
+        text: "Preview #{resource.file.filename.base}", href: /#{resource.preview.filename}/, visible: :all
     end
   end
 

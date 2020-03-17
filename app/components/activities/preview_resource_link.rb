@@ -7,7 +7,7 @@ module Activities
     end
 
     def filename
-      resource.filename
+      resource.file.filename
     end
 
     def base
@@ -19,9 +19,11 @@ module Activities
     end
 
     def preview_path
-      # NOTE this will want changing to link to the preview variant when we
-      # add in previews for odp, odt, etc
-      url_for resource
+      if resource.preview.attached?
+        url_for resource.preview
+      else
+        url_for resource.file
+      end
     end
 
     def badge

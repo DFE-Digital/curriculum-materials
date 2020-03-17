@@ -25,7 +25,8 @@ describe 'PupilResources' do
       response '200', 'pupil resources found' do
         examples 'application/json': [{
           id: 1,
-          url: 'https://example.com/path-to-resource'
+          file_url: 'https://example.com/path-to-resource',
+          preview_url: 'https://example.com/path-to-resource'
         }]
 
         run_test!
@@ -47,14 +48,19 @@ describe 'PupilResources' do
       parameter name: :lesson_id, in: :path, type: :string, required: true
       parameter name: :lesson_part_id, in: :path, type: :string, required: true
       parameter name: :activity_id, in: :path, type: :string, required: true
-      parameter name: :pupil_resource, in: :formData, type: :file, required: true
+      parameter name: 'pupil_resource[file]', in: :formData, type: :file, required: true
+      parameter name: 'pupil_resource[preview]', in: :formData, type: :file, required: true
 
       response 201, 'pupil_resouce created' do
         let :attachment_path do
           File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
         end
 
-        let :pupil_resource do
+        let 'pupil_resource[file]' do
+          fixture_file_upload attachment_path, 'image/png'
+        end
+
+        let 'pupil_resource[preview]' do
           fixture_file_upload attachment_path, 'image/png'
         end
 
@@ -64,15 +70,22 @@ describe 'PupilResources' do
               schema: {
                 type: 'object',
                 properties: {
-                  pupil_resource: {
+                  'pupil_resource[file]': {
+                    type: :string,
+                    format: :binary
+                  },
+                  'pupil_resource[preview]': {
                     type: :string,
                     format: :binary
                   }
                 }
               },
               encoding: {
-                pupil_resource: {
-                  contentType: Activity::ALLOWED_CONTENT_TYPES.join(',')
+                'pupil_resource[file]': {
+                  contentType: PupilResource::ALLOWED_CONTENT_TYPES.join(',')
+                },
+                'pupil_resource[preview]': {
+                  contentType: PupilResource::ALLOWED_PREVIEW_CONTENT_TYPES.join(',')
                 }
               }
             }
@@ -88,7 +101,11 @@ describe 'PupilResources' do
           File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
         end
 
-        let :pupil_resource do
+        let 'pupil_resource[file]' do
+          fixture_file_upload attachment_path, 'text/xml'
+        end
+
+        let 'pupil_resource[preview]' do
           fixture_file_upload attachment_path, 'text/xml'
         end
 
@@ -96,7 +113,7 @@ describe 'PupilResources' do
           expect(response.code).to eq '400'
 
           expect(JSON.parse(response.body).dig('errors')).to include \
-            "Pupil resources has an invalid content type"
+            "File has an invalid content type"
         end
       end
 
@@ -105,7 +122,11 @@ describe 'PupilResources' do
           File.join(Rails.application.root, 'spec', 'fixtures', 'sample.xml')
         end
 
-        let :pupil_resource do
+        let 'pupil_resource[file]' do
+          fixture_file_upload attachment_path, 'text/xml'
+        end
+
+        let 'pupil_resource[preview]' do
           fixture_file_upload attachment_path, 'text/xml'
         end
 
@@ -115,17 +136,8 @@ describe 'PupilResources' do
   end
 
   path '/ccps/{ccp_id}/units/{unit_id}/lessons/{lesson_id}/lesson_parts/{lesson_part_id}/activities/{activity_id}/pupil_resources/{pupil_resource_id}' do
-    let :attachment_path do
-      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
-    end
-
     let :pupil_resource do
-      activity.pupil_resources.attach(
-        io: File.open(attachment_path),
-        filename: '1px.png',
-        content_type: 'image/png'
-      )
-      activity.pupil_resources.last
+      create :pupil_resource, activity: activity
     end
 
     let :pupil_resource_id do

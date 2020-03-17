@@ -52,10 +52,19 @@ RSpec.describe Teachers::LessonContentsPresenter do
 
   context 'Slot#resources' do
     let :activity do
-      create :activity,
-             :with_pupil_resources, # previewable
-             :with_teacher_resources, # previewable
-             :with_slide_deck # not yet previewable
+      create :activity
+    end
+
+    let! :teacher_resource do
+      create :teacher_resource, :with_preview, activity: activity
+    end
+
+    let! :pupil_resource do
+      create :teacher_resource, activity: activity
+    end
+
+    let! :slide_deck do
+      create :slide_deck_resource, :with_preview, activity: activity
     end
 
     let :slot do
@@ -64,9 +73,9 @@ RSpec.describe Teachers::LessonContentsPresenter do
 
     subject { slot.resources }
 
-    specify %{returns the previewable resources for the activity} do
-      is_expected.to \
-        match_array(activity.pupil_resources + activity.teacher_resources)
+    specify %{returns the resources for the activity} do
+      expect(subject).to match_array \
+        [pupil_resource, teacher_resource, slide_deck]
     end
   end
 end

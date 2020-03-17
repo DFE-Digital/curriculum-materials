@@ -10,55 +10,20 @@ RSpec.describe(ResourcePackager) do
 
   describe '#lesson_bundle' do
     let(:activity) { create(:activity) }
-    let(:teacher_attachments) do
-      [{ filename: '1px.png', content_type: 'image/png' }]
-    end
-
-    let(:pupil_attachments) do
-      [{ filename: '1px.png', content_type: 'image/png' }]
-    end
-
-    let(:slide_deck_attachments) do
-      [
-        { filename: 'file1.odp', content_type: 'application/vnd.oasis.opendocument.presentation' },
-        { filename: 'file2.odp', content_type: 'application/vnd.oasis.opendocument.presentation' }
-      ]
-    end
-
-    before do
-      teacher_attachments.each do |attachment|
-        activity.teacher_resources.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', attachment[:filename])),
-          filename: attachment[:filename],
-          content_type: attachment[:content_type]
-        )
-      end
-
-      pupil_attachments.each do |attachment|
-        activity.pupil_resources.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', attachment[:filename])),
-          filename: attachment[:filename],
-          content_type: attachment[:content_type]
-        )
-      end
-
-      slide_deck_attachments.each do |attachment|
-        activity.slide_deck.attach(
-          io: File.open(Rails.root.join(file_fixture(attachment[:filename])), 'rb'),
-          filename: attachment[:filename],
-          content_type: attachment[:content_type]
-        )
-      end
-    end
+    let!(:teacher_resources) { create_list :teacher_resource, 1, activity: activity }
+    let!(:pupil_resources) { create_list :pupil_resource, 1, activity: activity }
+    let!(:slide_deck_resource) { create :slide_deck_resource, activity: activity }
 
     let(:teacher_attachment_filenames) do
-      arr = teacher_attachments.map { |ta| ta[:filename] }
-      arr << "presentation.odp"
-      arr
+      teacher_resources.map(&:file).map(&:filename).map(&:to_s)
     end
 
     let(:pupil_attachment_filenames) do
-      pupil_attachments.map { |ta| ta[:filename] }
+      pupil_resources.map(&:file).map(&:filename).map(&:to_s)
+    end
+
+    let(:slide_deck_attachment_filename) do
+      'presentation.odp'
     end
 
     let(:download) { create(:download, lesson: activity.lesson_part.lesson) }
@@ -70,12 +35,15 @@ RSpec.describe(ResourcePackager) do
 
     specify 'all attachments should be added to the zip file' do
       Zip::File.open_buffer(subject) do |zip|
-        teacher_resources, pupil_resources = *zip.map(&:name).partition do |p|
-          p.starts_with?('teacher')
-        end
+        zipped_file_names = *zip.map(&:name)
 
-        expect(teacher_attachment_filenames).to match_array(strip_paths(teacher_resources))
-        expect(pupil_attachment_filenames).to match_array(strip_paths(pupil_resources))
+        returned_teacher_resources = zipped_file_names.select { |fn| fn.starts_with? 'teacher' }
+        returned_pupil_resources = zipped_file_names.select { |fn| fn.starts_with? 'pupil' }
+
+        # FIXME the final presentation is being added into the teacher directory
+        # it should be added at the top level of the zip.
+        expect(teacher_attachment_filenames + ['presentation.odp']).to match_array(strip_paths(returned_teacher_resources))
+        expect(pupil_attachment_filenames).to match_array(strip_paths(returned_pupil_resources))
       end
     end
   end

@@ -20,7 +20,7 @@ private
   end
 
   def slide_deck_tempfiles
-    activities.map { |activity| activity.slide_deck.attachment.open { |f| f } }
+    activities.map { |activity| activity.slide_deck_resource.file.attachment.open { |f| f } }
   end
 
   def combined_slide_deck
@@ -32,11 +32,11 @@ private
   end
 
   def pupil_resource_blobs
-    activities.map(&:pupil_resources).flat_map(&:blobs)
+    PupilResource.where(activity: activities).includes(:file_attachment).map(&:file).map(&:blob)
   end
 
   def teacher_resource_blobs
-    activities.map(&:teacher_resources).flat_map(&:blobs)
+    TeacherResource.where(activity: activities).includes(:file_attachment).map(&:file).map(&:blob)
   end
 
   def build_lesson_bundle

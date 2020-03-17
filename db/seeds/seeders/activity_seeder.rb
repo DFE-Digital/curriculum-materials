@@ -21,45 +21,46 @@ module Seeders
       @name
     end
 
-    def attach_slide_deck(path)
+    def attach_slide_deck(file_path:, preview_path:)
       if api_mode_enabled?
-        attach_slide_deck_via_api(path)
+        attach_slide_deck_via_api(file_path, preview_path)
       else
-        attach_slide_deck_via_model(path)
+        attach_slide_deck_via_model(file_path, preview_path)
       end
     end
 
-    def attach_teacher_resource(path)
+    def attach_teacher_resource(file_path:, preview_path:)
       if api_mode_enabled?
-        attach_teacher_resource_via_api(path)
+        attach_teacher_resource_via_api(file_path, preview_path)
       else
-        attach_teacher_resource_via_model(path)
+        attach_teacher_resource_via_model(file_path, preview_path)
       end
     end
 
-    def attach_pupil_resource(path)
+    def attach_pupil_resource(file_path:, preview_path:)
       if api_mode_enabled?
-        attach_pupil_resource_via_api(path)
+        attach_pupil_resource_via_api(file_path, preview_path)
       else
-        attach_pupil_resource_via_model(path)
+        attach_pupil_resource_via_model(file_path, preview_path)
       end
     end
 
   private
 
-    def attach_slide_deck_via_api(path)
+    def attach_slide_deck_via_api(file_path, preview_path)
       save_file_via_api(
         endpoint(
           Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_slide_deck_path(
             *path_args, @id
           )
         ),
-        :slide_deck,
-        path
+        :slide_deck_resource,
+        file_path,
+        preview_path
       )
     end
 
-    def attach_teacher_resource_via_api(path)
+    def attach_teacher_resource_via_api(file_path, preview_path)
       save_file_via_api(
         endpoint(
           Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_teacher_resources_path(
@@ -67,11 +68,12 @@ module Seeders
           )
         ),
         :teacher_resource,
-        path
+        file_path,
+        preview_path
       )
     end
 
-    def attach_pupil_resource_via_api(path)
+    def attach_pupil_resource_via_api(file_path, preview_path)
       save_file_via_api(
         endpoint(
           Rails.application.routes.url_helpers.api_v1_ccp_unit_lesson_lesson_part_activity_pupil_resources_path(
@@ -79,11 +81,12 @@ module Seeders
           )
         ),
         :pupil_resource,
-        path
+        file_path,
+        preview_path
       )
     end
 
-    def save_file_via_api(path, param, file)
+    def save_file_via_api(path, param, file_path, preview_path)
       conn = Faraday.new(**faraday_connection_params) do |faraday|
         faraday.request :multipart
         faraday.request :url_encoded
@@ -92,30 +95,28 @@ module Seeders
 
       # ActiveStorage will identify the content type, just set it to
       # something generic for the time being
-      upload = Faraday::UploadIO.new(file, 'application/octet-stream')
+      file_upload = Faraday::UploadIO.new(file_path, 'application/octet-stream')
 
-      conn.post(path, param => upload)
+      body = { "#{param}[file]" => file_upload }
+
+      if preview_path.present?
+        preview_upload = Faraday::UploadIO.new(preview_path, 'application/octet-stream')
+        body.merge! "#{param}[preview]" => preview_upload
+      end
+
+      conn.post(path, body)
     end
 
-    def attach_slide_deck_via_model(path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.slide_deck.attach(
-        io: File.open(path),
-        filename: 'slides.odp'
-      )
+    def attach_slide_deck_via_model(file_path, preview_path)
+      attach_to_resource @activity.build_slide_deck_resource, file_path, preview_path
     end
 
-    def attach_teacher_resource_via_model(path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.teacher_resources.attach(
-        io: File.open(path),
-        filename: File.basename(path)
-      )
+    def attach_teacher_resource_via_model(file_path, preview_path)
+      attach_to_resource @activity.teacher_resources.new, file_path, preview_path
     end
 
-    def attach_pupil_resource_via_model(path)
-      fail ArgumentError, @activity.errors.full_messages unless @activity.pupil_resources.attach(
-        io: File.open(path),
-        filename: File.basename(path)
-      )
+    def attach_pupil_resource_via_model(file_path, preview_path)
+      attach_to_resource @activity.pupil_resources.new, file_path, preview_path
     end
 
     def parent
@@ -157,6 +158,20 @@ module Seeders
         @id = obj.id
         obj.teaching_methods << teaching_method_objects
       end
+    end
+
+    def attach_to_resource(resource, file_path, preview_path)
+      resource.file.attach \
+        io: File.open(file_path),
+        filename: File.basename(file_path)
+
+      if preview_path.present?
+        resource.preview.attach \
+          io: File.open(preview_path),
+          filename: File.basename(preview_path)
+      end
+
+      fail ArgumentError, resource.errors.full_messages unless resource.save
     end
   end
 end

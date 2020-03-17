@@ -5,8 +5,8 @@
       span.govuk-details__summary-text Preview resources
 
     .govuk-details__text
-      - resources.each do |resource|
-        = render(Activities::PreviewResourceLink, resource: resource)
+      - resources.each do |resources|
+        = render(Activities::PreviewResourceLink, resource: resources)
 
 - elsif resources.one?
   = render(Activities::PreviewResourceLink, resource: resources.first)
