@@ -102,9 +102,9 @@ private
         @output_stream.puts line
       end
       stderr_str = stderr.read
-      @output_stream.close_write
       @output_stream.flush
       @output_stream.rewind
+      @output_stream.close_write
       wait_thr.value
     end
     unless exit_status.success?
