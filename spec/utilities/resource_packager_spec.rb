@@ -46,5 +46,15 @@ RSpec.describe(ResourcePackager) do
         expect(pupil_attachment_filenames).to match_array(strip_paths(returned_pupil_resources))
       end
     end
+
+    it 'doesn\'t include any presentations where theres no slide decks' do
+      activity.slide_deck.detach
+
+      Zip::File.open_buffer(subject) do |zip|
+        zip.map(&:name).each do |name|
+          expect(name).not_to end_with(".odp")
+        end
+      end
+    end
   end
 end
