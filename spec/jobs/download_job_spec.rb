@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe DownloadJob, type: :job do
+  before { ActiveJob::Base.queue_adapter = :test }
   let(:download) { create(:download) }
 
   describe '#perform_later' do
-    before { ActiveJob::Base.queue_adapter = :test }
-
     it "enqueues jobs" do
       expect { DownloadJob.perform_later(download) }.to have_enqueued_job
     end
@@ -36,15 +35,13 @@ RSpec.describe DownloadJob, type: :job do
       allow(ResourcePackager).to receive(:new).and_raise(StandardError)
     end
 
-    subject { described_class.perform_now download }
+    before { described_class.perform_now download }
 
     it 'notifies sentry' do
-      expect { subject }.to raise_error StandardError
       expect(Raven).to have_received(:capture_exception).with StandardError
     end
 
     it 'marks the job as failed' do
-      expect { subject }.to raise_error StandardError
       expect(download.reload).to be_in_state :failed
     end
   end
