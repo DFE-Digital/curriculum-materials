@@ -96,12 +96,15 @@ private
     command = "./node_modules/.bin/presentation-merger #{file_paths}"
 
     stderr_str = ''
+    @output_stream.binmode
     exit_status = Open3.popen3(command) do |_stdin, stdout, stderr, wait_thr|
       while (line = stdout.gets)
         @output_stream.puts line
       end
       stderr_str = stderr.read
       @output_stream.close_write
+      @output_stream.flush
+      @output_stream.rewind
       wait_thr.value
     end
     unless exit_status.success?

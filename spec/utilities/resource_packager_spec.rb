@@ -40,15 +40,14 @@ RSpec.describe(ResourcePackager) do
         returned_teacher_resources = zipped_file_names.select { |fn| fn.starts_with? 'teacher' }
         returned_pupil_resources = zipped_file_names.select { |fn| fn.starts_with? 'pupil' }
 
-        # FIXME the final presentation is being added into the teacher directory
-        # it should be added at the top level of the zip.
-        expect(teacher_attachment_filenames + ['presentation.odp']).to match_array(strip_paths(returned_teacher_resources))
+        expect(teacher_attachment_filenames).to match_array(strip_paths(returned_teacher_resources))
         expect(pupil_attachment_filenames).to match_array(strip_paths(returned_pupil_resources))
+        expect(zipped_file_names).to include("#{download.lesson.name.parameterize}.odp")
       end
     end
 
     it 'doesn\'t include any presentations where there\'s no slide decks' do
-      activity.slide_deck.detach
+      slide_deck_resource.file.detach
 
       Zip::File.open_buffer(subject) do |zip|
         zip.map(&:name).each do |name|
