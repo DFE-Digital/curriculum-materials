@@ -47,7 +47,7 @@ RSpec.describe(ResourcePackager) do
       end
     end
 
-    it 'doesn\'t include any presentations where theres no slide decks' do
+    it 'doesn\'t include any presentations where there\'s no slide decks' do
       activity.slide_deck.detach
 
       Zip::File.open_buffer(subject) do |zip|

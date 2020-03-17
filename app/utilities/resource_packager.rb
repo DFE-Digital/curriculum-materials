@@ -24,7 +24,9 @@ private
   end
 
   def slide_deck_tempfiles
-    slide_decks.map { |activity| activity.attachment.open { |f| f } if activity.attached? }.compact
+    slide_decks
+      .select { |slide_deck| slide_deck.attached? }
+      .map { |activity| activity.attachment.open { |f| f } }
   end
 
   def combined_slide_deck
