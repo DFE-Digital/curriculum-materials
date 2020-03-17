@@ -3,50 +3,40 @@
 
     markdown:
       # Access curriculum resources
-    
-      Teachers can use this service to access their school's complete
-      curriculum online.
 
-      You can access the full course of study and its resources, lesson by
-      lesson.
+      Use this service to access your school's curriculum programme online, including:
 
-      Use this service to:
+      * curriculum materials organised by key stage, unit, and year group
+      * lesson plans and resources tailored to the curriculum
+      * helpful guidance on teaching the curriculum
 
-      * view your curriculum's contents by year and by subject
-      * organise all lessons, using plans and resources tailored to the
-        curriculum
-      * find helpful guidance on teaching the curriculum
+    .govuk-inset-text
+      | Curriculum materials are currently available for one unit of year 7
+        history
 
-      #### Resources
+    markdown:
+      This service is only available in England, as part of the Department for
+      Education's (DfE) pilot.
 
-      Resources are currently available for:
+    .div class="govuk-!-margin-top-6"
+      = link_to teachers_splash_path, class: %i(govuk-button govuk-button--start)
+        | Start now
 
-      * key stages 1 and 2 maths and science
-      * key stages 2 and 3 history and geography
-
-      You'll need a valid school email address to sign up.
-
-      This service is only available in England.
-
-    = link_to teachers_splash_path, class: %i(govuk-button govuk-button--start)
-      | Start now
-
-      = govuk_chevron
+        = govuk_chevron
 
     markdown:
       ### Before you start
 
-      Your school can use this service if it is:
+      Your school can use this service if it has:
 
-      * maintained or local authority funded
-      * an academy or academy trust
-      * a free school
+        * signed up to participate in the DfE's single-unit pilot
+        * arranged to participate in the DfE's user research
 
   .govuk-grid-column-one-third
 
     aside
       h3 Further reading
-      
+
       ul.govuk-list
         li.govuk-body-s
           = link_to("The National Curriculum", "https://www.gov.uk/government/collections/national-curriculum")
