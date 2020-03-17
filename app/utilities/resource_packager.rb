@@ -52,9 +52,7 @@ private
     end
     @combined_slide_decks
   ensure
-    slide_decks_tempfiles.each do |file|
-      file.close!
-    end
+    slide_decks_tempfiles.inject(&:close!)
     @combined_slide_decks
   end
 
