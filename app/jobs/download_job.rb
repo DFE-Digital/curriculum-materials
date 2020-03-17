@@ -14,6 +14,6 @@ class DownloadJob < ApplicationJob
   rescue StandardError => e
     download.transition_to! :failed
     Raven.capture_exception e
-    raise error
+    raise e
   end
 end
