@@ -2,69 +2,103 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/maintainability)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/test_coverage)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/test_coverage)
 
-# GOV.UK Rails Boilerplate
+# Curriculum Materials
 
-## Prerequisites
+The curriculum materials project is intended to ease the life of teachers by
+allowing them to view, customise and download teaching materials that cover the
+entire national curriculum.
 
-- Ruby 2.6.5
-- PostgreSQL
-- NodeJS 12.13.x
+## Environments
 
-## Setting up the app in development
+| Environment | URL                                                  |
+| ----------- | --------                                             |
+| Staging     | https://dfe-curriculum-materials.herokuapp.com/      |
+| Production  | https://dfe-curriculum-materials-prod.herokuapp.com/ |
 
-1. Run `bundle install` to install the gem dependencies
-1. Run `npm login --registry=https://npm.pkg.github.com --scope=@dfe-digital` and enter your github details
-2. Run `npm install` to install node dependencies
-3. Run `bin/rails db:setup` to set up the database development and test schemas, and seed with test data
-4. Run `bundle exec rails server` to launch the app on http://localhost:3000
-5. Run `./bin/webpack-dev-server` in a separate shell for faster compilation of assets
+## Getting started
 
-## Whats included in this boilerplate?
+## Running the application
 
-- Rails 6.0 with Webpacker
-- [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend)
-- RSpec
-- Dotenv (managing environment variables)
-- Travis with Heroku deployment
+The application is a standard [Ruby on Rails](https://www.rubyonrails.org/) application requiring
+no special stesp to set up.
 
-## Running specs, linter(without auto correct) and annotate models and serializers
-```
-bundle exec rake
-```
+### Locally
 
-## Running specs
-```
-bundle exec rspec
-```
+#### Prerequisites
 
-## Linting
+Ensure you have the following installed on your machine:
 
-It's best to lint just your app directories and not those belonging to the framework, e.g.
+ * Ruby `2.6.5`
+ * PostgreSQL (with an account that has superuser privileges)
+ * NodeJS `^12.14.1`
+
+Clone the repository:
 
 ```bash
-bundle exec rubocop app config db lib spec Gemfile --format clang -a
-
-or
-
-bundle exec scss-lint app/webpacker/styles
+$ git clone git@github.com:DFE-Digital/curriculum-materials.git
 ```
 
-## Deploying on GOV.UK PaaS
+Install bundler and bundle the Ruby gems:
 
-### Prerequisites
+```bash
+$ bundle install
+```
 
-- Your department, agency or team has a GOV.UK PaaS account
-- You have a personal account granted by your organisation manager
-- You have downloaded and installed the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads) for your platform
+_If your database user needs a password, set that first by editing `config/database.yml`_
 
-### Deploy
+Now run the app:
 
-1. Run `cf login -a api.london.cloud.service.gov.uk -u USERNAME`, `USERNAME` is your personal GOV.UK PaaS account email address
-2. Run `bundle package --all` to vendor ruby dependencies
-3. Run `npm install` to vendor node dependencies
-4. Run `bundle exec rails webpacker:compile` to compile assets
-5. Run `cf push` to push the app to Cloud Foundry Application Runtime
+```bash
+$ bundle exec rails db:setup
+```
 
-Check the file `manifest.yml` for customisation of name (you may need to change it as there could be a conflict on that name), buildpacks and eventual services (PostgreSQL needs to be [set up](https://docs.cloud.service.gov.uk/deploying_services/postgresql/)).
+### On Docker
 
-The app should be available at https://govuk-rails-boilerplate.london.cloudapps.digital
+From the application root, build and start the app:
+
+```bash
+$ docker build . -t curriculum_materials:latest
+$ docker-compose up
+```
+
+To stop the app run:
+
+```bash
+$ docker-compose down
+```
+
+## Running the tests
+
+All of the unit and integration tests are written in [RSpec](https://rspec.info/). Run them
+in the conventional manner:
+
+```bash
+$ budle exec rspec
+```
+
+Hopefully everything should be green!
+
+## Schema
+
+![Schema diagram](docs/schema.png)
+
+## Glossary
+
+| Word                | Description                                                                                                                                                                                    |
+| ----                | -----------                                                                                                                                                                                    |
+| CCP                 | Complete Curriculum Programme. A set of lesson materials and guidance that covers one subject for one Key Stage                                                                                |
+| Curriculum Designer | The person or persons responsible for creating a CCP                                                                                                                                           |
+| EAL                 | English as an additional language                                                                                                                                                              |
+| FSM                 | Free School Meals                                                                                                                                                                              |
+| LA                  | Local Authority e.g. Local Authority maintained schools                                                                                                                                        |
+| MAT                 | Multi-Academy Trusts                                                                                                                                                                           |
+| National curriculum | The national curriculum for England to be taught in all local-authority-maintained schools.                                                                                                    |
+| PPA                 | Planning, preparation and assessment                                                                                                                                                           |
+| Pedagogy            | Pedagogy, taken as an academic discipline, is the study of how knowledge and skills are imparted in an educational context, and it considers the interactions that take place during learning. |
+| SEN                 | Special Educational Needs or SEND, Special Educational Needs and Disabilities                                                                                                                  |
+| Unit                | A Unit of a CCP refers to the lessons that are delivered over the course of one half term. Normally 6 or 7 weeks                                                                               |
+
+
+## Licence
+
+[The MIT Licence](LICENCE)
