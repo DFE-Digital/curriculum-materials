@@ -34,6 +34,18 @@ Rails.application.routes.draw do
     resource :logged_out, only: %i(show), controller: 'logged_out'
   end
 
+  namespace :suppliers do
+    resources :complete_curriculum_programmes, path: 'ccps' do
+      resources :units do
+        resources :lessons do
+          resources :lesson_parts do
+            resources :activities
+          end
+        end
+      end
+    end
+  end
+
   root to: 'teachers/homes#show'
 
   # API

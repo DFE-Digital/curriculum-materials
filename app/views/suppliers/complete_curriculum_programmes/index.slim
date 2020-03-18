@@ -1,0 +1,5 @@
+h1.govuk-heading-l Complete curriculum programmes
+
+ul.govuk-list
+  - @complete_curriculum_programmes.each do |ccp|
+    li = link_to(ccp.title, suppliers_complete_curriculum_programme_path(ccp.id))

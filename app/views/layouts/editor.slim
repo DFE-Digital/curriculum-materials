@@ -18,6 +18,18 @@ html.govuk-template lang="en"
       = content_for :back_button
 
       main#main-content.govuk-main-wrapper[role="main"]
-        = yield
+
+        .govuk-grid-row
+
+          .govuk-grid-column-one-quarter
+            ul.govuk-list.govuk-list--bullet
+              li one
+              ul.govuk-list.govuk-list--bullet
+                li two
+                ul.govuk-list.govuk-list--bullet
+                  li three
+
+          .govuk-grid-column-three-quarters
+            = yield
 
     = render 'layouts/shared/footer'
