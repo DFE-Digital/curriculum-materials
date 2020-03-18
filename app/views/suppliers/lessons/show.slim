@@ -1,0 +1,26 @@
+h1 = @lesson.name
+
+.buttons
+  = link_to 'Edit', '#', class: 'govuk-button govuk-button--secondary'
+  = link_to 'Preview', '#', class: 'govuk-button govuk-button--secondary govuk-!-margin-left-1'
+  = link_to 'Delete', '#', class: 'govuk-button govuk-button--warning govuk-!-margin-left-1'
+
+h2.govuk-heading-m Core knowledge
+
+p
+  = markdown(@lesson.core_knowledge)
+
+h2.govuk-heading-m The following misconceptions are common:
+
+ul.govuk-list.govuk-list--bullet
+  - @lesson.misconceptions.each do |misconception|
+    li = misconception
+
+h2.govuk-heading-m Key vocabulary
+
+p By the end of the lesson pupils should know the words:
+
+- if @lesson.vocabulary.any?
+  ul
+    - @lesson.vocabulary.each do |word|
+      li = word
