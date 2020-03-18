@@ -28,7 +28,7 @@ private
   end
 
   def slide_decks_tempfiles
-    slide_decks
+    @slide_decks_tempfiles ||= slide_decks
       .select { |slide_deck| slide_deck.file.attached? }
       .map do |slide_deck|
         file = Tempfile.open('ResourcePackager-') do |tempfile|
@@ -57,7 +57,7 @@ private
   end
 
   def has_slide_decks?
-    slide_decks_tempfiles.any?
+    slide_decks.any? { |slide_deck| slide_deck.file.attached? }
   end
 
   def pupil_resource_blobs
