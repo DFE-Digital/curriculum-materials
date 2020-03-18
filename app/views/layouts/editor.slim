@@ -22,12 +22,7 @@ html.govuk-template lang="en"
         .govuk-grid-row
 
           .govuk-grid-column-one-quarter
-            ul.govuk-list.govuk-list--bullet
-              li one
-              ul.govuk-list.govuk-list--bullet
-                li two
-                ul.govuk-list.govuk-list--bullet
-                  li three
+            = render(Suppliers::TreeComponent, ccp: @ccp)
 
           .govuk-grid-column-three-quarters
             = yield

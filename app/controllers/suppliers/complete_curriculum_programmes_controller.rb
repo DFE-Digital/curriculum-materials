@@ -1,13 +1,13 @@
 module Suppliers
   class CompleteCurriculumProgrammesController < ApplicationController
-    layout 'editor'
+    layout 'editor', except: :index
 
     def index
       @complete_curriculum_programmes = CompleteCurriculumProgramme.all
     end
 
     def show
-      @complete_curriculum_programme = CompleteCurriculumProgramme.find(params[:id])
+      @ccp = CompleteCurriculumProgramme.find(params[:id])
     end
   end
 end
