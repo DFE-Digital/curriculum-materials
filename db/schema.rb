@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
     t.text "rationale", null: false
+    t.text "guidance", null: false
     t.integer "subject_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

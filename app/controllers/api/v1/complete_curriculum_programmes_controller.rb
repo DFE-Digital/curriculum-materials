@@ -42,7 +42,7 @@ class Api::V1::CompleteCurriculumProgrammesController < Api::BaseController
 private
 
   def ccp_params
-    params.require(:ccp).permit(:name, :rationale, :key_stage)
+    params.require(:ccp).permit(:name, :rationale, :guidance, :key_stage)
   end
 
   def subject_param

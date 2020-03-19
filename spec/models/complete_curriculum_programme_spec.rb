@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe CompleteCurriculumProgramme, type: :model do
   describe 'columns' do
     it { is_expected.to have_db_column(:name).of_type(:string) }
+    it { is_expected.to have_db_column(:rationale).of_type(:text) }
+    it { is_expected.to have_db_column(:guidance).of_type(:text) }
   end
 
   describe 'validation' do
@@ -12,6 +14,7 @@ RSpec.describe CompleteCurriculumProgramme, type: :model do
     end
 
     it { is_expected.to validate_presence_of(:rationale) }
+    it { is_expected.to validate_presence_of(:guidance) }
     it { is_expected.to validate_inclusion_of(:key_stage).in_array(SchoolYear.instance.key_stages) }
   end
 
