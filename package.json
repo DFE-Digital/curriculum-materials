@@ -5,6 +5,13 @@
     "node": "^12.14.1"
   },
   "scripts": {
+    "start": "export API_TOKEN=fb5542df-50e7-4c05-a74e-4f2123f46554 && bundle exec rails server --port 3002",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test": "npm run test:e2e",
+    "test:e2e": "export CYPRESS_BASE_URL=http://localhost:3002 && start-server-and-test start $CYPRESS_BASE_URL cy:run",
     "heroku-prebuild": "echo \"//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}\" >> .npmrc"
   },
   "dependencies": {

@@ -53,7 +53,7 @@ services:
       - database
 
   database:
-    image: postgres
+    image: postgres:11
     environment:
       - POSTGRES_DB=curriculum_materials
       - POSTGRES_USER=postgres

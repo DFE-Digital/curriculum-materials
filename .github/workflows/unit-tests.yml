@@ -1,0 +1,62 @@
+name: Unit Tests (Ruby)
+on:
+  - push
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11.5
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Setup Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      - name: Setup Node 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Install PostgreSQL 11 client
+        run: sudo apt-get -yqq install libpq-dev
+      - name: Build App
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+          npm config set @dfe-digital:registry=https://npm.pkg.github.com
+          npm install
+          bin/rails db:test:prepare
+      - name: Run tests
+        run: |
+          bundle exec rails webpacker:compile
+          bundle exec rspec
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+      - name: Report coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
+          chmod +x cc-test-reporter
+          ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.json
+          ./cc-test-reporter upload-coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
