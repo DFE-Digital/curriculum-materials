@@ -1,7 +1,7 @@
 class SlideDeckResource < Resource
   ALLOWED_CONTENT_TYPES = %w(application/vnd.oasis.opendocument.presentation).freeze
 
-  ALLOWED_PREVIEW_CONTENT_TYPES = %w(image/png).freeze
+  ALLOWED_PREVIEW_CONTENT_TYPES = %w(application/pdf).freeze
 
   MAX_UPLOAD_SIZE = 50.megabytes
 

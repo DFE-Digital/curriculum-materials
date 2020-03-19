@@ -17,7 +17,7 @@ describe 'Slide decks' do
       end
 
       let :slide_deck_preview_path do
-        File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
+        File.join(Rails.application.root, 'spec', 'fixtures', 'slide_1_keyword_match_up.pdf')
       end
 
       let 'slide_deck_resource[file]' do
@@ -25,7 +25,7 @@ describe 'Slide decks' do
       end
 
       let 'slide_deck_resource[preview]' do
-        fixture_file_upload slide_deck_preview_path, 'image/png'
+        fixture_file_upload slide_deck_preview_path, 'application/pdf'
       end
 
       tags 'SlideDeckResource'

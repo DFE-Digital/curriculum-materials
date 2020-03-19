@@ -16,7 +16,7 @@ shared_examples 'a Resource' do
 
   context 'attachments' do
     let :attachment_path do
-      File.join(Rails.application.root, 'spec', 'fixtures', '1px.png')
+      File.join(Rails.application.root, 'spec', 'fixtures', 'slide_1_keyword_match_up.pdf')
     end
 
     let :slide_deck_path do
@@ -27,8 +27,8 @@ shared_examples 'a Resource' do
       before do
         resource.preview.attach \
           io: File.open(attachment_path),
-          filename: 'teacher-test-image.png',
-          content_type: 'image/png'
+          filename: 'slide_1_keyword_match_up.pdf',
+          content_type: 'application/pdf'
       end
 
       subject { resource.preview }
@@ -36,8 +36,8 @@ shared_examples 'a Resource' do
       it { is_expected.to be_persisted }
 
       it "is attached correctly" do
-        expect(subject.filename).to eq 'teacher-test-image.png'
-        expect(subject.content_type).to eq 'image/png'
+        expect(subject.filename).to eq 'slide_1_keyword_match_up.pdf'
+        expect(subject.content_type).to eq 'application/pdf'
         expect(subject.download).to eq File.binread(attachment_path)
       end
     end
