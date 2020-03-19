@@ -1,5 +1,5 @@
 class UnitSerializer < Blueprinter::Base
   identifier :id
 
-  fields :name, :overview, :benefits, :position, :year
+  fields :name, :summary, :rationale, :guidance, :position, :year
 end

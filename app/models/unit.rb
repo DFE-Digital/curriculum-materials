@@ -3,13 +3,14 @@ class Unit < ApplicationRecord
 
   validates :name,
             presence: true,
-            length: { maximum: 256 }
+            length: { maximum: 128 }
 
-  validates :overview,
+  validates :summary,
             presence: true,
             length: { maximum: 1024 }
 
-  validates :benefits, presence: true
+  validates :rationale, presence: true
+  validates :guidance, presence: true
   validates :year, inclusion: SchoolYear.instance.years
 
   belongs_to :complete_curriculum_programme

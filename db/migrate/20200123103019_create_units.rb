@@ -3,9 +3,10 @@ class CreateUnits < ActiveRecord::Migration[6.0]
     create_table :units do |t|
       t.integer :complete_curriculum_programme_id
 
-      t.string :name, null: false, limit: 256
-      t.string :overview, null: false, limit: 1024
-      t.text :benefits, null: false
+      t.string :name, null: false, limit: 128
+      t.string :summary, null: false, limit: 1024
+      t.text :rationale, null: false
+      t.text :guidance, null: false
       t.integer :position
 
       t.timestamps

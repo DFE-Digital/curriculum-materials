@@ -183,9 +183,10 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
 
   create_table "units", force: :cascade do |t|
     t.integer "complete_curriculum_programme_id"
-    t.string "name", limit: 256, null: false
-    t.string "overview", limit: 1024, null: false
-    t.text "benefits", null: false
+    t.string "name", limit: 128, null: false
+    t.string "summary", limit: 1024, null: false
+    t.text "rationale", null: false
+    t.text "guidance", null: false
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

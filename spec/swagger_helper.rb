@@ -31,18 +31,19 @@ RSpec.configure do |config|
               key_stage: { type: :integer },
               subject: { type: :string }
             },
-            required: %i(name rationale)
+            required: %i(name rationale guidance)
           },
           unit: {
             type: :object,
             properties: {
               name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
+              summary: { type: :string },
+              rationale: { type: :string },
+              guidance: { type: :string },
               position: { type: :integer },
               year: { type: :integer }
             },
-            required: %i(name benefits overview position)
+            required: %i(name summary rationale guidance year)
           },
           lesson: {
             type: :object,
