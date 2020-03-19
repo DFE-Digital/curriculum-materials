@@ -1,11 +1,15 @@
 - content_for :polling do
-  meta http-equiv="refresh" content="5"
 
 .govuk-grid-row
   .govuk-grid-column-two-thirds
     h1 Your download is being built
 
+    .explaination-and-spinner
+      p You will be redirected once your download is ready
+      = image_tag asset_pack_path('media/images/loading-spinner.gif')
+
     = image_tag \
         asset_pack_path('media/images/download-building.png'),
         alt: 'Your download is being built',
-        width: '275px'
+        width: '200px',
+        class: 'download-image'
