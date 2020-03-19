@@ -3,17 +3,18 @@ class CreateLessons < ActiveRecord::Migration[6.0]
     create_table :lessons do |t|
       t.integer :unit_id, null: false
 
-      t.string :name, limit: 256
-      t.text :summary
+      t.string :name, limit: 128, null: false
+      t.string :learning_objective, limit: 256, null: false
 
-      # this is called sequence in the doc, we think position makes more sense
-      t.integer :position
+      t.integer :position, null: false
 
-      t.text :core_knowledge
+      t.text :core_knowledge_for_teachers
+      t.text :core_knowledge_for_pupils
+
       t.text :previous_knowledge
 
-      t.string :vocabulary, array: true
-      t.string :misconceptions, array: true
+      t.text :vocabulary
+      t.text :misconceptions
 
       t.timestamps
     end

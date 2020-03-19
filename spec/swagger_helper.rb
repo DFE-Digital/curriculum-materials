@@ -50,17 +50,14 @@ RSpec.configure do |config|
             properties: {
               id: { type: :integer },
               name: { type: :string },
-              summary: { type: :string },
-              core_knowledge: { type: :string },
-              previous_knowledge: { type: :object },
-              vocabulary: {
-                type: :array, items: { type: :string }
-              },
-              misconceptions: {
-                type: :array, items: { type: :string }
-              },
+              learning_objective: { type: :string },
+              core_knowledge_for_pupils: { type: :string },
+              core_knowledge_for_teachers: { type: :string },
+              previous_knowledge: { type: :string },
+              vocabulary: { type: :string },
+              misconceptions: { type: :string }
             },
-            required: %i(name summary core_knowledge previous_knowledge vocabulary misconceptions)
+            required: %i(name learning_objective core_knowledge_for_teachers core_knowledge_for_pupils previous_knowledge vocabulary misconceptions)
           },
           lesson_part: {
             type: :object,

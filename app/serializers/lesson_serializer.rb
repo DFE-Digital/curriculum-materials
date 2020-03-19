@@ -1,6 +1,7 @@
 class LessonSerializer < Blueprinter::Base
   identifier :id
 
-  fields :name, :summary, :position, :core_knowledge,
-         :previous_knowledge, :vocabulary, :misconceptions
+  fields :name, :position, :core_knowledge_for_pupils,
+         :core_knowledge_for_teachers, :previous_knowledge,
+         :vocabulary, :misconceptions, :learning_objective
 end

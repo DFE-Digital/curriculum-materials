@@ -43,12 +43,13 @@ private
   def lesson_params
     params.require(:lesson).permit(
       :name,
-      :summary,
+      :learning_objective,
       :position,
-      :core_knowledge,
-      previous_knowledge: {},
-      vocabulary: [],
-      misconceptions: []
+      :core_knowledge_for_pupils,
+      :core_knowledge_for_teachers,
+      :previous_knowledge,
+      :vocabulary,
+      :misconceptions
     )
   end
 
