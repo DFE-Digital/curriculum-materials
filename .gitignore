@@ -27,6 +27,10 @@
 .env
 .env.*
 *.log
+*DS_Store
 
 # Ignore simplecov reports
 /coverage
+mochawesome-report
+cypress/videos
+cypress/screenshots
