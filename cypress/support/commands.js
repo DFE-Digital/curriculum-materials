@@ -44,3 +44,12 @@ Cypress.Commands.add("shouldHaveHeaderAndFooter", () => {
     )
     .should("contain.text", "© Crown copyright");
 });
+
+Cypress.Commands.add("login", () => {
+  cy.visit(`/teachers/session/${Cypress.env("TEACHER_TOKEN")}`, {
+    auth: {
+      username: "curriculum-materials",
+      password: "curriculum-materials"
+    }
+  });
+})
