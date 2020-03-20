@@ -20,7 +20,7 @@ entire national curriculum.
 ## Running the application
 
 The application is a standard [Ruby on Rails](https://www.rubyonrails.org/) application requiring
-no special stesp to set up.
+no special steps to set up.
 
 ### Locally
 
