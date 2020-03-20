@@ -8,7 +8,7 @@ describe SlideDeckResource, type: :model do
     %w(application/vnd.oasis.opendocument.presentation)
   end
   let(:allowed_preview_content_types) do
-    %w(image/png)
+    %w(application/pdf)
   end
 
   it_behaves_like 'a Resource'
