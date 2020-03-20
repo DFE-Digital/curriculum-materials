@@ -10,17 +10,12 @@ entire national curriculum.
 
 ## Environments
 
-| Environment | URL                                                  |
-| ----------- | --------                                             |
-| Staging     | https://dfe-curriculum-materials.herokuapp.com/      |
-| Production  | https://dfe-curriculum-materials-prod.herokuapp.com/ |
-
-## Getting started
+See [Heroku](docs/Heroku.md) guide.
 
 ## Running the application
 
 The application is a standard [Ruby on Rails](https://www.rubyonrails.org/) application requiring
-no special stesp to set up.
+no special steps to set up.
 
 ### Locally
 
@@ -46,10 +41,20 @@ $ bundle install
 
 _If your database user needs a password, set that first by editing `config/database.yml`_
 
-Now run the app:
+Now set up the database:
 
 ```bash
 $ bundle exec rails db:setup
+```
+
+If successful, you should see information about the CCPs, units, lessons,
+activities and resources that have been created. There is more information
+in the [seeding guide](docs/Seeds.md).
+
+You should now be read to run the application:
+
+```bash
+$ bundle exec rails server
 ```
 
 ### On Docker
@@ -66,6 +71,8 @@ To stop the app run:
 ```bash
 $ docker-compose down
 ```
+
+There is a more in-depth guide on running the application in Docker [here](docs/Docker.md).
 
 ## Running the tests
 
