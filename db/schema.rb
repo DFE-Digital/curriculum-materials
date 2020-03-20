@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
   create_table "activities", force: :cascade do |t|
     t.integer "lesson_part_id", null: false
     t.text "overview"
+    t.text "guidance"
     t.integer "duration", null: false
     t.string "extra_requirements", limit: 32, array: true
     t.string "name", limit: 128, null: false
