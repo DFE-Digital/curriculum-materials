@@ -37,5 +37,5 @@
     icon: "feedback"
   }
 ].each do |teaching_method_attributes|
-  FactoryBot.create(:teaching_method, :randomised, **teaching_method_attributes)
+  TeachingMethod.find_or_create_by!(**FactoryBot.attributes_for(:teaching_method, :randomised).merge(teaching_method_attributes))
 end

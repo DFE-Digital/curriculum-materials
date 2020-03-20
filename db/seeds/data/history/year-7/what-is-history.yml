@@ -4,7 +4,7 @@ unit:
   name: What is history?
 
   # Note, the contents are hard-coded as a list here while we await final content
-  overview: |-
+  summary: |-
     Introducing key historical skills to underpin all units at key stage 3, covering:
 
     * cronology
@@ -12,5 +12,5 @@ unit:
     * sources of evidence
     * interpretations of history
 
-  benefits: |-
-    TODO
+  guidance: To be confirmed
+  rationale: To be confirmed
