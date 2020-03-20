@@ -4,7 +4,9 @@ unit:
   name: Julius Caesar
 
   # Note, the contents are hard-coded as a list here while we await final content
-  overview: |-
+  rationale: To be confirmed
+  guidance: To be confirmed
+  summary: |-
     An interpretations focused unit that helps to meet the history key stage 3
     National Curriculum requirement to study an aspect or theme in British
     history that consolidates and extends pupils’ chronological knowledge from
@@ -14,6 +16,3 @@ unit:
     * who was Julius Caesar?
     * what links Julius Caesar to Britain?
     * interpretations of Julius Caesar
-
-  benefits: |-
-    TODO

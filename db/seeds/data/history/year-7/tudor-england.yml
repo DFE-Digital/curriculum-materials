@@ -4,7 +4,7 @@ unit:
   name: Tudor England
 
   # Note, the contents are hard-coded as a list here while we await final content
-  overview: |-
+  summary: |-
     The development of Church, state and society in Britain 1509-1745, covering:
 
     * the English Reformation and Counter Reformation (Henry VIII to Mary I)
@@ -14,5 +14,5 @@ unit:
       Tudor period
     * interpretations of Elizabeth I
 
-  benefits: |-
-    TODO
+  guidance: To be confirmed
+  rationale: To be confirmed

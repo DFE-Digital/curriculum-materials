@@ -10,13 +10,13 @@ class Activity < ApplicationRecord
   validates :lesson_part_id, presence: true
   validates :name, presence: true, length: { maximum: 128 }
   validates :overview, presence: true
+  validates :guidance, presence: true
   validates :duration, presence: true, numericality: { less_than_or_equal_to: 60 }
 
   # the default attr is used to maintain compatibility with the previous approach
   # and allows an activity to be specified as being the default at creation time:w
   attr_accessor :default
   after_create :make_default!, if: :default
-
 
   scope :omit, ->(activity) { where.not(id: activity.id) }
   scope :ordered_by_id, -> { order(id: 'asc') }

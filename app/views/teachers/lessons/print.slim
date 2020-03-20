@@ -2,16 +2,17 @@
   .govuk-grid-column-full
     h1.govuk-heading-l
       = @lesson.name
-    
+
     h2
       =t(:heading, scope: :knowledge_overview)
 
-    = markdown(@lesson.summary)
-    = render 'core_knowledge', lesson: @lesson
+    = markdown(@lesson.learning_objective)
+    = render 'core_knowledge_for_pupils', lesson: @lesson
+    = render 'core_knowledge_for_teachers', lesson: @lesson
     = render 'vocabulary', lesson: @lesson
     = render 'misconceptions', lesson: @lesson
     = render 'previous_knowledge', lesson: @lesson
-    
+
     h2
       =t(:heading, scope: :lesson_contents)
 

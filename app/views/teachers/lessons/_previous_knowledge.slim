@@ -2,10 +2,4 @@
   section.building-on-previous-knowledge
     h2.govuk-heading-m Building on previous knowledge
 
-    dl.govuk-summary-list.govuk-summary-list--no-border
-      .govuk-summary-list__row
-        - lesson.previous_knowledge.each do |category, knowledge|
-
-          .govuk-summary-list__row
-            dt.govuk-summary-list__key = category
-            dd.govuk-summary-list__value = markdown(knowledge)
+    = markdown(lesson.previous_knowledge)

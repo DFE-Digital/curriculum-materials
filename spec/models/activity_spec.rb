@@ -4,6 +4,7 @@ RSpec.describe Activity, type: :model do
   describe 'columns' do
     it { is_expected.to have_db_column(:lesson_part_id).of_type(:integer).with_options(null: false) }
     it { is_expected.to have_db_column(:overview).of_type(:text) }
+    it { is_expected.to have_db_column(:guidance).of_type(:text) }
     it { is_expected.to have_db_column(:duration).of_type(:integer) }
     it { is_expected.to have_db_column(:extra_requirements).of_type(:string).with_options(array: true) }
   end
@@ -27,6 +28,7 @@ RSpec.describe Activity, type: :model do
     end
 
     it { is_expected.to validate_presence_of(:overview) }
+    it { is_expected.to validate_presence_of(:guidance) }
 
     describe '#duration' do
       it { is_expected.to validate_presence_of(:duration) }

@@ -47,7 +47,7 @@ class Api::V1::ActivitiesController < Api::BaseController
 private
 
   def activity_params
-    params.require(:activity).permit(:name, :overview, :duration, :default, extra_requirements: [])
+    params.require(:activity).permit(:name, :overview, :guidance, :duration, :default, extra_requirements: [])
   end
 
   def teaching_methods_from_params

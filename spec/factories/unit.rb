@@ -2,8 +2,9 @@ FactoryBot.define do
   factory(:unit) do
     sequence(:name) { |n| "Unit #{n}" }
     association(:complete_curriculum_programme, factory: :ccp)
-    overview { "Overview" }
-    benefits { "Benefits" }
+    summary { "Summary" }
+    rationale { "Rationale" }
+    guidance { "Guidance" }
     sequence(:position) { |n| n }
     year { [1, 3, 5, 7, 9, 11].sample }
 

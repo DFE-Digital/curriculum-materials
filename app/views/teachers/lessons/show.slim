@@ -27,9 +27,10 @@
           =t(:heading, scope: :knowledge_overview)
 
         h3 Lesson objective
-        = markdown(@lesson.summary)
+        = markdown(@lesson.learning_objective)
 
-        = render 'core_knowledge', lesson: @lesson
+        = render 'core_knowledge_for_teachers', lesson: @lesson
+        = render 'core_knowledge_for_pupils', lesson: @lesson
         = render 'vocabulary', lesson: @lesson
         = render 'misconceptions', lesson: @lesson
         = render 'previous_knowledge', lesson: @lesson

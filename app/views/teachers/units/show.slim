@@ -8,8 +8,15 @@
 .govuk-grid-row
   .govuk-grid-column-two-thirds
 
-    section.benefits
-      p = markdown(@unit.benefits)
+    section.rationale
+      h2.govuk-heading-m Rationale
+
+      p = markdown(@unit.rationale)
+
+    section.guidance
+      h2.govuk-heading-m Guidance
+
+      p = markdown(@unit.guidance)
 
     = render 'table', lessons: @unit.lessons.ordered_by_position
 

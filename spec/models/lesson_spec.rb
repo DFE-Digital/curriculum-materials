@@ -3,23 +3,27 @@ require 'rails_helper'
 RSpec.describe Lesson, type: :model do
   describe 'columns' do
     it { is_expected.to have_db_column(:unit_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:summary).of_type(:text) }
-    it { is_expected.to have_db_column(:position).of_type(:integer) }
+    it { is_expected.to have_db_column(:name).of_type(:string).with_options(limit: 128, null: false) }
+    it { is_expected.to have_db_column(:learning_objective).of_type(:string).with_options(limit: 256, null: false) }
+    it { is_expected.to have_db_column(:position).of_type(:integer).with_options(null: false) }
 
-    it { is_expected.to have_db_column(:core_knowledge).of_type(:text) }
-    it { is_expected.to have_db_column(:previous_knowledge).of_type(:hstore) }
-    it { is_expected.to have_db_column(:vocabulary).of_type(:string).with_options(array: true) }
-    it { is_expected.to have_db_column(:misconceptions).of_type(:string).with_options(array: true) }
+    it { is_expected.to have_db_column(:core_knowledge_for_pupils).of_type(:text) }
+    it { is_expected.to have_db_column(:core_knowledge_for_teachers).of_type(:text) }
+    it { is_expected.to have_db_column(:previous_knowledge).of_type(:text) }
+    it { is_expected.to have_db_column(:vocabulary).of_type(:text) }
+    it { is_expected.to have_db_column(:misconceptions).of_type(:text) }
   end
 
   describe 'validation' do
     describe 'name' do
       it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_length_of(:name).is_at_most(256) }
+      it { is_expected.to validate_length_of(:name).is_at_most(128) }
     end
 
-    it { is_expected.to validate_presence_of(:summary) }
+    describe 'learning_objective' do
+      it { is_expected.to validate_presence_of(:learning_objective) }
+      it { is_expected.to validate_length_of(:learning_objective).is_at_most(256) }
+    end
   end
 
   describe 'relationships' do

@@ -3,11 +3,13 @@ FactoryBot.define do
     sequence(:name) { |n| "CCP #{n}" }
     association(:subject, factory: :subject)
     rationale { "Rationale" }
+    guidance { "Guidance" }
     key_stage { [1, 2, 3, 4].sample }
 
     trait(:randomised) do
       name { Faker::University.name }
       rationale { Faker::Lorem.paragraphs.join("\n\n") }
+      guidance { Faker::Lorem.paragraphs.join("\n\n") }
     end
 
     trait(:with_units) do
