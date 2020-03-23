@@ -11,7 +11,11 @@
     grid-column: span 3;
     display: grid;
     grid-gap: 3rem;
-    grid-template-columns: subgrid;
+
+    @supports (display: subgrid) {
+      grid-template-columns: subgrid;
+    }
+    grid-template-columns: 1fr 7fr 2fr;
 
     .metadata {
       // force the height so
