@@ -24,6 +24,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add("loadFixtures", () => {
+  cy.fixture("units").as("units");
+  cy.fixture("lessons").as("lessons");
+});
+
 Cypress.Commands.add("waitUntilPageLoad", time => {
   cy.wait(time * 1000);
 });
@@ -52,4 +57,4 @@ Cypress.Commands.add("login", () => {
       password: "curriculum-materials"
     }
   });
-})
+});
