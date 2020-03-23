@@ -34,3 +34,6 @@
 mochawesome-report
 cypress/videos
 cypress/screenshots
+cypress/fixtures/complete_curriculum_programmes.json
+cypress/fixtures/lessons.json
+cypress/fixtures/units.json
