@@ -1,12 +1,6 @@
 describe("Homepage", () => {
   beforeEach(() => {
-    cy.visit(`/teachers/session/${Cypress.env("TEACHER_TOKEN")}`, {
-      auth: {
-        username: "curriculum-materials",
-        password: "curriculum-materials"
-      }
-    });
-
+    cy.login();
     cy.shouldHaveHeaderAndFooter()
   });
 
