@@ -59,18 +59,7 @@ $ bundle exec rails server
 
 ### On Docker
 
-From the application root, build and start the app:
-
-```bash
-$ docker build . -t curriculum_materials:latest
-$ docker-compose up
-```
-
-To stop the app run:
-
-```bash
-$ docker-compose down
-```
+See the docker guide section of the docs https://github.com/DFE-Digital/curriculum-materials/blob/development/docs/Docker.md
 
 There is a more in-depth guide on running the application in Docker [here](docs/Docker.md).
 
