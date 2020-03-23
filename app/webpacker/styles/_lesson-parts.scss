@@ -3,6 +3,7 @@
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 7fr 2fr;
+  margin: 1rem 0 2rem;
 
   .lesson-part {
     background-color: govuk-colour('white');
