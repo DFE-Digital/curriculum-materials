@@ -24,9 +24,54 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("loadFixtures", () => {
-  cy.fixture("units").as("units");
-  cy.fixture("lessons").as("lessons");
+Cypress.Commands.add("loadCCPFixtures", () => {
+  cy.request({
+    url: "/api/v1/ccps",
+    auth: { bearer: Cypress.env("API_TOKEN") }
+  })
+    .its("body")
+    .as("ccps");
+});
+
+Cypress.Commands.add("loadUnitFixtures", () => {
+  cy.loadCCPFixtures();
+  let units = [];
+  cy.get("@ccps").each(ccp => {
+    cy.request({
+      url: `/api/v1/ccps/${ccp.id}/units`,
+      auth: { bearer: Cypress.env("API_TOKEN") }
+    })
+      .its("body")
+      .then(body => {
+        body = body.map(unit => {
+          unit.ccp_id = ccp.id;
+          return unit;
+        });
+        body.forEach(i => units.push(i));
+      });
+  });
+  cy.wrap(units).as("units");
+});
+
+Cypress.Commands.add("loadLessonFixtures", () => {
+  cy.loadUnitFixtures();
+  let array = [];
+  cy.get("@units").each(unit => {
+    cy.request({
+      url: `/api/v1/ccps/${unit.ccp_id}/units/${unit.id}/lessons`,
+      auth: { bearer: Cypress.env("API_TOKEN") }
+    })
+      .its("body")
+      .then(lessons => {
+        lessons = lessons.map(lesson => {
+          lesson.ccp_id = unit.ccp_id;
+          lesson.unit_id = unit.id;
+          return lesson;
+        });
+        lessons.forEach(i => array.push(i));
+      });
+  });
+  cy.wrap(array).as("lessons");
 });
 
 Cypress.Commands.add("waitUntilPageLoad", time => {
