@@ -1,7 +1,6 @@
 ![Unit Tests (Ruby)](https://github.com/DFE-Digital/curriculum-materials/workflows/Unit%20Tests%20(Ruby)/badge.svg)
 ![Linters](https://github.com/DFE-Digital/curriculum-materials/workflows/Linters/badge.svg)
 ![Cypress Tests (Chrome)](https://github.com/DFE-Digital/curriculum-materials/workflows/Cypress%20Tests%20(Chrome)/badge.svg)
-[![Build Status](https://travis-ci.com/DFE-Digital/curriculum-materials.svg?branch=master)](https://travis-ci.com/DFE-Digital/curriculum-materials)
 [![Maintainability](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/maintainability)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/test_coverage)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/test_coverage)
 
