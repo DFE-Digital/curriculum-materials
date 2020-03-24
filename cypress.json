@@ -2,8 +2,8 @@
   "baseUrl": "http://localhost:3000",
   "reporter": "mochawesome",
   "env": {
-    "API_TOKEN": "fb5542df-50e7-4c05-a74e-4f2123f46554",
-    "TEACHER_TOKEN": "ff37bd17-42be-47ab-8141-2f5e3b7f2b7f"
+    "API_TOKEN": "changeme1",
+    "TEACHER_TOKEN": "11111111-1111-1111-1111-111111111111"
   },
   "defaultCommandTimeout": 2000,
   "pageLoadTimeout": 2000
