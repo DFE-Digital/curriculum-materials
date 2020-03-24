@@ -1,0 +1,107 @@
+.lesson-parts {
+
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 7fr 2fr;
+  margin: 1rem 0 2rem;
+
+  .lesson-part {
+    background-color: govuk-colour('white');
+    padding: 1rem;
+
+    grid-column: span 3;
+    display: grid;
+    grid-gap: 3rem;
+
+    grid-template-columns: subgrid;
+
+    @supports not (display: subgrid) {
+      grid-template-columns: 1fr 7fr 2fr;
+    }
+
+    .metadata {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .counter {
+        align-items: baseline;
+        height: 5rem;
+
+        @include govuk-font($size: 48, $weight: bold);
+        color: govuk-shade(govuk-colour('dark-grey'), 10);
+      }
+
+      .teaching-methods {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+      }
+    }
+
+    .alternatives {
+      .alternatives-list {
+        list-style: none;
+
+        li {
+          padding-bottom: 1rem;
+        }
+      }
+    }
+
+    .info {
+      .extras {
+        .previews {
+          margin-top: 1rem;
+        }
+
+        .requirement:not(:first-child) {
+          margin-left: .5rem;
+        }
+      }
+    }
+  }
+  // when narrower than tablet
+  @include govuk-media-query($until: tablet) {
+    .lesson-part {
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: auto;
+      grid-gap: 1rem;
+
+      .metadata {
+        height: auto;
+        flex-direction: row;
+
+        .counter {
+          font-size: 3rem;
+        }
+
+        .teaching-methods {
+          justify-content: flex-end;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+.teaching-methods {
+  .teaching-method {
+    text-align: center;
+    margin: 0.5rem;
+
+    .teaching-method-icon {
+
+      img {
+        height: 50px;
+        width: 50px;
+        display: inline;
+      }
+    }
+
+    .teaching-method-name {
+      @include govuk-font($size: 14);
+    }
+  }
+}

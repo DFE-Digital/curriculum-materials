@@ -16,7 +16,7 @@ RSpec.describe "teachers/lessons/_lesson_contents" do
     render
     expect(rendered).to have_css('.lesson-parts')
     presenter.contents.each.with_index(1) do |slot, i|
-      expect(rendered).to have_css('.big-number', text: i)
+      expect(rendered).to have_css('.counter', text: i)
       expect(rendered).to have_content(slot.name)
       expect(rendered).to have_content(slot.overview)
     end

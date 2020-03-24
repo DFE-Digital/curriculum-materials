@@ -17,52 +17,50 @@ section
         changes, you can search for alternative resources.
 
 
-    div.lesson-parts
+    .lesson-parts
       - @presenter.contents.each do |slot|
+        .lesson-part
+          .metadata
+            .counter
+              = slot.counter
+            .teaching-methods
+              - slot.teaching_methods.each do |tm|
+                .teaching-method
+                  .teaching-method-icon
+                    = activity_icon(tm)
+                  .teaching-method-name
+                    = tm.name
 
-        div.lesson-part
-          div.counter.big-number
-            = slot.counter
+          section.info
+            .description
+              h3 = slot.name
 
-          div.teaching-methods
-            - slot.teaching_methods.each do |tm|
+              = markdown(slot.overview)
 
-              div.teaching-method
-                = activity_icon(tm)
-                p.activity-name
-                  = tm.name
+            .extras
+              p.duration.govuk-hint
+                | Approximately #{slot.duration} minutes
 
-          article.lesson-name-and-description
-            header
-              h3.govuk-heading-m = slot.name
+              .requirements
+                - slot.extra_requirements.each do |req|
+                  .requirement.govuk-tag.govuk-tag__grey = req
 
-            = markdown(slot.overview)
 
-            section.extra-requirements
-              - slot.extra_requirements.each do |er|
-                .govuk-tag.govuk-tag__grey = er
+              - unless local_assigns[:mode] && mode == :print
+                .previews
+                  = render "preview", resources: slot.resources
 
-            p.duration
-              | Approximately #{slot.duration} minutes
+          .alternatives
+            - unless local_assigns[:mode] && mode == :print
 
-            .files
-              = render "preview", resources: slot.resources
+              - if slot.alternatives.any?
+                h4 Alternatives
 
-          - unless local_assigns[:mode] && mode == :print
-
-            - if slot.alternatives.any?
-              div.alternatives
-                div.alternatives-list
-                  h4 Alternative activities:
-
+                .alternatives-list
                   ul.govuk-list
                     - slot.alternatives.each do |alternative|
                       li = alternative.name
 
-                div.change-link
                   = link_to 'Change activity', activity_choice_link(@current_teacher, slot.lesson_part)
-
-            - else
-
-              div.govuk-hint.no-alternatives
-                | No alternatives
+              - else
+                p No alternatives
