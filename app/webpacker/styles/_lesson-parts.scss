@@ -13,14 +13,13 @@
     display: grid;
     grid-gap: 3rem;
 
-    @supports (display: subgrid) {
-      grid-template-columns: subgrid;
+    grid-template-columns: subgrid;
+
+    @supports not (display: subgrid) {
+      grid-template-columns: 1fr 7fr 2fr;
     }
-    grid-template-columns: 1fr 7fr 2fr;
 
     .metadata {
-      // force the height so
-      height: 22rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -29,7 +28,7 @@
       .counter {
         flex: 1 50%;
         display: flex;
-        align-items: center;
+        align-items: baseline;
 
         @include govuk-font($size: 48, $weight: bold);
         color: govuk-shade(govuk-colour('dark-grey'), 10);
