@@ -24,6 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+const unified = require("unified");
+const markdown = require("remark-parse");
+const remark2rehype = require("remark-rehype");
+const parseHtml = require("rehype-parse");
+const rehype2remark = require("rehype-remark");
+const stringify = require("remark-stringify");
+
 Cypress.Commands.add("loadCCPFixtures", () => {
   cy.request({
     url: "/api/v1/ccps",
@@ -105,5 +112,36 @@ Cypress.Commands.add("login", () => {
       username: "curriculum-materials",
       password: "curriculum-materials"
     }
+  });
+});
+
+Cypress.Commands.add("shouldContainMarkdown", (selector, markdownStringRaw) => {
+  function formatMarkdownString(str, cb) {
+    unified()
+      .use(markdown)
+      .use(remark2rehype)
+      .use(rehype2remark)
+      .use(stringify)
+      .process(str, (err, file) => {
+        cb(String(file));
+      });
+  }
+
+  function formatHTMLString(str, cb) {
+    unified()
+      .use(parseHtml)
+      .use(rehype2remark)
+      .use(stringify)
+      .process(str, (err, file) => {
+        cb(String(file));
+      });
+  }
+
+  cy.get(selector).then($el => {
+    formatHTMLString($el.html(), htmlStr => {
+      formatMarkdownString(markdownStringRaw, markdownStr => {
+        expect(htmlStr).to.contain(markdownStr);
+      });
+    });
   });
 });

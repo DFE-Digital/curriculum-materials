@@ -26,7 +26,13 @@
     "cypress": "^4.2.0",
     "mocha": "^7.1.1",
     "mochawesome": "^5.0.0",
+    "rehype-parse": "^6.0.2",
+    "rehype-remark": "^8.0.0",
+    "remark-parse": "^7.0.2",
+    "remark-rehype": "^6.0.0",
+    "remark-stringify": "^7.0.4",
     "start-server-and-test": "^1.10.11",
+    "unified": "^8.4.2",
     "webpack-dev-server": "^3.10.1"
   }
 }
