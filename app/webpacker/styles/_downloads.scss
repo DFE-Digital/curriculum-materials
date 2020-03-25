@@ -1,0 +1,15 @@
+.explaination-and-spinner {
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+  }
+}
+
+.download-image {
+  display: block;
+  margin-bottom: 20px;
+}
