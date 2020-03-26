@@ -24,7 +24,7 @@ private
   end
 
   def slide_decks
-    activities.map(&:slide_deck_resource)
+    activities.map(&:slide_deck_resource).compact
   end
 
   def slide_decks_tempfiles
