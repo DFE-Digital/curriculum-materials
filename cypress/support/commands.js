@@ -43,11 +43,13 @@ Cypress.Commands.add("loadUnitFixtures", () => {
     })
       .its("body")
       .then(body => {
-        body = body.map(unit => {
-          unit.ccp_id = ccp.id;
-          return unit;
-        });
-        body.forEach(i => units.push(i));
+        body
+          .map(unit => {
+            unit.ccp_id = ccp.id;
+            return unit;
+          })
+          .sort((a, b) => (a.position > b.position ? 1 : -1))
+          .forEach(i => units.push(i));
       });
   });
   cy.wrap(units).as("units");
@@ -63,12 +65,14 @@ Cypress.Commands.add("loadLessonFixtures", () => {
     })
       .its("body")
       .then(lessons => {
-        lessons = lessons.map(lesson => {
-          lesson.ccp_id = unit.ccp_id;
-          lesson.unit_id = unit.id;
-          return lesson;
-        });
-        lessons.forEach(i => array.push(i));
+        lessons
+          .map(lesson => {
+            lesson.ccp_id = unit.ccp_id;
+            lesson.unit_id = unit.id;
+            return lesson;
+          })
+          .sort((a, b) => (a.position > b.position ? 1 : -1))
+          .forEach(i => array.push(i));
       });
   });
   cy.wrap(array).as("lessons");
