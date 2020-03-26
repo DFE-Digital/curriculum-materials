@@ -6,7 +6,6 @@ describe("Lesson", () => {
 
   it("Displays lesson contents", () => {
     cy.get("@lessons").each(lesson => {
-      cy.log(lesson);
       cy.visit(`/teachers/lessons/${lesson.id}`);
       cy.shouldHaveHeaderAndFooter();
       cy.get('h1.govuk-heading-l').should('have.text', lesson.name)
