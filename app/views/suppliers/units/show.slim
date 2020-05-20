@@ -6,10 +6,10 @@ h1.govuk-heading-l = @unit.name
   = link_to 'Preview', '#', class: 'govuk-button govuk-button--secondary govuk-!-margin-left-1'
   = link_to 'Delete', '#', class: 'govuk-button govuk-button--warning govuk-!-margin-left-1'
 
-h2.govuk-heading-l Overview
+h2.govuk-heading-l Name
 
-p = markdown(@unit.overview)
+p = markdown(@unit.name)
 
-h2.govuk-heading-l Benefits
+h2.govuk-heading-l Summary
 
-p = markdown(@unit.benefits)
+p = markdown(@unit.summary)
