@@ -39,6 +39,12 @@ describe Teachers::DownloadsController, type: :request do
     context 'when download is pending' do
       let(:download) { create :download, teacher: teacher }
       it { is_expected.to render_template :pending }
+
+      it "include the polling tag" do
+        subject
+        expect(response.body).to \
+          include '<meta content="5" http-equiv="refresh" />'
+      end
     end
 
     context 'when download has completed' do

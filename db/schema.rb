@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2020_03_14_184138) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -40,8 +39,9 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
   create_table "activities", force: :cascade do |t|
     t.integer "lesson_part_id", null: false
     t.text "overview"
+    t.text "guidance"
     t.integer "duration", null: false
-    t.string "extra_requirements", limit: 32, default: [], array: true
+    t.string "extra_requirements", limit: 32, array: true
     t.string "name", limit: 128, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
   create_table "complete_curriculum_programmes", force: :cascade do |t|
     t.string "name", limit: 256, null: false
     t.text "rationale", null: false
+    t.text "guidance", null: false
     t.integer "subject_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -128,15 +129,16 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
 
   create_table "lessons", force: :cascade do |t|
     t.integer "unit_id", null: false
-    t.string "name", limit: 256
-    t.text "summary"
-    t.integer "position"
-    t.text "core_knowledge"
-    t.string "vocabulary", default: [], array: true
-    t.string "misconceptions", default: [], array: true
+    t.string "name", limit: 128, null: false
+    t.string "learning_objective", limit: 256, null: false
+    t.integer "position", null: false
+    t.text "core_knowledge_for_teachers"
+    t.text "core_knowledge_for_pupils"
+    t.text "previous_knowledge"
+    t.text "vocabulary"
+    t.text "misconceptions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.hstore "previous_knowledge"
     t.index ["name"], name: "index_lessons_on_name"
     t.index ["unit_id"], name: "index_lessons_on_unit_id"
   end
@@ -182,9 +184,10 @@ ActiveRecord::Schema.define(version: 2020_03_14_184138) do
 
   create_table "units", force: :cascade do |t|
     t.integer "complete_curriculum_programme_id"
-    t.string "name", limit: 256, null: false
-    t.string "overview", limit: 1024, null: false
-    t.text "benefits", null: false
+    t.string "name", limit: 128, null: false
+    t.string "summary", limit: 1024, null: false
+    t.text "rationale", null: false
+    t.text "guidance", null: false
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

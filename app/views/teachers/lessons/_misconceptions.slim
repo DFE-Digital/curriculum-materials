@@ -3,6 +3,4 @@ section.common-misconceptions
 
   p The following misconceptions are common:
 
-  ul.govuk-list
-    - lesson.misconceptions.each do |misconception|
-      li = misconception
+  = markdown(lesson.misconceptions)

@@ -4,7 +4,7 @@ unit:
   name: The English Civil War
 
   # Note, the contents are hard-coded as a list here while we await final content
-  overview: |-
+  summary: |-
     The development of Church, state and society in Britain 1509-1745, covering:
 
     * the causes and events of the civil wars throughout Britain
@@ -13,5 +13,5 @@ unit:
     * the Restoration, ‘Glorious Revolution’ and power of Parliament
     * life in early modern England
 
-  benefits: |-
-    TODO
+  guidance: To be confirmed
+  rationale: To be confirmed

@@ -1,0 +1,10 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "reporter": "mochawesome",
+  "env": {
+    "API_TOKEN": "changeme1",
+    "TEACHER_TOKEN": "11111111-1111-1111-1111-111111111111"
+  },
+  "defaultCommandTimeout": 2000,
+  "pageLoadTimeout": 2000
+}

@@ -1,19 +1,31 @@
 module Seeders
   class LessonSeeder < BaseSeeder
     attr_accessor :id, :name, :misconceptions, :core_knowledge,
-                  :summary, :previous_knowledge
+                  :learning_objective, :previous_knowledge
 
-    def initialize(ccp, unit, name:, misconceptions:, core_knowledge:, summary:, previous_knowledge:, vocabulary:, position:)
+    def initialize(
+      ccp,
+      unit,
+      name:,
+      misconceptions:,
+      core_knowledge_for_teachers:,
+      core_knowledge_for_pupils:,
+      learning_objective:,
+      previous_knowledge:,
+      vocabulary:,
+      position:
+    )
       @ccp  = ccp
       @unit = unit
 
-      @core_knowledge     = core_knowledge
-      @misconceptions     = misconceptions
-      @name               = name
-      @position           = position
-      @previous_knowledge = previous_knowledge
-      @summary            = summary
-      @vocabulary         = vocabulary
+      @core_knowledge_for_teachers = core_knowledge_for_teachers
+      @core_knowledge_for_pupils   = core_knowledge_for_pupils
+      @misconceptions              = misconceptions
+      @name                        = name
+      @position                    = position
+      @previous_knowledge          = previous_knowledge
+      @learning_objective          = learning_objective
+      @vocabulary                  = vocabulary
     end
 
     def identifier
@@ -36,11 +48,12 @@ module Seeders
 
     def attributes
       {
-        core_knowledge: @core_knowledge,
+        core_knowledge_for_teachers: @core_knowledge_for_teachers,
+        core_knowledge_for_pupils: @core_knowledge_for_pupils,
         misconceptions: @misconceptions,
         name: @name,
         previous_knowledge: @previous_knowledge,
-        summary: @summary,
+        learning_objective: @learning_objective,
         vocabulary: @vocabulary,
         position: @position
       }

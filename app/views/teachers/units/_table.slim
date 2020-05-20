@@ -4,12 +4,12 @@ table.units.govuk-table
       th.lesson-number Lesson number
       th Learning objective
       th Duration
-      th 
+      th
 
   tbody.govuk-table__body
     - lessons.each.with_index(1) do |lesson, i|
       tr.unit.govuk-table__row
         th.govuk-table__cell.big-number scope='row' = i
-        td.govuk-table__cell= lesson.summary
+        td.govuk-table__cell= lesson.learning_objective
         td.govuk-table__cell= "1 hour"
         td.govuk-table__cell= link_to('View lesson', teachers_lesson_path(lesson), data: { turbolinks: false })

@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.com/DFE-Digital/curriculum-materials.svg?branch=master)](https://travis-ci.com/DFE-Digital/curriculum-materials)
+![Unit Tests (Ruby)](https://github.com/DFE-Digital/curriculum-materials/workflows/Unit%20Tests%20(Ruby)/badge.svg)
+![Linters](https://github.com/DFE-Digital/curriculum-materials/workflows/Linters/badge.svg)
+![Cypress Tests (Chrome)](https://github.com/DFE-Digital/curriculum-materials/workflows/Cypress%20Tests%20(Chrome)/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/maintainability)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/347204b90ba1609c51df/test_coverage)](https://codeclimate.com/github/DFE-Digital/curriculum-materials/test_coverage)
 
@@ -10,17 +12,12 @@ entire national curriculum.
 
 ## Environments
 
-| Environment | URL                                                  |
-| ----------- | --------                                             |
-| Staging     | https://dfe-curriculum-materials.herokuapp.com/      |
-| Production  | https://dfe-curriculum-materials-prod.herokuapp.com/ |
-
-## Getting started
+See [Heroku](docs/Heroku.md) guide.
 
 ## Running the application
 
 The application is a standard [Ruby on Rails](https://www.rubyonrails.org/) application requiring
-no special stesp to set up.
+no special steps to set up.
 
 ### Locally
 
@@ -46,26 +43,27 @@ $ bundle install
 
 _If your database user needs a password, set that first by editing `config/database.yml`_
 
-Now run the app:
+Now set up the database:
 
 ```bash
 $ bundle exec rails db:setup
 ```
 
+If successful, you should see information about the CCPs, units, lessons,
+activities and resources that have been created. There is more information
+in the [seeding guide](docs/Seeds.md).
+
+You should now be read to run the application:
+
+```bash
+$ bundle exec rails server
+```
+
 ### On Docker
 
-From the application root, build and start the app:
+See the docker guide section of the docs https://github.com/DFE-Digital/curriculum-materials/blob/development/docs/Docker.md
 
-```bash
-$ docker build . -t curriculum_materials:latest
-$ docker-compose up
-```
-
-To stop the app run:
-
-```bash
-$ docker-compose down
-```
+There is a more in-depth guide on running the application in Docker [here](docs/Docker.md).
 
 ## Running the tests
 

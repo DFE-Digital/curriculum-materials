@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe Unit, type: :model do
   describe 'columns' do
     it { is_expected.to have_db_column(:complete_curriculum_programme_id).of_type(:integer) }
-    it { is_expected.to have_db_column(:name).of_type(:string) }
-    it { is_expected.to have_db_column(:overview).of_type(:string) }
-    it { is_expected.to have_db_column(:benefits).of_type(:text) }
+    it { is_expected.to have_db_column(:name).of_type(:string).with_options(length: 128) }
+    it { is_expected.to have_db_column(:summary).of_type(:string).with_options(length: 1024) }
+    it { is_expected.to have_db_column(:rationale).of_type(:text) }
+    it { is_expected.to have_db_column(:guidance).of_type(:text) }
     it { is_expected.to have_db_column(:position).of_type(:integer) }
   end
 
@@ -14,15 +15,16 @@ RSpec.describe Unit, type: :model do
 
     describe 'name' do
       it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_length_of(:name).is_at_most(256) }
+      it { is_expected.to validate_length_of(:name).is_at_most(128) }
     end
 
-    describe 'overview' do
-      it { is_expected.to validate_presence_of(:overview) }
-      it { is_expected.to validate_length_of(:overview).is_at_most(1024) }
+    describe 'summary' do
+      it { is_expected.to validate_presence_of(:summary) }
+      it { is_expected.to validate_length_of(:summary).is_at_most(1024) }
     end
 
-    it { is_expected.to validate_presence_of(:benefits) }
+    it { is_expected.to validate_presence_of(:rationale) }
+    it { is_expected.to validate_presence_of(:guidance) }
     it { is_expected.to validate_inclusion_of(:year).in_array(SchoolYear.instance.years) }
   end
 

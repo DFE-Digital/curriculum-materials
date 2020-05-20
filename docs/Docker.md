@@ -7,11 +7,16 @@ Before starting up the container stack you'll first need to build the image and
 create the database.
 
 #### Step 1 - Build the docker image
-`docker build . -t curriculum_materials:latest`
+`docker build --build-arg GITHUB_TOKEN=<token> . -t curriculum_materials:latest`
 
 #### Step 2 - Setup the database
 `docker-compose run --rm db_tasks bundle exec rake db:setup`
 This will create the database for you and load the seed data
+
+#### Step 3 - Create a teacher
+`docker-compose run --rm web bundle exec rails runner "Teacher.create! token: '11111111-1111-1111-1111-111111111111'"``
+This will add a teacher to the database for you to sign in as.
+You can sign in at `http://localhost:3000/teachers/sesssion/11111111-1111-1111-1111-111111111111`
 
 ### Developing
 

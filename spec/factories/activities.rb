@@ -2,7 +2,8 @@ FactoryBot.define do
   factory :activity do
     association :lesson_part, factory: :lesson_part
     sequence(:name) { |n| "Activity #{n}" }
-    sequence(:overview) { |n| "Overview #{n}" }
+    overview { 'Overview' }
+    guidance { 'Guidance' }
     duration { 20 }
     extra_requirements { ['PVA Glue', 'Glitter'] }
 

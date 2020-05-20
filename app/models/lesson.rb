@@ -3,9 +3,11 @@ class Lesson < ApplicationRecord
 
   validates :name,
             presence: true,
-            length: { maximum: 256 }
+            length: { maximum: 128 }
 
-  validates :summary, presence: true
+  validates :learning_objective,
+            presence: true,
+            length: { maximum: 256 }
 
   belongs_to :unit
   has_many :lesson_parts, dependent: :destroy

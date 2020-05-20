@@ -20,6 +20,44 @@ describe Download, type: :model do
     end
   end
 
+  context 'scopes' do
+    let!(:recently_pending)       { create :download }
+    let!(:historically_pending)   { create :download, :historic }
+    let!(:recently_completed)     { create :download, :completed }
+    let!(:historically_completed) { create :download, :completed, :historic }
+    let!(:recently_failed)        { create :download, :failed }
+    let!(:historically_failed)    { create :download, :failed, :historic }
+    let!(:recently_purged)        { create :download, :cleaned_up }
+    let!(:historically_purged)    { create :download, :cleaned_up, :historic }
+
+    context '.historic' do
+      subject { described_class.historic }
+
+      it {
+        is_expected.to match_array [
+          historically_pending,
+          historically_completed,
+          historically_failed,
+          historically_purged
+        ]
+      }
+    end
+
+    context '.completed' do
+      subject { described_class.completed }
+
+      it {
+        is_expected.to match_array [historically_completed, recently_completed]
+      }
+    end
+
+    context '.to_clean_up' do
+      subject { described_class.to_clean_up }
+
+      it { is_expected.to match_array [historically_completed] }
+    end
+  end
+
   describe 'methods' do
     describe '#lesson_parts' do
       subject { create(:download) }
@@ -65,28 +103,56 @@ describe Download, type: :model do
   end
 
   context 'states' do
-    subject { create :download }
+    context 'transitions' do
+      context 'pending to completed' do
+        subject { create :download }
 
-    context 'without a lesson_bundle' do
-      it 'cannot transition to completed' do
-        expect { subject.transition_to! :completed }.to \
-          raise_error Statesman::GuardFailedError
+        context 'without a lesson_bundle' do
+          it 'cannot transition to completed' do
+            expect { subject.transition_to! :completed }.to \
+              raise_error Statesman::GuardFailedError
 
-        expect(subject).to be_in_state(:pending)
+            expect(subject).to be_in_state(:pending)
+          end
+        end
+
+        context 'with a lesson_bundle' do
+          before do
+            subject.lesson_bundle.attach \
+              io: File.open(lesson_bundle_path),
+              filename: 'lesson_bundle.zip',
+              content_type: 'application/zip'
+          end
+
+          it 'can transition to completed' do
+            subject.transition_to! :completed
+            expect(subject).to be_in_state(:completed)
+          end
+        end
       end
-    end
 
-    context 'with a lesson_bundle' do
-      before do
-        subject.lesson_bundle.attach \
-          io: File.open(lesson_bundle_path),
-          filename: 'lesson_bundle.zip',
-          content_type: 'application/zip'
-      end
+      context 'completed to cleaned_up' do
+        subject { create :download, :completed }
 
-      it 'can transition to completed' do
-        subject.transition_to! :completed
-        expect(subject).to be_in_state(:completed)
+        context 'when the lesson_bundle is still attached' do
+          it 'cannot transistion to cleaned_up' do
+            expect { subject.transition_to! :cleaned_up }.to \
+              raise_error Statesman::GuardFailedError
+
+            expect(subject).to be_in_state :completed
+          end
+        end
+
+        context 'when the lesson_bundle is not attached' do
+          before do
+            subject.lesson_bundle.purge
+          end
+
+          it 'can transistion to cleaned_up' do
+            subject.transition_to! :cleaned_up
+            expect(subject).to be_in_state :cleaned_up
+          end
+        end
       end
     end
   end

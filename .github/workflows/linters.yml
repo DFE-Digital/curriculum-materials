@@ -1,0 +1,39 @@
+name: Linters
+on:
+  - push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Setup Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      # - name: Setup Node 12.x
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: "12.x"
+      - name: Build App
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+          npm config set @dfe-digital:registry=https://npm.pkg.github.com
+      - name: Rubocop
+        run: bundle exec rubocop app config db lib spec Gemfile --format clang
+      - name: Brakeman
+        run: bundle exec brakeman
+      - name: SCSS Lint
+        run: bundle exec scss-lint app/webpacker/styles
+      # - name: ESLint
+      #   run: eslint app/webpacker/packs

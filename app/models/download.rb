@@ -1,4 +1,6 @@
 class Download < ApplicationRecord
+  LESSON_BUNDLE_TTL = 24.hours
+
   belongs_to :teacher
   belongs_to :lesson
   has_one_attached :lesson_bundle
@@ -15,6 +17,12 @@ class Download < ApplicationRecord
   ]
 
   delegate :transition_to!, :current_state, :in_state?, to: :state_machine
+
+  scope :historic, -> { where 'downloads.created_at < ?', LESSON_BUNDLE_TTL.ago }
+
+  scope :completed, -> { joins(:download_transitions).merge DownloadTransition.completed }
+
+  scope :to_clean_up, -> { historic.completed }
 
   def state_machine
     @state_machine ||= DownloadStateMachine.new(self, transition_class: DownloadTransition)

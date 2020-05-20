@@ -3,6 +3,10 @@ FactoryBot.define do
     association :teacher
     association :lesson
 
+    trait :historic do
+      created_at { Download::LESSON_BUNDLE_TTL.ago }
+    end
+
     trait :completed do
       after :create do |download|
         lesson_bundle_path =  \
@@ -20,6 +24,15 @@ FactoryBot.define do
     trait :failed do
       after :create do |download|
         download.transition_to! :failed
+      end
+    end
+
+    trait :cleaned_up do
+      completed
+
+      after :create do |download|
+        download.lesson_bundle.purge
+        download.transition_to! :cleaned_up
       end
     end
   end

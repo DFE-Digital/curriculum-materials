@@ -30,11 +30,12 @@ RSpec.feature "Knowledge overview tab", type: :feature do
 
   specify 'the page should contain the relevant lesson details' do
     [
-      lesson.summary,
+      lesson.learning_objective,
       lesson.vocabulary,
       lesson.misconceptions,
-      lesson.core_knowledge,
-      lesson.previous_knowledge.flatten
+      lesson.core_knowledge_for_pupils,
+      lesson.core_knowledge_for_pupils,
+      lesson.previous_knowledge
     ].flatten.each { |value| expect(page).to have_content(value) }
   end
 

@@ -1,0 +1,76 @@
+name: Cypress Tests (Chrome)
+on:
+  - push
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11.5
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Setup Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      - name: Setup Node 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Install PostgreSQL 11 client
+        run: sudo apt-get -yqq install libpq-dev
+      - name: Build App
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: development
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KNOWN_TEACHER_UUID: 11111111-1111-1111-1111-111111111111
+          API_TOKEN: changeme1
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+          npm config set @dfe-digital:registry=https://npm.pkg.github.com
+          bin/rails db:setup
+      - name: Run E2E Tests (Chrome)
+        uses: cypress-io/github-action@v1
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: development
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KNOWN_TEACHER_UUID: 11111111-1111-1111-1111-111111111111
+          API_TOKEN: changeme1
+          CYPRESS_BASE_URL: http://localhost:3002
+        with:
+          start: bundle exec rails server --port 3002
+          wait-on: "http://localhost:3002"
+          # parallel: true
+          # record: true
+          # group: "E2E Testing Chrome"
+          browser: chrome
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

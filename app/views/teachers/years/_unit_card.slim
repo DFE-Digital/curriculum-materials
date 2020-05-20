@@ -6,7 +6,7 @@ article.card class=unit_card_class(unit)
 
   .card-body
     p.govuk-body
-      = markdown(unit.overview)
+      = markdown(unit.summary)
 
     ul
       - unit.lessons.each do |lesson|

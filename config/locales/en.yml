@@ -34,5 +34,7 @@ en:
     heading: Understand the aims of the lesson
   lesson_contents:
     heading: Understand and choose the lesson contents
-  core_knowledge:
+  core_knowledge_for_teachers:
+    heading: Core knowledge for teachers
+  core_knowledge_for_pupils:
     heading: Core knowledge for pupils

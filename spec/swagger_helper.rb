@@ -27,38 +27,37 @@ RSpec.configure do |config|
               id: { type: :integer },
               name: { type: :string },
               rationale: { type: :string },
+              guidance: { type: :string },
               key_stage: { type: :integer },
               subject: { type: :string }
             },
-            required: %i(name rationale)
+            required: %i(name rationale guidance)
           },
           unit: {
             type: :object,
             properties: {
               name: { type: :string },
-              benefits: { type: :string },
-              overview: { type: :string },
+              summary: { type: :string },
+              rationale: { type: :string },
+              guidance: { type: :string },
               position: { type: :integer },
               year: { type: :integer }
             },
-            required: %i(name benefits overview position)
+            required: %i(name summary rationale guidance year)
           },
           lesson: {
             type: :object,
             properties: {
               id: { type: :integer },
               name: { type: :string },
-              summary: { type: :string },
-              core_knowledge: { type: :string },
-              previous_knowledge: { type: :object },
-              vocabulary: {
-                type: :array, items: { type: :string }
-              },
-              misconceptions: {
-                type: :array, items: { type: :string }
-              },
+              learning_objective: { type: :string },
+              core_knowledge_for_pupils: { type: :string },
+              core_knowledge_for_teachers: { type: :string },
+              previous_knowledge: { type: :string },
+              vocabulary: { type: :string },
+              misconceptions: { type: :string }
             },
-            required: %i(name summary core_knowledge previous_knowledge vocabulary misconceptions)
+            required: %i(name learning_objective core_knowledge_for_teachers core_knowledge_for_pupils previous_knowledge vocabulary misconceptions)
           },
           lesson_part: {
             type: :object,
@@ -73,6 +72,7 @@ RSpec.configure do |config|
               id: { type: :integer },
               name: { type: :string },
               overview: { type: :string },
+              guidance: { type: :string },
               duration: { type: :integer },
               extra_requirements: {
                 type: :array, items: { type: :string }
