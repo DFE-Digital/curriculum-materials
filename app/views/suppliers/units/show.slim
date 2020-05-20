@@ -1,0 +1,15 @@
+span.govuk-caption-m Unit
+h1.govuk-heading-l = @unit.name
+
+.buttons
+  = link_to 'Edit', '#', class: 'govuk-button govuk-button--secondary'
+  = link_to 'Preview', '#', class: 'govuk-button govuk-button--secondary govuk-!-margin-left-1'
+  = link_to 'Delete', '#', class: 'govuk-button govuk-button--warning govuk-!-margin-left-1'
+
+h2.govuk-heading-l Overview
+
+p = markdown(@unit.overview)
+
+h2.govuk-heading-l Benefits
+
+p = markdown(@unit.benefits)

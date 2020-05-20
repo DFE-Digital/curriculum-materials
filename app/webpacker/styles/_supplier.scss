@@ -1,0 +1,20 @@
+.ccp-tree {
+  ul {
+    @include govuk-font($size: 14);
+
+    line-height: 1;
+
+    list-style-type: none;
+    padding-left: 8px;
+    border-left: 1px dotted govuk-colour('dark-grey');
+
+    li {
+      font-weight: bold;
+
+      a {
+        font-weight: normal;
+        text-decoration: none;
+      }
+    }
+  }
+}

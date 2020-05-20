@@ -1,0 +1,16 @@
+nav.ccp-tree
+  ul
+    li
+      = link_to_unless_current(@ccp.title, suppliers_complete_curriculum_programme_path(@ccp), class: 'govuk-link--no-visited-state')
+
+    - if @full_ccp.units.any?
+      ul
+        - @full_ccp.units.each do |unit|
+          li
+            = link_to_unless_current(unit.name, suppliers_complete_curriculum_programme_unit_path(@ccp, unit), class: 'govuk-link--no-visited-state')
+
+          - if unit.lessons.any?
+            ul
+              - unit.lessons.each do |lesson|
+                li
+                  = link_to_unless_current(lesson.name, suppliers_complete_curriculum_programme_unit_lesson_path(@ccp, unit, lesson), class: 'govuk-link--no-visited-state')
