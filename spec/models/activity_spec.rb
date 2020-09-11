@@ -94,5 +94,33 @@ RSpec.describe Activity, type: :model do
         expect(current_activity.alternatives).to match_array(other_activities)
       end
     end
+
+    context '#has_lesson_resources?' do
+      subject { activity.has_lesson_resources? }
+
+      context 'when has attached teacher_resources' do
+        let(:activity) { create :activity, :with_teacher_resources }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when has attached pupil_resources' do
+        let(:activity) { create :activity, :with_pupil_resources }
+
+        it { is_expected.to be true }
+      end
+
+      context 'when has attached slide_deck' do
+        let(:activity) { create :activity, :with_slide_deck }
+
+        it { is_expected.to be true }
+      end
+
+      context 'with out attached resources' do
+        let(:activity) { create :activity }
+
+        it { is_expected.to be false }
+      end
+    end
   end
 end

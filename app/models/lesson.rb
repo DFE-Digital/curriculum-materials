@@ -24,4 +24,8 @@ class Lesson < ApplicationRecord
       .each_with_object({}) { |lesson_part, hash| hash[lesson_part] = lesson_part.activity_for(teacher) }
       .reject { |_, activity| activity.nil? }
   end
+
+  def activities_for(teacher)
+    lesson_parts_for(teacher).values
+  end
 end

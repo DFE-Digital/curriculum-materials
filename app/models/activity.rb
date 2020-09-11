@@ -32,4 +32,8 @@ class Activity < ApplicationRecord
   def make_default!
     lesson_part.update!(default_activity: self)
   end
+
+  def has_lesson_resources?
+    [teacher_resources, pupil_resources, slide_deck_resource].any?(&:present?)
+  end
 end
